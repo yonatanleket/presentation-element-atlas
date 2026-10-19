@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annotated wireframe: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wf{position:absolute;inset-inline-start:1em;top:1em;width:17.5em;height:16.7em;padding:.8em;display:grid;gap:.55em;grid-template-rows:1.6em 5.2em auto 1fr;background:#fafafa}
+.g{background:#e3e5ea;border-radius:.25em;position:relative}
+.g.x{background:linear-gradient(to top right,transparent calc(50% - 1px),#c9ccd3 50%,transparent calc(50% + 1px)),linear-gradient(to top left,transparent calc(50% - 1px),#c9ccd3 50%,transparent calc(50% + 1px)),#e3e5ea}
+.lines{display:grid;gap:.35em}.lines i{height:.55em;background:#e3e5ea;border-radius:.2em}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5em}
+.cta{position:absolute;inset-inline-end:.8em;top:.75em;width:4em;height:1.1em;background:#c9ccd3;border-radius:.2em}
+.mk{position:absolute;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font:700 .85em/1.6em var(--f-mono);text-align:center;opacity:0;transform:scale(.6);box-shadow:0 0 0 .2em #fff}
+.mk.show{opacity:1;transform:none}
+.legend{position:absolute;inset-inline-start:19.6em;inset-inline-end:.9em;top:1.3em;margin:0;padding:0;list-style:none;display:grid;gap:.6em}
+.legend li{display:grid;grid-template-columns:1.6em 1fr;gap:.4em;font-size:.85em;opacity:.2}
+.legend li.show{opacity:1}
+.legend .n{width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font:700 .85em/1.6em var(--f-mono);text-align:center}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Annotated wireframe</h1>
+<div class="stage" role="img" aria-label="Demo: Annotated wireframe. A grey-box page sketch gains four numbered callouts with a legend that explains each part.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wf card" aria-hidden="true">
+  <div class="g"><span class="cta"></span></div>
+  <div class="g x"></div>
+  <div class="lines"><i style="width:80%"></i><i style="width:95%"></i><i style="width:60%"></i></div>
+  <div class="cards"><div class="g"></div><div class="g"></div><div class="g"></div></div>
+  <span class="mk fx" style="inset-inline-end:.3em;top:.3em">1</span>
+  <span class="mk fx" style="inset-inline-start:8em;top:4.2em">2</span>
+  <span class="mk fx" style="inset-inline-end:2.5em;top:8.1em">3</span>
+  <span class="mk fx" style="inset-inline-start:2.4em;top:12.1em">4</span>
+</div>
+<ol class="legend" id="lg">
+  <li class="fx"><span class="n">1</span><span><b>Primary action</b> stays in the header on every page.</span></li>
+  <li class="fx"><span class="n">2</span><span><b>Hero</b> shows the one thing this page is for.</span></li>
+  <li class="fx"><span class="n">3</span><span><b>Summary</b> in two lines, no jargon.</span></li>
+  <li class="fx"><span class="n">4</span><span><b>Cards</b> link to the three next steps.</span></li>
+</ol>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A grey-box sketch stands in for the real screen, so attention goes to structure rather than styling. Each step drops a numbered marker on one region and adds the matching line to the legend, building the explanation part by part.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var mks=document.querySelectorAll('.mk'),li=$('lg').children;
+AtlasDemo.init({frames:4,stepMs:1000,render:function(f){for(var i=0;i<4;i++){mks[i].classList.toggle('show',i<f);li[i].classList.toggle('show',i<f);}}});
+})();
+</script>
+</body>
+</html>

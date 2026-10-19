@@ -1,0 +1,20 @@
+{
+  "id": "draggable-zoomable-canvas",
+  "name": "Draggable / zoomable canvas",
+  "category": "explore",
+  "definition": "Board you drag and zoom, with keyboard support and sticky notes that open details.",
+  "bestUse": "Dense systems the viewer explores.",
+  "trigger": [
+    "system-architecture",
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/draggable-zoomable-canvas.html",
+    "kind": "interactive",
+    "how": "Drag the board to pan and use the wheel or the + and − buttons to zoom; with the board focused, arrow keys pan and +/− zoom. Tab moves through the sticky notes and centres each one; select a note to read its details. Fit or Reset brings the whole board back."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "loop-diagram",
+  "name": "Loop diagram",
+  "category": "diagram",
+  "definition": "A cycle (for example, a step that fails and repeats) with counts on each exit.",
+  "bestUse": "Showing a costly repeat loop.",
+  "trigger": [
+    "cause-effect",
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/loop-diagram.html",
+    "kind": "animated",
+    "how": "Boxes are steps and the arrows leaving the review carry the share that takes each exit. Play draws the happy path first, then the fail exit and the loop back in red, and finishes with what the loop costs per month. Counts are illustrative."
+  },
+  "aliases": [
+    "cycle",
+    "retry loop",
+    "rework"
+  ]
+}

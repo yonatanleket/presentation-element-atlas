@@ -1,0 +1,20 @@
+{
+  "id": "bump-chart",
+  "name": "Bump chart",
+  "category": "chart",
+  "definition": "Rank position over several periods.",
+  "bestUse": "Rank changes over time.",
+  "trigger": [
+    "ranking",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/bump-chart.html",
+    "kind": "interactive",
+    "how": "Each line tracks one product’s rank (1 = top) across six quarters, so crossings show who overtook whom. Select a product on the right to highlight its path and hear its ranks; others fade. Ranks show order, not size. Data is illustrative."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "sourced-footer",
+  "name": "Sourced footer",
+  "category": "trust",
+  "definition": "Source and notes line at the bottom of the slide.",
+  "bestUse": "Every data slide.",
+  "trigger": [
+    "claim-needing-evidence"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/sourced-footer.html",
+    "kind": "animated",
+    "how": "The chart builds, then a single footer line appears at the bottom of the slide naming the source, period, sample size and exclusions, with the key parts briefly highlighted. Readers can check the evidence without it competing with the headline. Values are illustrative."
+  },
+  "aliases": [
+    "source line",
+    "footnote",
+    "citation"
+  ]
+}

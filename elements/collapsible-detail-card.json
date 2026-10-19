@@ -1,0 +1,19 @@
+{
+  "id": "collapsible-detail-card",
+  "name": "Collapsible detail card",
+  "category": "story",
+  "definition": "Card that hides depth until it is clicked open.",
+  "bestUse": "Async readers who choose their depth.",
+  "trigger": [
+    "dense-detail"
+  ],
+  "level": "standard",
+  "sources": [
+    "gamma"
+  ],
+  "demo": {
+    "file": "demos/collapsible-detail-card.html",
+    "kind": "animated",
+    "how": "Each card shows only a one-line finding and a chevron. Play opens the first card to reveal its evidence, then closes it and opens the second, so readers choose their depth. The cards are also real buttons: click or press Enter on any card to open or close it."
+  }
+}

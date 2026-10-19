@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2×2 grid vote: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.wrap{display:grid;grid-template-columns:1fr 8.6em;gap:.7em;flex:1;min-height:0}
+.gw{position:relative;padding-inline-start:1.2em;padding-block-end:1.1em}
+.gd{position:absolute;inset:0 0 1.1em 1.2em;background:var(--surface);border:1px solid var(--line);border-radius:.3em;cursor:crosshair;overflow:hidden}
+.gd::before,.gd::after{content:"";position:absolute;background:var(--line)}.gd::before{left:50%;top:0;bottom:0;width:1px}.gd::after{top:50%;left:0;right:0;height:1px}
+.ql{position:absolute;font:500 .8em var(--f-mono);color:var(--ok);inset-block-start:.3em;inset-inline-start:.4em}
+.axx{position:absolute;bottom:0;inset-inline-start:1.2em;font:500 .8em var(--f-mono);color:var(--muted)}
+.axy{position:absolute;left:0;bottom:1.1em;font:500 .8em var(--f-mono);color:var(--muted);transform:rotate(-90deg);transform-origin:0 0;translate:0 0;white-space:nowrap;top:auto}
+.dt{position:absolute;width:.4em;height:.4em;border-radius:50%;opacity:.55;transform:translate(-50%,-50%)}
+.ch{position:absolute;transform:translate(-50%,-50%);width:1.4em;height:1.4em;border-radius:50%;color:#fff;font:700 .8em/1.4em var(--f-mono);text-align:center;transition:left .35s var(--ease-out),top .35s var(--ease-out)}
+.me{position:absolute;transform:translate(-50%,-50%);width:1.5em;height:1.5em;border-radius:50%;border:.15em dashed;background:#fff;font:700 .8em/1.25em var(--f-mono);text-align:center}
+.gd:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.its{display:flex;flex-direction:column;gap:.25em}.its .sbtn{justify-content:flex-start;display:flex;align-items:center;gap:.35em;font-size:.8em;text-align:start}
+.its .sbtn b{display:inline-block;width:1.3em;height:1.3em;border-radius:50%;color:#fff;font:700 .9em/1.3em var(--f-mono);text-align:center;flex:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">2×2 grid vote</h1>
+<div class="stage" role="group" aria-label="Demo: 2×2 grid vote. An impact versus effort grid where simulated votes place four items; the viewer selects an item and places it by clicking or with arrow keys, then submits.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.35em;padding-top:1.8em">
+<p class="q" style="font-size:1em">Place each idea: how much impact, how much effort?</p>
+<div class="wrap"><div class="gw"><div class="gd" id="gd" tabindex="0" role="application" aria-label="Grid. Arrow keys move your marker for the selected item; Enter places it."><span class="ql">Quick wins</span></div><span class="axy" aria-hidden="true">Impact →</span><span class="axx" aria-hidden="true">Effort →</span></div>
+<div class="its"><div class="its" id="its" role="group" aria-label="Item to place"></div><button class="sbtn primary" type="button" id="sub" disabled>Submit</button></div></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each participant places every item on an impact-versus-effort grid; small dots are simulated votes and the lettered chip is the room average. Pick an item, then click the grid, or focus the grid and use the arrow keys, to place your marker. Submit adds your placements to the averages.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var IT=[['A','Self-serve setup','#2f4bd8',.28,.25],['B','Audit view','#11734f',.62,.32],['C','Feature flags','#9a4a0b',.4,.62],['D','New email series','#b42318',.25,.8]];
+var F=8,lf=0,sel=0,mine=[null,null,null,null],sent=false,N=12;
+function rng(s){return function(){s=(s*16807)%2147483647;return s/2147483647;};}
+var rnd=rng(7),VOTES=[];for(var v=0;v<N;v++)VOTES.push(IT.map(function(it){return [Math.min(.95,Math.max(.05,it[3]+(rnd()-.5)*.36)),Math.min(.95,Math.max(.05,it[4]+(rnd()-.5)*.36))];}));
+$('its').innerHTML=IT.map(function(it,i){return '<button class="sbtn" type="button" data-i="'+i+'"><b style="background:'+it[2]+'">'+it[0]+'</b>'+it[1]+'</button>';}).join('');
+function pct(x,y){return 'left:'+(x*100)+'%;top:'+(y*100)+'%';}
+function draw(f){lf=f;var vs=VOTES.slice(0,Math.round(N*f/F)),h='';
+vs.forEach(function(v){v.forEach(function(p,i){h+='<span class="dt" style="background:'+IT[i][2]+';'+pct(p[0],p[1])+'"></span>';});});
+var all=sent?vs.concat([mine.map(function(m,i){return m||[IT[i][3],IT[i][4]];})]):vs;
+if(all.length)IT.forEach(function(it,i){var x=0,y=0;all.forEach(function(v){x+=v[i][0];y+=v[i][1];});h+='<span class="ch" style="background:'+it[2]+';'+pct(x/all.length,y/all.length)+'" aria-hidden="true">'+it[0]+'</span>';});
+mine.forEach(function(m,i){if(m&&!sent)h+='<span class="me" style="border-color:'+IT[i][2]+';color:'+IT[i][2]+';'+pct(m[0],m[1])+'" aria-hidden="true">'+IT[i][0]+'</span>';});
+$('gd').innerHTML='<span class="ql">Quick wins</span>'+h;
+$('its').querySelectorAll('button').forEach(function(b,i){b.setAttribute('aria-pressed',String(i===sel));b.disabled=sent;b.setAttribute('aria-label',IT[i][1]+(mine[i]?', placed':', not placed'));});
+var placed=mine.filter(Boolean).length;$('sub').disabled=sent||!placed;$('sub').textContent=sent?'Submitted ✓':'Submit ('+placed+'/4)';$('n').textContent=(vs.length+(sent?1:0))+' participants';}
+function place(x,y,how){if(sent)return;mine[sel]=[Math.min(.97,Math.max(.03,x)),Math.min(.97,Math.max(.03,y))];draw(lf);if(how)api.status('Placed '+IT[sel][1]+': '+(mine[sel][1]<=.5?'high':'low')+' impact, '+(mine[sel][0]<=.5?'low':'high')+' effort');}
+$('its').addEventListener('click',function(e){var b=e.target.closest('[data-i]');if(!b)return;sel=+b.dataset.i;draw(lf);api.status('Selected '+IT[sel][1]+'. Click the grid or use arrow keys to place it');});
+$('gd').addEventListener('click',function(e){var r=$('gd').getBoundingClientRect();place((e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height,true);});
+$('gd').addEventListener('keydown',function(e){var d={ArrowLeft:[-.05,0],ArrowRight:[.05,0],ArrowUp:[0,-.05],ArrowDown:[0,.05]}[e.key];if(!d&&e.key!=='Enter')return;e.preventDefault();var m=mine[sel]||[.5,.5];
+if(e.key==='Enter'){place(m[0],m[1],true);return;}place(m[0]+d[0],m[1]+d[1],false);});
+$('sub').addEventListener('click',function(){sent=true;draw(lf);api.status('Your placements were added to the room averages');});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,interactive:true,reset:function(){sel=0;mine=[null,null,null,null];sent=false;},render:function(f){draw(f);api&&api.status(f>=F?'Simulated responses: 12 participants placed all items':f?'Simulated responses arriving…':'');}});
+</script>
+</body>
+</html>

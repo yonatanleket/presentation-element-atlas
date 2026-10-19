@@ -1,0 +1,23 @@
+{
+  "id": "mind-map",
+  "name": "Mind map",
+  "category": "diagram",
+  "definition": "Ideas branching from a central topic.",
+  "bestUse": "Brainstorm summaries.",
+  "trigger": [
+    "hierarchy"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/mind-map.html",
+    "kind": "animated",
+    "how": "The central topic sits in the middle and each idea branches from it on its own curve, with one detail as a leaf. Play adds the centre, then the five branches, then the leaves, the order a brainstorm summary is usually read. Content is illustrative."
+  },
+  "aliases": [
+    "brainstorm",
+    "idea map"
+  ]
+}

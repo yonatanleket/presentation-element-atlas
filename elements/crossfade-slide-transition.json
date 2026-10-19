@@ -1,0 +1,24 @@
+{
+  "id": "crossfade-slide-transition",
+  "name": "Crossfade slide transition",
+  "category": "motion",
+  "definition": "The outgoing slide fades into the next.",
+  "bestUse": "Calm, continuous talks.",
+  "trigger": [
+    "visual-mood"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/crossfade-slide-transition.html",
+    "kind": "animated",
+    "how": "The slides sit on top of each other. Each step lowers the opacity of the current slide while the next one rises over about a second, so for a moment both are visible and the change feels continuous rather than a cut. Reduced motion swaps them instantly."
+  },
+  "aliases": [
+    "fade",
+    "dissolve",
+    "transition"
+  ]
+}

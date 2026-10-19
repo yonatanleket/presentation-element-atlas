@@ -1,0 +1,27 @@
+{
+  "id": "progress-ring-gauge",
+  "name": "Progress ring / gauge",
+  "category": "metric",
+  "definition": "Circular fill toward a goal.",
+  "bestUse": "A single completion rate.",
+  "trigger": [
+    "single-key-number",
+    "deviation-from-target"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/progress-ring-gauge.html",
+    "kind": "animated",
+    "how": "A circular track fills clockwise toward the goal while the percentage in the middle counts up. Reduced motion shows the final fill. The completion rate is illustrative."
+  },
+  "aliases": [
+    "kpi",
+    "donut",
+    "gauge",
+    "completion",
+    "percent complete"
+  ]
+}

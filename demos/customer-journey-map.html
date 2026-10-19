@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer journey map: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.sep{stroke:var(--line);stroke-dasharray:3 4}.neu{stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1}
+.curve{fill:none;stroke:var(--accent);stroke-width:2.5}.dot-ok{fill:var(--ok)}.dot-bad{fill:var(--bad)}.ring{fill:none;stroke:var(--bad);stroke-width:2}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Customer journey map</h1>
+<div class="stage" role="img" aria-label="Demo: Customer journey map. Five journey stages with what the customer does and an emotion curve that dips at set-up.">
+<span class="label-illustrative" style="inset-block-start:auto;inset-block-end:.4em">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<g data-f="1"><line x1="102" y1="52" x2="102" y2="262" class="sep"/><line x1="194" y1="52" x2="194" y2="262" class="sep"/><line x1="286" y1="52" x2="286" y2="262" class="sep"/><line x1="378" y1="52" x2="378" y2="262" class="sep"/>
+<g><rect x="15" y="20" width="82" height="24" rx="12" class="nd-a"/><text x="56" y="36.5" text-anchor="middle" class="t-b t-a">Discover</text></g><g><rect x="107" y="20" width="82" height="24" rx="12" class="nd-a"/><text x="148" y="36.5" text-anchor="middle" class="t-b t-a">Sign up</text></g><g><rect x="199" y="20" width="82" height="24" rx="12" class="nd-a"/><text x="240" y="36.5" text-anchor="middle" class="t-b t-a">Set up</text></g><g><rect x="291" y="20" width="82" height="24" rx="12" class="nd-a"/><text x="332" y="36.5" text-anchor="middle" class="t-b t-a">First win</text></g><g><rect x="383" y="20" width="82" height="24" rx="12" class="nd-a"/><text x="424" y="36.5" text-anchor="middle" class="t-b t-a">Renew</text></g></g>
+<g data-f="2"><text x="56" y="70" text-anchor="middle" class="">Reads a</text><text x="56" y="86" text-anchor="middle" class="">review</text><text x="148" y="70" text-anchor="middle" class="">Creates</text><text x="148" y="86" text-anchor="middle" class="">account</text><text x="240" y="70" text-anchor="middle" class="">Imports data,</text><text x="240" y="86" text-anchor="middle" class="">hits errors</text><text x="332" y="70" text-anchor="middle" class="">Ships first</text><text x="332" y="86" text-anchor="middle" class="">report</text><text x="424" y="70" text-anchor="middle" class="">Upgrades</text><text x="424" y="86" text-anchor="middle" class="">plan</text></g>
+<g data-f="3"><line x1="14" y1="180" x2="466" y2="180" class="neu"/><text x="18" y="130" class="t-m t-b">+</text><text x="18" y="250" class="t-m t-b">−</text></g>
+<path d="M56 150 C71.3 146.3 117.3 113.3 148 128 C178.7 142.7 209.3 239 240 238 C270.7 237 301.3 143.7 332 122 C362.7 100.3 408.7 110.3 424 108" class="curve draw" pathLength="1" data-f="3"/>
+<g data-f="3"><circle cx="56" cy="150" r="5.5" class="dot-ok"/><circle cx="148" cy="128" r="5.5" class="dot-ok"/><circle cx="240" cy="238" r="5.5" class="dot-bad"/><circle cx="332" cy="122" r="5.5" class="dot-ok"/><circle cx="424" cy="108" r="5.5" class="dot-ok"/></g>
+<g data-f="4"><circle cx="240" cy="238" r="13" class="ring"/><text x="240" y="274" text-anchor="middle" class="t-b t-bad">Pain: import errors (31% stall here)</text></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Columns are the journey stages, the row below says what the customer does, and the curve plots how they feel against a neutral line. Play builds stages, actions and the curve, then circles the deepest dip as the pain point. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

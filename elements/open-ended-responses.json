@@ -1,0 +1,25 @@
+{
+  "id": "open-ended-responses",
+  "name": "Open-ended responses",
+  "category": "audience",
+  "definition": "Short typed answers shown on screen.",
+  "bestUse": "Ideas and feedback.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/open-ended-responses.html",
+    "kind": "interactive",
+    "how": "Short simulated answers arrive as cards over about three seconds, newest first, so the room sees ideas as they come in. Type an answer and press Enter or Send to add your own; it appears first, marked You. Only the six most recent cards show at once. Reset clears them."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pull-quote",
+  "name": "Pull quote",
+  "category": "story",
+  "definition": "Large quotation with attribution.",
+  "bestUse": "Voice of customer.",
+  "trigger": [
+    "quote-or-voice"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/pull-quote.html",
+    "kind": "animated",
+    "how": "A single quotation fills the slide in large type, set off by an oversized quotation mark, with the attribution underneath in small type. Play brings in the mark, the quote and then the attribution, and highlights the phrase that carries the point. The quote is invented."
+  },
+  "aliases": [
+    "quote",
+    "testimonial",
+    "voice of customer"
+  ]
+}

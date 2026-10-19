@@ -1,0 +1,25 @@
+{
+  "id": "segmented-progress-bar",
+  "name": "Segmented progress bar",
+  "category": "nav",
+  "definition": "Row of dashes, one per slide, grouped by chapter, with the current position filled.",
+  "bestUse": "Showing how far along the talk is and where chapters break.",
+  "trigger": [
+    "navigation-wayfinding",
+    "section-structure"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/segmented-progress-bar.html",
+    "kind": "animated",
+    "how": "One dash stands for one slide and small gaps separate chapters. Play advances the mini deck slide by slide and fills each dash as it is reached, so position and chapter breaks stay visible at a glance."
+  },
+  "aliases": [
+    "progress dashes",
+    "progress bar",
+    "where am i"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "hero-outcome-supporting-stats",
+  "name": "Hero outcome + supporting stats",
+  "category": "metric",
+  "definition": "One large stat with a fill bar and an explanation, beside smaller qualifying stats.",
+  "bestUse": "Results slides.",
+  "trigger": [
+    "single-key-number",
+    "kpi-set"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/hero-outcome-supporting-stats.html",
+    "kind": "animated",
+    "how": "The hero number counts up while its fill bar grows toward the goal; the smaller stats beside it then appear to qualify the result. Reduced motion shows the final numbers at once. Values are illustrative."
+  },
+  "aliases": [
+    "kpi",
+    "headline result",
+    "big number"
+  ]
+}

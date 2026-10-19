@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda / contents tracker: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.ag{display:flex;gap:.3em;flex-wrap:wrap}.ag span{font-size:.95em;padding:.15em .45em;border-radius:.3em;color:var(--muted)}
+.ag span.done{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.ag span.cur{background:var(--accent-soft);color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Agenda / contents tracker</h1>
+<div class="stage" role="img" aria-label="Demo: Agenda / contents tracker">
+<div class="deck"><div class="deck-bar"><nav class="ag" id="ag" aria-label="Agenda"></nav></div>
+<div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p muted" id="p"></p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A small header lists every section of the talk. Play moves through the sections and highlights the current one while earlier ones dim, so the audience always knows where the argument stands.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var A=[['Context','Where things stand today','Three teams share one release process.'],['Problem','Sign-off is most of the wait','Two thirds of release time is approval.'],['Options','Three ways to fix it','Automate, delegate or batch.'],['Plan','Pilot automated checks','One team, six weeks.']];
+AtlasDemo.init({frames:3,stepMs:900,render:function(f){ag.innerHTML=A.map(function(a,i){return '<span class="fx '+(i<f?'done':i===f?'cur':'')+'"'+(i===f?' aria-current="step"':'')+'>'+a[0]+'</span>';}).join('');k.textContent=A[f][0];t.textContent=A[f][1];p.textContent=A[f][2];}});
+</script>
+</body>
+</html>

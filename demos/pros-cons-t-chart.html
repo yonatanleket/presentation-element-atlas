@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pros / cons T-chart: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.tc{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.tc>div{padding:.2em .8em}.tc>div+div{border-inline-start:2px solid var(--fg)}
+.hd{margin:0 0 .3em;font:700 .95em var(--f-body);padding-bottom:.3em;border-bottom:2px solid var(--fg);margin-inline:-.8em;padding-inline:.8em}
+.hd.okc{color:var(--ok)}.hd.badc{color:var(--bad)}
+.tc ul{list-style:none;margin:0;padding:0;display:grid;gap:.35em}.tc li{font-size:.85em;display:flex;gap:.4em;transform:translateY(.3em)}.tc li.on{transform:none}
+.tc li::before{font-weight:700}.pro li::before{content:"+";color:var(--ok)}.con li::before{content:"−";color:var(--bad)}
+.verdict{margin:0;font:600 .9em var(--f-body);padding:.45em .7em;border-radius:.4em;background:var(--accent-soft);color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Pros / cons T-chart</h1>
+<div class="stage" role="img" aria-label="Demo: Pros / cons T-chart. A T-chart weighing building billing in-house: three pros against three cons, ending in a verdict.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.55em">
+<div><p class="kicker">Option under review</p><p class="h">Build billing in-house?</p></div>
+<div class="tc" data-f="1"><div class="pro"><p class="hd okc">Pros</p><ul><li data-f="2">Full control of pricing logic</li><li data-f="3">No per-transaction fee</li><li data-f="4">Fits our data model</li></ul></div>
+<div class="con"><p class="hd badc">Cons</p><ul><li data-f="2">9–12 months to build</li><li data-f="3">PCI compliance burden</li><li data-f="4">Two engineers to maintain</li></ul></div></div>
+<p class="verdict" data-f="5">Verdict: buy now, revisit at 50k customers</p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One option, two columns: what speaks for it on the left and against it on the right, drawn as a T so the halves read as a balance. Play adds each pro with its matching con, then states the verdict the weighing leads to. Content is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:5,stepMs:850,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

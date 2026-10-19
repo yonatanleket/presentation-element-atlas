@@ -1,0 +1,24 @@
+{
+  "id": "dateline",
+  "name": "Dateline",
+  "category": "story",
+  "definition": "Small label giving the time period the slide refers to.",
+  "bestUse": "Retrospectives and historical context.",
+  "trigger": [
+    "timeline"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/dateline.html",
+    "kind": "animated",
+    "how": "Without a dateline the reader has to guess when the chart applies. Play adds a small label in the slide corner naming the period and data cut-off, then moves to a baseline slide whose dateline names a different period, so the time frame is always explicit."
+  },
+  "aliases": [
+    "timeline",
+    "date label",
+    "period"
+  ]
+}

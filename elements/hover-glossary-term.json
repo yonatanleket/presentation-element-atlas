@@ -1,0 +1,27 @@
+{
+  "id": "hover-glossary-term",
+  "name": "Hover glossary term",
+  "category": "text",
+  "definition": "An underlined term that shows its definition on hover.",
+  "bestUse": "Jargon-heavy content.",
+  "trigger": [
+    "jargon-definition"
+  ],
+  "level": "advanced",
+  "sources": [
+    "victor"
+  ],
+  "demo": {
+    "file": "demos/hover-glossary-term.html",
+    "kind": "interactive",
+    "how": "Jargon terms carry a dotted underline. Hover, Tab to, or click a term to show a short definition right beside it; Escape or moving away hides it. The status line counts terms looked up, and the slide text itself never changes, so experts are not slowed down."
+  },
+  "aliases": [
+    "tooltip",
+    "definition",
+    "glossary"
+  ],
+  "related": [
+    "details-on-demand-tooltip"
+  ]
+}

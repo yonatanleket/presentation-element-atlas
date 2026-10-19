@@ -1,0 +1,24 @@
+{
+  "id": "stakeholder-whiteboard",
+  "name": "Stakeholder whiteboard",
+  "category": "diagram",
+  "definition": "Sticky notes around a central note for the presenter’s role, joined by labeled wires describing each working relationship.",
+  "bestUse": "Explaining collaboration and ownership.",
+  "trigger": [
+    "relationships"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/stakeholder-whiteboard.html",
+    "kind": "interactive",
+    "how": "The presenter sits on the central note and each stakeholder is a sticky joined by a wire that names the working relationship. Click a sticky, or use the arrow keys, to highlight its wire and read the cadence and who brings what; Reset clears the selection. Roles are illustrative."
+  },
+  "aliases": [
+    "stakeholder map",
+    "raci",
+    "org"
+  ]
+}

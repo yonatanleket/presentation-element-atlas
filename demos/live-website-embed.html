@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live website / embed: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.emb{position:absolute;inset:.9em;display:flex;flex-direction:column;overflow:hidden}
+.eb-bar{display:flex;align-items:center;gap:.45em;padding:.35em .6em;border-bottom:1px solid var(--line);font-size:.8em}
+.eb-url{flex:1;background:var(--stage);border-radius:99em;padding:.2em .7em;color:var(--muted);font-family:var(--f-mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eb-body{flex:1;position:relative;padding:.6em .8em;display:grid;grid-template-rows:auto 1fr;gap:.5em}
+.tools{display:flex;align-items:center;gap:.4em;flex-wrap:wrap}
+.tools select{font:inherit;font-size:.85em;min-height:max(28px,2.1em);border:1px solid var(--line);border-radius:.4em;background:var(--surface);padding:0 .4em}
+.tot{margin-inline-start:auto;text-align:end;font-size:.8em;color:var(--muted)}.tot b{display:block;font:700 1.6em/1 var(--f-display);color:var(--fg)}
+.bars{display:flex;align-items:flex-end;gap:.5em;border-bottom:1px solid var(--line);padding-top:.4em}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2em;height:100%;justify-content:flex-end}
+.bars i{width:100%;background:var(--accent);border-radius:.2em .2em 0 0;transition:height .45s var(--ease-out)}
+.bars span{font-size:.8em;color:var(--muted)}
+.skel{position:absolute;inset:0;background:var(--surface);padding:.8em;display:none;gap:.5em;grid-template-rows:1.4em 1fr}
+.skel i{border-radius:.3em;background:linear-gradient(90deg,#eceef2,#f6f7f9,#eceef2);background-size:200% 100%;animation:sh 1s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.emb.loading .skel{display:grid}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Live website / embed</h1>
+<div class="stage" role="group" aria-label="Demo: Live website / embed. A card holds a simulated live dashboard with a period switch, a region menu and a reload button.">
+<span class="label-illustrative">Simulated embed</span>
+<div class="emb card" id="emb">
+  <div class="eb-bar"><span aria-hidden="true">●</span><span class="eb-url">dashboard.example.test/sales</span><button class="sbtn" type="button" id="reload">Reload</button></div>
+  <div class="eb-body">
+    <div class="tools">
+      <div class="row" role="group" aria-label="Period" style="gap:.3em"><button class="sbtn" type="button" data-p="0">Week</button><button class="sbtn" type="button" data-p="1">Month</button></div>
+      <label class="sr-only" for="reg">Region</label>
+      <select id="reg"><option value="0">All regions</option><option value="1">North</option><option value="2">South</option></select>
+      <div class="tot">Orders<b id="tot">0</b></div>
+    </div>
+    <div class="bars" id="bars" aria-hidden="true"></div>
+    <div class="skel" aria-hidden="true"><i></i><i></i></div>
+  </div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The card behaves like an embedded page: switch the period, pick a region and the chart and total update in place; Reload shows the loading skeleton a live embed would show. Everything is simulated locally, so the slide still works offline. Reset restores the defaults.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var LAB=[['Mon','Tue','Wed','Thu','Fri'],['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5']];
+var D=[[[120,148,135,170,162],[70,82,77,96,90],[50,66,58,74,72]],[[610,690,720,700,780],[340,380,410,390,430],[270,310,310,310,350]]];
+var p=0,r=0,api,tm=null,bars=$('bars'),pb=document.querySelectorAll('[data-p]');
+function draw(){var d=D[p][r],mx=Math.max.apply(null,D[p][0]);
+  bars.innerHTML=d.map(function(v,i){return '<div><i style="height:'+Math.round(v/mx*85)+'%"></i><span>'+LAB[p][i]+'</span></div>';}).join('');
+  $('tot').textContent=d.reduce(function(a,b){return a+b;},0).toLocaleString('en-US');
+  pb.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===p));});$('reg').value=String(r);}
+pb.forEach(function(b,i){b.addEventListener('click',function(){p=i;draw();api.status('Period: '+b.textContent+' (simulated data)');});});
+$('reg').addEventListener('change',function(e){r=+e.target.value;draw();api.status('Region: '+e.target.options[r].text);});
+$('reload').addEventListener('click',function(){clearTimeout(tm);$('emb').classList.add('loading');api.status('Loading embed…');
+  tm=setTimeout(function(){$('emb').classList.remove('loading');draw();api.status('Embed loaded (simulated)');},AtlasDemo.reducedMotion?150:800);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){clearTimeout(tm);$('emb').classList.remove('loading');p=0;r=0;draw();}});
+})();
+</script>
+</body>
+</html>

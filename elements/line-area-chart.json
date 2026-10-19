@@ -1,0 +1,25 @@
+{
+  "id": "line-area-chart",
+  "name": "Line / area chart",
+  "category": "chart",
+  "definition": "Values over time.",
+  "bestUse": "Change over time.",
+  "trigger": [
+    "trend-over-time"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/line-area-chart.html",
+    "kind": "animated",
+    "how": "The line draws month by month, then the area beneath it fills in to stress volume, and the last point gets a direct label so no legend is needed. The y-axis starts at zero, which an area chart requires. Values are illustrative."
+  },
+  "aliases": [
+    "line chart",
+    "area chart",
+    "trend",
+    "time series"
+  ]
+}

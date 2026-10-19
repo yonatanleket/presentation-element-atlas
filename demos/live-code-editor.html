@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live code editor: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.ed{position:absolute;inset:.9em;display:grid;grid-template-columns:1.25fr 1fr;gap:.6em}
+.pane{display:flex;flex-direction:column;min-height:0}
+.ph{display:flex;align-items:center;justify-content:space-between;font:500 .8em var(--f-mono);color:var(--muted);margin-bottom:.3em;min-height:2.2em}
+textarea{flex:1;resize:none;font:.85em/1.6 var(--f-mono);background:#1f2330;color:#e6e8ef;border:0;border-radius:.45em;padding:.6em .7em;caret-color:#fff}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.out{flex:1;margin:0;font:.85em/1.6 var(--f-mono);background:var(--surface);border:1px solid var(--line);border-radius:.45em;padding:.6em .7em;white-space:pre-wrap;overflow:auto}
+.out .err{color:var(--bad)}.out .res{color:var(--ok);font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Live code editor</h1>
+<div class="stage" role="group" aria-label="Demo: Live code editor. An editable code box with a Run button; the output panel shows computed values or an error.">
+<span class="label-illustrative">Simulated runtime</span>
+<div class="ed">
+  <div class="pane"><div class="ph"><label for="src">editor.calc</label><button class="sbtn primary" type="button" id="run">▶ Run</button></div><textarea id="src" spellcheck="false" aria-describedby="hint"></textarea><span class="sr-only" id="hint">Press Control or Command plus Enter to run.</span></div>
+  <div class="pane"><div class="ph"><span>Output</span></div><pre class="out" id="out" aria-live="polite"></pre></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Edit the four lines of arithmetic and press Run (or Ctrl/Cmd+Enter). A tiny built-in interpreter evaluates each assignment top to bottom and prints the values, or a line-numbered error if something is wrong. Nothing is sent anywhere; Reset restores the original code.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var START='seats = 12\nprice = 40\ndiscount = 0.15\ntotal = seats * price * (1 - discount)';
+var api,src=$('src'),out=$('out');
+function evalExpr(s,env){var t=s.match(/\d+(\.\d+)?|[A-Za-z_]\w*|[-+*\/()]|\S/g)||[],p=0;
+  function peek(){return t[p];}
+  function prim(){var x=t[p++];if(x===undefined)throw 'unexpected end';
+    if(x==='('){var v=add();if(t[p++]!==')')throw 'missing )';return v;}
+    if(x==='-')return -prim();
+    if(/^\d/.test(x))return parseFloat(x);
+    if(/^[A-Za-z_]/.test(x)){if(!(x in env))throw "unknown name '"+x+"'";return env[x];}
+    throw "unexpected '"+x+"'";}
+  function mul(){var v=prim();while(peek()==='*'||peek()==='/'){var o=t[p++],r=prim();v=o==='*'?v*r:v/r;}return v;}
+  function add(){var v=mul();while(peek()==='+'||peek()==='-'){var o=t[p++],r=mul();v=o==='+'?v+r:v-r;}return v;}
+  var v=add();if(p<t.length)throw "unexpected '"+t[p]+"'";return v;}
+function fmt(v){return Math.round(v*1000)/1000;}
+function run(){var env={},lines=src.value.split('\n'),html=[],last=null;
+  for(var i=0;i<lines.length;i++){var l=lines[i].trim();if(!l)continue;var m=l.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);
+    try{if(!m)throw 'expected name = expression';env[m[1]]=evalExpr(m[2],env);last=m[1];html.push(m[1]+' = '+fmt(env[m[1]]));}
+    catch(e){html.push('<span class="err">Line '+(i+1)+': '+String(e).replace(/</g,'&lt;')+'</span>');out.innerHTML=html.join('\n');api.status('Run failed on line '+(i+1));return;}}
+  if(last)html[html.length-1]='<span class="res">'+html[html.length-1]+'</span>';
+  out.innerHTML=html.join('\n')||'(nothing to run)';api.status(last?'Ran: '+last+' = '+fmt(env[last]):'Nothing to run');}
+$('run').addEventListener('click',run);
+src.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();run();}});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){src.value=START;out.textContent='Press Run to evaluate.';}});
+})();
+</script>
+</body>
+</html>

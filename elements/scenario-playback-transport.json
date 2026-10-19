@@ -1,0 +1,20 @@
+{
+  "id": "scenario-playback-transport",
+  "name": "Scenario playback transport",
+  "category": "explore",
+  "definition": "Play, step and reset controls that animate packets through a diagram for a chosen scenario.",
+  "bestUse": "Showing different paths through one system.",
+  "trigger": [
+    "system-architecture",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/scenario-playback-transport.html",
+    "kind": "interactive",
+    "how": "Pick a scenario, then use the transport: Play runs the packet through the diagram hop by hop, Pause holds it, Step advances one hop and Rewind returns to the start. The same system shows a cache hit, a cache miss and a failed database call with retry. Reset restores the first scenario."
+  }
+}

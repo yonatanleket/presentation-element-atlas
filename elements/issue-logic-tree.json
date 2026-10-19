@@ -1,0 +1,25 @@
+{
+  "id": "issue-logic-tree",
+  "name": "Issue / logic tree",
+  "category": "diagram",
+  "definition": "Problem broken into exhaustive sub-branches.",
+  "bestUse": "Structured problem solving.",
+  "trigger": [
+    "hierarchy",
+    "cause-effect"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/issue-logic-tree.html",
+    "kind": "animated",
+    "how": "The question on the left splits into branches that do not overlap and together cover every cause, then each branch splits again into testable drivers. Play builds one level at a time and marks the hypothesis to test first. Figures are illustrative."
+  },
+  "aliases": [
+    "mece",
+    "driver tree",
+    "problem tree"
+  ]
+}

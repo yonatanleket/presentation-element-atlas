@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter switcher menu: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.menu-btn{font:500 1em var(--f-body);background:var(--accent-soft);color:var(--accent);border:0;border-radius:.4em;padding:.35em .6em;cursor:pointer;min-height:2em}
+.menu{position:absolute;inset-block-start:2.8em;inset-inline-start:.7em;z-index:3;width:13em;padding:.4em;background:var(--surface);border:1px solid var(--line);border-radius:.5em;box-shadow:0 .4em 1.2em rgba(27,30,36,.14);font-size:.85em}
+.menu[hidden]{display:none}.menu p{margin:.3em .4em .1em;font:500 .85em var(--f-mono);color:var(--muted)}
+.menu button{display:block;width:100%;text-align:start;font:inherit;background:none;border:0;border-radius:.3em;padding:.35em .5em;cursor:pointer;color:var(--fg)}
+.menu button[aria-current=true]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Chapter switcher menu</h1>
+<div class="stage" role="group" aria-label="Demo: Chapter switcher menu">
+<div class="deck"><div class="deck-bar"><button class="menu-btn" id="mb" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><span id="mbl">Context</span> ▾</button><span class="muted mono" id="pos">1 / 4</span></div>
+<div class="menu" id="menu" hidden></div>
+<div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p" id="p"></p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The demo shows a four-slide mini deck with a chapter menu in its top bar. Open the menu and pick a slide to jump there; Replay walks through an automatic jump. The label always names the chapter you are in.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var SLIDES=[
+  {ch:'Context',k:'Context',t:'Where things stand today',p:'Three teams share one release process.'},
+  {ch:'Context',k:'Context',t:'What slows releases down',p:'Most delay comes from manual sign-off.'},
+  {ch:'Plan',k:'Plan',t:'Three ways to fix it',p:'Automate, delegate, or batch approvals.'},
+  {ch:'Plan',k:'Plan',t:'Recommendation: automate checks',p:'Pilot with one team next quarter.'}];
+var cur=0,mb=document.getElementById('mb'),menu=document.getElementById('menu');
+function show(i){cur=i;var s=SLIDES[i];k.textContent=s.k;t.textContent=s.t;p.textContent=s.p;mbl.textContent=s.ch;pos.textContent=(i+1)+' / 4';build();}
+function build(){var h='',last='';SLIDES.forEach(function(s,i){if(s.ch!==last){h+='<p>'+s.ch+'</p>';last=s.ch;}h+='<button data-i="'+i+'" aria-current="'+(i===cur)+'">'+(i+1)+'. '+s.t+'</button>';});menu.innerHTML=h;}
+function setOpen(o){menu.hidden=!o;mb.setAttribute('aria-expanded',String(o));}
+mb.addEventListener('click',function(){setOpen(menu.hidden);if(!menu.hidden)menu.querySelector('[aria-current=true]').focus();});
+menu.addEventListener('click',function(e){var b=e.target.closest('[data-i]');if(!b)return;show(+b.dataset.i);setOpen(false);mb.focus();api.status('Jumped to slide '+(cur+1));});
+menu.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();setOpen(false);mb.focus();}});
+var api=AtlasDemo.init({frames:2,stepMs:1100,interactive:true,
+  render:function(f){if(f===0){show(0);setOpen(false);}else if(f===1){show(0);setOpen(true);}else{show(2);setOpen(false);}}});
+</script>
+</body>
+</html>

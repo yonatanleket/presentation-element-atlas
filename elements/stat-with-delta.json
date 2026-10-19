@@ -1,0 +1,29 @@
+{
+  "id": "stat-with-delta",
+  "name": "Stat with delta",
+  "category": "metric",
+  "definition": "Number with a change arrow and a comparison period.",
+  "bestUse": "Showing progress.",
+  "trigger": [
+    "single-key-number",
+    "trend-over-time"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/stat-with-delta.html",
+    "kind": "animated",
+    "how": "The number counts up, then a delta chip shows the change against the comparison period with an arrow and a sign, so direction never depends on color alone. Values are illustrative."
+  },
+  "related": [
+    "kpi-tile"
+  ],
+  "aliases": [
+    "kpi",
+    "change vs last period",
+    "growth",
+    "trend arrow"
+  ]
+}

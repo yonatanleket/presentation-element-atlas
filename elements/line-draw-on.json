@@ -1,0 +1,20 @@
+{
+  "id": "line-draw-on",
+  "name": "Line draw-on",
+  "category": "motion",
+  "definition": "SVG strokes animate as if drawn.",
+  "bestUse": "Diagrams built live.",
+  "trigger": [
+    "sequential-process",
+    "system-architecture"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/line-draw-on.html",
+    "kind": "interactive",
+    "how": "Each stroke has a dash as long as the path, offset by how much should remain hidden. Drag the Draw slider, or use its arrow keys, to scrub the strokes on in order; Draw plays the whole build. Reduced motion jumps straight to the finished diagram. Reset hides everything."
+  }
+}

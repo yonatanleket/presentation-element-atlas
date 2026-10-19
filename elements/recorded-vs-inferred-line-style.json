@@ -1,0 +1,23 @@
+{
+  "id": "recorded-vs-inferred-line-style",
+  "name": "Recorded vs inferred line style",
+  "category": "trust",
+  "definition": "Solid lines for documented facts, dashed lines for inferred links.",
+  "bestUse": "Reconstructed diagrams.",
+  "trigger": [
+    "claim-needing-evidence",
+    "system-architecture"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/recorded-vs-inferred-line-style.html",
+    "kind": "interactive",
+    "how": "Solid arrows are links documented in a source; dashed arrows are links inferred from indirect evidence. Filter to recorded or inferred links, then hover or Tab to an arrow to read its evidence. The legend makes the convention explicit. Systems and sources are illustrative."
+  },
+  "related": [
+    "provenance-tags"
+  ]
+}

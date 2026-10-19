@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fade-out empty state: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-columns:1fr 9.6em;gap:.9em;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(8,1fr);gap:.45em}
+.pp{aspect-ratio:1;border-radius:50%;background:var(--accent);border:2px solid var(--accent);transition:background-color .5s var(--ease-out),border-color .5s var(--ease-out),opacity .5s var(--ease-out)}
+.pp.gone{background:transparent;border:2px dashed #b4b9c5;opacity:.85}
+.side{display:grid;gap:.4em}
+.side input{width:100%;accent-color:var(--accent);min-height:28px}
+.st{font:600 .9em var(--f-body)}.ticks{display:flex;justify-content:space-between;font:.8em var(--f-mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Fade-out empty state</h1>
+<div class="stage" role="group" aria-label="Demo: Fade-out empty state. Forty person markers; a funnel-stage slider fades out the people who drop off, leaving empty outlines.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="grid" id="grid" aria-hidden="true"></div>
+  <div class="side">
+    <span class="big" id="n">40</span><span class="st" id="st">Signed up</span><span class="muted" style="font-size:.85em" id="pct">100% of 40</span>
+    <label for="rg" class="kicker">Funnel stage</label>
+    <input type="range" id="rg" min="0" max="3" step="1" value="0" aria-valuetext="Signed up, 40 people">
+    <div class="ticks" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+  </div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Forty markers stand for forty sign-ups. Move the stage slider (or use its arrow keys) and the people who drop off at each stage fade to empty outlines instead of disappearing, so the absence stays visible and the remaining count is read against the original. Reset returns to sign-up.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var ST=[['Signed up',40],['Activated',26],['Active week 2',18],['Paid',7]],api;
+var order=[];for(var i=0;i<40;i++)order.push(i);
+var seed=7;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280;}
+for(i=39;i>0;i--){var j=Math.floor(rnd()*(i+1)),tmp=order[i];order[i]=order[j];order[j]=tmp;}
+var g=$('grid');g.innerHTML=new Array(41).join('<span class="pp"></span>');var pp=g.children;
+function set(s){var keep=ST[s][1];for(var k=0;k<40;k++)pp[order[k]].classList.toggle('gone',k>=keep);
+  $('n').textContent=keep;$('st').textContent=ST[s][0];$('pct').textContent=Math.round(keep/40*100)+'% of 40 · '+(40-keep)+' gone';
+  $('rg').value=s;$('rg').setAttribute('aria-valuetext',ST[s][0]+', '+keep+' people');}
+$('rg').addEventListener('input',function(e){set(+e.target.value);api.status(ST[+e.target.value][0]+': '+ST[+e.target.value][1]+' of 40 remain');});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){set(0);}});
+})();
+</script>
+</body>
+</html>

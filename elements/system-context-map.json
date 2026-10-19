@@ -1,0 +1,24 @@
+{
+  "id": "system-context-map",
+  "name": "System context map",
+  "category": "diagram",
+  "definition": "Zoned map (for example, user-facing, internal and partner systems) with the owned area highlighted and labeled connectors.",
+  "bestUse": "Showing where your part sits in a larger system.",
+  "trigger": [
+    "system-architecture",
+    "scope-boundary"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/system-context-map.html",
+    "kind": "interactive",
+    "how": "Zones group the systems by who runs them, the highlighted area is what your team owns, and each connector is labeled with what flows along it. Select any system to light up only its connections and list them below; Reset returns to the owned service. Systems are illustrative."
+  },
+  "aliases": [
+    "architecture",
+    "context diagram"
+  ]
+}

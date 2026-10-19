@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAG status: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.ls{display:grid;gap:.45em;width:84%}
+.it{display:grid;grid-template-columns:1fr auto;align-items:center;gap:.6em;background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.45em .7em}
+.st{display:inline-flex;align-items:center;gap:.35em;font:500 .85em var(--f-body);padding:.25em .55em;border-radius:99em;background:var(--stage);color:var(--muted)}
+.st i{font-style:normal;width:1.2em;height:1.2em;border-radius:50%;display:grid;place-items:center;font-size:.8em;color:#fff;background:var(--muted)}
+.g{background:var(--ok-soft);color:var(--ok)}.g i{background:var(--ok)}.a{background:var(--warn-soft);color:var(--warn)}.a i{background:#c98a00}.r{background:var(--bad-soft);color:var(--bad)}.r i{background:var(--bad)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">RAG status</h1>
+<div class="stage" role="img" aria-label="Demo: RAG status">
+<div class="fill center"><div class="ls" id="ls"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each workstream gets a red, amber or green status plus a text label and icon, so the status still reads without color. Play updates the statuses one by one as a weekly review would.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var W=[['Test automation','g'],['Approval workflow','a'],['Pilot onboarding','r'],['Documentation','g']];
+var L={g:['On track','✓'],a:['At risk','!'],r:['Blocked','✕']};
+AtlasDemo.init({frames:4,stepMs:700,render:function(f){ls.innerHTML=W.map(function(w,i){var s=i<f?w[1]:null;return '<div class="it"><span>'+w[0]+'</span><span class="st fx '+(s||'')+'"><i aria-hidden="true">'+(s?L[s][1]:'–')+'</i>'+(s?L[s][0]:'Not reported')+'</span></div>';}).join('');}});
+</script>
+</body>
+</html>

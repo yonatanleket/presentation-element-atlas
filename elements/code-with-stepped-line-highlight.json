@@ -1,0 +1,23 @@
+{
+  "id": "code-with-stepped-line-highlight",
+  "name": "Code with stepped line highlight",
+  "category": "product",
+  "definition": "Code block whose highlighted lines change on each click.",
+  "bestUse": "Technical talks.",
+  "trigger": [
+    "code"
+  ],
+  "level": "standard",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/code-with-stepped-line-highlight.html",
+    "kind": "animated",
+    "how": "The whole function stays on screen while each step highlights the next group of lines and dims the rest. A one-line note names what those lines do, so the audience follows the logic in order without the presenter pointing at the screen."
+  },
+  "aliases": [
+    "code",
+    "line highlight"
+  ]
+}

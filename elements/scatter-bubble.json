@@ -1,0 +1,24 @@
+{
+  "id": "scatter-bubble",
+  "name": "Scatter / bubble",
+  "category": "chart",
+  "definition": "Points on two axes; bubble size adds a third variable.",
+  "bestUse": "Correlation.",
+  "trigger": [
+    "correlation"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/scatter-bubble.html",
+    "kind": "animated",
+    "how": "Each dot is one sales region placed by marketing spend and new customers; the dots then grow into bubbles whose area (not radius) shows average deal size, and a fitted trend line shows the correlation. Data is illustrative."
+  },
+  "aliases": [
+    "scatter plot",
+    "bubble chart",
+    "correlation"
+  ]
+}

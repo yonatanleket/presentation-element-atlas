@@ -1,0 +1,20 @@
+{
+  "id": "objective-list-with-status-tag",
+  "name": "Objective list with status tag",
+  "category": "text",
+  "definition": "Small labeled two-column list of objectives, each with a pill marking its status (e.g. Committed or Stretch).",
+  "bestUse": "Stating scope without overclaiming.",
+  "trigger": [
+    "scope-boundary",
+    "status-update"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/objective-list-with-status-tag.html",
+    "kind": "animated",
+    "how": "Each objective sits on its own row with a small status pill in a second column: Committed for what will ship, Stretch for what might, Exploring for what is only being studied. Play adds the rows one at a time, so scope is stated without overclaiming."
+  }
+}

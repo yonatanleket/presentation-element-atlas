@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collapsible detail card: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.cd{width:100%;text-align:start;font:inherit;color:var(--fg);padding:.5em .7em;cursor:pointer;display:block}
+.cd .top{display:flex;align-items:center;gap:.5em;font-size:.95em;font-weight:600}
+.cd .chev{margin-inline-start:auto;transition:transform .22s var(--ease-out);color:var(--muted)}
+.cd[aria-expanded=true]{border-color:var(--accent)}.cd[aria-expanded=true] .chev{transform:rotate(180deg)}
+.det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease-out)}
+.cd[aria-expanded=true] .det{grid-template-rows:1fr}
+.det>div{overflow:hidden}.det p{margin:.35em 0 0;font-size:.85em;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Collapsible detail card</h1>
+<div class="stage" role="group" aria-label="Demo: Collapsible detail card. Three finding cards show one line each; one opens to reveal its detail.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.45em">
+<p class="kicker">Pilot review</p><p class="h" style="font-size:1.15em;margin-bottom:.2em">Three findings from the six-week pilot</p>
+<div id="cards" class="col" style="gap:.4em"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each card shows only a one-line finding and a chevron. Play opens the first card to reveal its evidence, then closes it and opens the second, so readers choose their depth. The cards are also real buttons: click or press Enter on any card to open or close it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var C=[['1','Setup time fell by half','Median setup went from 42 to 20 minutes across 18 teams. Two teams saw no change; both skipped the guided checklist.'],
+['2','Support requests shifted, not dropped','Total tickets held flat, but “how do I start” questions fell 60% while billing questions rose.'],
+['3','Admins want an audit view','11 of 14 admins asked who changed what. No workaround exists today.']];
+var open=[false,false,false];
+$('cards').innerHTML=C.map(function(c,i){return '<button class="cd card" type="button" data-i="'+i+'" aria-expanded="false"><span class="top"><span class="pill">'+c[0]+'</span>'+c[1]+'<span class="chev" aria-hidden="true">▾</span></span><span class="det"><div><p>'+c[2]+'</p></div></span></button>';}).join('');
+var btns=$('cards').querySelectorAll('.cd');
+function draw(){btns.forEach(function(b,i){b.setAttribute('aria-expanded',String(open[i]));});}
+$('cards').addEventListener('click',function(e){var b=e.target.closest('.cd');if(!b)return;var i=+b.dataset.i;open[i]=!open[i];draw();api.status((open[i]?'Opened: ':'Closed: ')+C[i][1]);});
+var FR=[[0,0,0],[1,0,0],[0,1,0]];
+var api=AtlasDemo.init({frames:2,stepMs:1500,render:function(f){open=FR[f].map(Boolean);draw();}});
+</script>
+</body>
+</html>

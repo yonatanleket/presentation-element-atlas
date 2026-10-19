@@ -1,0 +1,23 @@
+{
+  "id": "radar-chart",
+  "name": "Radar chart",
+  "category": "chart",
+  "definition": "Values on radial axes.",
+  "bestUse": "Multi-attribute profiles.",
+  "trigger": [
+    "options-comparison"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/radar-chart.html",
+    "kind": "animated",
+    "how": "Six attributes radiate from the center on the same 1–5 scale. Vendor A’s profile draws first, then Vendor B overlays it, so strengths and gaps show as bulges and dents. Keep axes few and scales shared. Scores are illustrative."
+  },
+  "aliases": [
+    "spider chart",
+    "web chart"
+  ]
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision card (dilemma → options → choice): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.dc{position:absolute;inset:.9em;display:grid;grid-template-columns:6.4em 1em 9.2em 1em 1fr;align-items:stretch}
+.wire{align-self:center;height:2px;background:var(--muted);position:relative}.wire::after{content:"";position:absolute;inset-inline-end:-.1em;top:-.25em;border:.27em solid transparent;border-inline-start:.4em solid var(--muted)}
+.colh{font:500 .8em var(--f-mono);color:var(--accent);margin:0 0 .3em}
+.dil{padding:.6em;display:flex;flex-direction:column;justify-content:center}.dil p{margin:0;font-size:.85em}
+.opts{display:flex;flex-direction:column;gap:.35em;justify-content:center}
+.opt{font:inherit;text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.4em .5em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.3em;min-height:2.5em}
+.opt span{font-size:.85em}.opt[aria-checked=true]{border:2px solid var(--accent);background:var(--accent-soft)}
+.opt .pill{font-size:.8em}
+.out{display:flex;flex-direction:column;gap:.35em;justify-content:center}
+.oc{padding:.45em .6em}.oc p{margin:0;font-size:.85em}.oc .colh{margin-bottom:.15em}
+.oc.t{border-inline-start:.3em solid var(--warn)}.oc.c{border-inline-start:.3em solid var(--ok)}
+#who{font:700 1em var(--f-display)}.alt #who{color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Decision card (dilemma → options → choice)</h1>
+<div class="stage" role="group" aria-label="Demo: Decision card (dilemma → options → choice). A decision card: the dilemma, three options, and the trade-off and outcome of the selected option.">
+<span class="label-illustrative">Illustrative</span>
+<div class="dc">
+<div class="dil card"><p class="colh">Dilemma</p><p>Checkout errors tripled after launch.</p><p style="margin-top:.4em"><b>Fix fast or fix right?</b></p></div>
+<span class="wire"></span>
+<div><p class="colh">Options</p><div class="opts" role="radiogroup" aria-label="Options considered"><button type="button" class="opt" role="radio" data-i="0"><span>Roll back</span></button><button type="button" class="opt" role="radio" data-i="1"><span>Hotfix + flag</span><span class="pill ok">Chosen</span></button><button type="button" class="opt" role="radio" data-i="2"><span>Full rewrite</span></button></div></div>
+<span class="wire"></span>
+<div class="out" id="out"><div class="oc card"><p class="colh" id="wh">Chosen</p><p id="who"></p></div>
+<div class="oc card t"><p class="colh">Trade-off</p><p id="to"></p></div><div class="oc card c"><p class="colh">What changed</p><p id="ch"></p></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The card wires the dilemma to the options considered and on to the choice, its trade-off and what changed. Select another option, by click or arrow keys, to see the road not taken; the Chosen tag stays on what the team actually picked. Reset returns to it. Content is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var O=[{"k":"A","n":"Roll back","t":"Lose new payment methods for 2 weeks","c":"Errors back to baseline in 1 hour"},{"k":"B","n":"Hotfix + flag","t":"Two days of heavy on-call load","c":"Errors −92% in 6 hours, methods kept","chosen":1},{"k":"C","n":"Full rewrite","t":"Six weeks with errors still live","c":"Cleanest code, highest revenue risk"}];var sel=1,api;var opts=$$('.opt');
+function draw(){var o=O[sel];opts.forEach(function(b,i){b.setAttribute('aria-checked',String(i===sel));b.tabIndex=i===sel?0:-1;});
+  $('#wh').textContent=o.chosen?'Chosen':'If we had picked';$('#out').classList.toggle('alt',!o.chosen);$('#who').textContent=o.n;
+  $('#to').textContent=o.t;$('#ch').textContent=o.chosen?o.c:'Expected: '+o.c.charAt(0).toLowerCase()+o.c.slice(1);}
+function pick(i,focus){sel=(i+O.length)%O.length;draw();if(focus)opts[sel].focus();api.status((O[sel].chosen?'Chosen: ':'Alternative: ')+O[sel].n);}
+opts.forEach(function(b,i){b.addEventListener('click',function(){pick(i);});
+  b.addEventListener('keydown',function(e){var d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(!d)return;e.preventDefault();if(isRtl()&&/Left|Right/.test(e.key))d=-d;pick(sel+d,true);});});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Select an option to compare',reset:function(){sel=1;draw();}});
+</script>
+</body>
+</html>

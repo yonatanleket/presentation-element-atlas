@@ -1,0 +1,19 @@
+{
+  "id": "drawing-laser-overlay",
+  "name": "Drawing & laser overlay",
+  "category": "nav",
+  "definition": "Freehand ink and a laser pointer drawn over the live slide.",
+  "bestUse": "Pointing at details, workshops.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "standard",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/drawing-laser-overlay.html",
+    "kind": "animated",
+    "how": "An ink stroke draws itself around one detail on the slide while a laser dot moves to the point being discussed. Play replays the gesture; the overlay sits above the slide and never changes its content."
+  }
+}

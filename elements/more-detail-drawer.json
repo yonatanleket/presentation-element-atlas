@@ -1,0 +1,20 @@
+{
+  "id": "more-detail-drawer",
+  "name": "“More detail” drawer",
+  "category": "nav",
+  "definition": "Side panel that opens per-slide backup notes without leaving the slide.",
+  "bestUse": "Keeping slides clean while having depth ready for questions.",
+  "trigger": [
+    "dense-detail",
+    "navigation-wayfinding"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/more-detail-drawer.html",
+    "kind": "interactive",
+    "how": "Each slide carries its own backup notes. The More detail button slides a drawer in from the side with the notes for the current slide only; closing it returns focus to the button. Switch slides to see the drawer content change."
+  }
+}

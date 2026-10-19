@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scrubbable numbers / reactive document: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.doc{position:absolute;inset:.9em;padding:1em 1.2em;display:grid;grid-template-rows:auto 1fr;gap:.6em}
+.doc p{margin:0;font-size:1.05em;line-height:1.7}
+.sc{display:inline-block;color:var(--accent);font:600 1em var(--f-mono);border-bottom:2px dashed var(--accent);cursor:ew-resize;padding:0 .1em;touch-action:none;user-select:none}
+.sc:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:.2em}
+.sc.act{background:var(--accent-soft)}
+.out{font-weight:700;font-variant-numeric:tabular-nums}
+.bars{display:flex;align-items:flex-end;gap:.25em;border-bottom:1px solid var(--line)}
+.bars i{flex:1;background:var(--accent-soft);border-top:2px solid var(--accent);transition:height .15s}
+.hint{font-size:.8em;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Scrubbable numbers / reactive document</h1>
+<div class="stage" role="group" aria-label="Demo: Scrubbable numbers / reactive document. A paragraph with three adjustable numbers; dragging or arrow keys change them and the dependent revenue figures and bars update.">
+<span class="label-illustrative">Illustrative</span>
+<div class="doc card">
+  <p>If we sign <span class="sc" tabindex="0" role="spinbutton" data-k="t" data-min="1" data-max="40" data-step="1" aria-label="New teams per month"></span> new teams a month, each with <span class="sc" tabindex="0" role="spinbutton" data-k="s" data-min="2" data-max="50" data-step="1" aria-label="Seats per team"></span> seats at <span class="sc" tabindex="0" role="spinbutton" data-k="p" data-min="5" data-max="100" data-step="5" aria-label="Price per seat per month"></span> a seat, monthly revenue after a year is <span class="out" id="mrr"></span>, an annual run rate of <span class="out" id="arr"></span>.</p>
+  <div class="bars" id="bars" aria-hidden="true"></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The blue numbers are inputs: drag one left or right, or focus it and press the arrow keys, and every dependent figure in the sentence plus the twelve-month bars recompute at once. Monthly revenue = new teams × 12 months × seats × price; annual run rate = that × 12. Reset restores the defaults.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var DEF={t:12,s:8,p:40},v={},api,scs=document.querySelectorAll('.sc');
+$('bars').innerHTML=new Array(13).join('<i></i>');var bs=$('bars').children;
+function money(n){return '$'+(n>=1e6?(n/1e6).toFixed(2)+'M':Math.round(n).toLocaleString('en-US'));}
+function fmt(k,x){return k==='p'?'$'+x:String(x);}
+function upd(){scs.forEach(function(e){var k=e.dataset.k;e.textContent=fmt(k,v[k]);e.setAttribute('aria-valuenow',v[k]);e.setAttribute('aria-valuemin',e.dataset.min);e.setAttribute('aria-valuemax',e.dataset.max);e.setAttribute('aria-valuetext',fmt(k,v[k]));});
+  var mrr=v.t*12*v.s*v.p;$('mrr').textContent=money(mrr);$('arr').textContent=money(mrr*12);
+  for(var m=0;m<12;m++)bs[m].style.height=((m+1)/12*92*Math.min(1,Math.sqrt(mrr/250000)))+'%';}
+function set(e,x,announce){var k=e.dataset.k,mn=+e.dataset.min,mx=+e.dataset.max,st=+e.dataset.step;v[k]=Math.max(mn,Math.min(mx,Math.round(x/st)*st));upd();
+  if(announce)api.status(e.getAttribute('aria-label')+': '+fmt(k,v[k])+' → run rate '+$('arr').textContent);}
+scs.forEach(function(e){var drag=null;
+  e.addEventListener('pointerdown',function(ev){drag={x:ev.clientX,v:v[e.dataset.k]};e.setPointerCapture(ev.pointerId);e.classList.add('act');ev.preventDefault();e.focus();});
+  e.addEventListener('pointermove',function(ev){if(!drag)return;var dx=(ev.clientX-drag.x)*(isRtl()?-1:1);set(e,drag.v+Math.round(dx/6)*(+e.dataset.step),false);});
+  function end(){if(drag){drag=null;e.classList.remove('act');set(e,v[e.dataset.k],true);}}
+  e.addEventListener('pointerup',end);e.addEventListener('pointercancel',end);
+  e.addEventListener('keydown',function(ev){var st=+e.dataset.step,d={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1,PageUp:5,PageDown:-5}[ev.key];
+    if(ev.key==='Home'){ev.preventDefault();set(e,+e.dataset.min,true);return;}if(ev.key==='End'){ev.preventDefault();set(e,+e.dataset.max,true);return;}
+    if(!d)return;if(isRtl()&&(ev.key==='ArrowRight'||ev.key==='ArrowLeft'))d=-d;ev.preventDefault();set(e,v[e.dataset.k]+d*st,true);});});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){v={t:DEF.t,s:DEF.s,p:DEF.p};upd();}});
+})();
+</script>
+</body>
+</html>

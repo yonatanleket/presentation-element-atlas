@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type-hover code (TwoSlash): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.box{position:absolute;inset:.9em;display:flex;flex-direction:column;gap:.5em}
+.code{position:relative;flex:1;background:#1f2330;border-radius:.5em;padding:.9em 1em;font:.85em/2.3 var(--f-mono);color:#e6e8ef;white-space:pre}
+.kw{color:#b9c4ff}.st{color:#9fe3c1}
+.tk{all:unset;cursor:help;border-bottom:1px dashed #8d93a6;color:#ffd28a}
+.tk:focus-visible{outline:2px solid #9fb0ff;outline-offset:1px}
+.tk[aria-expanded=true]{background:rgba(122,140,255,.3);border-bottom-color:#ffd28a}
+.pop{position:absolute;z-index:3;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:.4em;padding:.35em .6em;font:.95em/1.4 var(--f-mono);box-shadow:0 .4em 1em rgba(0,0,0,.25);white-space:pre;opacity:0;transform:translateY(-.2em);transition:opacity .15s var(--ease-out),transform .15s var(--ease-out);pointer-events:none}
+.pop.show{opacity:1;transform:none}
+.pop .kw{color:var(--accent)}
+.tip{font-size:.85em;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Type-hover code (TwoSlash)</h1>
+<div class="stage" role="group" aria-label="Demo: Type-hover code (TwoSlash). A short code sample whose identifiers show their type in a popover on hover, focus or click.">
+<span class="label-illustrative">Illustrative</span>
+<div class="box">
+  <div class="code" id="code"><span class="kw">const</span> <button class="tk" type="button" data-t="0">user</button> = <span class="kw">await</span> <button class="tk" type="button" data-t="1">getUser</button>(42);
+<span class="kw">const</span> <button class="tk" type="button" data-t="2">plan</button> = user.<button class="tk" type="button" data-t="3">tier</button>;
+<span class="kw">const</span> <button class="tk" type="button" data-t="4">seats</button> = <button class="tk" type="button" data-t="5">countSeats</button>(plan);
+<span class="kw">if</span> (seats &gt; 10) notify(<span class="st">"sales"</span>);<div class="pop" id="pop" role="tooltip"></div></div>
+  <p class="tip">Hover, focus or click an underlined name.</p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Hover, focus or click an underlined identifier to see the type the compiler would infer, shown in a popover under that token. Arrow keys move between identifiers and Escape closes the popover, so a presenter can answer “what is this?” without leaving the slide. Reset clears it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var T=['const user: User','function getUser(id: number): Promise<User>','const plan: "free" | "team" | "enterprise"','(property) User.tier: "free" | "team" | "enterprise"','const seats: number','function countSeats(plan: Plan): number'];
+var code=$('code'),pop=$('pop'),tks=code.querySelectorAll('.tk'),open=-1,api;
+pop.id='pop';
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function show(i){open=i;tks.forEach(function(b,k){b.setAttribute('aria-expanded',String(k===i));if(k===i)b.setAttribute('aria-describedby','pop');else b.removeAttribute('aria-describedby');});
+  if(i<0){pop.classList.remove('show');return;}
+  var b=tks[i];pop.innerHTML=esc(T[i]).replace(/^(const|function|\(property\))/,'<span class="kw">$1</span>');
+  var cr=code.getBoundingClientRect(),br=b.getBoundingClientRect(),fs=parseFloat(getComputedStyle(code).fontSize);
+  var x=br.left-cr.left,maxX=cr.width-pop.offsetWidth-fs*.5;pop.style.left=Math.max(fs*.5,Math.min(x,maxX))+'px';pop.style.top=(br.bottom-cr.top+fs*.15)+'px';
+  pop.classList.add('show');api.status(T[i]);}
+tks.forEach(function(b,i){
+  b.addEventListener('mouseenter',function(){show(i);});b.addEventListener('focus',function(){show(i);});
+  b.addEventListener('click',function(){show(i);});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+    if(e.key==='Escape'){e.preventDefault();show(-1);api.status('');return;}if(!d)return;if(isRtl())d=-d;e.preventDefault();tks[(i+d+tks.length)%tks.length].focus();});});
+code.addEventListener('mouseleave',function(){if(!code.contains(document.activeElement))show(-1);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){show(-1);}});
+})();
+</script>
+</body>
+</html>

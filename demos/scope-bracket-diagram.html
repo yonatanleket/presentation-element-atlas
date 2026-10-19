@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scope bracket diagram: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.stp{position:absolute;font:inherit;background:var(--surface);border:1px solid var(--line);border-radius:.45em;cursor:pointer;color:var(--fg);transition:background-color .2s,border-color .2s}
+.stp span{font-size:.85em}.stp[aria-pressed=true]{background:var(--accent-soft);border:2px solid var(--accent);color:var(--accent)}
+.brk{fill:none;stroke-width:2}.brk.in{stroke:var(--accent)}.brk.out{stroke:var(--muted);stroke-dasharray:4 3}
+.bl-in{fill:var(--accent);font-weight:600}.bl-out{fill:var(--muted)}.flow{stroke:var(--line);stroke-width:2}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Scope bracket diagram</h1>
+<div class="stage" role="group" aria-label="Demo: Scope bracket diagram. A six-step purchase process with a bracket above the steps the initiative owns and below the steps that stay unchanged. Steps toggle on click.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><text x="20" y="30" class="t-b" style="font-size:15px">Checkout revamp: what we own</text><line x1="20" y1="150" x2="460" y2="150" class="flow"/><g id="brk"></g></svg>
+<div class="fill"><button type="button" class="stp" data-i="0" style="left:1.063em;top:7.75em;width:4.125em;height:3.25em"><span>Browse</span></button><button type="button" class="stp" data-i="1" style="left:5.813em;top:7.75em;width:4.125em;height:3.25em"><span>Cart</span></button><button type="button" class="stp" data-i="2" style="left:10.563em;top:7.75em;width:4.125em;height:3.25em"><span>Checkout</span></button><button type="button" class="stp" data-i="3" style="left:15.313em;top:7.75em;width:4.125em;height:3.25em"><span>Payment</span></button><button type="button" class="stp" data-i="4" style="left:20.063em;top:7.75em;width:4.125em;height:3.25em"><span>Confirm</span></button><button type="button" class="stp" data-i="5" style="left:24.813em;top:7.75em;width:4.125em;height:3.25em"><span>Delivery</span></button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The process runs left to right; the bracket above marks the steps this initiative owns and the bracket below marks what stays unchanged. Click a step, or press Enter on it, to move it in or out of scope and the brackets redraw around the new boundary. Reset restores the proposed scope.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var N=["Browse","Cart","Checkout","Payment","Confirm","Delivery"];var DEF=[0,0,1,1,1,0],inS,api;var B=$$('.stp');
+function runs(v){var r=[],s=null;for(var i=0;i<=N.length;i++){var on=i<N.length&&inS[i]===v;if(on&&s===null)s=i;if(!on&&s!==null){r.push([s,i-1]);s=null;}}return r;}
+function br(a,b,up){var x1=50+a*76-31,x2=50+b*76+31,y=up?118:182,t=up?104:198,cx=(x1+x2)/2,c=up?'in':'out';
+  return '<path class="brk '+c+'" d="M'+x1+' '+y+' V'+t+' H'+(cx-6)+' L'+cx+' '+(up?t-8:t+8)+' L'+(cx+6)+' '+t+' H'+x2+' V'+y+'"/>'+
+    '<text x="'+cx+'" y="'+(up?t-14:t+24)+'" text-anchor="middle" class="'+(up?'bl-in':'bl-out')+'">'+(up?'We own':'Unchanged')+'</text>';}
+function draw(){B.forEach(function(b,i){b.setAttribute('aria-pressed',String(!!inS[i]));});
+  $('#brk').innerHTML=runs(1).map(function(r){return br(r[0],r[1],true);}).join('')+runs(0).map(function(r){return br(r[0],r[1],false);}).join('');}
+B.forEach(function(b,i){b.addEventListener('click',function(){inS[i]=inS[i]?0:1;draw();var own=N.filter(function(n,j){return inS[j];});api.status(own.length?'In scope: '+own.join(', '):'Nothing in scope');});});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Click a step to change the scope',reset:function(){inS=DEF.slice();draw();}});
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "id": "hub-and-spoke",
+  "name": "Hub and spoke",
+  "category": "diagram",
+  "definition": "Central node with radiating items.",
+  "bestUse": "Platform ecosystems.",
+  "trigger": [
+    "system-architecture",
+    "relationships"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/hub-and-spoke.html",
+    "kind": "animated",
+    "how": "One central node and every item that depends on it, each on its own spoke so no consumer looks more important than another. Play draws the hub, then the spokes in two waves, and ends with the takeaway: one contract serves six consumers. Names are illustrative."
+  },
+  "aliases": [
+    "ecosystem",
+    "platform map"
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stat with delta: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.tile{width:64%;padding:1.2em 1.4em;display:grid;gap:.35em}
+.delta{display:inline-flex;align-items:center;gap:.3em;font:500 .9em var(--f-mono);padding:.3em .55em;border-radius:.35em;background:var(--ok-soft);color:var(--ok);justify-self:start}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Stat with delta</h1>
+<div class="stage" role="img" aria-label="Demo: Stat with delta">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill center"><div class="tile card"><span class="muted">Releases per week</span><span class="big" id="v">0</span>
+<span class="delta fx hide" id="d"><span aria-hidden="true">▲</span> +8.4% vs last quarter</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The number counts up, then a delta chip shows the change against the comparison period with an arrow and a sign, so direction never depends on color alone. Values are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+AtlasDemo.init({frames:2,stepMs:1200,render:function(f,ctx){AtlasDemo.countUp(v,f>=1?37:0,{animate:ctx.animate&&f===1});d.classList.toggle('hide',f<2);}});
+</script>
+</body>
+</html>

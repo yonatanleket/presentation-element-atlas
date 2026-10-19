@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulation disclaimer: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+.dots{display:flex;gap:.3em}.dots i{width:.55em;height:.55em;border-radius:50%;background:var(--line)}.sbanner{display:flex;align-items:center;gap:.5em;padding:.35em .7em;background:var(--warn-soft);color:var(--warn);font-size:.85em;font-weight:600;border-block-end:1px solid var(--line)}.sbody{gap:.5em}.kpi{flex:1;padding:.4em .55em;display:flex;flex-direction:column;font-size:.85em}.kpi b{font:700 1.5em/1.1 var(--f-display)}.tbl{font-size:.85em}.tr{display:grid;grid-template-columns:1.4fr 1fr .8fr;gap:.4em;padding:.3em .55em;border-block-start:1px solid var(--line);align-items:center}.tr .pill{justify-self:start}.tr.th{border:0;color:var(--muted);font:500 .9em var(--f-mono)}.deck.sim{inset:.9em .9em .9em .9em;top:2.1em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Simulation disclaimer</h1>
+<div class="stage" role="img" aria-label="Demo: Simulation disclaimer. A mock analytics product screen, then a banner reading Simulated. Not a real product screen, and placeholder customer names.">
+<span class="label-illustrative">Simulated</span>
+<div class="deck sim"><div class="deck-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><b>Insights</b><span class="muted" style="margin-inline-start:auto">Workspace</span></div>
+<div class="sbanner fx hide" id="sb"><span class="pill warn">Simulated</span> Not a real product screen.</div>
+<div class="deck-body sbody"><div class="row" style="gap:.5em"><div class="card kpi"><span class="muted">Active accounts</span><b>1,284</b></div><div class="card kpi"><span class="muted">Renewal rate</span><b>91%</b></div><div class="card kpi"><span class="muted">Open tickets</span><b>37</b></div></div>
+<div class="card tbl"><div class="tr th"><span>Account</span><span>Plan</span><span>Health</span></div><div class="tr"><span data-a="Northwind Foods" data-b="Customer A"></span><span>Enterprise</span><span class="pill ok">Good</span></div><div class="tr"><span data-a="Bluebay Clinics" data-b="Customer B"></span><span>Growth</span><span class="pill warn">Watch</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A mock product screen appears, then a banner states “Simulated. Not a real product screen.” and real-looking customer names swap to neutral placeholders. Use it whenever a slide shows a mockup that could be mistaken for a live system or real client data.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var sb = document.getElementById('sb'), names = document.querySelectorAll('[data-a]');
+    AtlasDemo.init({ frames: 2, stepMs: 1400, render: function (f) {
+      sb.classList.toggle('hide', f < 1);
+      names.forEach(function (n) { n.textContent = f >= 2 ? n.dataset.b : n.dataset.a; });
+    } });
+  })();
+</script>
+</body>
+</html>

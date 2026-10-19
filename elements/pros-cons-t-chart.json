@@ -1,0 +1,24 @@
+{
+  "id": "pros-cons-t-chart",
+  "name": "Pros / cons T-chart",
+  "category": "compare",
+  "definition": "Two columns weighing an option.",
+  "bestUse": "Quick trade-offs.",
+  "trigger": [
+    "decision-tradeoff"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/pros-cons-t-chart.html",
+    "kind": "animated",
+    "how": "One option, two columns: what speaks for it on the left and against it on the right, drawn as a T so the halves read as a balance. Play adds each pro with its matching con, then states the verdict the weighing leads to. Content is illustrative."
+  },
+  "aliases": [
+    "pros and cons",
+    "t chart",
+    "trade-off"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "stepper",
+  "name": "Stepper",
+  "category": "explore",
+  "definition": "Click through the layers of a story step by step.",
+  "bestUse": "Self-paced explainers.",
+  "trigger": [
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/stepper.html",
+    "kind": "animated",
+    "how": "A numbered stepper sits above the diagram. Each step marks the next number as current and adds one more layer to the picture (customer, order, warehouse, courier) with a one-line caption, so the story is told in layers at a pace the viewer sets."
+  }
+}

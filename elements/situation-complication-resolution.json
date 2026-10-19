@@ -1,0 +1,25 @@
+{
+  "id": "situation-complication-resolution",
+  "name": "Situation–Complication–Resolution",
+  "category": "story",
+  "definition": "Three-beat opener: context, tension, then the proposed answer.",
+  "bestUse": "Persuasive decks.",
+  "trigger": [
+    "key-message",
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/situation-complication-resolution.html",
+    "kind": "animated",
+    "how": "The opener runs in three beats. Situation states the shared context, Complication adds the tension that makes it a problem now, and Resolution answers it with the proposal. Play reveals one beat per step, with the resolution emphasized because it is the point of the deck."
+  },
+  "aliases": [
+    "scr",
+    "storyline",
+    "narrative arc"
+  ]
+}

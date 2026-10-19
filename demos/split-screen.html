@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split screen: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.ss{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.half{padding:1.6em 1.4em;display:flex;flex-direction:column;gap:.3em;transform:translateY(.6em)}.half.on{transform:none}
+.half.l{background:#e4e6eb}.half.r{background:var(--accent-soft)}.half.r .big{color:var(--accent)}
+.half ul{margin:.4em 0 0;padding-inline-start:1.1em;font-size:.85em;color:var(--ink-2);display:grid;gap:.2em}
+.vs{position:absolute;inset-inline-start:50%;top:50%;width:2.6em;height:2.6em;margin:-1.3em 0 0 -1.3em;border-radius:50%;background:var(--fg);color:#fff;display:grid;place-items:center;font:700 .85em var(--f-body)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Split screen</h1>
+<div class="stage" role="img" aria-label="Demo: Split screen. Two halves contrast account opening today, 3 days, with mobile onboarding, 8 minutes.">
+<span class="label-illustrative">Illustrative</span>
+<div class="ss"><div class="half l" data-f="1"><p class="kicker" style="color:var(--muted)">Today</p><span class="big">3 days</span><p class="p">to open an account</p><ul><li>Paper forms</li><li>Branch visit</li></ul></div>
+<div class="half r" data-f="2"><p class="kicker">With mobile onboarding</p><span class="big">8 min</span><p class="p">to open an account</p><ul><li>Photo ID check</li><li>No branch visit</li></ul></div></div>
+<span class="vs" data-f="3">vs</span>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The slide is cut into two equal halves that use the same layout, so every difference between them is the point. Play fills the left half with today, then the right half with the new state, and finishes by marking the contrast down the middle. Numbers are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:3,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

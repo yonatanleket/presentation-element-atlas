@@ -1,0 +1,20 @@
+{
+  "id": "context-aware-next-reveal-button",
+  "name": "Context-aware Next / Reveal button",
+  "category": "nav",
+  "definition": "Primary button that reads “Reveal” while a slide has builds left and “Next” when it is done.",
+  "bestUse": "Talks with progressive builds, so the presenter never skips a step.",
+  "trigger": [
+    "presenter-delivery",
+    "navigation-wayfinding"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/context-aware-next-reveal-button.html",
+    "kind": "interactive",
+    "how": "The button checks whether the current slide still has hidden builds. While it does, the label reads Reveal and a click shows the next build; when none are left it reads Next and moves to the following slide. Reset starts over."
+  }
+}

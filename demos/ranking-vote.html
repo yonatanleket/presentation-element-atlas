@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranking vote: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6em;flex:1;min-height:0}
+.pnl{padding:.45em .6em;display:flex;flex-direction:column;gap:.3em}
+.pnl h3{margin:0;font:500 .8em var(--f-mono);color:var(--muted)}
+.it{display:flex;align-items:center;gap:.3em;font-size:.88em}.it .n{font:700 1em var(--f-display);color:var(--accent);width:1em}.it .t{flex:1}
+.it .sbtn{min-width:max(28px,1.9em);padding:0}
+.rr{display:grid;grid-template-columns:1em 1fr 2em;gap:.35em;align-items:center;font-size:.85em}
+.rr .bar{grid-column:2;height:.5em;background:var(--accent-soft);border-radius:.2em;overflow:hidden}.rr .bar i{display:block;height:100%;background:var(--accent);transition:width .35s var(--ease-out)}
+.rr .p{font-family:var(--f-mono);text-align:end;grid-row:span 2}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Ranking vote</h1>
+<div class="stage" role="group" aria-label="Demo: Ranking vote. Viewer orders four options with up and down buttons; simulated rankings arrive and the room ranking updates with points per option.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.4em;padding-top:1.8em">
+<p class="q">Rank what to fix first</p>
+<div class="two"><div class="pnl card"><h3>Your ranking</h3><div id="mine" class="col" style="gap:.25em"></div><button class="sbtn primary" type="button" id="sub" style="margin-top:auto">Submit ranking</button></div>
+<div class="pnl card"><h3 id="rh">Room ranking</h3><div id="room" class="col" style="gap:.2em"></div></div></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Simulated rankings arrive over about three seconds and the room order updates by points: first place earns 4, last earns 1. Reorder your own list with the up and down buttons, then press Submit to add your ranking to the room totals. Reset clears your vote.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var I=['Slow builds','Unclear owners','Flaky tests','Long approvals'];
+var V=[[3,0,2,1],[0,3,2,1],[3,2,0,1],[3,0,1,2],[0,3,1,2],[3,2,1,0],[2,3,0,1],[3,0,2,1],[0,2,3,1],[3,1,0,2],[1,3,0,2],[3,0,1,2],[2,3,1,0],[3,2,0,1],[0,3,2,1],[3,1,2,0]];
+var F=8,lf=0,order=[0,1,2,3],sent=false;
+function draw(f){lf=f;var votes=V.slice(0,Math.round(V.length*f/F));if(sent)votes=votes.concat([order]);var pts=[0,0,0,0];votes.forEach(function(v){v.forEach(function(it,pos){pts[it]+=4-pos;});});
+var mx=Math.max.apply(null,pts)||1,ix=[0,1,2,3].sort(function(a,b){return pts[b]-pts[a];});
+$('room').innerHTML=ix.map(function(it,r){return '<div class="rr"><span class="mono muted">'+(r+1)+'</span><span>'+I[it]+'</span><span class="p">'+pts[it]+'</span><span class="bar"><i style="width:'+(pts[it]/mx*100)+'%"></i></span></div>';}).join('');
+$('n').textContent=votes.length+' rankings';$('rh').textContent='Room ranking · points';drawMine();}
+function drawMine(fi){$('mine').innerHTML=order.map(function(it,p){return '<div class="it"><span class="n">'+(p+1)+'</span><span class="t">'+I[it]+'</span><button class="sbtn" type="button" data-p="'+p+'" data-d="-1" aria-label="Move '+I[it]+' up"'+(p===0||sent?' disabled':'')+'>▲</button><button class="sbtn" type="button" data-p="'+p+'" data-d="1" aria-label="Move '+I[it]+' down"'+(p===3||sent?' disabled':'')+'>▼</button></div>';}).join('');
+$('sub').disabled=sent;$('sub').textContent=sent?'Submitted ✓':'Submit ranking';if(fi){var b=$('mine').querySelector(fi);if(b&&!b.disabled)b.focus();}}
+$('mine').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;var p=+b.dataset.p,d=+b.dataset.d,q=p+d;if(q<0||q>3)return;var t=order[p];order[p]=order[q];order[q]=t;
+drawMine('[data-p="'+q+'"][data-d="'+d+'"]');api.status(I[t]+' moved to position '+(q+1));});
+$('sub').addEventListener('click',function(){sent=true;draw(lf);api.status('Your ranking was added: '+order.map(function(i){return I[i];}).join(' > '));});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,idleText:'Simulated responses',doneText:'Simulated responses: 16 rankings in',reset:function(){order=[0,1,2,3];sent=false;},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

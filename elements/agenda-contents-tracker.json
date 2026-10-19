@@ -1,0 +1,25 @@
+{
+  "id": "agenda-contents-tracker",
+  "name": "Agenda / contents tracker",
+  "category": "nav",
+  "definition": "Small header showing the section list with the current section highlighted.",
+  "bestUse": "Consulting-style decks with many sections.",
+  "trigger": [
+    "section-structure",
+    "navigation-wayfinding"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/agenda-contents-tracker.html",
+    "kind": "animated",
+    "how": "A small header lists every section of the talk. Play moves through the sections and highlights the current one while earlier ones dim, so the audience always knows where the argument stands."
+  },
+  "aliases": [
+    "agenda",
+    "table of contents",
+    "toc"
+  ]
+}

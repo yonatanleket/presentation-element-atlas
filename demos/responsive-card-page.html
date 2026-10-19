@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsive card page: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.seg{display:flex;gap:.3em}
+.vp{margin:0 auto;height:12.6em;background:#e3e6ec;border:1px solid var(--line);border-radius:.45em;overflow:auto;transition:width .4s var(--ease-out);padding:.5em}
+.vp.phone{width:9.5em}.vp.tablet{width:17em}.vp.wide{width:27em}
+.rc{background:var(--surface);border:1px solid var(--line);border-radius:.45em;padding:.55em;display:flex;flex-direction:column;gap:.4em}
+.vp.wide .rc .top,.vp.tablet .rc .top{flex-direction:row}
+.rc .top{display:flex;flex-direction:column;gap:.5em}
+.rc .media{flex:0 0 auto;min-width:6em;height:4.4em;border-radius:.3em;background:linear-gradient(135deg,#c8d1f6,#2f4bd8)}
+.vp.wide .rc .media{flex-basis:9em}
+.rc h3{margin:0;font:700 .95em/1.15 var(--f-display)}.rc p{margin:0;font-size:.8em;line-height:1.3;color:var(--ink-2)}
+.emb{display:flex;align-items:flex-end;gap:.25em;height:3em;padding:.3em;border:1px dashed var(--line);border-radius:.3em}.emb i{flex:1;background:var(--accent);border-radius:.1em}
+.more[hidden]{display:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Responsive card page</h1>
+<div class="stage" role="group" aria-label="Demo: Responsive card page. A web-native card shown at phone, tablet and wide widths; its layout reflows and an expand button lets it grow taller than a slide.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.45em;padding-block:1.9em .6em">
+<div class="row" style="justify-content:space-between"><div class="seg" role="group" aria-label="Screen width" id="seg">
+<button class="sbtn" type="button" data-w="phone">Phone</button><button class="sbtn" type="button" data-w="tablet">Tablet</button><button class="sbtn" type="button" data-w="wide">Wide</button></div>
+<button class="sbtn" type="button" id="mo" aria-expanded="false" aria-controls="more">Show more</button></div>
+<div class="vp" id="vp" tabindex="0" aria-label="Card preview, scrollable"><div class="rc"><div class="top"><div class="media" aria-hidden="true"></div><div class="col" style="gap:.25em"><h3>Weekly releases cut lead time in half</h3><p>One team moved to weekly releases in March. Lead time fell from 9 to 4 days.</p></div></div>
+<div class="more col" id="more" hidden style="gap:.4em"><p>Embedded chart, live in the page:</p><div class="emb" aria-hidden="true"><i style="height:90%"></i><i style="height:80%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:44%"></i></div><p>The card keeps growing with its content: notes, links and media sit inline instead of being cut to one slide.</p><p>Readers scroll; nothing is shrunk to fit.</p></div></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The card is not a fixed 16:9 slide: it reflows to the reader’s screen and grows as tall as its content. Pick Phone, Tablet or Wide to see the image stack above or sit beside the text, and use Show more to expand the card past one screen; the frame scrolls.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var w='wide',more=false;
+function draw(){$('vp').className='vp '+w;$('seg').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.w===w));});
+$('more').hidden=!more;$('mo').setAttribute('aria-expanded',String(more));$('mo').textContent=more?'Show less':'Show more';}
+$('seg').addEventListener('click',function(e){var b=e.target.closest('[data-w]');if(!b)return;w=b.dataset.w;draw();api.status('Width: '+b.textContent+(w==='phone'?', image stacks above text':', image beside text'));});
+$('mo').addEventListener('click',function(){more=!more;draw();if(!more)$('vp').scrollTop=0;api.status(more?'Card expanded past one screen; scroll the preview':'Card collapsed');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){w='wide';more=false;draw();$('vp').scrollTop=0;}});
+</script>
+</body>
+</html>

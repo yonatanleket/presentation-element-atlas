@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pan and zoom: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-rows:1fr auto;gap:.45em}
+.cam{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:.5em;overflow:hidden}
+svg{position:absolute;inset:0;width:100%;height:100%}
+.stops{display:flex;gap:.3em;flex-wrap:wrap}
+.zt{font:600 30px var(--f-body);fill:var(--fg)}.zs{font:20px var(--f-body);fill:var(--muted)}.nt{font:500 18px var(--f-body);fill:var(--fg)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Pan and zoom</h1>
+<div class="stage" role="group" aria-label="Demo: Pan and zoom. A large system map; stop buttons move the camera from the overview to each of three regions and back.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="cam"><svg id="svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <rect x="30" y="80" width="340" height="600" rx="24" fill="#e8ecfd"/><text class="zt" x="60" y="130">Ingest</text><text class="zs" x="60" y="160">3 sources · 40k events/min</text>
+    <rect x="70" y="210" width="260" height="80" rx="12" fill="#fff" stroke="#2f4bd8" stroke-width="3"/><text class="nt" x="95" y="257">Web events</text>
+    <rect x="70" y="330" width="260" height="80" rx="12" fill="#fff" stroke="#2f4bd8" stroke-width="3"/><text class="nt" x="95" y="377">Mobile events</text>
+    <rect x="70" y="450" width="260" height="80" rx="12" fill="#fff" stroke="#2f4bd8" stroke-width="3"/><text class="nt" x="95" y="497">Partner feed</text>
+    <rect x="430" y="80" width="340" height="600" rx="24" fill="#fdf3d8"/><text class="zt" x="460" y="130">Store</text><text class="zs" x="460" y="160">raw → clean → modelled</text>
+    <ellipse cx="600" cy="280" rx="110" ry="30" fill="#fff" stroke="#8a5a00" stroke-width="3"/><rect x="490" y="280" width="220" height="140" fill="#fff"/><path d="M490 280v140a110 30 0 0 0 220 0V280" fill="none" stroke="#8a5a00" stroke-width="3"/><text class="nt" x="600" y="370" text-anchor="middle">Warehouse</text>
+    <rect x="490" y="500" width="220" height="80" rx="12" fill="#fff" stroke="#8a5a00" stroke-width="3"/><text class="nt" x="600" y="547" text-anchor="middle">Nightly models</text>
+    <rect x="830" y="80" width="340" height="600" rx="24" fill="#e3f3ec"/><text class="zt" x="860" y="130">Serve</text><text class="zs" x="860" y="160">2 dashboards · 1 API</text>
+    <rect x="870" y="230" width="260" height="120" rx="12" fill="#fff" stroke="#11734f" stroke-width="3"/><text class="nt" x="895" y="297">Exec dashboard</text>
+    <rect x="870" y="400" width="260" height="120" rx="12" fill="#fff" stroke="#11734f" stroke-width="3"/><text class="nt" x="895" y="467">Metrics API</text>
+    <path d="M370 380h60M770 380h60" stroke="#565c6b" stroke-width="4" marker-end="url(#ah)"/>
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#565c6b"/></marker></defs>
+  </svg></div>
+  <div class="stops" role="group" aria-label="Camera stop" id="stops"><button class="sbtn" type="button">Overview</button><button class="sbtn" type="button">Ingest</button><button class="sbtn" type="button">Store</button><button class="sbtn" type="button">Serve</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The whole system is one large drawing; only the camera moves. Choose a stop, or use the arrow keys on the stop buttons, and the view glides and zooms to that region, so detail never loses its place in the whole. Overview zooms back out. Reset returns to the overview.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var VB2=[[0,0,1200,750],[20,90,370,600],[420,90,370,600],[820,90,370,600]];
+var cur=[0,0,1200,750],raf=0,api,bs=$('stops').querySelectorAll('button'),svg=$('svg');
+function apply(v){cur=v;svg.setAttribute('viewBox',v.map(function(x){return x.toFixed(1);}).join(' '));}
+function go(i,animate){cancelAnimationFrame(raf);var to=VB2[i],from=cur.slice();bs.forEach(function(b,k){b.setAttribute('aria-pressed',String(k===i));});
+  if(!animate||AtlasDemo.reducedMotion){apply(to);return;}
+  var t0=performance.now();(function f(now){var p=Math.min(1,(now-t0)/700),e=1-Math.pow(1-p,3);apply(from.map(function(x,k){return x+(to[k]-x)*e;}));if(p<1)raf=requestAnimationFrame(f);})(t0);}
+bs.forEach(function(b,i){b.addEventListener('click',function(){go(i,true);api.status(i?'Zoomed to '+b.textContent:'Overview');});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;if(isRtl())d=-d;e.preventDefault();var n=(i+d+4)%4;bs[n].focus();bs[n].click();});});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){go(0,false);}});
+})();
+</script>
+</body>
+</html>

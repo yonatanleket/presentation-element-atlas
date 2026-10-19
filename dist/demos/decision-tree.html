@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision tree: demo</title>
+<style>
+/* Presentation Element Atlas: shared demo harness styles.
+   Every demo links this file: <link rel="stylesheet" href="_harness.css">
+   Light theme only. No network requests (system font fallbacks). */
+:root{
+  color-scheme: light;
+  --bg:#f6f7f9; --surface:#ffffff; --stage:#eef0f4;
+  --fg:#1b1e24; --muted:#565c6b; --line:#d9dce2;
+  --accent:#2f4bd8; --accent-soft:#e8ecfd;
+  --adv:#9a4a0b; --adv-soft:#fbefe2;
+  --ok:#11734f;
+  --radius:10px; --radius-sm:8px;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  /* Extra demo tokens (light only) */
+  --ok-soft:#e3f3ec; --warn:#8a5a00; --warn-soft:#fdf3d8; --bad:#b42318; --bad-soft:#fde8e6;
+  --ink-2:#3a3f4b;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---------- Frame ---------- */
+.demo{max-width:600px;margin:0 auto;padding:16px;display:grid;gap:12px}
+.demo-title{font:600 16px/1.3 var(--f-body);margin:0}
+.embedded .demo-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (max-width:400px){.demo{padding:12px}}
+
+/* ---------- Stage: 16:10, scaled 480x300 logical canvas (1em = 16 logical px) ---------- */
+.stage{position:relative;width:100%;max-width:544px;margin-inline:auto;aspect-ratio:16/10;
+  background:var(--stage);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;
+  container-type:inline-size;line-height:1.35}
+.stage>*{font-size:max(12px,3.3333cqi)} /* cqi resolves against .stage, so set it on children */
+.demo[data-state=loading] .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:pulse 1.2s infinite}
+@keyframes pulse{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* ---------- Controls ---------- */
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.controls button{min-height:44px;min-width:44px;padding:0 14px;font:500 14px var(--f-body);color:var(--fg);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);cursor:pointer}
+.controls button[data-role=play]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.controls button:disabled{opacity:.45;cursor:default}
+.controls .status{font:400 13px var(--f-mono);color:var(--muted);margin-inline-start:auto;min-height:1em}
+@media (hover:hover) and (pointer:fine){.controls button:not(:disabled):hover{border-color:var(--accent)}}
+@media (max-width:400px){.controls button{padding:0 10px}.controls .status{flex-basis:100%;margin:0}}
+
+/* ---------- How it works ---------- */
+.how{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;font-size:14px}
+.how summary{font-weight:600;cursor:pointer;min-height:28px}
+.how p{margin:6px 0 0;color:var(--ink-2)}
+
+/* ---------- Stage building blocks (use em units; 1em = 16 logical px) ---------- */
+.fill{position:absolute;inset:0}
+.pad{padding:1.1em 1.3em}
+.col{display:flex;flex-direction:column;gap:.5em}
+.row{display:flex;align-items:center;gap:.5em}
+.center{display:grid;place-items:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:.5em}
+.kicker{font:500 .8em/1.2 var(--f-mono);color:var(--accent)}
+.h{font:700 1.35em/1.15 var(--f-display);margin:0}
+.p{margin:0;font-size:.95em;color:var(--ink-2)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+.big{font:700 3em/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pill{display:inline-block;font:500 .75em/1 var(--f-mono);padding:.35em .55em;border-radius:99em;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.adv{background:var(--adv-soft);color:var(--adv)}
+/* Corner label for invented data or simulated UI: required by the contribution rules */
+.label-illustrative{position:absolute;inset-block-start:.5em;inset-inline-end:.6em;z-index:5;font:500 .8em/1 var(--f-mono);
+  padding:.3em .5em;border-radius:.3em;background:rgba(255,255,255,.85);color:var(--muted);border:1px solid var(--line)}
+.sbtn{font:500 .85em/1 var(--f-body);min-height:max(28px,2.1em);padding:0 .8em;border-radius:.4em;border:1px solid var(--line);
+  background:var(--surface);color:var(--fg);cursor:pointer}
+.sbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.sbtn[aria-pressed=true],.sbtn[aria-current=true]{background:var(--fg);border-color:var(--fg);color:var(--surface)}
+.fx{transition:opacity .22s var(--ease-out),transform .22s var(--ease-out),background-color .22s var(--ease-out),width .4s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+.hide{opacity:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Mini deck: a slide with a top bar, used by navigation demos */
+.deck{position:absolute;inset:.9em;background:var(--surface);border:1px solid var(--line);border-radius:.5em;display:flex;flex-direction:column;overflow:hidden}
+.deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
+.deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
+.deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
+</style>
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.hl{fill:none;stroke:var(--accent);stroke-width:3.2;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Decision tree</h1>
+<div class="stage" role="img" aria-label="Demo: Decision tree. A refund policy tree: within 30 days and unused gives a full refund, used gives store credit, after 30 days declines.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<g data-f="1"><rect x="170" y="22" width="140" height="36" rx="6" class="nd-a"/><text x="240" y="44.5" text-anchor="middle" class="t-b t-a">Within 30 days?</text></g>
+<g data-f="2"><path d="M240 58 V84 H140 V108" class="ln " marker-end="url(#ah)"/><path d="M240 58 V84 H370 V108" class="ln " marker-end="url(#ah)"/><text x="186" y="78" text-anchor="middle" class="t-m t-mono">yes</text><text x="306" y="78" text-anchor="middle" class="t-m t-mono">no</text></g>
+<g data-f="2"><rect x="80" y="112" width="120" height="36" rx="6" class="nd"/><text x="140" y="134.5" text-anchor="middle" class="t-b">Item unused?</text></g>
+<g data-f="2"><rect x="290" y="112" width="160" height="36" rx="6" class="nd-bad"/><text x="370" y="134.5" text-anchor="middle" class="">Decline, offer repair</text></g>
+<g data-f="3"><path d="M140 148 V176 H75 V202" class="ln " marker-end="url(#ah)"/><path d="M140 148 V176 H205 V202" class="ln " marker-end="url(#ah)"/><text x="100" y="170" text-anchor="middle" class="t-m t-mono">yes</text><text x="178" y="170" text-anchor="middle" class="t-m t-mono">no</text></g>
+<g data-f="3"><rect x="20" y="206" width="110" height="36" rx="6" class="nd-ok"/><text x="75" y="228.5" text-anchor="middle" class="">Full refund</text></g>
+<g data-f="3"><rect x="150" y="206" width="110" height="36" rx="6" class="nd-warn"/><text x="205" y="228.5" text-anchor="middle" class="">Store credit</text></g>
+<g data-f="4"><path d="M240 58 V84 H140 V112 M140 148 V176 H75 V206" class="hl"/>
+<text x="300" y="214" class="">Example: day 12,</text><text x="300" y="232" class="">box unopened</text><text x="300" y="252" class="t-b t-a">→ Full refund</text></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each box is a yes/no question and the coloured leaves are outcomes. Play reveals the tree one level at a time, then traces one example case from the root to its outcome so the audience sees how the policy is applied. The policy is illustrative.</p></details>
+</main>
+<script>
+/* Presentation Element Atlas: shared demo harness.
+   Load after the demo markup:  <script src="_harness.js"><\/script>
+   Then call AtlasDemo.init({...}). See CONTRIBUTING.md, "Demo authoring", for the full contract.
+
+   Model: a demo is a timeline of frames 0..frames. Frame 0 is the idle start, the last frame is done.
+   The harness owns the buttons, state, autoplay, reduced motion, keyboard shortcuts and the status line;
+   the demo only draws a frame in render(frame, ctx) and, if it has its own stage controls, restores them in reset(ctx). */
+(function () {
+  'use strict';
+  var reducedQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var embedded = window.parent && window.parent !== window;
+  if (embedded) document.documentElement.classList.add('embedded');
+
+  function post(event, extra) {
+    if (!embedded) return;
+    var msg = { type: 'atlas-demo', event: event };
+    if (extra) for (var k in extra) msg[k] = extra[k];
+    try { window.parent.postMessage(msg, '*'); } catch (e) { /* ignore */ }
+  }
+  window.addEventListener('error', function (e) {
+    var s = document.querySelector('.demo .status');
+    if (s) s.textContent = 'Demo error';
+    post('error', { message: String(e.message || 'error') });
+  });
+
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function init(opts) {
+    opts = opts || {};
+    var root = document.querySelector('.demo');
+    var stage = root.querySelector('.stage');
+    var controls = root.querySelector('.controls') || root.insertBefore(el('div', { 'class': 'controls' }), stage.nextSibling);
+    var frames = Math.max(0, opts.frames | 0);
+    var stepMs = opts.stepMs || 900;
+    var interactive = !!opts.interactive;
+    var showStep = frames > 1 && opts.step !== false;
+    var loop = !!opts.loop && frames > 0;
+    var render = opts.render || function () {};
+    var reduced = reducedQuery.matches;
+    var frame = 0, timer = null, paused = false;
+
+    controls.textContent = '';
+    var bPlay = frames > 0 ? el('button', { type: 'button', 'data-role': 'play' }, 'Play') : null;
+    var bStep = showStep ? el('button', { type: 'button', 'data-role': 'step', 'aria-label': 'Step forward' }, 'Step ▸') : null;
+    var bPause = loop ? el('button', { type: 'button', 'data-role': 'pause', 'aria-pressed': 'false' }, 'Pause') : null;
+    var bReset = el('button', { type: 'button', 'data-role': 'reset' }, 'Reset');
+    var status = el('span', { 'class': 'status', 'aria-live': 'polite' });
+    [bPlay, bStep, bPause, bReset, status].forEach(function (b) { if (b) controls.appendChild(b); });
+
+    var ctx = {
+      stage: stage, root: root,
+      get reduced() { return reduced; },
+      animate: false,
+      status: function (t) { status.textContent = t == null ? '' : String(t); },
+      setState: setState
+    };
+
+    function setState(s) {
+      root.setAttribute('data-state', s);
+      var playing = s === 'playing';
+      if (bPlay) {
+        bPlay.textContent = s === 'done' || (frame > 0 && !playing) ? 'Replay' : 'Play';
+        bPlay.disabled = playing && !loop;
+      }
+      if (bStep) bStep.disabled = playing || frame >= frames;
+      if (bPause) bPause.disabled = !playing && !paused;
+      if (s === 'done' && !interactive) ctx.status(opts.doneText || 'Done');
+    }
+    function draw(n, animate) {
+      frame = n;
+      ctx.animate = !!animate && !reduced;
+      render(n, ctx);
+    }
+    function stop() { if (timer) { clearTimeout(timer); timer = null; } }
+    function tick() {
+      if (frame >= frames) {
+        if (loop && !paused) { timer = setTimeout(function () { draw(0, false); tick(); }, stepMs); return; }
+        timer = null; setState('done'); post('done'); return;
+      }
+      timer = setTimeout(function () { draw(frame + 1, true); setState('playing'); tick(); }, frame === 0 ? Math.min(300, stepMs) : stepMs);
+    }
+    function play() {
+      stop(); paused = false;
+      if (bPause) { bPause.textContent = 'Pause'; bPause.setAttribute('aria-pressed', 'false'); }
+      ctx.status(opts.playText || '');
+      draw(0, false); setState('playing'); tick();
+    }
+    function step() {
+      stop();
+      if (frame >= frames) return;
+      draw(frame + 1, true);
+      setState(frame >= frames ? 'done' : 'idle');
+      if (frame < frames) ctx.status('Step ' + frame + ' of ' + frames);
+    }
+    function reset() {
+      stop(); paused = false;
+      if (opts.reset) opts.reset(ctx);
+      draw(0, false);
+      ctx.status(opts.idleText || '');
+      setState('idle');
+    }
+    function togglePause() {
+      if (!loop) return;
+      if (timer) { stop(); paused = true; bPause.textContent = 'Resume'; bPause.setAttribute('aria-pressed', 'true'); setState('idle'); ctx.status('Paused'); }
+      else { paused = false; bPause.textContent = 'Pause'; bPause.setAttribute('aria-pressed', 'false'); ctx.status(''); setState('playing'); tick(); }
+    }
+
+    if (bPlay) bPlay.addEventListener('click', play);
+    if (bStep) bStep.addEventListener('click', step);
+    if (bPause) bPause.addEventListener('click', togglePause);
+    bReset.addEventListener('click', reset);
+
+    // Shortcuts when focus is not inside a form field or the stage's own controls: P play, N step, R reset.
+    document.addEventListener('keydown', function (e) {
+      // Escape that no stage control consumed (via preventDefault) asks the catalog to close its panel.
+      if (e.key === 'Escape' && !e.defaultPrevented) { post('escape'); return; }
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target;
+      if (t && (t.closest && t.closest('.stage, input, textarea, select, [contenteditable]'))) return;
+      var k = e.key.toLowerCase();
+      if (k === 'p' && bPlay) { e.preventDefault(); play(); }
+      else if (k === 'n' && bStep) { e.preventDefault(); step(); }
+      else if (k === 'r') { e.preventDefault(); reset(); }
+    });
+
+    // "How it works" is open on wide screens and collapsed on phones.
+    var how = root.querySelector('details.how');
+    // Inside the catalog panel the iframe is narrower than 600px even on desktop, so use the device screen there.
+    var narrow = embedded ? (window.screen && window.screen.width < 600)
+      : (window.matchMedia && window.matchMedia('(max-width: 599px)').matches);
+    if (how && narrow) how.removeAttribute('open');
+
+    // Start: reduced motion shows the final frame with no autoplay.
+    if (opts.reset) opts.reset(ctx);
+    if (reduced && frames > 0) { draw(frames, false); setState('done'); }
+    else { draw(0, false); setState('idle'); if (frames > 0 && opts.autoplay !== false) setTimeout(play, 400); }
+    if (reducedQuery.addEventListener) reducedQuery.addEventListener('change', function (e) { reduced = e.matches; });
+    post('ready');
+
+    return { play: play, step: step, reset: reset, goto: function (n) { stop(); draw(Math.max(0, Math.min(frames, n)), true); setState(frame >= frames ? 'done' : 'idle'); },
+      get frame() { return frame; }, status: ctx.status, setState: setState, ctx: ctx };
+  }
+
+  /* Helpers available to demos. */
+  function countUp(node, to, o) {
+    o = o || {};
+    var dec = o.decimals || 0, pre = o.prefix || '', suf = o.suffix || '', dur = o.duration || 900;
+    var fmt = function (v) { return pre + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf; };
+    if (node._raf) cancelAnimationFrame(node._raf);
+    if (!o.animate || reducedQuery.matches) { node.textContent = fmt(to); return; }
+    var from = o.from || 0, t0 = performance.now();
+    (function f(now) {
+      var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      node.textContent = fmt(from + (to - from) * e);
+      if (p < 1) node._raf = requestAnimationFrame(f);
+    })(t0);
+  }
+
+  window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
+})();
+</script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:1000,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

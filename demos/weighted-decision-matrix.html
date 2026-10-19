@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weighted decision matrix: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+table{width:100%;border-collapse:collapse;font-size:.85em;background:var(--surface);border-radius:.4em;overflow:hidden}
+th,td{padding:.38em .55em;text-align:center;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:start}
+th{font-weight:600;background:#f3f4f7}tfoot td{font-weight:700;border-bottom:0;border-top:2px solid var(--fg)}
+td.w{color:var(--muted);font-family:var(--f-mono)}
+.c1{transition:background-color .3s var(--ease-out)}table.win .c1{background:var(--accent-soft)}table.win tfoot .c1{color:var(--accent)}
+th .pill{font-size:.8em;margin-inline-start:.25em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Weighted decision matrix</h1>
+<div class="stage" role="img" aria-label="Demo: Weighted decision matrix. Build, buy and partner scored 1 to 5 on four weighted criteria; buy wins with 4.05 of 5.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.5em">
+<div><p class="kicker">Billing platform</p><p class="h">Scored on what matters most</p></div>
+<table id="tb"><thead><tr><th>Criterion</th><th>Weight</th><th>Build</th><th class="c1">Buy<span class="pill ok" data-f="4">Pick</span></th><th>Partner</th></tr></thead>
+<tbody><tr><td>Cost</td><td class="w"><span data-f="1">30%</span></td><td><span data-f="2">2</span></td><td class="c1"><span data-f="2">4</span></td><td><span data-f="2">3</span></td></tr><tr><td>Time to launch</td><td class="w"><span data-f="1">25%</span></td><td><span data-f="2">2</span></td><td class="c1"><span data-f="2">5</span></td><td><span data-f="2">4</span></td></tr><tr><td>Risk</td><td class="w"><span data-f="1">25%</span></td><td><span data-f="2">3</span></td><td class="c1"><span data-f="2">4</span></td><td><span data-f="2">2</span></td></tr><tr><td>Team fit</td><td class="w"><span data-f="1">20%</span></td><td><span data-f="2">5</span></td><td class="c1"><span data-f="2">3</span></td><td><span data-f="2">3</span></td></tr></tbody>
+<tfoot><tr><td>Weighted total</td><td class="w">100%</td><td><span data-f="3" class="tot" data-v="2.85">0.00</span></td><td class="c1"><span data-f="3" class="tot" data-v="4.05">0.00</span></td><td><span data-f="3" class="tot" data-v="3.00">0.00</span></td></tr></tfoot></table>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each criterion gets a weight, each option a 1–5 score, and the total is the sum of score times weight. Play reveals the weights, then the scores, counts up the weighted totals and highlights the winner, which makes the choice auditable. Scores are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';$('#tb').classList.toggle('win',fr>=4);$$('.tot').forEach(function(n){AtlasDemo.countUp(n,fr>=3?+n.getAttribute('data-v'):0,{animate:ctx.animate&&fr===3,decimals:2,duration:900});});}});
+</script>
+</body>
+</html>

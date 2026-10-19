@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Line draw-on: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-rows:1fr auto;gap:.5em}
+svg{width:100%;height:100%}
+.ln{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1}
+.lbl{font:600 13px var(--f-body);fill:var(--fg);transition:opacity .2s}
+.bar{display:flex;align-items:center;gap:.5em}.bar input{flex:1;accent-color:var(--accent);min-height:28px}
+.pc{font:.8em var(--f-mono);color:var(--muted);min-width:3em;text-align:end}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Line draw-on</h1>
+<div class="stage" role="group" aria-label="Demo: Line draw-on. A three-box flow diagram whose strokes draw on as a progress slider moves, with a Draw button that plays it.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <svg viewBox="0 0 440 190" aria-hidden="true">
+    <rect class="ln" pathLength="1" x="10" y="60" width="110" height="60" rx="10"/>
+    <path class="ln" pathLength="1" d="M122 90h46m-10 -8l10 8-10 8"/>
+    <rect class="ln" pathLength="1" x="170" y="60" width="110" height="60" rx="10"/>
+    <path class="ln" pathLength="1" d="M282 90h46m-10 -8l10 8-10 8"/>
+    <rect class="ln" pathLength="1" x="330" y="60" width="100" height="60" rx="10"/>
+    <path class="ln" pathLength="1" d="M380 122c0 50-310 50-315 0m-8 10l8-10 9 9"/>
+    <text class="lbl" x="65" y="95" text-anchor="middle">Draft</text><text class="lbl" x="225" y="95" text-anchor="middle">Review</text><text class="lbl" x="380" y="95" text-anchor="middle">Publish</text><text class="lbl" x="222" y="182" text-anchor="middle">feedback loop</text>
+  </svg>
+  <div class="bar"><button class="sbtn primary" type="button" id="go">Draw</button><label class="sr-only" for="rg">Drawing progress</label><input type="range" id="rg" min="0" max="100" value="0"><span class="pc" id="pc">0%</span></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each stroke has a dash as long as the path, offset by how much should remain hidden. Drag the Draw slider, or use its arrow keys, to scrub the strokes on in order; Draw plays the whole build. Reduced motion jumps straight to the finished diagram. Reset hides everything.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var ps=document.querySelectorAll('.ln'),lb=document.querySelectorAll('.lbl'),LB=[0,2,4,5],n=ps.length,raf=0,api;
+function set(v){var p=v/100;for(var i=0;i<n;i++){var lp=Math.max(0,Math.min(1,p*n-i));ps[i].style.strokeDashoffset=String(1-lp);}
+  lb.forEach(function(t,k){t.style.opacity=p*n>=LB[k]+1?1:0;});$('rg').value=v;$('pc').textContent=Math.round(v)+'%';}
+$('rg').addEventListener('input',function(e){cancelAnimationFrame(raf);set(+e.target.value);api.status(+e.target.value>=100?'Diagram complete':'');});
+$('go').addEventListener('click',function(){cancelAnimationFrame(raf);if(AtlasDemo.reducedMotion){set(100);api.status('Diagram complete');return;}
+  var t0=performance.now();(function f(now){var p=Math.min(1,(now-t0)/2200);set(p*100);if(p<1)raf=requestAnimationFrame(f);else api.status('Diagram complete');})(t0);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){cancelAnimationFrame(raf);set(0);}});
+})();
+</script>
+</body>
+</html>

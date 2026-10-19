@@ -1,0 +1,25 @@
+{
+  "id": "code-morph-magic-move",
+  "name": "Code morph (Magic Move)",
+  "category": "product",
+  "definition": "Code animates smoothly between versions.",
+  "bestUse": "Showing a refactor.",
+  "trigger": [
+    "code",
+    "before-after"
+  ],
+  "level": "advanced",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/code-morph-magic-move.html",
+    "kind": "interactive",
+    "how": "Pick a version (or use the arrow keys on the version buttons). Lines that exist in both versions glide to their new position, removed lines fade out and new lines fade in, so the refactor reads as one continuous change instead of a jump cut. Reset returns to version 1."
+  },
+  "aliases": [
+    "before after",
+    "refactor",
+    "code diff"
+  ]
+}

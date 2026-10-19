@@ -1,0 +1,24 @@
+{
+  "id": "terminal-typing-animation",
+  "name": "Terminal typing animation",
+  "category": "product",
+  "definition": "Commands typed out with their output.",
+  "bestUse": "CLI products.",
+  "trigger": [
+    "code"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/terminal-typing-animation.html",
+    "kind": "animated",
+    "how": "Each step types the next command character by character in a drawn terminal, then prints its output, so the audience reads at typing speed instead of facing a wall of text. Under reduced motion the full session appears at once. Commands and output are simulated."
+  },
+  "aliases": [
+    "terminal",
+    "cli",
+    "console"
+  ]
+}

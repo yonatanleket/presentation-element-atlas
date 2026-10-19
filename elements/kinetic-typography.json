@@ -1,0 +1,20 @@
+{
+  "id": "kinetic-typography",
+  "name": "Kinetic typography",
+  "category": "text",
+  "definition": "Words that animate in rhythm with the spoken line.",
+  "bestUse": "Keynote openers.",
+  "trigger": [
+    "key-message",
+    "visual-mood"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/kinetic-typography.html",
+    "kind": "interactive",
+    "how": "Each word lands on the beat of the spoken line, and the stressed words land bigger. Play runs the line; Step advances one beat. Choose Pop, Rise or Weight to change how words arrive, then replay. Under reduced motion all words show at once without movement."
+  }
+}

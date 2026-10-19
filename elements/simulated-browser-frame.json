@@ -1,0 +1,23 @@
+{
+  "id": "simulated-browser-frame",
+  "name": "Simulated browser frame",
+  "category": "product",
+  "definition": "Fake browser chrome around a mock screen, labeled as simulated.",
+  "bestUse": "Showing UI without real screenshots.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/simulated-browser-frame.html",
+    "kind": "animated",
+    "how": "Drawn browser chrome (tab, address bar, window dots) frames a mock screen so it reads as a web product without using a real screenshot. The steps type the address, show a loading skeleton, then fill in the page; the corner label keeps it honest as simulated."
+  },
+  "aliases": [
+    "browser mockup",
+    "mock screen"
+  ]
+}

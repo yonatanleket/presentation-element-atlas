@@ -1,0 +1,19 @@
+{
+  "id": "pacing-timer",
+  "name": "Pacing timer",
+  "category": "nav",
+  "definition": "Per-slide time budget that shows whether you are ahead of or behind schedule.",
+  "bestUse": "Strict time slots and timed talks.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "advanced",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/pacing-timer.html",
+    "kind": "interactive",
+    "how": "Each slide has a time budget. Advance slides with Next while the simulated clock runs; the bar compares elapsed time with the budget so far and turns amber when you fall behind. Times are illustrative and the clock runs fast."
+  }
+}

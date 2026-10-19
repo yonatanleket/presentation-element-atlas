@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-ended responses: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.35em;flex:1;align-content:start;min-height:0;overflow:hidden}
+.an{padding:.35em .55em;font-size:.85em;line-height:1.25;animation:pop .3s var(--ease-out)}
+.an.you{border-color:var(--accent);background:var(--accent-soft)}.an.you b{font:600 .95em var(--f-mono);color:var(--accent);margin-inline-end:.3em}
+@keyframes pop{from{opacity:0;transform:translateY(.3em)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Open-ended responses</h1>
+<div class="stage" role="group" aria-label="Demo: Open-ended responses. Short typed answers arrive as cards, newest first; the viewer can submit an answer that appears pinned at the top.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.35em;padding-top:1.8em">
+<p class="q">What would make releases less stressful?</p>
+<div class="grid" id="g"></div>
+<div class="row"><label class="sr-only" for="in">Your answer</label><input class="tin" id="in" maxlength="60" placeholder="Your answer" autocomplete="off" style="flex:1"><button class="sbtn primary" type="button" id="send">Send</button></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Short simulated answers arrive as cards over about three seconds, newest first, so the room sees ideas as they come in. Type an answer and press Enter or Send to add your own; it appears first, marked You. Only the six most recent cards show at once. Reset clears them.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var A=['Knowing the date a week ahead','Fewer people needed to approve','A rollback button that just works','Tests that finish before lunch','One channel for release news','Smaller releases, more often','Clear owner for each release','No Friday releases','Release notes written for us','A checklist we actually use'];
+var F=8,lf=0,mine=[];
+function draw(f){var n=Math.round(A.length*f/F),anim=f!==lf;lf=f;var items=A.slice(0,n).reverse().map(function(t){return '<div class="an card">'+t+'</div>';});
+$('g').innerHTML='';mine.slice().reverse().forEach(function(t){var d=document.createElement('div');d.className='an card you';d.innerHTML='<b>You</b>';d.appendChild(document.createTextNode(t));$('g').appendChild(d);});
+$('g').insertAdjacentHTML('beforeend',items.slice(0,Math.max(0,6-mine.length)).join(''));$('n').textContent=(n+mine.length)+' responses';}
+function send(){var v=$('in').value.trim().slice(0,60);if(!v){api.status('Type an answer first');return;}mine.push(v);$('in').value='';draw(lf);api.status('Your answer was added');}
+$('send').addEventListener('click',send);$('in').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();send();}});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,idleText:'Simulated responses',doneText:'Simulated responses: 10 answers in',reset:function(){mine=[];$('in').value='';},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

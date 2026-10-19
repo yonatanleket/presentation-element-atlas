@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context-aware Next / Reveal button: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.3em)}.b.on{opacity:1;transform:none}
+.nr{min-width:6.5em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Context-aware Next / Reveal button</h1>
+<div class="stage" role="group" aria-label="Demo: Context-aware Next / Reveal button">
+<div class="deck"><div class="deck-body" id="body"><p class="kicker" id="k"></p><p class="h" id="t"></p><ul id="ul" class="col" style="margin:0;padding-inline-start:1.1em"></ul></div>
+<div class="deck-foot"><span class="mono muted" id="left"></span><span style="flex:1"></span><button class="sbtn primary nr" id="nr"></button></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The button checks whether the current slide still has hidden builds. While it does, the label reads Reveal and a click shows the next build; when none are left it reads Next and moves to the following slide. Reset starts over.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=[{k:'Problem',t:'Why releases slip',b:['Manual sign-off','Late test results','Unclear owners']},{k:'Options',t:'What we could change',b:['Automate checks','Delegate approval']},{k:'Plan',t:'Recommendation',b:[]}];
+var si=0,shown=0,api;
+function draw(){var s=S[si];k.textContent=s.k;t.textContent=s.t;
+  ul.innerHTML=s.b.map(function(x,i){return '<li class="b fx'+(i<shown?' on':'')+'">'+x+'</li>';}).join('');
+  var rem=s.b.length-shown;nr.textContent=rem>0?'Reveal':(si<S.length-1?'Next →':'End');nr.disabled=rem===0&&si===S.length-1;
+  left.textContent='Slide '+(si+1)+'/3 · '+(rem>0?rem+' build'+(rem>1?'s':'')+' left':'no builds left');}
+nr.addEventListener('click',function(){var s=S[si];if(shown<s.b.length){shown++;api.status('Revealed: '+s.b[shown-1]);}else if(si<S.length-1){si++;shown=0;api.status('Next slide');}draw();});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){si=0;shown=0;draw();}});
+</script>
+</body>
+</html>

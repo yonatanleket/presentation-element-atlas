@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertical (2D) slide stacks: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.map{position:absolute;inset-block-start:.5em;inset-inline-end:.6em;display:grid;grid-template-columns:repeat(3,1em);grid-auto-rows:1em;gap:.25em;z-index:2}
+.map i{width:1em;height:.7em;border-radius:.2em;background:var(--line)}.map i.on{background:var(--accent)}.map i.no{visibility:hidden}
+.arrows{display:grid;grid-template-columns:repeat(3,2.3em);grid-template-rows:repeat(2,2.1em);gap:.2em}
+.arrows .sbtn{padding:0;min-height:0}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Vertical (2D) slide stacks</h1>
+<div class="stage" role="group" aria-label="Demo: Vertical (2D) slide stacks">
+<div class="deck" id="deck" tabindex="0" aria-label="Slide stack. Use arrow keys."><div class="map" id="map" aria-hidden="true"></div>
+<div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p muted" id="p"></p></div>
+<div class="deck-foot"><div class="arrows"><span></span><button class="sbtn" id="up" aria-label="Up">↑</button><span></span><button class="sbtn" id="lf" aria-label="Left">←</button><button class="sbtn" id="dn" aria-label="Down">↓</button><button class="sbtn" id="rt" aria-label="Right">→</button></div><span class="mono muted" id="pos" style="margin-inline-start:auto"></span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Topics run left to right and each topic can hold detail slides stacked below it. Use the arrow buttons or arrow keys: right moves to the next topic, down opens a deeper slide. The mini map shows where you are.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var T=[{t:'Context',d:['Release history']},{t:'Options',d:['Option A detail','Option B detail']},{t:'Plan',d:[]}];
+var x=0,y=0,api;
+function draw(){var c=T[x];k.textContent=y?c.t+' · detail '+y:'Topic '+(x+1);t.textContent=y?c.d[y-1]:c.t;p.textContent=y?'Down = more depth. Right = next topic.':(c.d.length?c.d.length+' detail slide'+(c.d.length>1?'s':'')+' below':'No detail below');
+  pos.textContent=(x+1)+'.'+y;var h='';for(var r=0;r<3;r++)for(var col=0;col<3;col++){var ex=r===0||T[col].d.length>=r;h+='<i class="'+(!ex?'no':(col===x&&r===y?'on':''))+'"></i>';}map.innerHTML=h;
+  lf.disabled=x===0;rt.disabled=x===2;up.disabled=y===0;dn.disabled=y>=c.d.length;}
+function go(dx,dy){if(dx){x=Math.max(0,Math.min(2,x+dx));y=0;}if(dy){y=Math.max(0,Math.min(T[x].d.length,y+dy));}draw();api.status('Topic '+(x+1)+(y?', detail '+y:''));}
+lf.onclick=function(){go(-1,0);};rt.onclick=function(){go(1,0);};up.onclick=function(){go(0,-1);};dn.onclick=function(){go(0,1);};
+deck.addEventListener('keydown',function(e){var rtl=document.dir==='rtl';var m={ArrowLeft:[rtl?1:-1,0],ArrowRight:[rtl?-1:1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(m){e.preventDefault();go(m[0],m[1]);}});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){x=0;y=0;draw();}});
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "id": "parallax-layers",
+  "name": "Parallax layers",
+  "category": "motion",
+  "definition": "Layers move at different speeds.",
+  "bestUse": "Depth in web decks.",
+  "trigger": [
+    "visual-mood"
+  ],
+  "level": "standard",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/parallax-layers.html",
+    "kind": "animated",
+    "how": "Three layers sit on top of each other: far hills, near hills and the foreground. Each step moves all of them in the same direction, but the far layer moves least and the foreground most, which the eye reads as depth. Reduced motion shows the final position without movement."
+  }
+}

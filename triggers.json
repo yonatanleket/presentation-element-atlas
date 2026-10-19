@@ -1,0 +1,158 @@
+[
+  {
+    "id": "single-key-number",
+    "description": "One headline figure the audience should remember."
+  },
+  {
+    "id": "kpi-set",
+    "description": "Several metrics that belong together."
+  },
+  {
+    "id": "status-update",
+    "description": "Health or progress of a project or workstream."
+  },
+  {
+    "id": "deviation-from-target",
+    "description": "Performance measured against a goal, plan or reference."
+  },
+  {
+    "id": "trend-over-time",
+    "description": "A value changing across time."
+  },
+  {
+    "id": "part-to-whole",
+    "description": "Shares that add up to a total."
+  },
+  {
+    "id": "ranking",
+    "description": "Items ordered by size or position."
+  },
+  {
+    "id": "distribution",
+    "description": "Spread, shape or outliers of many observations."
+  },
+  {
+    "id": "correlation",
+    "description": "How two or more variables move together."
+  },
+  {
+    "id": "spatial-data",
+    "description": "Values tied to places or positions."
+  },
+  {
+    "id": "flow-between-stages",
+    "description": "Volume moving between stages, groups or places."
+  },
+  {
+    "id": "sequential-process",
+    "description": "Steps that happen in order."
+  },
+  {
+    "id": "timeline",
+    "description": "Events, phases or plans along a time axis."
+  },
+  {
+    "id": "options-comparison",
+    "description": "Two or more options compared on the same criteria."
+  },
+  {
+    "id": "before-after",
+    "description": "An old state and a new state."
+  },
+  {
+    "id": "decision-tradeoff",
+    "description": "A choice and what it costs."
+  },
+  {
+    "id": "prioritization",
+    "description": "Deciding what comes first."
+  },
+  {
+    "id": "system-architecture",
+    "description": "Parts of a system and how they connect."
+  },
+  {
+    "id": "hierarchy",
+    "description": "Nested levels or a breakdown into sub-parts."
+  },
+  {
+    "id": "relationships",
+    "description": "Connections, overlaps or roles between actors or sets."
+  },
+  {
+    "id": "cause-effect",
+    "description": "Causes leading to an outcome, including loops."
+  },
+  {
+    "id": "scope-boundary",
+    "description": "What is in and out of scope."
+  },
+  {
+    "id": "estimate-with-range",
+    "description": "A projection or estimate with uncertainty."
+  },
+  {
+    "id": "claim-needing-evidence",
+    "description": "A statement that should show where it comes from."
+  },
+  {
+    "id": "method-explanation",
+    "description": "How a number or result was produced."
+  },
+  {
+    "id": "what-if-model",
+    "description": "Assumptions the audience can vary to see the effect."
+  },
+  {
+    "id": "product-ui",
+    "description": "A screen, interface or product moment."
+  },
+  {
+    "id": "code",
+    "description": "Source code or command-line usage."
+  },
+  {
+    "id": "user-experience-story",
+    "description": "What a person goes through over time."
+  },
+  {
+    "id": "audience-input",
+    "description": "Collecting responses from the room."
+  },
+  {
+    "id": "key-message",
+    "description": "The takeaway or argument of a slide."
+  },
+  {
+    "id": "section-structure",
+    "description": "Chapters, sections and where the talk is."
+  },
+  {
+    "id": "navigation-wayfinding",
+    "description": "Moving around a long or non-linear deck."
+  },
+  {
+    "id": "presenter-delivery",
+    "description": "Tools that help the presenter run the talk."
+  },
+  {
+    "id": "dense-detail",
+    "description": "Depth that should be available without crowding the slide."
+  },
+  {
+    "id": "jargon-definition",
+    "description": "Terms the audience may not know."
+  },
+  {
+    "id": "quote-or-voice",
+    "description": "Words from a person, customer or user."
+  },
+  {
+    "id": "visual-mood",
+    "description": "Atmosphere, emotion or visual continuity."
+  },
+  {
+    "id": "accessibility",
+    "description": "Making the deck usable with keyboards and assistive tech."
+  }
+]

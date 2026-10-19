@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q&amp;A topic hub: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.hub{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em}
+.tc{font:inherit;color:var(--fg);text-align:start;padding:.45em .55em;cursor:pointer;display:flex;flex-direction:column;gap:.15em;position:relative;min-height:4.4em}
+.tc b{font-size:.9em}.tc span{font-size:.8em;color:var(--muted);line-height:1.2}.tc em{font:500 .8em var(--f-mono);color:var(--accent);font-style:normal;margin-top:auto}
+.tc.seen{background:var(--ok-soft);border-color:#bfe0d2}.tc.seen::after{content:"✓";position:absolute;inset-inline-end:.45em;top:.3em;color:var(--ok);font-weight:700}
+@media (hover:hover) and (pointer:fine){.tc:hover{border-color:var(--accent)}}
+.ans[hidden],.hubv[hidden]{display:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Q&amp;A topic hub</h1>
+<div class="stage" role="group" aria-label="Demo: Q&amp;A topic hub. A closing grid of six topic cards, each with an “If asked” cue and a slide link; choosing one opens the answering slide with a Back to topics button.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body">
+<div class="hubv col" id="hv" style="gap:.4em"><p class="kicker" style="margin:0">Questions</p><div class="hub" id="hub"></div></div>
+<div class="ans col" id="ans" hidden style="gap:.4em;height:100%"><p class="kicker" id="ak"></p><p class="h" id="at" style="font-size:1.2em"></p><p class="p" id="ap"></p>
+<div style="margin-top:auto"><button class="sbtn" type="button" id="back">← Back to topics</button></div></div>
+</div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The closing slide is a grid of likely questions, each with an “If asked…” cue and the backup slide that answers it. Choose a card to jump to that slide, then press Back to topics to return; visited cards get a check so the presenter sees what is already covered.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var T=[{k:'Cost',c:'If asked what it costs',s:'B1',t:'Year one costs one extra engineer and tooling',p:'About 60% of the cost is people; tooling licenses are the rest.'},
+{k:'Risk',c:'If asked what could go wrong',s:'B2',t:'The main risk is a missed check in month one',p:'Mitigation: run old and new approval side by side for four weeks.'},
+{k:'Timeline',c:'If asked when it is done',s:'B3',t:'Pilot in Q3, all teams by the end of Q4',p:'Each team switches over in one sprint.'},
+{k:'Alternatives',c:'If asked why not batch releases',s:'B4',t:'Batching cuts meetings but not the wait',p:'Lead time only falls from 9 to 8 days.'},
+{k:'Metrics',c:'If asked how success is measured',s:'B5',t:'Success = lead time under 5 days for 8 weeks',p:'Reported weekly on the shared dashboard.'},
+{k:'People',c:'If asked who is affected',s:'B6',t:'Approvers move to reviewing check rules',p:'No roles are removed; about 2 hours a week shifts.'}];
+var seen={},open=-1;
+function draw(){$('hub').innerHTML=T.map(function(t,i){return '<button type="button" class="tc card'+(seen[i]?' seen':'')+'" data-i="'+i+'"><b>'+t.k+'</b><span>'+t.c+'…</span><em>→ '+t.s+'</em></button>';}).join('');
+$('hv').hidden=open>=0;$('ans').hidden=open<0;if(open>=0){var t=T[open];$('ak').textContent='Backup '+t.s+' · '+t.k;$('at').textContent=t.t;$('ap').textContent=t.p;}}
+$('hub').addEventListener('click',function(e){var b=e.target.closest('.tc');if(!b)return;open=+b.dataset.i;seen[open]=1;draw();$('back').focus();api.status('Jumped to '+T[open].s+': '+T[open].k);});
+$('back').addEventListener('click',function(){var i=open;open=-1;draw();var b=$('hub').querySelector('[data-i="'+i+'"]');if(b)b.focus();api.status('Back to topics, '+Object.keys(seen).length+' of 6 covered');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){seen={};open=-1;draw();}});
+</script>
+</body>
+</html>

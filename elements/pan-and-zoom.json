@@ -1,0 +1,20 @@
+{
+  "id": "pan-and-zoom",
+  "name": "Pan and zoom",
+  "category": "motion",
+  "definition": "The camera moves across one large visual.",
+  "bestUse": "Maps, big diagrams.",
+  "trigger": [
+    "system-architecture",
+    "spatial-data"
+  ],
+  "level": "advanced",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/pan-and-zoom.html",
+    "kind": "interactive",
+    "how": "The whole system is one large drawing; only the camera moves. Choose a stop, or use the arrow keys on the stop buttons, and the view glides and zooms to that region, so detail never loses its place in the whole. Overview zooms back out. Reset returns to the overview."
+  }
+}

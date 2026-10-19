@@ -1,0 +1,19 @@
+{
+  "id": "beeswarm-strip-plot",
+  "name": "Beeswarm / strip plot",
+  "category": "chart",
+  "definition": "Every observation as a dot along one axis.",
+  "bestUse": "Distribution with individual items.",
+  "trigger": [
+    "distribution"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/beeswarm-strip-plot.html",
+    "kind": "interactive",
+    "how": "Every deal is one dot on a single dollar axis. Swarm nudges dots vertically so none overlap; Strip keeps them on one line, where clusters hide. Toggle the layout, then Tab to a dot and use the arrow keys to step through deals in order. Data is illustrative."
+  }
+}

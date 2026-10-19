@@ -1,0 +1,27 @@
+{
+  "id": "focus-dimming",
+  "name": "Focus dimming",
+  "category": "text",
+  "definition": "Earlier items fade back as the next one appears.",
+  "bestUse": "Keeping attention on the current point.",
+  "trigger": [
+    "sequential-process",
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/focus-dimming.html",
+    "kind": "animated",
+    "how": "Each step brings in the next point at full strength and fades the earlier ones back to a light gray, so the room reads the point being discussed rather than the whole list. Play walks through four points; the final step leaves only the last one emphasized."
+  },
+  "aliases": [
+    "dim previous",
+    "spotlight bullets"
+  ],
+  "related": [
+    "fragment-builds"
+  ]
+}

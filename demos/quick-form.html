@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick form: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6em;flex:1;min-height:0}
+.fm{padding:.55em .7em;display:flex;flex-direction:column;gap:.45em}
+.fm label,.fm .lb{font-size:.85em;font-weight:600}
+.fm select{font:inherit;font-size:.9em;min-height:max(28px,2em);border:1px solid var(--line);border-radius:.35em;background:var(--surface);color:var(--fg);padding:0 .4em}
+.sc{display:flex;gap:.25em}.sc .sbtn{flex:1;padding:0}
+.sm{padding:.55em .7em;display:flex;flex-direction:column;gap:.3em}
+.rb{display:grid;grid-template-columns:5.2em 1fr 1.6em;gap:.4em;align-items:center;font-size:.8em}
+.rb .t{height:.6em;background:var(--accent-soft);border-radius:.2em;overflow:hidden}.rb .t i{display:block;height:100%;background:var(--accent);transition:width .35s var(--ease-out)}
+.avg{font:700 1.5em/1 var(--f-display)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Quick form</h1>
+<div class="stage" role="group" aria-label="Demo: Quick form. A two-field form beside a live summary; simulated submissions update the role breakdown and average confidence, and the viewer can submit too.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.4em;padding-top:1.8em">
+<p class="q">Before we start: two quick questions</p>
+<div class="two"><div class="fm card"><label for="role">Your role</label><select id="role"><option value="">Choose…</option><option>Engineering</option><option>Product</option><option>Design</option><option>Other</option></select>
+<span class="lb" id="cl">Confidence in the Q3 date</span><div class="sc" role="group" aria-labelledby="cl" id="sc"></div>
+<button class="sbtn primary" type="button" id="sub">Submit</button></div>
+<div class="sm card"><span class="mono muted" style="font-size:.8em" id="n"></span><div id="rb" class="col" style="gap:.25em"></div><span class="muted" style="font-size:.8em">Average confidence</span><span class="avg" id="avg">–</span></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A short form asks two things: your role and your confidence from 1 to 5. Simulated submissions arrive over about three seconds and the summary beside the form updates the role split and average. Fill in both fields and press Submit to add yours; Reset clears it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var RL=['Engineering','Product','Design','Other'],S=[[0,3],[1,4],[0,2],[0,3],[2,4],[1,3],[0,2],[0,4],[3,3],[1,2],[0,3],[2,3],[0,2],[1,4],[0,3],[2,5],[0,3],[1,3],[3,2],[0,4]];
+var F=8,lf=0,conf=0,mine=null;
+$('sc').innerHTML=[1,2,3,4,5].map(function(v){return '<button class="sbtn" type="button" data-v="'+v+'" aria-pressed="false" aria-label="'+v+' of 5">'+v+'</button>';}).join('');
+$('rb').innerHTML=RL.map(function(r){return '<div class="rb"><span>'+r+'</span><span class="t"><i style="width:0"></i></span><span class="mono"></span></div>';}).join('');
+function draw(f){lf=f;var d=S.slice(0,Math.round(S.length*f/F));if(mine)d=d.concat([mine]);var c=[0,0,0,0],sum=0;d.forEach(function(x){c[x[0]]++;sum+=x[1];});
+var rows=$('rb').children;for(var i=0;i<4;i++){rows[i].querySelector('i').style.width=(d.length?c[i]/d.length*100:0)+'%';rows[i].querySelector('.mono').textContent=c[i];}
+$('avg').textContent=d.length?(sum/d.length).toFixed(1)+' / 5':'–';$('n').textContent=d.length+' responses';
+$('sc').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.v===conf));b.disabled=!!mine;});$('role').disabled=!!mine;
+$('sub').disabled=!!mine;$('sub').textContent=mine?'Submitted ✓':'Submit';}
+$('sc').addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b)return;conf=+b.dataset.v;draw(lf);});
+$('sub').addEventListener('click',function(){var r=RL.indexOf($('role').value);if(r<0||!conf){api.status('Choose a role and a confidence first');return;}mine=[r,conf];draw(lf);api.status('Your response was added to the summary');});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,idleText:'Simulated responses',doneText:'Simulated responses: 20 forms in',reset:function(){mine=null;conf=0;$('role').value='';},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

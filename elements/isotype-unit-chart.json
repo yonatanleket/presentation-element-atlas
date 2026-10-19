@@ -1,0 +1,25 @@
+{
+  "id": "isotype-unit-chart",
+  "name": "Isotype / unit chart",
+  "category": "chart",
+  "definition": "Icons or dots where each one stands for a fixed quantity.",
+  "bestUse": "Making counts tangible.",
+  "trigger": [
+    "single-key-number",
+    "part-to-whole"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/isotype-unit-chart.html",
+    "kind": "interactive",
+    "how": "Each icon stands for a fixed 1,000 daily users, so the count becomes something you can see and tally. Choose a year to fill or empty icons; the total counts to match. Keep the unit fixed across views or the comparison breaks. Data is illustrative."
+  },
+  "aliases": [
+    "pictogram",
+    "icon chart",
+    "1 in 10"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "full-bleed-image-overlay",
+  "name": "Full-bleed image + overlay",
+  "category": "story",
+  "definition": "Edge-to-edge photo with short text on top.",
+  "bestUse": "Emotional openers.",
+  "trigger": [
+    "visual-mood",
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/full-bleed-image-overlay.html",
+    "kind": "animated",
+    "how": "The image runs edge to edge with no frame. Play darkens the lower part with a gradient scrim so text stays readable, then sets a short headline and one supporting line on top. The landscape is an inline SVG illustration standing in for a photograph."
+  }
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branching box tree: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.nb{position:absolute;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:.4em;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:opacity .3s var(--ease-out),border-color .2s,background-color .2s,box-shadow .2s}
+.nb span{font-size:.8em}.nb b{font-size:.9em}
+.nb[aria-pressed=true],.nb.sel{border:2px solid var(--accent);background:var(--accent-soft);box-shadow:0 .2em .6em rgba(47,75,216,.18)}.bt-e{opacity:0;transition:opacity .3s var(--ease-out)}.bt-e.vis{opacity:1}
+.nb.kid{opacity:0;visibility:hidden}.nb.kid.vis{opacity:1;visibility:visible}
+.nb.ok b{color:var(--ok)}.nb.bad b{color:var(--bad)}.nb[aria-expanded]::after{content:"+";position:absolute;inset-inline-end:.3em;bottom:.1em;font:600 .8em var(--f-mono);color:var(--accent)}
+.nb[aria-expanded=true]::after{content:"−"}.exp{position:absolute;inset-inline-start:1em;inset-block-end:.8em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Branching box tree</h1>
+<div class="stage" role="group" aria-label="Demo: Branching box tree. Trial sign-ups split into activated and not activated, then into paid, free, returned and churned. Boxes expand on click.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><path d="M132 150 H150 V85 H166" class="ln bt-e" id="e-a1" marker-end="url(#ah)"/><path d="M132 150 H150 V215 H166" class="ln bt-e" id="e-a2" marker-end="url(#ah)"/><path d="M292 85 H315 V50 H336" class="ln bt-e" id="e-b1" marker-end="url(#ah)"/><path d="M292 85 H315 V120 H336" class="ln bt-e" id="e-b2" marker-end="url(#ah)"/><path d="M292 215 H315 V185 H336" class="ln bt-e" id="e-b3" marker-end="url(#ah)"/><path d="M292 215 H315 V250 H336" class="ln bt-e" id="e-b4" marker-end="url(#ah)"/></svg>
+<div class="fill"><button type="button" class="nb" id="n-root" data-id="root" aria-expanded="false" style="left:0.5em;top:8em;width:7.75em;height:2.75em"><span>Trial sign-ups</span><b>10,000</b></button><button type="button" class="nb kid" id="n-a1" data-id="a1" aria-expanded="false" style="left:10.5em;top:3.938em;width:7.75em;height:2.75em"><span>Activated · 46%</span><b>4,600</b></button><button type="button" class="nb kid" id="n-a2" data-id="a2" aria-expanded="false" style="left:10.5em;top:12.063em;width:7.75em;height:2.75em"><span>Not activated · 54%</span><b>5,400</b></button><button type="button" class="nb kid ok" id="n-b1" data-id="b1" style="left:21.125em;top:1.75em;width:7.75em;height:2.75em"><span>Paid · 38%</span><b>1,748</b></button><button type="button" class="nb kid" id="n-b2" data-id="b2" style="left:21.125em;top:6.125em;width:7.75em;height:2.75em"><span>Free · 62%</span><b>2,852</b></button><button type="button" class="nb kid" id="n-b3" data-id="b3" style="left:21.125em;top:10.188em;width:7.75em;height:2.75em"><span>Returned · 20%</span><b>1,080</b></button><button type="button" class="nb kid bad" id="n-b4" data-id="b4" style="left:21.125em;top:14.25em;width:7.75em;height:2.75em"><span>Churned · 80%</span><b>4,320</b></button>
+<button type="button" class="sbtn exp" id="all">Expand all</button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each box is a group of people and its children show how that group splits, with the share and the count. Click a box, or press Enter on it, to expand or collapse its branches; Expand all opens the whole tree and Reset collapses it. Numbers are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var T=[{"id":"root","n":"Trial sign-ups","v":"10,000","kids":["a1","a2"],"p":null},{"id":"a1","n":"Activated · 46%","v":"4,600","kids":["b1","b2"],"p":"root"},{"id":"a2","n":"Not activated · 54%","v":"5,400","kids":["b3","b4"],"p":"root"},{"id":"b1","n":"Paid · 38%","v":"1,748","kids":null,"p":"a1"},{"id":"b2","n":"Free · 62%","v":"2,852","kids":null,"p":"a1"},{"id":"b3","n":"Returned · 20%","v":"1,080","kids":null,"p":"a2"},{"id":"b4","n":"Churned · 80%","v":"4,320","kids":null,"p":"a2"}];var open={},api;
+function byId(id){for(var i=0;i<T.length;i++)if(T[i].id===id)return T[i];}
+function visible(id){var b=byId(id);return !b.p||(!!open[b.p]&&visible(b.p));}
+function draw(){T.forEach(function(b){var n=document.getElementById('n-'+b.id),v=visible(b.id);if(b.p){n.classList.toggle('vis',v);document.getElementById('e-'+b.id).classList.toggle('vis',v);}
+  if(b.kids)n.setAttribute('aria-expanded',String(!!open[b.id]&&v));});}
+$('.fill').addEventListener('click',function(e){var n=e.target.closest('.nb');if(!n)return;var b=byId(n.dataset.id);if(!b.kids){api.status(b.n+': '+b.v+' people');return;}
+  open[b.id]=!open[b.id];if(!open[b.id])b.kids.forEach(function(k){open[k]=false;});draw();
+  api.status(open[b.id]?b.n.split(' ·')[0]+' splits into '+b.kids.map(function(k){var c=byId(k);return c.v+' '+c.n.split(' ·')[0].toLowerCase();}).join(' and '):'Collapsed '+b.n.split(' ·')[0]);});
+$('#all').addEventListener('click',function(){T.forEach(function(b){if(b.kids)open[b.id]=true;});draw();api.status('All branches open: 1,748 of 10,000 became paid');});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Click a box to expand it',reset:function(){open={};draw();}});
+</script>
+</body>
+</html>

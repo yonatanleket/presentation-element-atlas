@@ -1,0 +1,19 @@
+{
+  "id": "remote-control-from-phone",
+  "name": "Remote control from phone",
+  "category": "nav",
+  "definition": "Advancing slides from a phone over a shared link.",
+  "bestUse": "Presenting away from the laptop.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "standard",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/remote-control-from-phone.html",
+    "kind": "animated",
+    "how": "A simulated phone sends Next taps over a shared link and the slide on the laptop advances with each tap. Play runs a short sequence of taps; nothing here connects to a real device."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "2x2-matrix",
+  "name": "2×2 matrix",
+  "category": "compare",
+  "definition": "Items placed on two axes in four quadrants.",
+  "bestUse": "Prioritization and positioning.",
+  "trigger": [
+    "prioritization",
+    "options-comparison"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/2x2-matrix.html",
+    "kind": "animated",
+    "how": "Two axes split the slide into four named quadrants, so where an item lands says what to do with it. Play draws the grid, places six backlog items by impact and effort, then highlights the quick-wins quadrant as the recommendation. Placements are illustrative."
+  },
+  "aliases": [
+    "quadrant",
+    "prioritization matrix",
+    "magic quadrant"
+  ]
+}

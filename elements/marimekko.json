@@ -1,0 +1,23 @@
+{
+  "id": "marimekko",
+  "name": "Marimekko",
+  "category": "chart",
+  "definition": "Stacked bars whose widths also vary with size.",
+  "bestUse": "Market share × segment size.",
+  "trigger": [
+    "part-to-whole"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/marimekko.html",
+    "kind": "interactive",
+    "how": "Column width is segment size and height within a column is each player’s share, so every rectangle’s area is that player’s dollars in that segment. Highlight a player to see where its revenue sits; hover or Tab to a cell for its value. Data is illustrative."
+  },
+  "aliases": [
+    "mekko",
+    "market map"
+  ]
+}

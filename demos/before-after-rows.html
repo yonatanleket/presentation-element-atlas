@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before / after rows: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.ba{display:grid;grid-template-columns:3.4em 1fr;align-items:start;gap:.5em}
+.lab{font:600 .85em var(--f-body);padding-top:.55em}.lab.n{color:var(--accent)}
+.steps{display:flex;align-items:flex-start;gap:.15em}
+.st{width:4.9em;display:flex;flex-direction:column;align-items:center;gap:.3em}
+.nm{width:100%;text-align:center;font-size:.8em;line-height:1.2;padding:.5em .3em;background:var(--surface);border:1px solid var(--line);border-radius:.4em}
+.after .nm{border-color:var(--accent)}
+.arr{color:var(--muted);padding-top:.45em}.mk{font-size:.8em;min-height:1.4em}
+.sum{margin:0;font:600 .9em var(--f-body);text-align:center}.sum b{color:var(--ok)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Before / after rows</h1>
+<div class="stage" role="img" aria-label="Demo: Before / after rows. Old account opening flow with four steps and three pain points above a new three-step flow with three improvements.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.55em;justify-content:center">
+<p class="kicker">Account opening</p>
+<div class="ba"><span class="lab">Before</span><div class="steps"><div class="st"><div class="nm" data-f="1">Paper form</div><span class="pill bad mk" data-f="2">✗ re-typed</span></div><span class="arr" data-f="1">→</span><div class="st"><div class="nm" data-f="1">Branch visit</div><span class="pill bad mk" data-f="2">✗ 45 min</span></div><span class="arr" data-f="1">→</span><div class="st"><div class="nm" data-f="1">ID check</div><span class="pill bad mk" data-f="2">✗ 2-day wait</span></div><span class="arr" data-f="1">→</span><div class="st"><div class="nm" data-f="1">Account open</div><span class="mk"></span></div></div></div>
+<div class="ba after"><span class="lab n">After</span><div class="steps"><div class="st"><div class="nm" data-f="3">Online form</div><span class="pill ok mk" data-f="4">✓ prefilled</span></div><span class="arr" data-f="3">→</span><div class="st"><div class="nm" data-f="3">Photo ID</div><span class="pill ok mk" data-f="4">✓ instant</span></div><span class="arr" data-f="3">→</span><div class="st"><div class="nm" data-f="3">Account open</div><span class="pill ok mk" data-f="4">✓ same day</span></div></div></div>
+<p class="sum" data-f="4">4 steps · 3 days &nbsp;→&nbsp; <b>3 steps · 10 min</b></p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The old and new flows sit in two aligned rows so the audience compares step by step. Play builds the old row and marks its pain points, then builds the shorter new row with what improved, and ends on the summary of steps and time saved. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

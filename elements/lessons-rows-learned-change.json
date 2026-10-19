@@ -1,0 +1,25 @@
+{
+  "id": "lessons-rows-learned-change",
+  "name": "Lessons rows (learned → change)",
+  "category": "story",
+  "definition": "Numbered rows pairing a lesson with what you would do differently, joined by an arrow.",
+  "bestUse": "Retrospectives and closing slides.",
+  "trigger": [
+    "before-after",
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/lessons-rows-learned-change.html",
+    "kind": "animated",
+    "how": "Each numbered row pairs one lesson on the left with the specific change it leads to on the right, joined by an arrow. Play builds the rows one at a time and draws each arrow after its lesson, so every lesson visibly turns into an action."
+  },
+  "aliases": [
+    "retro",
+    "lessons learned",
+    "retrospective"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "customer-journey-map",
+  "name": "Customer journey map",
+  "category": "diagram",
+  "definition": "Stages × actions × emotion curve.",
+  "bestUse": "UX storytelling.",
+  "trigger": [
+    "user-experience-story"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/customer-journey-map.html",
+    "kind": "animated",
+    "how": "Columns are the journey stages, the row below says what the customer does, and the curve plots how they feel against a neutral line. Play builds stages, actions and the curve, then circles the deepest dip as the pain point. Data is illustrative."
+  },
+  "aliases": [
+    "journey",
+    "user journey",
+    "experience map",
+    "timeline"
+  ]
+}

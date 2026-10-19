@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sankey: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Sankey</h1>
+<div class="stage" role="group" aria-label="Demo: Sankey. A 10 million dollar budget flowing from three revenue sources to four spending areas; select a node to highlight its flows.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="ch" id="ch" viewBox="0 0 480 300"></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Band widths are proportional to dollars, so each node’s height equals its total in and out. Select a source or a spending node (click, or Tab then Enter) to isolate its flows and hear the split; hover a band for its value. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var svg = document.getElementById('ch'), tip = Tip(svg);
+    var SRC = ['Subscriptions', 'Services', 'Licenses'], DST = ['R&D', 'Sales', 'Operations', 'Profit'], COL = ['var(--accent)', 'var(--ok)', 'var(--adv)'];
+    var F = [[2.8, 1.8, 0.9, 0.5], [0.6, 0.8, 0.8, 0.3], [0.6, 0.4, 0.3, 0.2]], K = 20, GAP = 10;
+    title(svg, 'Where the $10M budget goes', 'Revenue source → spending, $M');
+    var sum = function (a) { return a.reduce(function (s, v) { return s + v; }, 0); };
+    var sT = F.map(sum), dT = DST.map(function (_, j) { return sum(F.map(function (r) { return r[j]; })); });
+    var sy = [], dy = [], y = 60; sT.forEach(function (t) { sy.push(y); y += t * K + GAP; }); y = 56; dT.forEach(function (t) { dy.push(y); y += t * K + GAP; });
+    var links = [], so = sy.slice(), dofs = dy.slice(), XL = 124, XR = 356;
+    var lg = S('g', {}, svg);
+    F.forEach(function (row, i) { row.forEach(function (v, j) {
+      var h = v * K, a0 = so[i], b0 = dofs[j]; so[i] += h; dofs[j] += h;
+      var p = S('path', { d: 'M' + XL + ',' + a0 + 'C240,' + a0 + ' 240,' + b0 + ' ' + XR + ',' + b0 + 'L' + XR + ',' + (b0 + h) + 'C240,' + (b0 + h) + ' 240,' + (a0 + h) + ' ' + XL + ',' + (a0 + h) + 'Z', fill: COL[i], 'fill-opacity': .35, 'class': 'enter' }, lg);
+      p.style.transition = 'fill-opacity .3s var(--ease-out)'; p.style.animationDelay = (i * 120) + 'ms';
+      p.dataset.s = i; p.dataset.d = j; p.dataset.t = SRC[i] + ' → ' + DST[j] + ': $' + v.toFixed(1) + 'M'; links.push(p);
+    }); });
+    var nodes = [];
+    function node(xx, yy, h, name, tot, side, idx) {
+      var r = S('rect', { x: xx, y: yy, width: 12, height: h, rx: 2, fill: side === 's' ? COL[idx] : 'var(--fg)', tabindex: 0, role: 'button', 'aria-pressed': 'false', 'aria-label': name + ', $' + tot.toFixed(1) + 'M' }, svg);
+      var tx = side === 's' ? xx - 8 : xx + 20, an = side === 's' ? 'end' : 'start';
+      S('text', { x: tx, y: yy + h / 2 - 1, 'text-anchor': an, 'class': 'lbl' }, svg, name);
+      S('text', { x: tx, y: yy + h / 2 + 14, 'text-anchor': an, 'class': 'ax' }, svg, '$' + tot.toFixed(1) + 'M');
+      r.dataset.side = side; r.dataset.idx = idx; nodes.push(r);
+    }
+    sT.forEach(function (t, i) { node(XL - 12, sy[i], t * K, SRC[i], t, 's', i); });
+    dT.forEach(function (t, j) { node(XR, dy[j], t * K, DST[j], t, 'd', j); });
+    var sel = null, api;
+    function apply() {
+      links.forEach(function (p) { var hit = !sel || (sel.side === 's' ? +p.dataset.s === sel.idx : +p.dataset.d === sel.idx); p.setAttribute('fill-opacity', sel ? (hit ? .75 : .07) : .35); });
+      nodes.forEach(function (n) { n.setAttribute('aria-pressed', String(!!sel && n.dataset.side === sel.side && +n.dataset.idx === sel.idx)); });
+    }
+    function pick(n) {
+      var s = { side: n.dataset.side, idx: +n.dataset.idx };
+      sel = sel && sel.side === s.side && sel.idx === s.idx ? null : s; apply();
+      if (!sel) { api.status('All flows shown'); return; }
+      var parts = links.filter(function (p) { return sel.side === 's' ? +p.dataset.s === sel.idx : +p.dataset.d === sel.idx; }).map(function (p) { return p.dataset.t.split(': ')[0].replace(sel.side === 's' ? SRC[sel.idx] + ' → ' : ' → ' + DST[sel.idx], '') + ' ' + p.dataset.t.split(': ')[1]; });
+      api.status((sel.side === 's' ? SRC : DST)[sel.idx] + ': ' + parts.join(', '));
+    }
+    nodes.forEach(function (n) {
+      n.addEventListener('click', function () { pick(n); });
+      n.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(n); } });
+    });
+    lg.addEventListener('mousemove', function (e) { var p = e.target; if (!p.dataset.t) return; var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; var q = pt.matrixTransform(svg.getScreenCTM().inverse()); tip.show(q.x, q.y - 4, p.dataset.t); });
+    lg.addEventListener('mouseleave', function () { tip.hide(); });
+    api = AtlasDemo.init({ frames: 0, interactive: true, idleText: 'Select a node to isolate its flows', reset: function () { sel = null; apply(); tip.hide(); } });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dateline: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.dl{margin-inline-start:auto;font:500 .8em/1 var(--f-mono);color:var(--ink-2);background:var(--stage);border:1px solid var(--line);border-radius:.3em;padding:.3em .45em;opacity:0;transform:translateY(-.3em)}
+.dl.on{opacity:1;transform:none}
+.bars{display:flex;align-items:flex-end;gap:.55em;height:6.2em;margin-top:.4em;border-block-end:1px solid var(--line)}
+.bars span{flex:1;background:var(--accent);border-radius:.2em .2em 0 0;transition:height .4s var(--ease-out)}
+.ax{display:flex;gap:.55em;font:500 .8em var(--f-mono);color:var(--muted)}.ax span{flex:1;text-align:center}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Dateline</h1>
+<div class="stage" role="img" aria-label="Demo: Dateline. A chart slide gains a small label naming its time period; the next slide carries a different dateline.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="padding-top:1.5em"><div class="row"><p class="kicker" id="k" style="margin:0"></p><span class="dl fx" id="dl"></span></div><p class="h" id="t" style="font-size:1.15em;max-width:19em"></p>
+<div class="bars" id="bars"></div><div class="ax" id="ax"></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Without a dateline the reader has to guess when the chart applies. Play adds a small label in the slide corner naming the period and data cut-off, then moves to a baseline slide whose dateline names a different period, so the time frame is always explicit.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var S=[{k:'Support',t:'Tickets fell after self-serve setup launched',d:'Jan–Jun 2025 · data to 30 Jun',v:[90,84,70,58,51,47],a:['Jan','Feb','Mar','Apr','May','Jun']},
+{k:'Baseline',t:'Where we started: tickets grew every month',d:'Jul–Dec 2024 · baseline',v:[62,68,73,79,84,90],a:['Jul','Aug','Sep','Oct','Nov','Dec']}];
+$('bars').innerHTML='<span></span>'.repeat(6);$('ax').innerHTML='<span></span>'.repeat(6);
+var bs=$('bars').children,as=$('ax').children;
+AtlasDemo.init({frames:2,stepMs:1400,render:function(f){var s=S[f===2?1:0];$('k').textContent=s.k;$('t').textContent=s.t;
+for(var i=0;i<6;i++){bs[i].style.height=s.v[i]+'%';as[i].textContent=s.a[i];}
+$('dl').textContent=s.d;on($('dl'),f>=1);}});
+</script>
+</body>
+</html>

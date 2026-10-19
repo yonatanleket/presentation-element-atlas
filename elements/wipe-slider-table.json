@@ -1,0 +1,24 @@
+{
+  "id": "wipe-slider-table",
+  "name": "Wipe slider table",
+  "category": "compare",
+  "definition": "Table with a draggable handle that wipes between the old and new versions of each row.",
+  "bestUse": "Same journey, different outcome.",
+  "trigger": [
+    "before-after"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/wipe-slider-table.html",
+    "kind": "interactive",
+    "how": "The old and new versions of the same table are stacked, and the handle wipes between them row by row: left of it is the old outcome, right of it the new. Drag the handle, use the slider and arrow keys, or jump with Old and New; Reset centres it. Data is illustrative."
+  },
+  "aliases": [
+    "before after",
+    "compare slider",
+    "old vs new"
+  ]
+}

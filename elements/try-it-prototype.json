@@ -1,0 +1,25 @@
+{
+  "id": "try-it-prototype",
+  "name": "Try-it prototype",
+  "category": "product",
+  "definition": "Working mini-app in the slide: run the old flow and hit its failure, then rewind and run the new flow.",
+  "bestUse": "Letting the audience feel the change themselves.",
+  "trigger": [
+    "product-ui",
+    "before-after"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/try-it-prototype.html",
+    "kind": "interactive",
+    "how": "Run the old flow: three screens to share a report, then a session error wipes the selections. Rewind, switch to the new flow, and the same task takes two clicks with suggested people. The click counter makes the difference felt rather than described. Reset returns to the old flow."
+  },
+  "aliases": [
+    "before after",
+    "prototype",
+    "demo"
+  ]
+}

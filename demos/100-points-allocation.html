@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100-points allocation: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.al{display:grid;grid-template-columns:8.3em 1fr 2.2em 5.5em;gap:.5em;align-items:center;font-size:.88em}
+.al input{width:100%;accent-color:var(--accent);min-height:28px}
+.al output{font:600 1em var(--f-mono);text-align:end}
+.rm{font:600 .9em var(--f-mono)}
+.avg{height:.55em;background:var(--line);border-radius:.2em;overflow:hidden;position:relative}.avg i{display:block;height:100%;background:var(--adv);transition:width .35s var(--ease-out)}
+.hd{display:grid;grid-template-columns:8.3em 1fr 2.2em 5.5em;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">100-points allocation</h1>
+<div class="stage" role="group" aria-label="Demo: 100-points allocation. Viewer spreads 100 points across four options with sliders; a remaining counter enforces the budget and the room average updates as simulated allocations arrive.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.4em;padding-top:1.8em">
+<div class="row"><p class="q" style="font-size:1em;flex:1">Spend 100 points on next quarter</p><span class="pill" id="rm">100 left</span></div>
+<div class="hd"><span>Option</span><span>Your points</span><span></span><span>Room avg</span></div>
+<div id="al" class="col" style="gap:.3em"></div>
+<div class="row"><button class="sbtn primary" type="button" id="sub" disabled>Submit</button><span class="muted" style="font-size:.8em" id="hint"></span></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>You have 100 points to spread across four options. Drag a slider or use the arrow keys to move points in steps of 5; a slider cannot go past what is left. Simulated allocations build the room average shown beside each option, and Submit adds your split once all 100 points are placed.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var O=['Faster builds','Better docs','Fewer meetings','Self-serve tools'],V=[[40,10,20,30],[30,20,10,40],[50,0,25,25],[25,25,25,25],[40,15,15,30],[20,10,30,40],[45,5,20,30],[35,20,15,30],[30,10,20,40],[50,10,10,30]];
+var F=8,lf=0,pts=[0,0,0,0],sent=false;
+$('al').innerHTML=O.map(function(o,i){return '<div class="al"><label for="r'+i+'">'+o+'</label><input type="range" id="r'+i+'" min="0" max="100" step="5" value="0" data-i="'+i+'"><output id="o'+i+'" for="r'+i+'">0</output><span class="avg" title="room average"><i></i></span></div>';}).join('');
+function left(){return 100-pts.reduce(function(a,b){return a+b;},0);}
+function draw(f){lf=f;var vs=V.slice(0,Math.round(V.length*f/F));if(sent)vs=vs.concat([pts.slice()]);var av=[0,1,2,3].map(function(i){return vs.length?vs.reduce(function(a,v){return a+v[i];},0)/vs.length:0;});
+var bars=$('al').querySelectorAll('.avg');for(var i=0;i<4;i++){bars[i].querySelector('i').style.width=av[i]+'%';bars[i].setAttribute('aria-label','Room average '+Math.round(av[i]));$('r'+i).value=pts[i];$('o'+i).textContent=pts[i];$('r'+i).disabled=sent;}
+var l=left();$('rm').textContent=l+' left';$('rm').className='pill '+(l===0?'ok':'');$('sub').disabled=sent||l!==0;$('sub').textContent=sent?'Submitted ✓':'Submit';
+$('hint').textContent=sent?'Your split is in the room average':(l?'Place all 100 points to submit':'Ready to submit');$('n').textContent=vs.length+' people allocated';}
+$('al').addEventListener('input',function(e){var r=e.target.closest('input');if(!r)return;var i=+r.dataset.i,others=100-left()-pts[i];var v=Math.min(+r.value,100-others);pts[i]=v;r.value=v;draw(lf);});
+$('al').addEventListener('change',function(e){var r=e.target.closest('input');if(r)api.status(O[+r.dataset.i]+': '+pts[+r.dataset.i]+' points, '+left()+' left');});
+$('sub').addEventListener('click',function(){if(left()!==0)return;sent=true;draw(lf);api.status('Your allocation was added to the room average');});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,interactive:true,reset:function(){pts=[0,0,0,0];sent=false;},render:function(f){draw(f);api&&api.status(f>=F?'Simulated responses: all allocations in':f?'Simulated responses arriving…':'');}});
+</script>
+</body>
+</html>

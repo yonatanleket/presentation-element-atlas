@@ -1,0 +1,24 @@
+{
+  "id": "kicker-action-title-lede",
+  "name": "Kicker + action title + lede",
+  "category": "story",
+  "definition": "Small chapter label, then a full-sentence takeaway title, then one or two supporting lines.",
+  "bestUse": "Every content slide; the title carries the argument.",
+  "trigger": [
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/kicker-action-title-lede.html",
+    "kind": "animated",
+    "how": "The kicker names the chapter in small type, the title states the takeaway as a full sentence, and the lede adds one supporting line. Play builds the three layers in that order, with margin tags naming each, then adds the chart that proves the title."
+  },
+  "aliases": [
+    "action title",
+    "headline",
+    "takeaway title"
+  ]
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparison table: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+table{width:100%;border-collapse:collapse;font-size:.85em;background:var(--surface);border-radius:.4em;overflow:hidden}
+th,td{padding:.4em .6em;text-align:center;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:start}
+th{font-weight:600;background:#f3f4f7}tr:last-child td{border-bottom:0}
+.y{color:var(--ok);font-weight:700}.n{color:var(--bad);font-weight:700}.na{color:var(--muted)}
+td.b,th.b{transition:background-color .3s var(--ease-out)}table.win td.b,table.win th.b{background:var(--accent-soft)}
+th .pill{font-size:.8em;margin-inline-start:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Comparison table</h1>
+<div class="stage" role="img" aria-label="Demo: Comparison table. Three vendors compared on SSO, audit log, EU hosting, API access and price; Vendor B is marked best fit.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.5em">
+<div><p class="kicker">Vendor shortlist</p><p class="h">B covers every must-have</p></div>
+<table id="tb"><thead><tr><th>Criteria</th><th>Vendor A</th><th class="b">Vendor B<span class="pill ok" data-f="6">Best fit</span></th><th>Vendor C</th></tr></thead>
+<tbody><tr data-f="1"><td>SSO</td><td><span class="y" aria-label="yes">✓</span></td><td class="b"><span class="y" aria-label="yes">✓</span></td><td><span class="n" aria-label="no">✗</span></td></tr><tr data-f="2"><td>Audit log</td><td><span class="na" aria-label="partial">–</span></td><td class="b"><span class="y" aria-label="yes">✓</span></td><td><span class="n" aria-label="no">✗</span></td></tr><tr data-f="3"><td>EU hosting</td><td><span class="n" aria-label="no">✗</span></td><td class="b"><span class="y" aria-label="yes">✓</span></td><td><span class="y" aria-label="yes">✓</span></td></tr><tr data-f="4"><td>API access</td><td><span class="y" aria-label="yes">✓</span></td><td class="b"><span class="y" aria-label="yes">✓</span></td><td><span class="na" aria-label="partial">–</span></td></tr><tr data-f="5"><td>Price / seat</td><td><span class="mono">$12</span></td><td class="b"><span class="mono">$18</span></td><td><span class="mono">$9</span></td></tr></tbody></table>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Criteria run down the rows and options across the columns, with checks, crosses and dashes for partial support. Play fills the table one criterion at a time, then highlights the column that best fits the must-haves, even though it is not the cheapest. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:6,stepMs:650,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';$('#tb').classList.toggle('win',fr>=6);}});
+</script>
+</body>
+</html>

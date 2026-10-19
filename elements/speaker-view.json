@@ -1,0 +1,27 @@
+{
+  "id": "speaker-view",
+  "name": "Speaker view",
+  "category": "nav",
+  "definition": "Second window with notes, a timer, a pacing clock and the next-slide preview.",
+  "bestUse": "Live delivery.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "standard",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/speaker-view.html",
+    "kind": "animated",
+    "how": "The demo shows the presenter window: the current slide, the next slide, notes and a running clock. Play advances the talk so the preview, notes and timer change together, which is what the presenter sees while the audience sees one slide."
+  },
+  "aliases": [
+    "presenter view",
+    "speaker notes",
+    "presenter mode"
+  ],
+  "related": [
+    "presenter-panel-quiet-button"
+  ]
+}

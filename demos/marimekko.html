@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marimekko: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Marimekko</h1>
+<div class="stage" role="group" aria-label="Demo: Marimekko. A 100 billion dollar market split into four segments by column width, each column split by player share; buttons highlight one player.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="ch" id="ch" viewBox="0 0 480 300"></svg><div class="sctl" role="group" aria-label="Highlight a player"><button class="sbtn" type="button" data-p="0" aria-pressed="false"><span style="color:#2f4bd8">■</span> Us</button><button class="sbtn" type="button" data-p="1" aria-pressed="false"><span style="color:#9a4a0b">■</span> Rival A</button><button class="sbtn" type="button" data-p="2" aria-pressed="false"><span style="color:#6b7280">■</span> Others</button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Column width is segment size and height within a column is each player’s share, so every rectangle’s area is that player’s dollars in that segment. Highlight a player to see where its revenue sits; hover or Tab to a cell for its value. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var svg = document.getElementById('ch'), tip = Tip(svg);
+    var SEG = [['Enterprise', 40, [18, 42, 40]], ['Mid-market', 25, [30, 25, 45]], ['SMB', 20, [22, 18, 60]], ['Consumer', 15, [8, 30, 62]]];
+    var PL = ['Us', 'Rival A', 'Others'], COL = ['#2f4bd8', '#9a4a0b', '#6b7280'];
+    title(svg, 'We lead only in mid-market', 'Market by segment ($B) and share');
+    var x = lin(0, 100, 62, 450), y = lin(0, 100, 262, 70), acc = 0, cells = [];
+    [0, 25, 50, 75, 100].forEach(function (t) { S('text', { x: 54, y: y(t) + 4.5, 'text-anchor': 'end', 'class': 'ax' }, svg, t + '%'); });
+    SEG.forEach(function (s, si) {
+      var x0 = x(acc), w = x(acc + s[1]) - x0 - 2, base = 0;
+      S('text', { x: x0 + w / 2, y: 279, 'text-anchor': 'middle' }, svg, s[0]);
+      S('text', { x: x0 + w / 2, y: 294, 'text-anchor': 'middle', 'class': 'ax' }, svg, '$' + s[1] + 'B');
+      s[2].forEach(function (sh, p) {
+        var y1 = y(base + sh), h = y(base) - y1 - 2, usd = (sh / 100 * s[1]);
+        var lab = s[0] + ' · ' + PL[p] + ': ' + sh + '% of $' + s[1] + 'B = $' + (usd % 1 ? usd.toFixed(1) : usd) + 'B';
+        var r = S('rect', { x: x0, y: y1, width: w, height: h, fill: COL[p], tabindex: 0, role: 'img', 'aria-label': lab, 'class': 'enter' }, svg);
+        r.style.animationDelay = (si * 90 + p * 40) + 'ms'; r.style.transition = 'opacity .3s var(--ease-out)'; r.dataset.p = p;
+        if (h > 18 && w > 34) { var t = S('text', { x: x0 + 6, y: y1 + 16, style: 'fill:#fff;font-weight:600', 'pointer-events': 'none' }, svg, sh + '%'); t.dataset.p = p; cells.push(t); }
+        var sh2 = function () { tip.show(x0 + w / 2, y1 + 4, lab.replace(s[0] + ' · ', '')); api && api.status(lab); };
+        r.addEventListener('focus', sh2); r.addEventListener('mouseenter', sh2); r.addEventListener('blur', tip.hide); r.addEventListener('mouseleave', tip.hide);
+        cells.push(r); base += sh;
+      });
+      acc += s[1];
+    });
+    var sel = -1, api, btns = document.querySelectorAll('[data-p]');
+    var totals = PL.map(function (_, p) { return SEG.reduce(function (t, s) { return t + s[2][p] / 100 * s[1]; }, 0); });
+    function apply() { cells.forEach(function (c) { c.style.opacity = sel < 0 || +c.dataset.p === sel ? 1 : .2; }); btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.p === sel)); }); }
+    btns.forEach(function (b) { b.addEventListener('click', function () { var p = +b.dataset.p; sel = sel === p ? -1 : p; apply(); api.status(sel < 0 ? 'All players shown' : PL[p] + ': $' + totals[p].toFixed(1) + 'B in total, ' + totals[p].toFixed(1) + '% of the market'); }); });
+    api = AtlasDemo.init({ frames: 0, interactive: true, idleText: 'Highlight a player, or Tab to a cell', reset: function () { sel = -1; apply(); tip.hide(); } });
+  })();
+</script>
+</body>
+</html>

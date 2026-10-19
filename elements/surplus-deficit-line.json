@@ -1,0 +1,20 @@
+{
+  "id": "surplus-deficit-line",
+  "name": "Surplus / deficit line",
+  "category": "chart",
+  "definition": "Line with shaded areas above and below a reference.",
+  "bestUse": "Deviation over time.",
+  "trigger": [
+    "deviation-from-target",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/surplus-deficit-line.html",
+    "kind": "interactive",
+    "how": "The line is monthly cash flow and the dashed line is the target. Area above the target shades green (surplus), area below shades red (deficit). Drag the target slider to see how the balance of good and bad months shifts. Data is illustrative."
+  }
+}

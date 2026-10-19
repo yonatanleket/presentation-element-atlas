@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeline / roadmap: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.axis{stroke:var(--fg);stroke-width:2}.tick{stroke:var(--fg);stroke-width:1.2}.dia{fill:var(--accent)}.today{stroke:var(--bad);stroke-width:1.6;stroke-dasharray:4 3}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Timeline / roadmap</h1>
+<div class="stage" role="img" aria-label="Demo: Timeline / roadmap. A 2027 roadmap with four phases across quarters, four milestones and a Today marker in February.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<text x="20" y="36" class="t-b" style="font-size:15px">2027 roadmap</text>
+<g data-f="1"><line x1="30" y1="190" x2="450" y2="190" class="axis"/><line x1="30" y1="184" x2="30" y2="196" class="tick"/><line x1="135" y1="184" x2="135" y2="196" class="tick"/><line x1="240" y1="184" x2="240" y2="196" class="tick"/><line x1="345" y1="184" x2="345" y2="196" class="tick"/><line x1="450" y1="184" x2="450" y2="196" class="tick"/>
+<text x="82.5" y="172" text-anchor="middle" class="t-m t-mono">Q1</text><text x="187.5" y="172" text-anchor="middle" class="t-m t-mono">Q2</text><text x="292.5" y="172" text-anchor="middle" class="t-m t-mono">Q3</text><text x="397.5" y="172" text-anchor="middle" class="t-m t-mono">Q4</text></g>
+<g data-f="2"><rect x="31" y="112" width="78" height="30" rx="5" class="nd"/><text x="70" y="131" text-anchor="middle" class="t-b">Discover</text><rect x="111" y="112" width="138" height="30" rx="5" class="nd-a"/><text x="180" y="131" text-anchor="middle" class="t-b t-a">Build + beta</text><rect x="251" y="112" width="78" height="30" rx="5" class="nd"/><text x="290" y="131" text-anchor="middle" class="t-b">Launch</text><rect x="331" y="112" width="118" height="30" rx="5" class="nd-a"/><text x="390" y="131" text-anchor="middle" class="t-b t-a">Scale</text></g>
+<g data-f="3"><rect x="58" y="183" width="14" height="14" class="dia" transform="rotate(45 65 190)"/><text x="65" y="222" text-anchor="middle" class="">Pilot live</text><text x="65" y="240" text-anchor="middle" class="t-m t-mono">Feb</text><rect x="173" y="183" width="14" height="14" class="dia" transform="rotate(45 180 190)"/><text x="180" y="222" text-anchor="middle" class="">Public beta</text><text x="180" y="240" text-anchor="middle" class="t-m t-mono">May</text><rect x="283" y="183" width="14" height="14" class="dia" transform="rotate(45 290 190)"/><text x="290" y="222" text-anchor="middle" class="">GA</text><text x="290" y="240" text-anchor="middle" class="t-m t-mono">Aug</text><rect x="411" y="183" width="14" height="14" class="dia" transform="rotate(45 418 190)"/><text x="418" y="222" text-anchor="middle" class="">EU region</text><text x="418" y="240" text-anchor="middle" class="t-m t-mono">Nov</text></g>
+<g data-f="4"><line x1="122" y1="80" x2="122" y2="200" class="today"/><text x="122" y="74" text-anchor="middle" class="t-b t-bad">Today</text></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A single time axis carries phases as bars above it and milestones as diamonds on it, so plans and dates read together. Play draws the axis, the phases, then the milestones, and drops a Today marker to show where the team is now. Dates are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

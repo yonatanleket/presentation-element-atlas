@@ -1,0 +1,24 @@
+{
+  "id": "animated-transition-between-states",
+  "name": "Animated transition between states",
+  "category": "motion",
+  "definition": "One chart morphs smoothly between data states.",
+  "bestUse": "Change over time.",
+  "trigger": [
+    "before-after",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/animated-transition-between-states.html",
+    "kind": "interactive",
+    "how": "Choose a year (buttons or arrow keys). The same five bars grow or shrink to the new values and the labels count to their new numbers, so the eye tracks each category through the change instead of comparing two separate charts. Reset returns to 2024."
+  },
+  "aliases": [
+    "morph chart",
+    "data transition"
+  ]
+}

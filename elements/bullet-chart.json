@@ -1,0 +1,25 @@
+{
+  "id": "bullet-chart",
+  "name": "Bullet chart",
+  "category": "metric",
+  "definition": "Bar against a target marker and qualitative bands.",
+  "bestUse": "Performance against a goal.",
+  "trigger": [
+    "deviation-from-target",
+    "single-key-number"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/bullet-chart.html",
+    "kind": "animated",
+    "how": "Grey bands mark poor, fair and good ranges, a thin vertical line marks the target, and the dark bar grows to the actual value. One glance shows the value, the goal and how good it is. Values are illustrative."
+  },
+  "aliases": [
+    "kpi",
+    "target vs actual",
+    "goal tracking"
+  ]
+}

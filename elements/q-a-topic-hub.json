@@ -1,0 +1,23 @@
+{
+  "id": "q-a-topic-hub",
+  "name": "Q&A topic hub",
+  "category": "story",
+  "definition": "Closing grid of topic cards, each with a cue (“If asked …”) and a link to the slide that answers it.",
+  "bestUse": "Q&A sessions, so likely questions are answered with existing slides.",
+  "trigger": [
+    "navigation-wayfinding",
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/q-a-topic-hub.html",
+    "kind": "interactive",
+    "how": "The closing slide is a grid of likely questions, each with an “If asked…” cue and the backup slide that answers it. Choose a card to jump to that slide, then press Back to topics to return; visited cards get a check so the presenter sees what is already covered."
+  },
+  "related": [
+    "return-to-hub-button"
+  ]
+}

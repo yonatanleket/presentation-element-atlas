@@ -1,0 +1,25 @@
+{
+  "id": "interactive-station-strip",
+  "name": "Interactive station strip",
+  "category": "diagram",
+  "definition": "Horizontal journey of selectable stations, navigable with arrow keys, with a detail panel below and a legend of milestones.",
+  "bestUse": "Walking through a journey step by step during the talk.",
+  "trigger": [
+    "user-experience-story",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/interactive-station-strip.html",
+    "kind": "interactive",
+    "how": "Stations sit on one horizontal line, with diamonds for milestones and dots for ordinary steps. Click a station or use the arrow keys, Home and End to move along it; the panel below shows what happens there and how many users reach it. Reset returns to the start. Data is illustrative."
+  },
+  "aliases": [
+    "timeline",
+    "journey",
+    "steps"
+  ]
+}

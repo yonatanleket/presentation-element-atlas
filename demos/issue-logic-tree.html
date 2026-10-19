@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue / logic tree: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.dg .hl rect{stroke-width:2.6}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Issue / logic tree</h1>
+<div class="stage" role="img" aria-label="Demo: Issue / logic tree. A logic tree splits why margin fell into revenue per order and cost per order, then into four testable drivers.">
+<span class="label-illustrative" style="inset-block-start:auto;inset-block-end:.4em;inset-inline-end:auto;inset-inline-start:.6em">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<g data-f="1"><rect x="10" y="122" width="112" height="56" rx="6" class="nd-a"/><text x="66" y="147" text-anchor="middle" class="t-b t-a">Why is margin</text><text x="66" y="162" text-anchor="middle" class="t-b t-a">down 6 pts?</text></g>
+<g data-f="2"><path d="M122 150 H138 V85 H154" class="ln " marker-end="url(#ah)"/><path d="M122 150 H138 V215 H154" class="ln " marker-end="url(#ah)"/></g>
+<g data-f="2"><rect x="156" y="63" width="112" height="44" rx="6" class="nd"/><text x="212" y="82" text-anchor="middle" class="t-b">Revenue per</text><text x="212" y="97" text-anchor="middle" class="t-b">order fell</text></g>
+<g data-f="2"><rect x="156" y="193" width="112" height="44" rx="6" class="nd"/><text x="212" y="212" text-anchor="middle" class="t-b">Cost per</text><text x="212" y="227" text-anchor="middle" class="t-b">order rose</text></g>
+<g data-f="3"><path d="M268 85 H290 V50 H313" class="ln " marker-end="url(#ah)"/><path d="M268 85 H290 V115 H313" class="ln " marker-end="url(#ah)"/><path d="M268 215 H290 V185 H313" class="ln " marker-end="url(#ah)"/><path d="M268 215 H290 V250 H313" class="ln " marker-end="url(#ah)"/></g>
+<g data-f="3"><rect x="317" y="35" width="150" height="30" rx="6" class="nd"/><text x="392" y="54.5" text-anchor="middle" class="">Bigger discounts</text></g><g data-f="3"><rect x="317" y="100" width="150" height="30" rx="6" class="nd"/><text x="392" y="119.5" text-anchor="middle" class="">Smaller baskets</text></g><g data-f="3"><rect x="317" y="170" width="150" height="30" rx="6" class="nd"/><text x="392" y="189.5" text-anchor="middle" class="">Higher shipping</text></g><g data-f="3"><rect x="317" y="235" width="150" height="30" rx="6" class="nd"/><text x="392" y="254.5" text-anchor="middle" class="">More returns</text></g>
+<g data-f="4" class="hl"><g><rect x="317" y="35" width="150" height="30" rx="6" class="nd-warn"/><text x="392" y="54.5" text-anchor="middle" class="t-b">Bigger discounts</text></g><text x="300" y="290" text-anchor="middle" class="t-b">Test first: average discount rose 4 pts</text></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The question on the left splits into branches that do not overlap and together cover every cause, then each branch splits again into testable drivers. Play builds one level at a time and marks the hypothesis to test first. Figures are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:950,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

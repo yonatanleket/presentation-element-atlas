@@ -1,0 +1,24 @@
+{
+  "id": "scenario-toggle",
+  "name": "Scenario toggle",
+  "category": "explore",
+  "definition": "Buttons switch the visual between cases.",
+  "bestUse": "Comparing scenarios.",
+  "trigger": [
+    "options-comparison",
+    "what-if-model"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/scenario-toggle.html",
+    "kind": "animated",
+    "how": "One chart, three cases. Each step switches the active case: the bars move to that scenario’s monthly cash balance and the summary line restates what changes, so the audience compares cases on identical axes instead of flipping between three separate charts."
+  },
+  "aliases": [
+    "scenario switch",
+    "case toggle"
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2×2 matrix: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.q{fill:var(--surface);stroke:var(--line)}.qa{fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-width:2.5}
+.dot{fill:var(--ink-2)}.dot-a{fill:var(--accent)}.ax{stroke:var(--fg);stroke-width:1.6}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">2×2 matrix</h1>
+<div class="stage" role="img" aria-label="Demo: 2×2 matrix. Six backlog items placed on an impact versus effort grid; two land in the quick wins quadrant.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<text x="70" y="27" class="t-b" data-f="3" style="font-size:15px">Ship the two quick wins first</text>
+<g data-f="1"><rect x="70" y="40" width="190" height="115" class="q"/><rect x="260" y="40" width="190" height="115" class="q"/><rect x="70" y="155" width="190" height="115" class="q"/><rect x="260" y="155" width="190" height="115" class="q"/>
+<line x1="70" y1="270" x2="450" y2="270" class="ax"/><line x1="70" y1="40" x2="70" y2="270" class="ax"/>
+<text x="78" y="58" class="t-m t-mono">Quick wins</text><text x="442" y="58" text-anchor="end" class="t-m t-mono">Big bets</text><text x="78" y="262" class="t-m t-mono">Fill-ins</text><text x="442" y="262" text-anchor="end" class="t-m t-mono">Money pits</text>
+<text x="56" y="155" text-anchor="middle" transform="rotate(-90 56 155)" class="t-b">Impact →</text><text x="260" y="290" text-anchor="middle" class="t-b">Effort →</text></g>
+<rect x="70" y="40" width="190" height="115" class="qa" data-f="3"/>
+<g data-f="2"><circle cx="105" cy="92" r="5.5" class="dot"/><text x="114" y="96" class="">SSO login</text><circle cx="172" cy="128" r="5.5" class="dot"/><text x="181" y="132" class="">Bulk export</text><circle cx="330" cy="90" r="5.5" class="dot"/><text x="339" y="94" class="">AI search</text><circle cx="300" cy="135" r="5.5" class="dot"/><text x="309" y="139" class="">Usage alerts</text><circle cx="120" cy="205" r="5.5" class="dot"/><text x="129" y="209" class="">Dark mode</text><circle cx="330" cy="215" r="5.5" class="dot"/><text x="339" y="219" class="">Rewrite API</text></g>
+<g data-f="3"><circle cx="105" cy="92" r="6.5" class="dot-a"/><circle cx="172" cy="128" r="6.5" class="dot-a"/></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Two axes split the slide into four named quadrants, so where an item lands says what to do with it. Play draws the grid, places six backlog items by impact and effort, then highlights the quick-wins quadrant as the recommendation. Placements are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:3,stepMs:950,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

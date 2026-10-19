@@ -1,0 +1,25 @@
+{
+  "id": "before-after-rows",
+  "name": "Before / after rows",
+  "category": "compare",
+  "definition": "Two parallel step rows with good and bad icons showing the old and new experience.",
+  "bestUse": "Showing a change in flow at a glance.",
+  "trigger": [
+    "before-after",
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/before-after-rows.html",
+    "kind": "animated",
+    "how": "The old and new flows sit in two aligned rows so the audience compares step by step. Play builds the old row and marks its pain points, then builds the shorter new row with what improved, and ends on the summary of steps and time saved. Data is illustrative."
+  },
+  "aliases": [
+    "before after",
+    "old vs new",
+    "comparison"
+  ]
+}

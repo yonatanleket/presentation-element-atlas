@@ -1,0 +1,23 @@
+{
+  "id": "annotated-wireframe",
+  "name": "Annotated wireframe",
+  "category": "product",
+  "definition": "Grey-box UI sketch with numbered callouts explaining each part.",
+  "bestUse": "Explaining an existing screen without showing the real UI.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/annotated-wireframe.html",
+    "kind": "animated",
+    "how": "A grey-box sketch stands in for the real screen, so attention goes to structure rather than styling. Each step drops a numbered marker on one region and adds the matching line to the legend, building the explanation part by part."
+  },
+  "aliases": [
+    "wireframe",
+    "mockup"
+  ]
+}

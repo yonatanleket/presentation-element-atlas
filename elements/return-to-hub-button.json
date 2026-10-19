@@ -1,0 +1,22 @@
+{
+  "id": "return-to-hub-button",
+  "name": "Return-to-hub button",
+  "category": "nav",
+  "definition": "Floating “Back to topics” control that appears after jumping from a hub slide.",
+  "bestUse": "Non-linear Q&A navigation.",
+  "trigger": [
+    "navigation-wayfinding"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/return-to-hub-button.html",
+    "kind": "interactive",
+    "how": "Pick a topic on the hub slide to jump to the slide that answers it. A floating Back to topics button appears only after such a jump and returns you to the hub. Navigating normally never shows it."
+  },
+  "related": [
+    "q-a-topic-hub"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "background-video-cinemagraph",
+  "name": "Background video / cinemagraph",
+  "category": "motion",
+  "definition": "Looping video or a partly moving photo behind text.",
+  "bestUse": "Atmosphere.",
+  "trigger": [
+    "visual-mood"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/background-video-cinemagraph.html",
+    "kind": "animated",
+    "how": "A CSS-drawn scene stands in for the looping clip: the sky, sun and shore stay still while only the water shimmer and clouds drift, which is what makes a cinemagraph calm. A scrim keeps the headline readable. Pause stops the loop; reduced motion shows a still frame."
+  },
+  "aliases": [
+    "video",
+    "background loop"
+  ]
+}

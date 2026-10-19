@@ -1,0 +1,33 @@
+{
+  "id": "fragment-builds",
+  "name": "Fragment builds",
+  "category": "text",
+  "definition": "Elements appear in steps (fade, grow, shrink, highlight or fade out), including bullets revealed one per click.",
+  "bestUse": "Pacing complex points.",
+  "trigger": [
+    "sequential-process",
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/fragment-builds.html",
+    "kind": "animated",
+    "how": "A fragment is one piece of a slide with its own build effect. Play runs five in turn on one slide: a point fades in, a second grows in, the first gets highlighted, a third shrinks into place, and the second fades out. A tag names each effect as it runs."
+  },
+  "aliases": [
+    "list click-reveal",
+    "click reveal",
+    "bullet reveal",
+    "builds",
+    "progressive disclosure",
+    "appear on click",
+    "animation steps"
+  ],
+  "related": [
+    "focus-dimming",
+    "clicks-slider"
+  ]
+}

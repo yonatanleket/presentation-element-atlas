@@ -1,0 +1,20 @@
+{
+  "id": "fade-out-empty-state",
+  "name": "Fade-out empty state",
+  "category": "motion",
+  "definition": "Content fades out in stages to show absence (e.g. people dropping out of a process).",
+  "bestUse": "Showing drop-off.",
+  "trigger": [
+    "user-experience-story",
+    "flow-between-stages"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/fade-out-empty-state.html",
+    "kind": "interactive",
+    "how": "Forty markers stand for forty sign-ups. Move the stage slider (or use its arrow keys) and the people who drop off at each stage fade to empty outlines instead of disappearing, so the absence stays visible and the remaining count is read against the original. Reset returns to sign-up."
+  }
+}

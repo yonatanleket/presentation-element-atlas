@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harvey balls: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+table{border-collapse:collapse;width:88%;font-size:.9em}th,td{padding:.35em .4em;text-align:center}th{font-weight:600}
+td:first-child,th:first-child{text-align:start}tr+tr td{border-block-start:1px solid var(--line)}
+.hb{width:1.5em;height:1.5em;vertical-align:middle}
+.lg{display:flex;gap:.8em;align-items:center;font-size:.75em;color:var(--muted);margin-top:.5em}.lg svg{width:1.1em;height:1.1em;vertical-align:middle}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Harvey balls</h1>
+<div class="stage" role="img" aria-label="Demo: Harvey balls">
+<div class="fill center"><div style="width:100%;display:grid;justify-items:center"><table id="tb"></table><div class="lg" id="lg"></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each circle fills in quarters to rate an option on one criterion, from empty to full. Play fills the matrix row by row; a legend explains the scale so the fills do not depend on color.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function ball(q){var s='<svg class="hb" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="var(--surface)" stroke="var(--fg)" stroke-width="1.5"/>';
+  if(q>=4)s+='<circle cx="10" cy="10" r="8.5" fill="var(--fg)"/>';else if(q>0){var a=q/4*2*Math.PI,x=10+8.5*Math.sin(a),y=10-8.5*Math.cos(a);s+='<path d="M10 10 L10 1.5 A8.5 8.5 0 '+(q>2?1:0)+' 1 '+x.toFixed(2)+' '+y.toFixed(2)+' Z" fill="var(--fg)"/>';}return s+'</svg>';}
+var C=['Speed','Cost','Risk'],O=[['Automate',[4,2,3]],['Delegate',[2,4,2]],['Batch',[3,3,1]]],NAMES=['none','low','medium','high','full'];
+lg.innerHTML=[0,1,2,3,4].map(function(q){return '<span>'+ball(q)+' '+NAMES[q]+'</span>';}).join('');
+AtlasDemo.init({frames:3,stepMs:800,render:function(f){tb.innerHTML='<tr><th>Option</th>'+C.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr>'+O.map(function(o,i){return '<tr><td>'+o[0]+'</td>'+o[1].map(function(q,j){var v=i<f?q:0;return '<td aria-label="'+C[j]+': '+(i<f?NAMES[q]:'not rated')+'">'+ball(v)+'</td>';}).join('')+'</tr>';}).join('');}});
+</script>
+</body>
+</html>

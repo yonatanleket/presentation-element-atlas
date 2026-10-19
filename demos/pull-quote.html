@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pull quote: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.qm{font:700 6em/0.6 var(--f-display);color:var(--accent);height:.45em}
+.qt{font:600 1.45em/1.25 var(--f-display);margin:0;max-width:17em}
+.qt mark{background:linear-gradient(transparent 60%,transparent 60%);color:inherit;transition:background .5s var(--ease-out)}
+.qt.hl mark{background:linear-gradient(transparent 58%,#fde7a8 58%)}
+.at{font-size:.9em;color:var(--muted)}.at b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Pull quote</h1>
+<div class="stage" role="img" aria-label="Demo: Pull quote. A large quotation mark, then a short quote in large type, then its attribution.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="justify-content:center;gap:.6em;padding-inline:2em">
+<div class="qm b fx" id="m" aria-hidden="true">“</div>
+<p class="qt b fx" id="q">I stopped exporting to spreadsheets <mark>the week the dashboard went live.</mark></p>
+<p class="at b fx" id="a"><b>Operations lead</b>, pilot team · interview, week 3</p></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A single quotation fills the slide in large type, set off by an oversized quotation mark, with the attribution underneath in small type. Play brings in the mark, the quote and then the attribution, and highlights the phrase that carries the point. The quote is invented.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:3,stepMs:1000,render:function(f){on($('m'),f>=1);on($('q'),f>=2);on($('a'),f>=3);$('q').classList.toggle('hl',f>=3);}});
+</script>
+</body>
+</html>

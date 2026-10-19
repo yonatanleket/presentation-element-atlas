@@ -1,0 +1,86 @@
+/* Presentation Element Atlas: shared demo harness styles.
+   Every demo links this file: <link rel="stylesheet" href="_harness.css">
+   Light theme only. No network requests (system font fallbacks). */
+:root{
+  color-scheme: light;
+  --bg:#f6f7f9; --surface:#ffffff; --stage:#eef0f4;
+  --fg:#1b1e24; --muted:#565c6b; --line:#d9dce2;
+  --accent:#2f4bd8; --accent-soft:#e8ecfd;
+  --adv:#9a4a0b; --adv-soft:#fbefe2;
+  --ok:#11734f;
+  --radius:10px; --radius-sm:8px;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  /* Extra demo tokens (light only) */
+  --ok-soft:#e3f3ec; --warn:#8a5a00; --warn-soft:#fdf3d8; --bad:#b42318; --bad-soft:#fde8e6;
+  --ink-2:#3a3f4b;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---------- Frame ---------- */
+.demo{max-width:600px;margin:0 auto;padding:16px;display:grid;gap:12px}
+.demo-title{font:600 16px/1.3 var(--f-body);margin:0}
+.embedded .demo-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media (max-width:400px){.demo{padding:12px}}
+
+/* ---------- Stage: 16:10, scaled 480x300 logical canvas (1em = 16 logical px) ---------- */
+.stage{position:relative;width:100%;max-width:544px;margin-inline:auto;aspect-ratio:16/10;
+  background:var(--stage);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;
+  container-type:inline-size;line-height:1.35}
+.stage>*{font-size:max(12px,3.3333cqi)} /* cqi resolves against .stage, so set it on children */
+.demo[data-state=loading] .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:pulse 1.2s infinite}
+@keyframes pulse{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* ---------- Controls ---------- */
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.controls button{min-height:44px;min-width:44px;padding:0 14px;font:500 14px var(--f-body);color:var(--fg);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);cursor:pointer}
+.controls button[data-role=play]{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+.controls button:disabled{opacity:.45;cursor:default}
+.controls .status{font:400 13px var(--f-mono);color:var(--muted);margin-inline-start:auto;min-height:1em}
+@media (hover:hover) and (pointer:fine){.controls button:not(:disabled):hover{border-color:var(--accent)}}
+@media (max-width:400px){.controls button{padding:0 10px}.controls .status{flex-basis:100%;margin:0}}
+
+/* ---------- How it works ---------- */
+.how{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px;font-size:14px}
+.how summary{font-weight:600;cursor:pointer;min-height:28px}
+.how p{margin:6px 0 0;color:var(--ink-2)}
+
+/* ---------- Stage building blocks (use em units; 1em = 16 logical px) ---------- */
+.fill{position:absolute;inset:0}
+.pad{padding:1.1em 1.3em}
+.col{display:flex;flex-direction:column;gap:.5em}
+.row{display:flex;align-items:center;gap:.5em}
+.center{display:grid;place-items:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:.5em}
+.kicker{font:500 .8em/1.2 var(--f-mono);color:var(--accent)}
+.h{font:700 1.35em/1.15 var(--f-display);margin:0}
+.p{margin:0;font-size:.95em;color:var(--ink-2)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+.big{font:700 3em/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pill{display:inline-block;font:500 .75em/1 var(--f-mono);padding:.35em .55em;border-radius:99em;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.adv{background:var(--adv-soft);color:var(--adv)}
+/* Corner label for invented data or simulated UI: required by the contribution rules */
+.label-illustrative{position:absolute;inset-block-start:.5em;inset-inline-end:.6em;z-index:5;font:500 .8em/1 var(--f-mono);
+  padding:.3em .5em;border-radius:.3em;background:rgba(255,255,255,.85);color:var(--muted);border:1px solid var(--line)}
+.sbtn{font:500 .85em/1 var(--f-body);min-height:max(28px,2.1em);padding:0 .8em;border-radius:.4em;border:1px solid var(--line);
+  background:var(--surface);color:var(--fg);cursor:pointer}
+.sbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.sbtn[aria-pressed=true],.sbtn[aria-current=true]{background:var(--fg);border-color:var(--fg);color:var(--surface)}
+.fx{transition:opacity .22s var(--ease-out),transform .22s var(--ease-out),background-color .22s var(--ease-out),width .4s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+.hide{opacity:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Mini deck: a slide with a top bar, used by navigation demos */
+.deck{position:absolute;inset:.9em;background:var(--surface);border:1px solid var(--line);border-radius:.5em;display:flex;flex-direction:column;overflow:hidden}
+.deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
+.deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
+.deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}

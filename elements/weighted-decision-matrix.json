@@ -1,0 +1,24 @@
+{
+  "id": "weighted-decision-matrix",
+  "name": "Weighted decision matrix",
+  "category": "compare",
+  "definition": "Scored criteria with weights and totals.",
+  "bestUse": "Defensible choices.",
+  "trigger": [
+    "options-comparison",
+    "decision-tradeoff"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/weighted-decision-matrix.html",
+    "kind": "animated",
+    "how": "Each criterion gets a weight, each option a 1–5 score, and the total is the sum of score times weight. Play reveals the weights, then the scores, counts up the weighted totals and highlights the winner, which makes the choice auditable. Scores are illustrative."
+  },
+  "aliases": [
+    "scoring matrix",
+    "decision matrix"
+  ]
+}

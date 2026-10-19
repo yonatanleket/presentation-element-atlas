@@ -1,0 +1,24 @@
+{
+  "id": "paired-grouped-bar",
+  "name": "Paired / grouped bar",
+  "category": "chart",
+  "definition": "Side-by-side bars per category.",
+  "bestUse": "Magnitude comparison.",
+  "trigger": [
+    "options-comparison"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/paired-grouped-bar.html",
+    "kind": "animated",
+    "how": "Each region gets a pair of bars on one zero-based axis: last year in grey, this year in blue. Pairs make the within-region change easy to judge while keeping regions comparable; South is the one decline. Values are illustrative."
+  },
+  "aliases": [
+    "bar chart",
+    "clustered bar",
+    "column chart"
+  ]
+}

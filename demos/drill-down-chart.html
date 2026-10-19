@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drill-down chart: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-rows:auto 1fr auto;gap:.4em}
+.crumb{display:flex;align-items:center;gap:.3em;font-size:.85em;min-height:max(28px,2.1em)}
+.crumb button{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline;padding:.2em}
+.crumb button:focus-visible{outline:2px solid var(--accent)}
+.ch{display:flex;align-items:flex-end;gap:.6em;border-bottom:1px solid var(--line);padding:0 .3em}
+.br{all:unset;box-sizing:border-box;flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.2em;cursor:pointer}
+.br i{width:100%;background:var(--accent);border-radius:.25em .25em 0 0;transition:height .45s var(--ease-out)}
+.br:disabled{cursor:default}.br:disabled i{background:#8fa0ea}
+.br:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.br:not(:disabled):hover i{background:#2338a8}}
+.br .v{font:600 .8em var(--f-mono)}
+.lab{display:flex;gap:.6em;padding:0 .3em}.lab span{flex:1;text-align:center;font-size:.8em;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Drill-down chart</h1>
+<div class="stage" role="group" aria-label="Demo: Drill-down chart. A bar chart of revenue by region; selecting a bar opens that region broken down by product, with a breadcrumb back.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="crumb" id="crumb"></div>
+  <div class="ch" id="ch"></div>
+  <div class="lab" id="lab" aria-hidden="true"></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The top level shows revenue by region. Select a bar (click, or Tab then Enter) to drill into that region’s products; the bars re-grow for the new level and a breadcrumb shows where you are. All regions, or Back, climbs up again. Reset returns to the top level.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var TOP=[['North',4.2],['South',3.1],['East',5.6],['West',2.4]];
+var SUB={North:[['Core',2.1],['Add-ons',1.2],['Services',.9]],South:[['Core',1.9],['Add-ons',.6],['Services',.6]],East:[['Core',2.8],['Add-ons',1.9],['Services',.9]],West:[['Core',1.5],['Add-ons',.5],['Services',.4]]};
+var lvl=null,api;
+function draw(focusFirst){var d=lvl?SUB[lvl]:TOP,mx=lvl?3:6;
+  $('crumb').innerHTML=lvl?'<button type="button" id="up">All regions</button><span aria-hidden="true">›</span><b>'+lvl+'</b><span class="muted">· revenue by product, $M</span>':'<b>All regions</b><span class="muted">· revenue, $M (select a bar)</span>';
+  $('ch').innerHTML=d.map(function(x){return '<button class="br" type="button"'+(lvl?' disabled':'')+' aria-label="'+x[0]+': $'+x[1]+'M'+(lvl?'':', open breakdown')+'"><span class="v">'+x[1].toFixed(1)+'</span><i style="height:0"></i></button>';}).join('');
+  $('lab').innerHTML=d.map(function(x){return '<span>'+x[0]+'</span>';}).join('');
+  var bs=$('ch').children;void $('ch').offsetWidth;
+  for(var i=0;i<bs.length;i++){bs[i].querySelector('i').style.height=Math.round(d[i][1]/mx*85)+'%';
+    if(!lvl)(function(r){bs[i].addEventListener('click',function(){lvl=r;draw(true);api.status('Drilled into '+r);});})(d[i][0]);}
+  var up=$('up');if(up){up.addEventListener('click',function(){var was=lvl;lvl=null;draw();var k=TOP.map(function(x){return x[0];}).indexOf(was);$('ch').children[k].focus();api.status('Back to all regions');});if(focusFirst)up.focus();}}
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){lvl=null;draw();}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "id": "skip-link-and-slide-announcer",
+  "name": "Skip link and slide announcer",
+  "category": "nav",
+  "definition": "Keyboard skip link plus a screen-reader live region announcing “Slide N of M: title”.",
+  "bestUse": "Accessible web decks.",
+  "trigger": [
+    "accessibility",
+    "navigation-wayfinding"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/skip-link-and-slide-announcer.html",
+    "kind": "interactive",
+    "how": "Tab into the stage to reveal the skip link, which jumps focus past the deck controls to the slide content. Changing slides writes “Slide N of M: title” into a polite live region, shown here as a visible caption so you can see what a screen reader hears."
+  }
+}

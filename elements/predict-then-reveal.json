@@ -1,0 +1,20 @@
+{
+  "id": "predict-then-reveal",
+  "name": "Predict-then-reveal",
+  "category": "explore",
+  "definition": "The viewer guesses (e.g. draws a line) before the real data appears.",
+  "bestUse": "Challenging assumptions.",
+  "trigger": [
+    "audience-input",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "explor"
+  ],
+  "demo": {
+    "file": "demos/predict-then-reveal.html",
+    "kind": "interactive",
+    "how": "The chart shows 2019–2022 and hides the rest. Drag the four dashed handles, or focus one and use the up and down arrows, to draw your prediction; Reveal then draws the actual line and reports how far off the guess was on average. Committing first makes the surprise stick. Reset tries again."
+  }
+}

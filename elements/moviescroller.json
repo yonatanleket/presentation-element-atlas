@@ -1,0 +1,20 @@
+{
+  "id": "moviescroller",
+  "name": "Moviescroller",
+  "category": "motion",
+  "definition": "Scrolling or stepping scrubs through video frames.",
+  "bestUse": "3D or product reveals.",
+  "trigger": [
+    "product-ui",
+    "visual-mood"
+  ],
+  "level": "advanced",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/moviescroller.html",
+    "kind": "interactive",
+    "how": "The device is drawn as a sequence of 36 frames, the way a moviescroller steps through video frames. Drag the slider, scroll over the picture, or focus the picture and use the arrow keys to scrub; captions change as the front, edge and back come round. Reset returns to frame 1."
+  }
+}

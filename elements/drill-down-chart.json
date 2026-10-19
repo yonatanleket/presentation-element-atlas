@@ -1,0 +1,24 @@
+{
+  "id": "drill-down-chart",
+  "name": "Drill-down chart",
+  "category": "explore",
+  "definition": "Click a mark to open its breakdown.",
+  "bestUse": "Hierarchical data.",
+  "trigger": [
+    "hierarchy",
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/drill-down-chart.html",
+    "kind": "interactive",
+    "how": "The top level shows revenue by region. Select a bar (click, or Tab then Enter) to drill into that region’s products; the bars re-grow for the new level and a breadcrumb shows where you are. All regions, or Back, climbs up again. Reset returns to the top level."
+  },
+  "aliases": [
+    "drill down",
+    "breakdown"
+  ]
+}

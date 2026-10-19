@@ -1,0 +1,25 @@
+{
+  "id": "overview-grid-mode",
+  "name": "Overview / grid mode",
+  "category": "nav",
+  "definition": "Zoomed-out grid of all slides for jumping.",
+  "bestUse": "Rehearsal, and jumping back during Q&A.",
+  "trigger": [
+    "navigation-wayfinding",
+    "presenter-delivery"
+  ],
+  "level": "standard",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/overview-grid-mode.html",
+    "kind": "animated",
+    "how": "Play zooms out from the current slide into a grid of all slides, highlights the target, then zooms back into it. The grid keeps slides in order, so jumping during Q&A takes one glance and one click."
+  },
+  "aliases": [
+    "slide sorter",
+    "thumbnails",
+    "overview"
+  ]
+}

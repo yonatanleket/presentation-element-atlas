@@ -1,0 +1,20 @@
+{
+  "id": "click-to-open-node-details",
+  "name": "Click-to-open node details",
+  "category": "explore",
+  "definition": "Diagram nodes that expand into details when selected.",
+  "bestUse": "Depth on demand.",
+  "trigger": [
+    "dense-detail",
+    "system-architecture"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/click-to-open-node-details.html",
+    "kind": "interactive",
+    "how": "The diagram stays simple until someone asks. Select a node (click, or Tab then Enter) and a detail card opens beside it with the owner, uptime target and what it depends on; the edges to its dependencies highlight. Escape or Close dismisses it and Reset clears the selection."
+  }
+}

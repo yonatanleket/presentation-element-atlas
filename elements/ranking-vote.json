@@ -1,0 +1,26 @@
+{
+  "id": "ranking-vote",
+  "name": "Ranking vote",
+  "category": "audience",
+  "definition": "The audience orders options.",
+  "bestUse": "Prioritization.",
+  "trigger": [
+    "audience-input",
+    "prioritization"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/ranking-vote.html",
+    "kind": "interactive",
+    "how": "Simulated rankings arrive over about three seconds and the room order updates by points: first place earns 4, last earns 1. Reorder your own list with the up and down buttons, then press Submit to add your ranking to the room totals. Reset clears your vote."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

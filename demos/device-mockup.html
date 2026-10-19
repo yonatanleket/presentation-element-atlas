@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Device mockup: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.lap{position:absolute;inset-inline-start:2em;top:2.2em;width:17em;opacity:0;transform:translateY(.8em)}
+.lap .scr{height:10.4em;background:#1f2330;border-radius:.6em .6em 0 0;padding:.5em}
+.lap .in{height:100%;background:var(--surface);border-radius:.2em;display:grid;grid-template-columns:3em 1fr;overflow:hidden}
+.lap .side{background:var(--accent-soft)}
+.lap .main{padding:.5em;display:grid;gap:.35em;align-content:start}
+.lap .base{height:.7em;background:#c9ccd3;border-radius:0 0 .6em .6em;margin-inline:-1.2em}
+.kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.3em}.kpis i{height:2em;border:1px solid var(--line);border-radius:.25em}
+.ch{height:3.6em;border-radius:.25em;background:linear-gradient(to top,var(--accent-soft) 0 40%,transparent 40%),linear-gradient(90deg,transparent 0 30%,var(--accent-soft) 30% 31%,transparent 31%)}
+.ph{position:absolute;inset-inline-end:3em;top:3.4em;width:6.6em;height:13.2em;background:#1f2330;border-radius:1.1em;padding:.45em;opacity:0;transform:translateX(2em)}
+.ph .in{height:100%;background:var(--surface);border-radius:.75em;padding:1.1em .45em .45em;position:relative;display:grid;gap:.35em;align-content:start;overflow:hidden}
+.ph .notch{position:absolute;top:.35em;left:50%;width:2.2em;height:.45em;background:#1f2330;border-radius:99em;transform:translateX(-50%)}
+.ph .bar{height:.55em;border-radius:.2em;background:var(--line)}.ph .big2{height:3em;border-radius:.3em;background:var(--accent-soft)}
+.toast{position:absolute;inset-inline:.35em;top:1.1em;background:var(--fg);color:#fff;border-radius:.4em;padding:.35em .4em;font-size:.8em;line-height:1.2;opacity:0;transform:translateY(-.6em)}
+.on{opacity:1!important;transform:none!important}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Device mockup</h1>
+<div class="stage" role="img" aria-label="Demo: Device mockup. A laptop frame appears with a dashboard screen, then a phone frame slides in front and shows a notification.">
+<span class="label-illustrative">Simulated UI</span>
+<div class="lap fx" id="lap" aria-hidden="true"><div class="scr"><div class="in"><div class="side"></div><div class="main"><div class="kpis"><i></i><i></i><i></i></div><div class="ch"></div></div></div></div><div class="base"></div></div>
+<div class="ph fx" id="ph" aria-hidden="true"><div class="in"><span class="notch"></span><div class="bar" style="width:70%"></div><div class="big2"></div><div class="bar"></div><div class="bar" style="width:55%"></div><div class="toast fx" id="toast">Order shipped · arrives Thu</div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A mock screen is placed inside drawn device frames so it reads as a real product. The laptop appears first with the desktop view, then the phone slides in front with the mobile view, and a notification lands to show the moment the product is about.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+AtlasDemo.init({frames:3,stepMs:1100,render:function(f){$('lap').classList.toggle('on',f>=1);$('ph').classList.toggle('on',f>=2);$('toast').classList.toggle('on',f>=3);}});
+})();
+</script>
+</body>
+</html>

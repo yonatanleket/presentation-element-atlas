@@ -1,0 +1,23 @@
+{
+  "id": "venn-diagram",
+  "name": "Venn diagram",
+  "category": "diagram",
+  "definition": "Overlapping sets.",
+  "bestUse": "Intersections and positioning.",
+  "trigger": [
+    "relationships"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/venn-diagram.html",
+    "kind": "animated",
+    "how": "Each circle is a set and the overlaps show what two or three sets share. Play draws design, engineering and research one at a time, then names the pairwise overlaps and the centre where all three meet. Labels are illustrative."
+  },
+  "aliases": [
+    "overlap",
+    "intersection"
+  ]
+}

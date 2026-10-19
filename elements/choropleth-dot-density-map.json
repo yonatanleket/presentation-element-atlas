@@ -1,0 +1,24 @@
+{
+  "id": "choropleth-dot-density-map",
+  "name": "Choropleth / dot-density map",
+  "category": "chart",
+  "definition": "Regions shaded by value, or dots per unit.",
+  "bestUse": "Spatial data.",
+  "trigger": [
+    "spatial-data"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/choropleth-dot-density-map.html",
+    "kind": "animated",
+    "how": "Fifteen tile regions fill with a four-step color scale keyed in the legend, then the same values switch to dots (one dot per four customers per 1,000 residents), so you can compare a shaded and a counted reading. Regions and values are illustrative."
+  },
+  "aliases": [
+    "map",
+    "geo",
+    "heatmap map"
+  ]
+}

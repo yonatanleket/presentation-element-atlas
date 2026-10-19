@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section divider: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sl{position:absolute;inset:0;opacity:0;transition:opacity .35s var(--ease-out)}.sl.on{opacity:1}
+.dv{background:var(--fg);color:var(--surface);display:flex;flex-direction:column;justify-content:center;padding:1.2em 1.6em;gap:.3em}
+.dv .num{font:700 3.4em/1 var(--f-display);color:#9fb0ff}.dv .nm{font:700 1.7em/1.1 var(--f-display)}
+.trk{display:flex;gap:.6em;margin-top:.8em;font:500 .8em var(--f-mono);color:#aeb3c0}.trk span{padding-top:.35em;border-top:.15em solid #4a4f5c}
+.trk span.cur{color:#fff;border-color:#9fb0ff}.trk span.past{color:#d5d8df;border-color:#d5d8df}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Section divider</h1>
+<div class="stage" role="img" aria-label="Demo: Section divider. A content slide gives way to a full divider slide marking chapter two of four, then the first slide of that chapter.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="padding:0">
+<div class="sl pad col" id="s0"><p class="kicker">01 · Context</p><p class="h">Releases now take nine days end to end</p><p class="p">Most of the wait sits between “ready” and “approved”.</p></div>
+<div class="sl dv" id="s1"><span class="num">02</span><span class="nm">Options</span><div class="trk"><span class="past">01 Context</span><span class="cur">02 Options</span><span>03 Plan</span><span>04 Ask</span></div></div>
+<div class="sl pad col" id="s2"><p class="kicker">02 · Options</p><p class="h">Three ways to shorten the wait</p><p class="p">Automate checks, delegate approval, or batch releases.</p></div>
+</div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A divider is a full slide that marks a chapter break: a large number, the chapter name and a small tracker of all chapters with the new one highlighted. Play moves from the last slide of chapter one to the divider, then into the first slide of chapter two.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:2,stepMs:1500,render:function(f){[0,1,2].forEach(function(i){on($('s'+i),i===f);});}});
+</script>
+</body>
+</html>

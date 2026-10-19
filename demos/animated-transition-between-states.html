@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animated transition between states: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:2.1em .9em .9em;display:grid;grid-template-rows:auto 1fr;gap:.6em}
+.hd{display:flex;align-items:center;gap:.5em}.hd .h{font-size:1.05em;flex:1}
+.ch{display:grid;grid-template-columns:repeat(5,1fr);gap:.7em;align-items:end;border-bottom:1px solid var(--line);padding:0 .4em}
+.b{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:.2em}
+.b i{width:100%;background:var(--accent);border-radius:.25em .25em 0 0;transition:height .6s var(--ease-out)}
+.b .v{font:600 .85em var(--f-mono)}.lab{display:grid;grid-template-columns:repeat(5,1fr);gap:.7em;padding:0 .4em;font-size:.8em;color:var(--muted);text-align:center;margin-top:-.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Animated transition between states</h1>
+<div class="stage" role="group" aria-label="Demo: Animated transition between states. A bar chart with three year buttons; choosing a year morphs the bars and counts the values to the new state.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="hd"><p class="h">Support tickets by channel</p><div class="row" role="group" aria-label="Year" id="yrs" style="gap:.3em"><button class="sbtn" type="button">2024</button><button class="sbtn" type="button">2025</button><button class="sbtn" type="button">2026</button></div></div>
+  <div><div class="ch" id="ch" style="height:9.6em"></div><div class="lab"><span>Email</span><span>Chat</span><span>Phone</span><span>Forum</span><span>In-app</span></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Choose a year (buttons or arrow keys). The same five bars grow or shrink to the new values and the labels count to their new numbers, so the eye tracks each category through the change instead of comparing two separate charts. Reset returns to 2024.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var D=[[420,310,260,90,40],[360,380,180,110,150],[240,410,120,100,330]],MX=440,cur=-1,api,yb=$('yrs').querySelectorAll('button');
+$('ch').innerHTML=D[0].map(function(){return '<div class="b"><span class="v">0</span><i style="height:0"></i></div>';}).join('');
+var bs=$('ch').children;
+function set(y,animate){var prev=cur<0?null:D[cur];cur=y;
+  for(var i=0;i<5;i++){bs[i].querySelector('i').style.height=Math.round(D[y][i]/MX*82)+'%';AtlasDemo.countUp(bs[i].querySelector('.v'),D[y][i],{animate:animate,from:prev?prev[i]:0,duration:600});}
+  yb.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===y));});}
+yb.forEach(function(b,i){b.addEventListener('click',function(){set(i,true);api.status('Showing '+b.textContent+': in-app '+D[i][4]+', email '+D[i][0]);});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;if(isRtl())d=-d;e.preventDefault();var n=(i+d+3)%3;yb[n].focus();yb[n].click();});});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){cur=-1;set(0,false);}});
+})();
+</script>
+</body>
+</html>

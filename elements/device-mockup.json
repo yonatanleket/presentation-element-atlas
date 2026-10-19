@@ -1,0 +1,23 @@
+{
+  "id": "device-mockup",
+  "name": "Device mockup",
+  "category": "product",
+  "definition": "Screen placed inside a phone or laptop frame.",
+  "bestUse": "Product launches.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/device-mockup.html",
+    "kind": "animated",
+    "how": "A mock screen is placed inside drawn device frames so it reads as a real product. The laptop appears first with the desktop view, then the phone slides in front with the mobile view, and a notification lands to show the moment the product is about."
+  },
+  "aliases": [
+    "phone mockup",
+    "laptop frame"
+  ]
+}

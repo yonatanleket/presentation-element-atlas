@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kicker + action title + lede: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.lay{display:flex;align-items:baseline;gap:.5em}.lay>:first-child{flex:1}
+.tag{font:500 .8em/1 var(--f-mono);color:var(--adv);white-space:nowrap}
+.mini{display:flex;align-items:flex-end;gap:.4em;height:3.6em;margin-top:.3em}
+.mini span{width:2.2em;background:var(--line);border-radius:.2em .2em 0 0}.mini span.hi{background:var(--accent)}
+.mini em{font:500 .8em var(--f-mono);color:var(--muted);font-style:normal;align-self:center}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Kicker + action title + lede</h1>
+<div class="stage" role="img" aria-label="Demo: Kicker + action title + lede. A slide builds a small chapter label, then a full-sentence takeaway title, then a one-line lede and a chart.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.4em">
+<div class="lay b fx" id="k"><p class="kicker" style="margin:0">Onboarding · Q2</p><span class="tag">← kicker</span></div>
+<div class="lay b fx" id="t"><p class="h" style="font-size:1.25em">New teams now reach first value in 3 days, down from 8</p><span class="tag">← action title</span></div>
+<div class="lay b fx" id="l"><p class="p">Guided setup removed the two steps where most teams stalled.</p><span class="tag">← lede</span></div>
+<div class="mini b fx" id="c"><span style="height:100%"></span><span style="height:88%"></span><span style="height:62%"></span><span class="hi" style="height:38%"></span><em>days to first value, Jan → Apr</em></div>
+</div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The kicker names the chapter in small type, the title states the takeaway as a full sentence, and the lede adds one supporting line. Play builds the three layers in that order, with margin tags naming each, then adds the chart that proves the title.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:4,stepMs:900,render:function(f){on($('k'),f>=1);on($('t'),f>=2);on($('l'),f>=3);on($('c'),f>=4);}});
+</script>
+</body>
+</html>

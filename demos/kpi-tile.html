@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPI tile: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.tile{width:60%;padding:1.2em 1.4em;display:grid;gap:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">KPI tile</h1>
+<div class="stage" role="img" aria-label="Demo: KPI tile">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill center"><div class="tile card"><span class="muted">Weekly active teams</span><span class="big" id="v">0</span><span class="mono muted" style="font-size:.8em">Week 24</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A single tile shows one number and its label. Play counts the number up from zero and settles on the final value; nothing else competes with it, which is the point of the tile. The value is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+AtlasDemo.init({frames:1,stepMs:400,render:function(f,ctx){AtlasDemo.countUp(v,f?1248:0,{animate:ctx.animate,duration:1100});}});
+</script>
+</body>
+</html>

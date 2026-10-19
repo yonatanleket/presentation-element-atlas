@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What-if calculator: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:2em .9em .9em;display:grid;grid-template-columns:11.4em 1fr;gap:.9em}
+.in{display:grid;gap:.3em;align-content:start}
+.in label{display:flex;justify-content:space-between;font-size:.85em}.in output{font:600 1em var(--f-mono)}
+.in input[type=range]{width:100%;accent-color:var(--accent);min-height:28px}
+.in input[type=number]{width:5em;font:inherit;font-size:.9em;border:1px solid var(--line);border-radius:.35em;padding:.15em .35em;min-height:max(28px,1.9em)}
+.out{display:grid;gap:.45em;align-content:start}
+.net{padding:.6em .8em}.net b{display:block;font:700 2.1em/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cmp{display:grid;grid-template-columns:4.6em 1fr 5em;gap:.3em .5em;align-items:center;font-size:.85em}
+.cmp i{height:.8em;border-radius:.2em;transition:width .2s}.cmp span:last-child{text-align:end;font-family:var(--f-mono)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">What-if calculator</h1>
+<div class="stage" role="group" aria-label="Demo: What-if calculator. A savings calculator: team size, hours saved and hourly cost inputs produce annual savings, tool cost, net value and payback.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="in">
+    <label for="ppl">People <input type="number" id="ppl" min="1" max="500"></label>
+    <label for="hrs">Hours saved / week <output id="ho"></output></label><input type="range" id="hrs" min="0.5" max="6" step="0.5">
+    <label for="rate">Hourly cost <output id="ro"></output></label><input type="range" id="rate" min="30" max="150" step="5">
+  </div>
+  <div class="out">
+    <div class="net card"><span class="muted" style="font-size:.8em">Net value per year</span><b id="net"></b><span class="muted" style="font-size:.8em" id="pb"></span></div>
+    <div class="cmp"><span>Savings</span><i id="bs" style="background:var(--ok)"></i><span id="sv"></span><span>Tool cost</span><i id="bc" style="background:var(--bad)"></i><span id="cv"></span></div>
+  </div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Adjust team size, hours saved per person each week and hourly cost; the estimate updates as you type or slide. Savings = people × hours × 46 working weeks × hourly cost. Cost = people × $25 × 12 months. Payback = cost ÷ weekly savings. All figures are illustrative; Reset restores the defaults.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var api,ppl=$('ppl'),hrs=$('hrs'),rate=$('rate');
+function m(n){var s=Math.abs(n)>=1e6?(Math.abs(n)/1e6).toFixed(2)+'M':Math.round(Math.abs(n)).toLocaleString('en-US');return (n<0?'−$':'$')+s;}
+function upd(announce){var p=Math.max(1,Math.min(500,Math.round(+ppl.value)||1)),h=+hrs.value,r=+rate.value;
+  var sav=p*h*46*r,cost=p*25*12,net=sav-cost,wk=sav/46;
+  $('ho').textContent=h+' h';$('ro').textContent='$'+r;$('net').textContent=m(net);$('net').style.color=net<0?'var(--bad)':'';
+  $('pb').textContent=wk>0?'Pays back in '+Math.max(1,Math.ceil(cost/wk))+' weeks':'';
+  var mx=Math.max(sav,cost);$('bs').style.width=(sav/mx*100)+'%';$('bc').style.width=(cost/mx*100)+'%';$('sv').textContent=m(sav);$('cv').textContent=m(cost);
+  hrs.setAttribute('aria-valuetext',h+' hours');rate.setAttribute('aria-valuetext',r+' dollars per hour');
+  if(announce)api.status('Net '+m(net)+' per year, '+$('pb').textContent.toLowerCase());}
+[ppl,hrs,rate].forEach(function(e){e.addEventListener('input',function(){upd(true);});});
+ppl.addEventListener('change',function(){ppl.value=Math.max(1,Math.min(500,Math.round(+ppl.value)||1));upd(true);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){ppl.value=40;hrs.value=1.5;rate.value=60;upd(false);}});
+})();
+</script>
+</body>
+</html>

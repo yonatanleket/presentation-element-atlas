@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code with stepped line highlight: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.code{position:absolute;inset-inline:.9em;top:.9em;bottom:3.6em;background:#1f2330;border-radius:.5em;padding:.6em 0;overflow:hidden}
+.l{display:grid;grid-template-columns:2.2em 1fr;font:.8em/1.6 var(--f-mono);color:#e6e8ef;white-space:pre;transition:opacity .3s var(--ease-out),background-color .3s var(--ease-out)}
+.l .no{color:#8d93a6;text-align:end;padding-inline-end:.9em}
+.code.focus .l{opacity:.32}.code.focus .l.on{opacity:1;background:rgba(122,140,255,.22)}
+.kw{color:#b9c4ff}
+.cap{position:absolute;inset-inline:.9em;bottom:.8em;display:flex;align-items:center;gap:.6em}
+.cap .pill{flex:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Code with stepped line highlight</h1>
+<div class="stage" role="img" aria-label="Demo: Code with stepped line highlight. A nine-line function; each step highlights the next group of lines and dims the rest while a note explains them.">
+<span class="label-illustrative">Illustrative</span>
+<div class="code" id="code" aria-hidden="true"></div>
+<div class="cap"><span class="pill" id="pill">Lines 1–9</span><span class="p" id="cap">Load a report, using the cache when possible.</span></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The whole function stays on screen while each step highlights the next group of lines and dims the rest. A one-line note names what those lines do, so the audience follows the logic in order without the presenter pointing at the screen.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var L=['async function loadReport(id) {','  const hit = cache.get(id);','  if (hit) return hit;','  const res = await api.get("reports", id);','  if (!res.ok) throw new Error(res.status);','  const report = parse(res.body);','  cache.set(id, report);','  return report;','}'];
+var S=[null,[2,3,'Check the cache first and return early.'],[4,5,'Fetch, and fail loudly on a bad response.'],[6,7,'Parse once, then store it for next time.'],[8,8,'Both paths return the same shape.']];
+var code=$('code');
+code.innerHTML=L.map(function(t,i){return '<div class="l"><span class="no">'+(i+1)+'</span><span>'+t.replace(/\b(async|function|const|if|return|await|throw|new)\b/g,'<span class="kw">$1</span>')+'</span></div>';}).join('');
+var rows=code.children;
+AtlasDemo.init({frames:4,stepMs:1500,render:function(f){var s=S[f];code.classList.toggle('focus',!!s);
+  for(var i=0;i<rows.length;i++)rows[i].classList.toggle('on',!!s&&i+1>=s[0]&&i+1<=s[1]);
+  $('pill').textContent=s?(s[0]===s[1]?'Line '+s[0]:'Lines '+s[0]+'–'+s[1]):'Lines 1–9';
+  $('cap').textContent=s?s[2]:'Load a report, using the cache when possible.';}});
+})();
+</script>
+</body>
+</html>

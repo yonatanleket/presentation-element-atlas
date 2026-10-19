@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fan chart (uncertainty band): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Fan chart (uncertainty band)</h1>
+<div class="stage" role="group" aria-label="Demo: Fan chart (uncertainty band). Units sold from 2019 to 2025 with a forecast to 2030 whose 50, 80 and 95 percent bands widen each year; buttons choose the widest band shown.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="ch" id="ch" viewBox="0 0 480 300"></svg><div class="sctl" role="group" aria-label="Confidence band"><button class="sbtn" type="button" data-c="0" aria-pressed="false">50%</button><button class="sbtn" type="button" data-c="1" aria-pressed="true">80%</button><button class="sbtn" type="button" data-c="2" aria-pressed="false">95%</button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>History is a solid line; the forecast is dashed, with nested bands that widen each year because uncertainty compounds. Choose 50%, 80% or 95% to show how wide a range you need for that confidence; Tab to a forecast point for its range. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var svg = document.getElementById('ch'), tip = Tip(svg);
+    var H = [30, 28, 33, 36, 39, 41, 44], FC = [46.5, 49, 51.5, 54, 56.5], Z = [0.674, 1.282, 1.96], LV = ['50%', '80%', '95%'];
+    title(svg, 'The forecast widens with time', 'Units sold, thousands');
+    var x = lin(2019, 2030, 60, 418), y = lin(20, 80, 262, 72);
+    yAxis(svg, y, [20, 40, 60, 80], 52, 424);
+    [2019, 2021, 2023, 2025, 2027, 2030].forEach(function (t) { S('text', { x: x(t), y: 280, 'text-anchor': 'middle', 'class': 'ax' }, svg, t); });
+    var band = function (z) { var up = [[2025, 44]], dn = [[2025, 44]]; FC.forEach(function (v, h) { var s = 1.5 * (h + 1) * z; up.push([2026 + h, v + s]); dn.push([2026 + h, v - s]); }); return 'M' + up.map(function (p) { return x(p[0]) + ',' + y(p[1]); }).join('L') + 'L' + dn.reverse().map(function (p) { return x(p[0]) + ',' + y(p[1]); }).join('L') + 'Z'; };
+    var bands = [2, 1, 0].map(function (c) {
+      var g = S('g', { 'class': 'fade' }, svg);
+      S('path', { d: band(Z[c]), fill: 'var(--accent)', 'fill-opacity': [.45, .28, .16][c] }, g);
+      S('text', { x: x(2030) + 6, y: y(56.5 + 1.5 * 5 * Z[c]) + 4.5, 'class': 'ax' }, g, LV[c]);
+      g.dataset.c = c; return g;
+    });
+    S('line', { x1: x(2025), x2: x(2025), y1: 72, y2: 262, stroke: 'var(--muted)', 'stroke-dasharray': '3 4' }, svg);
+    S('text', { x: x(2025) + 6, y: 86, 'class': 'ax' }, svg, 'forecast →');
+    S('path', { d: 'M' + H.map(function (v, i) { return x(2019 + i) + ',' + y(v); }).join('L'), fill: 'none', stroke: 'var(--fg)', 'stroke-width': 2.5 }, svg);
+    S('path', { d: 'M' + x(2025) + ',' + y(44) + FC.map(function (v, i) { return 'L' + x(2026 + i) + ',' + y(v); }).join(''), fill: 'none', stroke: 'var(--fg)', 'stroke-width': 2.5, 'stroke-dasharray': '6 4' }, svg);
+    var c = 1, api, btns = document.querySelectorAll('[data-c]');
+    var pts = FC.map(function (v, h) {
+      var p = S('circle', { cx: x(2026 + h), cy: y(v), r: 5, fill: '#fff', stroke: 'var(--fg)', 'stroke-width': 2, tabindex: 0, role: 'img' }, svg);
+      var txt = function () { var s = 1.5 * (h + 1) * Z[c]; return (2026 + h) + ': ' + v + 'k (' + LV[c] + ' range ' + (v - s).toFixed(0) + '–' + (v + s).toFixed(0) + 'k)'; };
+      var sh = function () { var s = txt(); tip.show(x(2026 + h), y(v) - 4, s); api.status(s); };
+      p.addEventListener('focus', sh); p.addEventListener('mouseenter', sh); p.addEventListener('blur', tip.hide); p.addEventListener('mouseleave', tip.hide);
+      p.txt = txt; return p;
+    });
+    function apply() {
+      bands.forEach(function (g) { on(g, +g.dataset.c <= c); });
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.c === c)); });
+      pts.forEach(function (p) { p.setAttribute('aria-label', p.txt()); });
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { c = +b.dataset.c; apply(); tip.hide(); var s = 1.5 * 5 * Z[c]; api.status(LV[c] + ' band: 2030 between ' + (56.5 - s).toFixed(0) + 'k and ' + (56.5 + s).toFixed(0) + 'k'); }); });
+    api = AtlasDemo.init({ frames: 0, interactive: true, idleText: 'Choose a band, or Tab to a forecast point', reset: function () { c = 1; apply(); tip.hide(); } });
+  })();
+</script>
+</body>
+</html>

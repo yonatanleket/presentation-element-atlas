@@ -1,0 +1,23 @@
+{
+  "id": "not-to-scale-note",
+  "name": "“Not to scale” note",
+  "category": "trust",
+  "definition": "Caption warning that a visual is illustrative.",
+  "bestUse": "Schematic charts.",
+  "trigger": [
+    "claim-needing-evidence"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/not-to-scale-note.html",
+    "kind": "animated",
+    "how": "Market-size circles are drawn schematically so all three labels fit, then a “Not to scale” note appears beside them. A small inset shows the true proportions, where the obtainable market is barely a dot, which is exactly why the note matters. Values are illustrative."
+  },
+  "aliases": [
+    "disclaimer",
+    "schematic"
+  ]
+}

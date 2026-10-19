@@ -1,0 +1,20 @@
+{
+  "id": "slidedoc-page",
+  "name": "Slidedoc page",
+  "category": "story",
+  "definition": "Dense, readable slide meant to be read rather than projected; one idea per page.",
+  "bestUse": "Leave-behinds and pre-reads.",
+  "trigger": [
+    "dense-detail",
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "duarte"
+  ],
+  "demo": {
+    "file": "demos/slidedoc-page.html",
+    "kind": "animated",
+    "how": "A slidedoc page is written to be read, not projected: a full-sentence title, short paragraphs, a captioned chart and a source note, all on one idea. Play numbers the reading path one part at a time, from title to body to chart to footnote."
+  }
+}

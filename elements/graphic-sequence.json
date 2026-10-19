@@ -1,0 +1,19 @@
+{
+  "id": "graphic-sequence",
+  "name": "Graphic sequence",
+  "category": "motion",
+  "definition": "A fixed visual is swapped for a new one at each step while text changes.",
+  "bestUse": "Step explanations.",
+  "trigger": [
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/graphic-sequence.html",
+    "kind": "animated",
+    "how": "The frame and layout never move; only the picture inside the panel and the text beside it are swapped at each step. Because the eye always returns to the same spot, each new graphic reads as the next step in one story rather than a new slide."
+  }
+}

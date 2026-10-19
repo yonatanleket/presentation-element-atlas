@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live multiple-choice poll: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.op{display:grid;grid-template-columns:9.5em 1fr 2.8em;align-items:center;gap:.6em;width:100%;font:inherit;font-size:.92em;color:var(--fg);text-align:start;background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.4em .6em;cursor:pointer}
+.op .bar{height:.85em;background:var(--accent-soft);border-radius:.2em;overflow:hidden}.op .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .35s var(--ease-out)}
+.op .pc{font:600 1em var(--f-mono);text-align:end}
+.op[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 .1em var(--accent)}.op[aria-pressed=true] .lb::after{content:" · you"; color:var(--accent);font-weight:600}
+@media (hover:hover) and (pointer:fine){.op:hover{border-color:var(--accent)}}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Live multiple-choice poll</h1>
+<div class="stage" role="group" aria-label="Demo: Live multiple-choice poll. A four-option poll; simulated votes arrive and the bars grow live. The viewer can cast or change a vote.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.4em;padding-top:1.8em">
+<p class="q">Which change would help your team most?</p>
+<div class="col" id="ops" style="gap:.35em"></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Simulated votes arrive over about three seconds and each bar and percentage updates as they land. Click an option, or Tab to it and press Enter, to cast your own vote; it is added to the count and outlined, and you can change it. Reset clears all votes.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var O=['Automated checks','Weekly release day','One release owner','Better dashboards'],FIN=[17,21,8,6],F=8,my=-1,lf=0;
+$('ops').innerHTML=O.map(function(o,i){return '<button type="button" class="op" data-i="'+i+'" aria-pressed="false"><span class="lb">'+o+'</span><span class="bar"><i></i></span><span class="pc">0%</span></button>';}).join('');
+var bs=$('ops').children;
+function draw(f){lf=f;var c=FIN.map(function(v){return Math.round(v*f/F);});if(my>=0)c[my]++;var t=c.reduce(function(a,b){return a+b;},0);
+for(var i=0;i<4;i++){var p=t?Math.round(c[i]/t*100):0;bs[i].querySelector('i').style.width=p+'%';bs[i].querySelector('.pc').textContent=p+'%';bs[i].setAttribute('aria-pressed',String(i===my));bs[i].setAttribute('aria-label',O[i]+', '+c[i]+' votes');}
+$('n').textContent=t+' votes';}
+$('ops').addEventListener('click',function(e){var b=e.target.closest('.op');if(!b)return;my=+b.dataset.i;draw(lf);api.status('Your vote: '+O[my]);});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,idleText:'Simulated responses',doneText:'Simulated responses: all votes in',reset:function(){my=-1;},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

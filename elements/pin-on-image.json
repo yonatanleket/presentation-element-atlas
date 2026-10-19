@@ -1,0 +1,26 @@
+{
+  "id": "pin-on-image",
+  "name": "Pin on image",
+  "category": "audience",
+  "definition": "Participants click a spot on an image.",
+  "bestUse": "Locating issues on a UI or map.",
+  "trigger": [
+    "audience-input",
+    "product-ui"
+  ],
+  "level": "advanced",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/pin-on-image.html",
+    "kind": "interactive",
+    "how": "Participants answer by clicking a spot on the image. Simulated pins arrive over about three seconds and cluster around the Export button, which the counter reports. Click anywhere on the mock screen to drop your own pin, or focus it and use the arrow keys, then Enter. Reset removes all pins."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

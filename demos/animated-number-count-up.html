@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animated number count-up: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.big{font-size:3.6em;color:var(--fg)}
+.u{font:600 1em var(--f-body);color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Animated number count-up</h1>
+<div class="stage" role="img" aria-label="Demo: Animated number count-up. A headline figure rolls from zero up to 48,600, then a context line explains it.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col center" style="gap:.35em;text-align:center">
+<p class="kicker" style="margin:0">Support automation · 2025</p>
+<span class="big" id="v">0</span>
+<span class="u">questions answered without a ticket each month</span>
+<p class="p b fx" id="c" style="margin-top:.4em"><span class="pill ok">+38%</span> vs 35,200 a year earlier</p></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The headline number starts at zero and rolls up to its value with an ease-out, so it slows and settles before the eye reads it. Play counts it up, then adds a context line comparing it with last year. Under reduced motion the final number appears directly.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:2,stepMs:1500,render:function(f,ctx){AtlasDemo.countUp($('v'),f>=1?48600:0,{animate:ctx.animate&&f===1,duration:1300});on($('c'),f>=2);}});
+</script>
+</body>
+</html>

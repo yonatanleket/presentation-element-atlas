@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parallax layers: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sky{position:absolute;inset:0;background:linear-gradient(#dfe7f8,#f6f7f9)}
+.ly{position:absolute;bottom:0;left:0;width:200%;transition:transform 1.1s var(--ease-out)}
+.ly svg{display:block;width:100%;height:100%}
+.l1{height:62%}.l2{height:46%}.l3{height:24%}
+.ttl{position:absolute;inset-inline-start:1.3em;top:1.1em;max-width:14em}
+.meter{position:absolute;inset-inline-end:1em;top:1em;display:grid;gap:.25em;font:.8em var(--f-mono);color:var(--muted);background:rgba(255,255,255,.85);padding:.4em .6em;border-radius:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Parallax layers</h1>
+<div class="stage" role="img" aria-label="Demo: Parallax layers. A landscape of three layers that slide sideways at different speeds as the scene advances, creating depth.">
+<div class="sky" aria-hidden="true"></div>
+<div class="ly l1" aria-hidden="true"><svg viewBox="0 0 960 200" preserveAspectRatio="none"><path d="M0 200V120l80-50 90 40 110-70 120 60 100-40 110 50 100-60 120 70 130-30v150z" fill="#b9c4e6"/></svg></div>
+<div class="ly l2" aria-hidden="true"><svg viewBox="0 0 960 150" preserveAspectRatio="none"><path d="M0 150V90q60-50 140-10t150-20q90-40 170 10t160 0q80-40 160 10t180-10v80z" fill="#7d93c8"/></svg></div>
+<div class="ly l3" aria-hidden="true"><svg viewBox="0 0 960 80" preserveAspectRatio="none"><path d="M0 80V40h40l10-30 10 30h120l12-34 12 34h160l10-26 10 26h180l12-32 12 32h140l10-28 10 28h170v40z" fill="#3a4a7a"/></svg></div>
+<div class="ttl"><p class="kicker">Roadmap</p><p class="h">Three horizons</p></div>
+<div class="meter" aria-hidden="true"><span>far ×0.2</span><span>mid ×0.5</span><span>near ×1.0</span></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Three layers sit on top of each other: far hills, near hills and the foreground. Each step moves all of them in the same direction, but the far layer moves least and the foreground most, which the eye reads as depth. Reduced motion shows the final position without movement.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var L=[[document.querySelector('.l1'),.2],[document.querySelector('.l2'),.5],[document.querySelector('.l3'),1]];
+AtlasDemo.init({frames:3,stepMs:1300,render:function(f){L.forEach(function(l){l[0].style.transform='translateX('+(-f*l[1]*14)+'%)';});}});
+})();
+</script>
+</body>
+</html>

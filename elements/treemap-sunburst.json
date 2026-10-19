@@ -1,0 +1,25 @@
+{
+  "id": "treemap-sunburst",
+  "name": "Treemap / sunburst",
+  "category": "chart",
+  "definition": "Nested rectangles or rings showing hierarchy and size.",
+  "bestUse": "Hierarchical part to whole.",
+  "trigger": [
+    "part-to-whole",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/treemap-sunburst.html",
+    "kind": "animated",
+    "how": "Rectangle area is proportional to budget: column widths split the $10M by department, then each column divides into its teams. Nesting shows hierarchy and size at once; a sunburst shows the same tree as rings. Values are illustrative."
+  },
+  "aliases": [
+    "pie",
+    "hierarchy",
+    "nested"
+  ]
+}

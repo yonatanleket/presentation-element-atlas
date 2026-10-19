@@ -1,0 +1,28 @@
+{
+  "id": "uncertainty-range",
+  "name": "Uncertainty range",
+  "category": "trust",
+  "definition": "Range or band instead of a single point (e.g. 1.2–1.6 million).",
+  "bestUse": "Estimates.",
+  "trigger": [
+    "estimate-with-range"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/uncertainty-range.html",
+    "kind": "animated",
+    "how": "A falsely precise point estimate (1.43 million) appears first, then widens into the honest range, 1.2–1.6 million, and finally a darker inner band marks the likeliest half. The headline changes with it, so the slide never claims more certainty than the model has. Values are illustrative."
+  },
+  "aliases": [
+    "confidence interval",
+    "error bar",
+    "estimate range",
+    "forecast"
+  ],
+  "related": [
+    "fan-chart-uncertainty-band"
+  ]
+}

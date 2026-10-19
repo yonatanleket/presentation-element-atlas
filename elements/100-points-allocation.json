@@ -1,0 +1,26 @@
+{
+  "id": "100-points-allocation",
+  "name": "100-points allocation",
+  "category": "audience",
+  "definition": "Spread 100 points across options.",
+  "bestUse": "Trade-off preferences.",
+  "trigger": [
+    "audience-input",
+    "prioritization"
+  ],
+  "level": "advanced",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/100-points-allocation.html",
+    "kind": "interactive",
+    "how": "You have 100 points to spread across four options. Drag a slider or use the arrow keys to move points in steps of 5; a slider cannot go past what is left. Simulated allocations build the room average shown beside each option, and Submit adds your split once all 100 points are placed."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stacked bar / waffle: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Stacked bar / waffle</h1>
+<div class="stage" role="img" aria-label="Demo: Stacked bar / waffle. Revenue by channel shown as a 100 percent stacked bar and a 10 by 10 waffle: Direct 46 percent, Partner 31 percent, Online 23 percent.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="ch" id="ch" viewBox="0 0 480 300" aria-hidden="true"></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The same shares appear twice: a 100% stacked bar, then a 10 × 10 waffle where each square is 1% of revenue. Bars suit precise comparison; waffles make the part-to-whole feel countable. Values are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var svg = document.getElementById('ch'), D = [['Direct', 46, 'var(--accent)'], ['Partner', 31, 'var(--ok)'], ['Online', 23, 'var(--adv)']];
+    title(svg, 'Direct sales bring in almost half', 'Revenue by channel, 2026 · 1 square = 1%');
+    var cells = [], k = 0;
+    for (var i = 0; i < 100; i++) { var c = i % 10, r = Math.floor(i / 10); cells.push(S('rect', { x: 28 + c * 18, y: 70 + r * 18, width: 15, height: 15, rx: 2, fill: '#e2e5eb' }, svg)); }
+    var col = []; D.forEach(function (d) { for (var j = 0; j < d[1]; j++) col.push(d[2]); });
+    cells.forEach(function (c, i) { c.style.transition = 'fill .3s var(--ease-out) ' + (i * 9) + 'ms'; });
+    var bx = lin(0, 100, 240, 460), acc = 0, segs = [];
+    D.forEach(function (d, i) {
+      var g = S('g', { 'class': 'growx off' }, svg); g.style.transitionDelay = (i * 250) + 'ms';
+      S('rect', { x: bx(acc), y: 96, width: bx(d[1]) - bx(0) - 2, height: 34, fill: d[2] }, g);
+      S('text', { x: bx(acc) + 8, y: 118, style: 'fill:#fff;font-weight:700' }, g, d[1] + '%');
+      segs.push(g); acc += d[1];
+      S('rect', { x: 240, y: 158 + i * 28, width: 14, height: 14, rx: 2, fill: d[2] }, svg);
+      S('text', { x: 262, y: 170 + i * 28 }, svg, d[0] + ' · ' + d[1] + '%');
+    });
+    S('text', { x: 240, y: 86, 'class': 'ax' }, svg, '100% stacked bar');
+    S('text', { x: 28, y: 266, 'class': 'ax' }, svg, '10 × 10 waffle');
+    AtlasDemo.init({ frames: 2, stepMs: 1500, render: function (f) {
+      segs.forEach(function (g) { on(g, f >= 1); });
+      cells.forEach(function (c, i) { c.setAttribute('fill', f >= 2 ? col[i] : '#e2e5eb'); });
+    } });
+  })();
+</script>
+</body>
+</html>

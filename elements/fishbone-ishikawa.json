@@ -1,0 +1,23 @@
+{
+  "id": "fishbone-ishikawa",
+  "name": "Fishbone (Ishikawa)",
+  "category": "diagram",
+  "definition": "Causes grouped along branches toward an effect.",
+  "bestUse": "Root-cause analysis.",
+  "trigger": [
+    "cause-effect"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/fishbone-ishikawa.html",
+    "kind": "animated",
+    "how": "The effect sits in the head and each bone is a cause category, with specific causes along it. Play draws the spine, then the four categories, then the causes, and finally marks the biggest driver so the root-cause discussion has a starting point. Data is illustrative."
+  },
+  "aliases": [
+    "root cause",
+    "cause and effect"
+  ]
+}

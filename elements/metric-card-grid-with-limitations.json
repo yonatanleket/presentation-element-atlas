@@ -1,0 +1,30 @@
+{
+  "id": "metric-card-grid-with-limitations",
+  "name": "Metric card grid with limitations",
+  "category": "metric",
+  "definition": "Cards grouped by metric type; each gives a definition, the value, its main limitation and a provenance tag.",
+  "bestUse": "Defining success metrics honestly.",
+  "trigger": [
+    "kpi-set",
+    "method-explanation",
+    "claim-needing-evidence"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/metric-card-grid-with-limitations.html",
+    "kind": "interactive",
+    "how": "Each card pairs a metric with its definition, value, main limitation and a provenance tag such as Measured or Estimated. Filter by metric type, or open a card to read its limitation. All values are illustrative."
+  },
+  "related": [
+    "provenance-tags",
+    "kpi-tile"
+  ],
+  "aliases": [
+    "kpi",
+    "success metrics",
+    "scorecard"
+  ]
+}

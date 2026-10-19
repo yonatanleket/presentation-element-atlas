@@ -1,0 +1,24 @@
+{
+  "id": "slope-chart",
+  "name": "Slope chart",
+  "category": "chart",
+  "definition": "Lines connecting two points in time per item.",
+  "bestUse": "Rank or value change between two dates.",
+  "trigger": [
+    "ranking",
+    "before-after"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/slope-chart.html",
+    "kind": "animated",
+    "how": "Each product is one line from its 2024 score to its 2026 score, so the angle shows the direction and size of change at a glance. After the lines draw, the two decliners are colored and labeled while the rest fade. Scores are illustrative."
+  },
+  "aliases": [
+    "before after",
+    "change between two dates"
+  ]
+}

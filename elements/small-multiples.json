@@ -1,0 +1,25 @@
+{
+  "id": "small-multiples",
+  "name": "Small multiples",
+  "category": "chart",
+  "definition": "A grid of identical mini-charts, one per group.",
+  "bestUse": "Comparing many series.",
+  "trigger": [
+    "options-comparison",
+    "trend-over-time"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/small-multiples.html",
+    "kind": "animated",
+    "how": "Six identical mini line charts share one 0–100% scale and the same eight weeks, so shapes compare directly without a cluttered legend. After the lines draw, the one region moving against the rest is highlighted. Values are illustrative."
+  },
+  "aliases": [
+    "trellis",
+    "facets",
+    "grid of charts"
+  ]
+}

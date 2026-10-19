@@ -1,0 +1,27 @@
+{
+  "id": "upvoted-q-a",
+  "name": "Upvoted Q&A",
+  "category": "audience",
+  "definition": "Questions submitted and voted up.",
+  "bestUse": "Large audiences.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/upvoted-q-a.html",
+    "kind": "interactive",
+    "how": "Simulated questions arrive and collect votes over about three seconds; the list re-sorts so the question most of the room wants answered rises to the top. Press the ▲ button beside any question to add or remove your own upvote and watch it move. Reset clears votes."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience",
+    "questions",
+    "ama"
+  ]
+}

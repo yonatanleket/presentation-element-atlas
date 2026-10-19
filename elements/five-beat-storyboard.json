@@ -1,0 +1,23 @@
+{
+  "id": "five-beat-storyboard",
+  "name": "Five-beat storyboard",
+  "category": "product",
+  "definition": "Five panels of mini UI moments (screens, reminders, status changes) showing a user’s experience over several days.",
+  "bestUse": "Making a pain point felt.",
+  "trigger": [
+    "user-experience-story",
+    "product-ui"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/five-beat-storyboard.html",
+    "kind": "interactive",
+    "how": "Five small panels show what one user sees from Monday to Friday. Select a panel, or use Previous, Next and the arrow keys, to bring that day forward with its caption; the frustration track underneath rises until the problem is solved. Reset returns to day one."
+  },
+  "related": [
+    "data-comic"
+  ]
+}

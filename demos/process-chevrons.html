@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Process chevrons: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.chev-row{display:flex}
+.chev{flex:1;height:3.1em;background:var(--surface);color:var(--fg);display:flex;flex-direction:column;justify-content:center;
+  padding-inline:1.25em .8em;margin-inline-end:-.45em;font-size:.85em;line-height:1.2;
+  clip-path:polygon(0 0,calc(100% - .9em) 0,100% 50%,calc(100% - .9em) 100%,0 100%,.9em 50%);transition:background-color .3s var(--ease-out),color .3s var(--ease-out)}
+.chev:first-child{clip-path:polygon(0 0,calc(100% - .9em) 0,100% 50%,calc(100% - .9em) 100%,0 100%);padding-inline-start:.8em}
+.chev .n{font:500 .95em var(--f-mono);color:var(--muted)}
+.chev.lit{background:var(--accent);color:#fff}.chev.lit .n{color:#dfe5ff}
+.desc-row{display:flex;gap:.45em}.desc-row p{flex:1;margin:0;font-size:.8em;color:var(--ink-2);transform:translateY(.4em)}.desc-row p.on{transform:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Process chevrons</h1>
+<div class="stage" role="img" aria-label="Demo: Process chevrons. Five arrow-shaped steps from discover to launch, filled one at a time, each with a one-line description.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="justify-content:center;gap:.8em">
+<div><p class="kicker">Launch process</p><p class="h">Five steps from idea to GA</p></div>
+<div class="chev-row"><div class="chev"><span class="n">01</span><span>Discover</span></div><div class="chev"><span class="n">02</span><span>Define</span></div><div class="chev"><span class="n">03</span><span>Build</span></div><div class="chev"><span class="n">04</span><span>Test</span></div><div class="chev"><span class="n">05</span><span>Launch</span></div></div>
+<div class="desc-row"><p data-f="1">Interview 12 users</p><p data-f="2">One-page spec</p><p data-f="3">Two-week sprints</p><p data-f="4">Beta with 5 teams</p><p data-f="5">GA + announce</p></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each arrow is one step and the shape itself says the order, so the row needs no connecting lines. Play fills the steps left to right and adds a one-line description under each, ending with the whole process lit. Steps are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:5,stepMs:750,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';$$('.chev').forEach(function(c,i){c.classList.toggle('lit',i<fr);});}});
+</script>
+</body>
+</html>

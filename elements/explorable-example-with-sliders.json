@@ -1,0 +1,24 @@
+{
+  "id": "explorable-example-with-sliders",
+  "name": "Explorable example with sliders",
+  "category": "explore",
+  "definition": "Model controls that change a live visualization.",
+  "bestUse": "Teaching how a system behaves.",
+  "trigger": [
+    "what-if-model"
+  ],
+  "level": "advanced",
+  "sources": [
+    "victor"
+  ],
+  "demo": {
+    "file": "demos/explorable-example-with-sliders.html",
+    "kind": "interactive",
+    "how": "Move the request and agent sliders; utilisation, average wait and the curve update live. Utilisation ρ = requests ÷ (agents × 6), since each request takes 10 minutes. Wait ≈ 10 min × ρ^(√(2(agents+1))−1) ÷ (agents × (1−ρ)). Watch the wait explode as ρ nears 100%. Reset restores 30 requests, 6 agents."
+  },
+  "aliases": [
+    "slider",
+    "simulation",
+    "interactive model"
+  ]
+}

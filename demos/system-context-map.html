@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System context map: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.nb{position:absolute;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:.4em;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:opacity .3s var(--ease-out),border-color .2s,background-color .2s,box-shadow .2s}
+.nb span{font-size:.8em}.nb b{font-size:.9em}
+.nb[aria-pressed=true],.nb.sel{border:2px solid var(--accent);background:var(--accent-soft);box-shadow:0 .2em .6em rgba(47,75,216,.18)}.zone{fill:var(--surface);fill-opacity:.55;stroke:var(--line)}.own{fill:var(--accent);fill-opacity:.08;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:5 4}
+.ce{transition:opacity .25s,stroke .25s}.ce.dim{opacity:.18}.ce.hot{stroke:var(--accent);stroke-width:2.4;marker-end:url(#aha)}
+.cl{font-size:13px;paint-order:stroke;stroke:var(--stage);stroke-width:4px;transition:opacity .25s}.cl.dim{opacity:0}.cl.hot{fill:var(--accent);font-weight:600}
+.nb.own{border-color:var(--accent)}.nb span{font-size:.8em}
+.det{position:absolute;inset-inline:1em;inset-block-end:.5em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">System context map</h1>
+<div class="stage" role="group" aria-label="Demo: System context map. A zoned system map: user-facing apps, internal services with the owned Payments service highlighted, and partner systems.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><rect x="8" y="30" width="146" height="206" rx="8" class="zone"/><rect x="164" y="30" width="162" height="206" rx="8" class="zone"/><rect x="336" y="30" width="136" height="206" rx="8" class="zone"/>
+<rect x="184" y="86" width="122" height="48" rx="8" class="own"/><text x="81" y="48" text-anchor="middle" class="t-m t-mono">User-facing</text><text x="245" y="48" text-anchor="middle" class="t-m t-mono">Internal</text><text x="404" y="48" text-anchor="middle" class="t-m t-mono">Partners</text><text x="240" y="152" text-anchor="end" class="t-a t-mono">Our scope</text>
+<path d="M132 76 L191 102" class="ln ce" id="ce0" marker-end="url(#ah)"/><path d="M132 184 L191 120" class="ln ce" id="ce1" marker-end="url(#ah)"/><path d="M299 102 L351 76" class="ln ce" id="ce2" marker-end="url(#ah)"/><path d="M299 120 L351 184" class="ln ce" id="ce3" marker-end="url(#ah)"/><path d="M245 129 V184" class="ln ce" id="ce4" marker-end="url(#ah)"/>
+<text x="160" y="78" text-anchor="middle" class="cl" id="cl0">authorize</text><text x="168" y="172" text-anchor="middle" class="cl" id="cl1">authorize</text><text x="325" y="78" text-anchor="middle" class="cl" id="cl2">charge</text><text x="318" y="172" text-anchor="middle" class="cl" id="cl3">settle daily</text><text x="252" y="164" text-anchor="middle" class="cl" id="cl4">post entry</text></svg>
+<div class="fill"><button type="button" class="nb own" data-id="pay" style="left:12.063em;top:5.813em;width:6.5em;height:2.125em"><span>Payments</span></button><button type="button" class="nb" data-id="led" style="left:12.063em;top:11.75em;width:6.5em;height:2.125em"><span>Ledger</span></button><button type="button" class="nb" data-id="mob" style="left:1.75em;top:3.313em;width:6.5em;height:2.125em"><span>Mobile app</span></button><button type="button" class="nb" data-id="web" style="left:1.75em;top:10.813em;width:6.5em;height:2.125em"><span>Web checkout</span></button><button type="button" class="nb" data-id="card" style="left:22.063em;top:3.313em;width:6.5em;height:2.125em"><span>Card network</span></button><button type="button" class="nb" data-id="bank" style="left:22.063em;top:10.813em;width:6.5em;height:2.125em"><span>Bank payouts</span></button></div>
+<p class="det" id="det"></p>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Zones group the systems by who runs them, the highlighted area is what your team owns, and each connector is labeled with what flows along it. Select any system to light up only its connections and list them below; Reset returns to the owned service. Systems are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var N=[["pay","Payments"],["led","Ledger"],["mob","Mobile app"],["web","Web checkout"],["card","Card network"],["bank","Bank payouts"]],E=[["mob","pay","authorize"],["web","pay","authorize"],["pay","card","charge"],["pay","bank","settle daily"],["pay","led","post entry"]];var sel='pay',api;
+function nm(id){for(var i=0;i<N.length;i++)if(N[i][0]===id)return N[i][1];}
+function draw(){$$('.nb').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.id===sel));});var list=[];
+  E.forEach(function(e,i){var hot=e[0]===sel||e[1]===sel;$('#ce'+i).classList.toggle('hot',hot);$('#ce'+i).classList.toggle('dim',!hot);$('#cl'+i).classList.toggle('hot',hot);$('#cl'+i).classList.toggle('dim',!hot);
+    if(hot)list.push(e[0]===sel?e[2]+' → '+nm(e[1]):nm(e[0])+' → '+e[2]);});
+  $('#det').textContent=nm(sel)+': '+list.join(' · ');}
+$('.fill').addEventListener('click',function(e){var b=e.target.closest('.nb');if(!b)return;sel=b.dataset.id;draw();api.status(nm(sel)+' selected');});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Select a system to trace its connections',reset:function(){sel='pay';draw();}});
+</script>
+</body>
+</html>

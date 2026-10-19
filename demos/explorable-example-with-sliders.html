@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explorable example with sliders: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:2em .9em .9em;display:grid;grid-template-columns:10.6em 1fr;gap:.9em}
+.ctl{display:grid;gap:.35em;align-content:start}
+.ctl label{display:flex;justify-content:space-between;font-size:.85em}.ctl output{font:600 1em var(--f-mono)}
+.ctl input{width:100%;accent-color:var(--accent);min-height:28px}
+.res{display:grid;grid-template-rows:auto auto 1fr;gap:.4em}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:.5em}.kp div{padding:.4em .6em}.kp b{display:block;font:700 1.5em/1.1 var(--f-display)}
+.ub{height:.6em;border-radius:99em;background:var(--line);overflow:hidden}.ub i{display:block;height:100%;transition:width .2s,background-color .2s}
+svg{width:100%;height:100%}.ax{font:12px var(--f-mono);fill:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Explorable example with sliders</h1>
+<div class="stage" role="group" aria-label="Demo: Explorable example with sliders. A support queue model: sliders for requests per hour and agents recompute utilisation, average wait and a wait curve.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="ctl">
+    <label for="lam">Requests / hour <output id="lo"></output></label><input type="range" id="lam" min="6" max="60" step="1">
+    <label for="ag">Agents <output id="ao"></output></label><input type="range" id="ag" min="1" max="10" step="1">
+    <p class="p muted" style="font-size:.8em;margin-top:.3em">Each request takes 10 min.</p>
+  </div>
+  <div class="res">
+    <div class="kp"><div class="card"><span class="muted" style="font-size:.8em">Utilisation</span><b id="u"></b></div><div class="card"><span class="muted" style="font-size:.8em">Average wait</span><b id="w"></b></div></div>
+    <div class="ub" aria-hidden="true"><i id="ub"></i></div>
+    <svg viewBox="0 0 260 120" preserveAspectRatio="none" aria-hidden="true"><text class="ax" x="2" y="12">wait vs requests</text><line x1="0" y1="110" x2="260" y2="110" stroke="var(--line)"/><polyline id="cv" fill="none" stroke="var(--accent)" stroke-width="2"/><circle id="mk" r="4.5" fill="var(--accent)"/></svg>
+  </div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Move the request and agent sliders; utilisation, average wait and the curve update live. Utilisation ρ = requests ÷ (agents × 6), since each request takes 10 minutes. Wait ≈ 10 min × ρ^(√(2(agents+1))−1) ÷ (agents × (1−ρ)). Watch the wait explode as ρ nears 100%. Reset restores 30 requests, 6 agents.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var api,lam=$('lam'),ag=$('ag');
+function wait(l,c){var r=l/(c*6);if(r>=1)return Infinity;return 10*Math.pow(r,Math.sqrt(2*(c+1))-1)/(c*(1-r));}
+function upd(announce){var l=+lam.value,c=+ag.value,r=l/(c*6),w=wait(l,c);
+  $('lo').textContent=l;$('ao').textContent=c;$('u').textContent=Math.round(r*100)+'%';
+  $('w').textContent=w===Infinity?'∞ (backlog grows)':(w<1?'<1 min':Math.round(w)+' min');$('w').style.fontSize=w===Infinity?'1em':'';
+  var ub=$('ub');ub.style.width=Math.min(100,r*100)+'%';ub.style.backgroundColor=r<.75?'var(--ok)':r<.9?'var(--warn)':'var(--bad)';
+  var pts=[],cap=60;for(var x=6;x<=60;x++){var ww=wait(x,c);if(ww===Infinity||ww>cap){pts.push((x-6)/54*260+',0');break;}pts.push(((x-6)/54*260).toFixed(1)+','+(110-ww/cap*100).toFixed(1));}
+  $('cv').setAttribute('points',pts.join(' '));var my=w===Infinity||w>cap?6:110-w/cap*100;$('mk').setAttribute('cx',(l-6)/54*260);$('mk').setAttribute('cy',my);
+  lam.setAttribute('aria-valuetext',l+' requests per hour');ag.setAttribute('aria-valuetext',c+' agents');
+  if(announce)api.status('Utilisation '+Math.round(r*100)+'%, wait '+$('w').textContent);}
+lam.addEventListener('input',function(){upd(true);});ag.addEventListener('input',function(){upd(true);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){lam.value=30;ag.value=6;upd(false);}});
+})();
+</script>
+</body>
+</html>

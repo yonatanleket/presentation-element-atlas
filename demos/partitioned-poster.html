@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Partitioned poster: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.pg{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:.45em;flex:1;min-height:0}
+.pn{padding:.45em .6em;display:flex;flex-direction:column;gap:.2em}
+.pn .lb{font:500 .8em/1 var(--f-mono);color:var(--muted)}
+.pn .v{font:700 1.6em/1 var(--f-display)}
+.hb{display:flex;flex-direction:column;gap:.2em;font-size:.8em}.hb div{display:flex;align-items:center;gap:.3em}.hb i{display:block;height:.6em;background:var(--accent);border-radius:.15em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Partitioned poster</h1>
+<div class="stage" role="img" aria-label="Demo: Partitioned poster. One slide split into four panels, each with its own small data display: a number, bars, a status and a trend line.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.45em;padding-top:1.8em">
+<p class="h" style="font-size:1.1em">Platform health, Q3 at a glance</p>
+<div class="pg">
+<div class="pn card b fx" id="p1"><span class="lb">Adoption</span><span class="v">74%</span><span class="p" style="font-size:.8em">of teams on the new platform</span></div>
+<div class="pn card b fx" id="p2"><span class="lb">Build time, minutes</span><div class="hb"><div><span style="width:3em">Before</span><i style="width:6em;background:var(--line)"></i>14</div><div><span style="width:3em">Now</span><i style="width:2.6em"></i>6</div></div></div>
+<div class="pn card b fx" id="p3"><span class="lb">Reliability</span><span><span class="pill ok">On target</span></span><span class="p" style="font-size:.8em">99.92% vs 99.9% goal</span></div>
+<div class="pn card b fx" id="p4"><span class="lb">Cost per build</span><svg viewBox="0 0 100 30" style="width:100%;height:2.2em" aria-hidden="true"><polyline points="0,6 20,9 40,12 60,16 80,21 100,24" fill="none" stroke="var(--accent)" stroke-width="2.5"/></svg><span class="p" style="font-size:.8em">down 31% since Q1</span></div>
+</div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One slide is divided into four equal panels, each answering its own question with its own small display: a headline number, a bar comparison, a status pill and a trend line. Play fills the panels one at a time; the shared title ties them together.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:4,stepMs:800,render:function(f){['p1','p2','p3','p4'].forEach(function(i,n){on($(i),n<f);});}});
+</script>
+</body>
+</html>

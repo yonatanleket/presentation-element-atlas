@@ -1,0 +1,24 @@
+{
+  "id": "source-chips",
+  "name": "Source chips",
+  "category": "trust",
+  "definition": "Clickable chips that open source notes (data definitions, references, glossary).",
+  "bestUse": "Talks whose claims will be checked.",
+  "trigger": [
+    "claim-needing-evidence"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/source-chips.html",
+    "kind": "interactive",
+    "how": "Numbered chips sit right after the words they support. Select a chip (click, or Tab then Enter) to open its note: a data definition, a reference or a glossary entry. Escape or the same chip closes it, so the slide stays clean until someone asks. Content is illustrative."
+  },
+  "aliases": [
+    "citation",
+    "footnote",
+    "reference"
+  ]
+}

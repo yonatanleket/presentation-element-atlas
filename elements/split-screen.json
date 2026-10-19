@@ -1,0 +1,25 @@
+{
+  "id": "split-screen",
+  "name": "Split screen",
+  "category": "compare",
+  "definition": "Two halves contrasting states.",
+  "bestUse": "Before/after, us/them.",
+  "trigger": [
+    "before-after",
+    "options-comparison"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/split-screen.html",
+    "kind": "animated",
+    "how": "The slide is cut into two equal halves that use the same layout, so every difference between them is the point. Play fills the left half with today, then the right half with the new state, and finishes by marking the contrast down the middle. Numbers are illustrative."
+  },
+  "aliases": [
+    "before after",
+    "us vs them",
+    "side by side"
+  ]
+}

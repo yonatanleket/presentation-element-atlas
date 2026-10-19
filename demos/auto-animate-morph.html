@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto-animate / morph: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.top{position:absolute;inset-inline:.9em;top:.7em;display:flex;align-items:center;gap:.35em;z-index:4}
+.top label{margin-inline-start:auto;display:flex;align-items:center;gap:.35em;font-size:.85em}
+.top input{width:1.1em;height:1.1em;margin:0}
+.sl{position:absolute;inset:3.4em .9em .9em;overflow:hidden}
+.m{position:absolute;transition:all .7s var(--ease-out)}
+.sl.cut .m{transition:none}
+.t{font:700 1.5em/1.1 var(--f-display)}
+.c{border-radius:50%;background:var(--accent)}
+.k{background:var(--accent-soft);border:1px solid var(--line);border-radius:.45em;padding:.5em .6em;font-size:.85em;color:var(--ink-2)}
+.s1 .t{left:1.2em;top:1.1em;font-size:1.5em}.s1 .c{left:22em;top:1.3em;width:3em;height:3em}.s1 .k{left:1.2em;top:6.6em;width:15em}
+.s2 .t{left:1.2em;top:.8em;font-size:1em}.s2 .c{left:15.5em;top:2.6em;width:9.5em;height:9.5em}.s2 .k{left:1.2em;top:3.4em;width:12em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Auto-animate / morph</h1>
+<div class="stage" role="group" aria-label="Demo: Auto-animate / morph. Two slide buttons move matching shapes and the title to new positions; a switch turns the morph off for comparison.">
+<div class="top"><div class="row" role="group" aria-label="Slide" id="sw" style="gap:.3em"><button class="sbtn" type="button">Slide 1</button><button class="sbtn" type="button">Slide 2</button></div><label><input type="checkbox" id="mo" checked> Morph</label></div>
+<div class="sl card s1" id="sl" aria-live="off"><span class="m t">Onboarding</span><span class="m c" aria-hidden="true"></span><span class="m k">Day-one setup checklist: three steps, ten minutes.</span></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Switch between Slide 1 and Slide 2 (buttons or arrow keys). The title, circle and card exist on both slides, so they move and resize to their new spots instead of cutting. Turn Morph off to see the same change as a hard cut and compare. Reset returns to slide 1.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var sl=$('sl'),btn=$('sw').querySelectorAll('button'),api;
+function go(i){sl.classList.toggle('s1',i===0);sl.classList.toggle('s2',i===1);btn.forEach(function(b,k){b.setAttribute('aria-pressed',String(k===i));});}
+btn.forEach(function(b,i){b.addEventListener('click',function(){go(i);api.status('Slide '+(i+1)+($('mo').checked?' (morph)':' (cut)'));});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;if(isRtl())d=-d;e.preventDefault();var n=(i+d+2)%2;btn[n].focus();btn[n].click();});});
+$('mo').addEventListener('change',function(e){sl.classList.toggle('cut',!e.target.checked);api.status(e.target.checked?'Morph on':'Morph off: hard cut');});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){$('mo').checked=true;sl.classList.add('cut');go(0);void sl.offsetWidth;sl.classList.remove('cut');}});
+})();
+</script>
+</body>
+</html>

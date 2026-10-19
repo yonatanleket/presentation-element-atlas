@@ -1,0 +1,30 @@
+{
+  "id": "kpi-tile",
+  "name": "KPI tile",
+  "category": "metric",
+  "definition": "Single number with a label.",
+  "bestUse": "Dashboards and summaries.",
+  "trigger": [
+    "single-key-number"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/kpi-tile.html",
+    "kind": "animated",
+    "how": "A single tile shows one number and its label. Play counts the number up from zero and settles on the final value; nothing else competes with it, which is the point of the tile. The value is illustrative."
+  },
+  "related": [
+    "stat-with-delta",
+    "sparkline",
+    "animated-number-count-up"
+  ],
+  "aliases": [
+    "kpi",
+    "big number",
+    "scorecard",
+    "metric tile"
+  ]
+}

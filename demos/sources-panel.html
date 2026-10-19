@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources panel: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.panel{position:absolute;inset-block-start:2.6em;inset-inline-end:.6em;width:62%;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:.5em;box-shadow:0 .4em 1.2em rgba(27,30,36,.14);padding:.6em .8em;font-size:.85em;opacity:0;transform:translateY(-.4em)}
+.panel.open{opacity:1;transform:none}.panel ol{margin:.3em 0 0;padding-inline-start:1.3em;display:grid;gap:.3em}
+.panel li{padding:.15em .3em;border-radius:.3em}.panel li.hit{background:var(--accent-soft)}
+sup{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Sources panel</h1>
+<div class="stage" role="img" aria-label="Demo: Sources panel">
+<span class="label-illustrative" style="inset-block-start:auto;inset-block-end:.4em">Illustrative</span>
+<div class="deck"><div class="deck-bar"><span class="muted mono">4 / 12</span><span style="flex:1"></span><span class="sbtn" id="sb" style="display:inline-flex;align-items:center" aria-hidden="true">Sources</span></div>
+<div class="panel fx" id="pn"><strong>Sources</strong><ol><li id="s1">Release log, Jan–Jun — <span class="muted">cycle times</span></li><li id="s2">Team survey, n=48 — <span class="muted">pain points</span></li><li id="s3">Ticket export — <span class="muted">sign-off share</span></li></ol></div>
+<div class="deck-body"><p class="kicker">Problem</p><p class="h">Sign-off is most of the wait<sup>3</sup></p><p class="p">About two thirds of release time is spent waiting for approval.</p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A Sources entry sits in the top bar on every slide. Play opens the panel, which lists each reference with what it supports, and highlights the one behind the claim on screen. The panel is global, so it reads the same from any slide.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+AtlasDemo.init({frames:2,stepMs:1000,render:function(f){pn.classList.toggle('open',f>=1);sb.setAttribute('aria-pressed',String(f>=1));s3.classList.toggle('hit',f>=2);}});
+</script>
+</body>
+</html>

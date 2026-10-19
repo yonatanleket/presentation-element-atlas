@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Predict-then-reveal: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-rows:1fr auto;gap:.4em}
+svg{width:100%;height:100%;touch-action:none}
+.ax{font:12px var(--f-mono);fill:var(--muted)}
+.hd{fill:var(--surface);stroke:var(--warn);stroke-width:2.5;cursor:ns-resize}
+.hd:focus{outline:none}.hd:focus-visible{stroke:var(--fg);stroke-width:4}
+.act{fill:none;stroke:var(--accent);stroke-width:3}
+.gs{fill:none;stroke:var(--warn);stroke-width:2.5;stroke-dasharray:5 4}
+.real{fill:none;stroke:var(--accent);stroke-width:3;stroke-dasharray:1 1;transition:stroke-dashoffset .9s var(--ease-out)}
+.bar{display:flex;align-items:center;gap:.5em}.bar .p{flex:1;font-size:.85em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Predict-then-reveal</h1>
+<div class="stage" role="group" aria-label="Demo: Predict-then-reveal. A line chart with four years hidden; drag or arrow-key four handles to predict them, then Reveal draws the real line and scores the guess.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <svg viewBox="0 0 440 200" id="svg"><text class="ax" x="4" y="14">Share of orders placed on mobile, %</text>
+    <line x1="30" y1="180" x2="436" y2="180" stroke="var(--line)"/><line x1="232" y1="24" x2="232" y2="180" stroke="var(--line)" stroke-dasharray="3 3"/>
+    <g id="xl"></g><polyline class="act" id="act"/><polyline class="real" id="real" pathLength="1" style="stroke-dashoffset:1"/><polyline class="gs" id="gs"/><g id="hds"></g></svg>
+  <div class="bar"><p class="p" id="msg">Drag the orange handles to predict 2023–2026.</p><button class="sbtn primary" type="button" id="rev">Reveal</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The chart shows 2019–2022 and hides the rest. Drag the four dashed handles, or focus one and use the up and down arrows, to draw your prediction; Reveal then draws the actual line and reports how far off the guess was on average. Committing first makes the surprise stick. Reset tries again.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var YR=[2019,2020,2021,2022,2023,2024,2025,2026],A=[22,31,36,41,49,58,63,67],G=[],done=false,api,svg=$('svg');
+function X(i){return 45+i*53;}function Y(v){return 180-v/80*150;}
+$('xl').innerHTML=YR.map(function(y,i){return '<text class="ax" text-anchor="middle" x="'+X(i)+'" y="196">'+y+'</text>';}).join('');
+$('act').setAttribute('points',A.slice(0,4).map(function(v,i){return X(i)+','+Y(v);}).join(' '));
+$('real').setAttribute('points',A.slice(3).map(function(v,i){return X(i+3)+','+Y(v);}).join(' '));
+var hh='';for(var i=0;i<4;i++)hh+='<circle class="hd" r="7" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="80" aria-label="Prediction for '+YR[i+4]+'"/>';$('hds').innerHTML=hh;var hds=$('hds').children;
+function draw(){$('gs').setAttribute('points',[X(3)+','+Y(A[3])].concat(G.map(function(v,i){return X(i+4)+','+Y(v);})).join(' '));
+  for(var i=0;i<4;i++){hds[i].setAttribute('cx',X(i+4));hds[i].setAttribute('cy',Y(G[i]));hds[i].setAttribute('aria-valuenow',G[i]);hds[i].setAttribute('aria-valuetext',G[i]+'%');}}
+function setG(i,v){if(done)return;G[i]=Math.max(0,Math.min(80,Math.round(v)));draw();}
+for(i=0;i<4;i++)(function(i){var h=hds[i],drag=false;
+  h.addEventListener('pointerdown',function(e){if(done)return;drag=true;h.setPointerCapture(e.pointerId);h.focus();});
+  h.addEventListener('pointermove',function(e){if(!drag)return;var r=svg.getBoundingClientRect(),k=200/r.height;setG(i,(180-(e.clientY-r.top)*k)/150*80);});
+  h.addEventListener('pointerup',function(){if(drag){drag=false;api.status('Prediction '+YR[i+4]+': '+G[i]+'%');}});
+  h.addEventListener('keydown',function(e){var d={ArrowUp:1,ArrowDown:-1,PageUp:5,PageDown:-5}[e.key];if(!d)return;e.preventDefault();setG(i,G[i]+d);api.status(YR[i+4]+': '+G[i]+'%');});})(i);
+$('rev').addEventListener('click',function(){if(done)return;done=true;$('real').style.strokeDashoffset='0';$('rev').disabled=true;
+  var err=0;for(var i=0;i<4;i++)err+=Math.abs(G[i]-A[i+4]);err=Math.round(err/4);
+  var t='Actual 2026: '+A[7]+'%. Your guess: '+G[3]+'%. Average miss: '+err+' points.';$('msg').textContent=t;api.status(t);
+  for(i=0;i<4;i++)hds[i].setAttribute('aria-disabled','true');});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){done=false;G=[41,41,41,41];$('real').style.strokeDashoffset='1';$('rev').disabled=false;$('msg').textContent='Drag the orange handles to predict 2023–2026.';for(var i=0;i<4;i++)hds[i].removeAttribute('aria-disabled');draw();}});
+})();
+</script>
+</body>
+</html>

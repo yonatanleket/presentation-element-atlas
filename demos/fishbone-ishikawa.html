@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fishbone (Ishikawa): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.spine{stroke:var(--fg);stroke-width:2.5}.bone{fill:none;stroke:var(--ink-2);stroke-width:1.6}.lfd{fill:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Fishbone (Ishikawa)</h1>
+<div class="stage" role="img" aria-label="Demo: Fishbone (Ishikawa). A fishbone diagram for late releases with causes grouped under process, people, tools and environment.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<g data-f="1"><line x1="20" y1="150" x2="392" y2="150" class="spine"/><rect x="395" y="118" width="75" height="64" rx="8" class="nd-bad"/><text x="432" y="146" text-anchor="middle" class="t-b t-bad">Late</text><text x="432" y="163" text-anchor="middle" class="t-b t-bad">releases</text></g>
+<g data-f="2"><path d="M170 150 L110 60 M330 150 L270 60 M170 150 L110 240 M330 150 L270 240" class="bone"/>
+<text x="110" y="50" text-anchor="middle" class="t-b">Process</text><text x="270" y="50" text-anchor="middle" class="t-b">People</text><text x="110" y="260" text-anchor="middle" class="t-b">Tools</text><text x="270" y="260" text-anchor="middle" class="t-b">Environment</text></g>
+<rect x="151" y="171" width="112" height="19" rx="4" class="nd-bad" data-f="4"/>
+<g data-f="3"><circle cx="149" cy="118.5" r="2.5" class="lfd"/><text x="155" y="122.5" class="">Manual sign-off</text><circle cx="128" cy="87" r="2.5" class="lfd"/><text x="134" y="91" class="">Late test results</text><circle cx="309" cy="118.5" r="2.5" class="lfd"/><text x="315" y="122.5" class="">No owner</text><circle cx="288" cy="87" r="2.5" class="lfd"/><text x="294" y="91" class="">Busy leads</text>
+<circle cx="149" cy="181.5" r="2.5" class="lfd"/><text x="155" y="185.5" class="">Flaky test suite</text><circle cx="128" cy="213" r="2.5" class="lfd"/><text x="134" y="217" class="">Slow build (40 min)</text><circle cx="309" cy="181.5" r="2.5" class="lfd"/><text x="315" y="185.5" class="">Shared env</text><circle cx="288" cy="213" r="2.5" class="lfd"/><text x="294" y="217" class="">Freeze days</text></g>
+<text x="20" y="26" class="t-b t-bad" data-f="4">Biggest driver: flaky tests, 41% of delays</text></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The effect sits in the head and each bone is a cause category, with specific causes along it. Play draws the spine, then the four categories, then the causes, and finally marks the biggest driver so the root-cause discussion has a starting point. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:4,stepMs:950,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "id": "calendar-heatmap",
+  "name": "Calendar heatmap",
+  "category": "chart",
+  "definition": "Days in a calendar grid shaded by value.",
+  "bestUse": "Daily patterns.",
+  "trigger": [
+    "trend-over-time",
+    "distribution"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/calendar-heatmap.html",
+    "kind": "interactive",
+    "how": "Each square is one day, columns are weeks and rows are weekdays, shaded by count. Switch between releases and incidents, then hover, or Tab into the grid and use the arrow keys, to read any day. Data is illustrative."
+  },
+  "aliases": [
+    "heatmap",
+    "github contributions"
+  ]
+}

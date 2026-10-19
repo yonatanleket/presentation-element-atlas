@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speaker intro card: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.ic{display:grid;grid-template-columns:5.6em 1fr;gap:.5em 1em;align-items:start}
+.av{width:5.6em;height:5.6em;border-radius:50%;overflow:hidden;grid-row:span 2}
+.nm{font:700 1.4em/1.1 var(--f-display);margin:0}.rl{font-size:.9em;color:var(--muted);margin:.15em 0 0}
+.ul{margin:0;padding-inline-start:1.1em;font-size:.9em;display:grid;gap:.2em}
+.sc{padding:.45em .7em;font-size:.85em;background:var(--accent-soft);border-color:#c9d2fb;margin-top:.2em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Speaker intro card</h1>
+<div class="stage" role="img" aria-label="Demo: Speaker intro card. An opening card builds a photo placeholder and name, the role, three responsibility bullets and a scope note.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.5em">
+<div class="ic"><svg class="av b fx" id="ph" viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#d6dcf3"/><circle cx="30" cy="24" r="11" fill="#8e9bcc"/><path d="M8 60c3-14 12-20 22-20s19 6 22 20z" fill="#8e9bcc"/></svg>
+<div class="b fx" id="nm"><p class="nm">Alex Rivera</p><p class="rl b fx" id="rl">Platform engineering lead · 6 years on the team</p></div>
+<ul class="ul b fx" id="ul"><li>Runs the release tooling group (12 people)</li><li>Owns build and deploy reliability targets</li><li>Led the move from monthly to weekly releases</li></ul></div>
+<p class="sc card b fx" id="sc"><b>Today:</b> the release process only. Hiring and budget are out of scope.</p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The card introduces the speaker before the content: a photo, name and role, three bullets on what they are responsible for, and a scope note saying what this talk covers and what it does not. Play builds those parts in order. The person and photo are invented placeholders.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:4,stepMs:900,render:function(f){on($('ph'),f>=1);on($('nm'),f>=1);on($('rl'),f>=2);on($('ul'),f>=3);on($('sc'),f>=4);}});
+</script>
+</body>
+</html>

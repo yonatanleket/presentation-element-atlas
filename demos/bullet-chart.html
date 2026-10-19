@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bullet chart: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.bc{display:grid;gap:.9em;width:86%}
+.bc .r{display:grid;grid-template-columns:6.5em 1fr 3.4em;align-items:center;gap:.6em}
+.track{position:relative;height:1.3em;display:flex;border-radius:.15em;overflow:hidden}
+.track span{height:100%}.b1{background:#d5d9e1}.b2{background:#e2e5eb}.b3{background:#eef0f4}
+.val{position:absolute;inset-inline-start:0;inset-block:.42em;background:var(--fg);width:0;transition:width .9s var(--ease-out)}
+.tgt{position:absolute;inset-block:.15em;width:.18em;background:var(--accent)}
+.pct{font:500 .85em var(--f-mono);opacity:0;transition:opacity .2s}.pct.on{opacity:1}
+.lg{display:flex;gap:1em;font-size:.75em;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Bullet chart</h1>
+<div class="stage" role="img" aria-label="Demo: Bullet chart">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill center"><div class="bc" id="bc"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Grey bands mark poor, fair and good ranges, a thin vertical line marks the target, and the dark bar grows to the actual value. One glance shows the value, the goal and how good it is. Values are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var R=[['Releases / wk',37,40],['Teams onboard',9,8],['Tests automated',58,80]];var MAX=[50,12,100];
+bc.innerHTML=R.map(function(r,i){var m=MAX[i];return '<div class="r"><span>'+r[0]+'</span><div class="track" role="img" aria-label="'+r[0]+': '+r[1]+' against target '+r[2]+'"><span class="b1" style="width:50%"></span><span class="b2" style="width:30%"></span><span class="b3" style="width:20%"></span><i class="val" data-w="'+(r[1]/m*100)+'%"></i><i class="tgt" style="inset-inline-start:'+(r[2]/m*100)+'%"></i></div><span class="pct">'+Math.round(r[1]/r[2]*100)+'%</span></div>';}).join('')+'<div class="lg"><span>■ actual</span><span style="color:var(--accent)">| target</span><span>bands: poor · fair · good</span></div>';
+AtlasDemo.init({frames:2,stepMs:1100,render:function(f){bc.querySelectorAll('.val').forEach(function(v){v.style.width=f>=1?v.dataset.w:'0';});bc.querySelectorAll('.pct').forEach(function(p){p.classList.toggle('on',f>=2);});}});
+</script>
+</body>
+</html>

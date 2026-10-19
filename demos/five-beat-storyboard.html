@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five-beat storyboard: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sb{position:absolute;inset:2em .9em .9em;display:grid;grid-template-rows:auto auto 1fr;gap:.55em}
+.pan{display:grid;grid-template-columns:repeat(5,1fr);gap:.45em}
+.pn{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:.45em;padding:.35em;display:grid;gap:.3em;align-content:start;height:7.4em;opacity:.72;transition:opacity .25s var(--ease-out),transform .25s var(--ease-out),border-color .25s}
+.pn[aria-pressed=true]{opacity:1;transform:translateY(-.25em);border-color:var(--accent);box-shadow:0 .3em .8em rgba(27,30,36,.12)}
+.pn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pn .d{font:600 .8em var(--f-mono);color:var(--muted)}
+.ui{border-radius:.3em;padding:.3em;font-size:.8em;line-height:1.2;min-height:3.6em}
+.u1{background:var(--ok-soft);color:var(--ok)}.u2{background:var(--accent-soft);color:var(--accent)}.u3{background:var(--bad-soft);color:var(--bad)}.u4{background:var(--warn-soft);color:var(--warn)}.u5{background:var(--ok-soft);color:var(--ok)}
+.mood{height:2.2em}
+.cap{display:flex;gap:.6em;align-items:flex-start}
+.cap .p{flex:1}.nav{display:flex;gap:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Five-beat storyboard</h1>
+<div class="stage" role="group" aria-label="Demo: Five-beat storyboard. Five day-by-day panels of mini UI moments; selecting a panel enlarges it and shows its caption and frustration level.">
+<span class="label-illustrative">Illustrative</span>
+<div class="sb">
+  <div class="pan" id="pan">
+    <button class="pn" type="button"><span class="d">Mon</span><span class="ui u1">✓ Access request sent</span></button>
+    <button class="pn" type="button"><span class="d">Tue</span><span class="ui u2">🔔 Still waiting on approval</span></button>
+    <button class="pn" type="button"><span class="d">Wed</span><span class="ui u3">✕ Can't open file: no access</span></button>
+    <button class="pn" type="button"><span class="d">Thu</span><span class="ui u4">💬 “Any update on this?”</span></button>
+    <button class="pn" type="button"><span class="d">Fri</span><span class="ui u5">✓ Access granted</span></button>
+  </div>
+  <svg class="mood" viewBox="0 0 500 40" preserveAspectRatio="none" aria-hidden="true"><polyline id="ml" fill="none" stroke="var(--bad)" stroke-width="3" points="50,32 150,24 250,8 350,6 450,30"/><circle id="mc" r="7" fill="var(--bad)" cx="50" cy="32"/></svg>
+  <div class="cap"><p class="p" id="cap"></p><div class="nav"><button class="sbtn" type="button" id="prev">‹ Prev</button><button class="sbtn" type="button" id="next">Next ›</button></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Five small panels show what one user sees from Monday to Friday. Select a panel, or use Previous, Next and the arrow keys, to bring that day forward with its caption; the frustration track underneath rises until the problem is solved. Reset returns to day one.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var C=['Day 1 · She asks for access to the shared report and moves on.','Day 2 · A reminder, but nobody has approved it yet.','Day 3 · The deadline task is blocked: the file will not open.','Day 4 · She chases the owner in chat. Frustration peaks.','Day 5 · Access arrives. Four days lost to one permission.'];
+var Y=[32,24,8,6,30],cur=0,api,pns=$('pan').querySelectorAll('.pn');
+function sel(i,focus){cur=Math.max(0,Math.min(4,i));pns.forEach(function(b,k){b.setAttribute('aria-pressed',String(k===cur));b.tabIndex=k===cur?0:-1;});
+  $('cap').textContent=C[cur];$('mc').setAttribute('cx',50+cur*100);$('mc').setAttribute('cy',Y[cur]);
+  $('prev').disabled=cur===0;$('next').disabled=cur===4;if(focus)pns[cur].focus();}
+pns.forEach(function(b,i){b.addEventListener('click',function(){sel(i);api.status(C[i]);});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;if(isRtl())d=-d;e.preventDefault();sel(cur+d,true);api.status(C[cur]);});});
+$('prev').addEventListener('click',function(){sel(cur-1);api.status(C[cur]);});
+$('next').addEventListener('click',function(){sel(cur+1);api.status(C[cur]);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){sel(0);}});
+})();
+</script>
+</body>
+</html>

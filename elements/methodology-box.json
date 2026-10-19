@@ -1,0 +1,23 @@
+{
+  "id": "methodology-box",
+  "name": "Methodology box",
+  "category": "trust",
+  "definition": "Short note explaining how a number was computed.",
+  "bestUse": "Contested metrics.",
+  "trigger": [
+    "method-explanation"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/methodology-box.html",
+    "kind": "animated",
+    "how": "The headline number appears first, then a compact methodology box states the metric, sample, period and exclusions, and finally the main caveat is highlighted. Anyone challenging the number can see how it was built without leaving the slide. Values are illustrative."
+  },
+  "aliases": [
+    "method note",
+    "how calculated"
+  ]
+}

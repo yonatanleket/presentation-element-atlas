@@ -1,0 +1,20 @@
+{
+  "id": "chord-diagram",
+  "name": "Chord diagram",
+  "category": "chart",
+  "definition": "Arcs linking groups around a circle.",
+  "bestUse": "Flows between many groups.",
+  "trigger": [
+    "flow-between-stages",
+    "relationships"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/chord-diagram.html",
+    "kind": "interactive",
+    "how": "Each team owns an arc sized by its total shared projects, and each ribbon joins two teams with width equal to the projects they share. Select a team (click, or Tab then Enter) to isolate its ribbons and hear the counts; hover a ribbon for its value. Data is illustrative."
+  }
+}

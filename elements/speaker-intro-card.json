@@ -1,0 +1,19 @@
+{
+  "id": "speaker-intro-card",
+  "name": "Speaker intro card",
+  "category": "story",
+  "definition": "Photo, name and role, a few responsibility bullets and a scope note on the opening slide.",
+  "bestUse": "Talks where the speaker needs to establish credibility first.",
+  "trigger": [
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/speaker-intro-card.html",
+    "kind": "animated",
+    "how": "The card introduces the speaker before the content: a photo, name and role, three bullets on what they are responsible for, and a scope note saying what this talk covers and what it does not. Play builds those parts in order. The person and photo are invented placeholders."
+  }
+}

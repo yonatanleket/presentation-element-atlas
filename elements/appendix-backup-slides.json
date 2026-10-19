@@ -1,0 +1,23 @@
+{
+  "id": "appendix-backup-slides",
+  "name": "Appendix / backup slides",
+  "category": "story",
+  "definition": "Slides after the close for expected questions.",
+  "bestUse": "Q&A preparation.",
+  "trigger": [
+    "dense-detail"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/appendix-backup-slides.html",
+    "kind": "animated",
+    "how": "The main talk ends on its closing slide; backup slides sit after an Appendix divider so they never interrupt the story. Play adds the divider, then the backups, then shows a question from the room jumping straight to the backup slide that answers it."
+  },
+  "aliases": [
+    "appendix",
+    "backup"
+  ]
+}

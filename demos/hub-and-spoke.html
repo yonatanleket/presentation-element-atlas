@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hub and spoke: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.spk{stroke:var(--accent);stroke-width:1.8}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Hub and spoke</h1>
+<div class="stage" role="img" aria-label="Demo: Hub and spoke. A central Platform API with six connected consumers: mobile, web, partner apps, billing, analytics and support.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<text x="20" y="30" class="t-b" data-f="3" style="font-size:15px">One API, six consumers</text>
+<line x1="240" y1="155" x2="240" y2="40" class="spk draw" pathLength="1" data-f="2"/><line x1="240" y1="155" x2="345" y2="97" class="spk draw" pathLength="1" data-f="2"/><line x1="240" y1="155" x2="345" y2="213" class="spk draw" pathLength="1" data-f="2"/><line x1="240" y1="155" x2="240" y2="270" class="spk draw" pathLength="1" data-f="3"/><line x1="240" y1="155" x2="135" y2="213" class="spk draw" pathLength="1" data-f="3"/><line x1="240" y1="155" x2="135" y2="97" class="spk draw" pathLength="1" data-f="3"/>
+<g data-f="1"><circle cx="240" cy="155" r="46" class="nd-a"/><text x="240" y="151" text-anchor="middle" class="t-b t-a">Platform</text><text x="240" y="167" text-anchor="middle" class="t-b t-a">API</text></g>
+<g data-f="2"><rect x="189" y="25" width="102" height="30" rx="15" class="nd"/><text x="240" y="44.5" text-anchor="middle" class="">Mobile app</text></g><g data-f="2"><rect x="294" y="82" width="102" height="30" rx="15" class="nd"/><text x="345" y="101.5" text-anchor="middle" class="">Web app</text></g><g data-f="2"><rect x="294" y="198" width="102" height="30" rx="15" class="nd"/><text x="345" y="217.5" text-anchor="middle" class="">Partner apps</text></g><g data-f="3"><rect x="189" y="255" width="102" height="30" rx="15" class="nd"/><text x="240" y="274.5" text-anchor="middle" class="">Billing</text></g><g data-f="3"><rect x="84" y="198" width="102" height="30" rx="15" class="nd"/><text x="135" y="217.5" text-anchor="middle" class="">Analytics</text></g><g data-f="3"><rect x="84" y="82" width="102" height="30" rx="15" class="nd"/><text x="135" y="101.5" text-anchor="middle" class="">Support desk</text></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One central node and every item that depends on it, each on its own spoke so no consumer looks more important than another. Play draws the hub, then the spokes in two waves, and ends with the takeaway: one contract serves six consumers. Names are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:3,stepMs:900,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

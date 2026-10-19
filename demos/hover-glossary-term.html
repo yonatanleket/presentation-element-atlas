@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hover glossary term: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.para{font-size:1.1em;line-height:1.6;margin:0}
+.term{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:help;text-decoration:underline dotted var(--accent);text-decoration-thickness:.12em;text-underline-offset:.2em;position:relative}
+.term[aria-expanded=true]{color:var(--accent)}
+.tip{position:absolute;z-index:4;width:13em;padding:.5em .65em;background:var(--fg);color:#fff;border-radius:.4em;font-size:.85em;line-height:1.35;box-shadow:0 .3em 1em rgba(27,30,36,.2)}
+.tip[hidden]{display:none}.tip b{display:block;font:600 .95em var(--f-mono);color:#c8d1ff;margin-bottom:.15em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Hover glossary term</h1>
+<div class="stage" role="group" aria-label="Demo: Hover glossary term. A slide paragraph with three underlined jargon terms; hovering, focusing or clicking a term shows its definition.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" id="db" style="gap:.6em">
+<p class="kicker">Performance</p><p class="h" style="font-size:1.2em">Faster pages without new servers</p>
+<p class="para">We cut <button class="term" type="button" data-t="0" aria-expanded="false">p95 latency</button> by 40% by moving hot reads to an <button class="term" type="button" data-t="1" aria-expanded="false">edge cache</button>, and stayed inside our <button class="term" type="button" data-t="2" aria-expanded="false">SLO</button> the whole time.</p>
+<div class="tip" id="tip" role="tooltip" hidden></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Jargon terms carry a dotted underline. Hover, Tab to, or click a term to show a short definition right beside it; Escape or moving away hides it. The status line counts terms looked up, and the slide text itself never changes, so experts are not slowed down.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var D=[['p95 latency','The response time that 95% of requests beat. It shows the slow tail, not the average.'],['Edge cache','Copies of data stored on servers close to users, so requests travel a shorter distance.'],['SLO','Service level objective: the reliability target the team commits to, e.g. 99.9% of requests succeed.']];
+var seen={},cur=-1,pinned=false;
+function show(b,pin){var i=+b.dataset.t;cur=i;pinned=!!pin;seen[i]=1;var tip=$('tip');tip.innerHTML='<b>'+D[i][0]+'</b>'+D[i][1];tip.hidden=false;tip.id='tip';
+document.querySelectorAll('.term').forEach(function(t){t.setAttribute('aria-expanded',String(t===b));t.removeAttribute('aria-describedby');});b.setAttribute('aria-describedby','tip');
+var db=$('db').getBoundingClientRect(),r=b.getBoundingClientRect(),em=parseFloat(getComputedStyle(tip).fontSize);
+var x=Math.max(4,Math.min(db.width-tip.offsetWidth-4,r.left-db.left+r.width/2-tip.offsetWidth/2));tip.style.left=x+'px';tip.style.top=(r.bottom-db.top+em*.4)+'px';
+if(r.bottom-db.top+tip.offsetHeight+em>db.height)tip.style.top=(r.top-db.top-tip.offsetHeight-em*.4)+'px';
+api.status('Defined: '+D[i][0]+' · '+Object.keys(seen).length+' of 3 terms looked up');}
+function hide(){cur=-1;pinned=false;$('tip').hidden=true;document.querySelectorAll('.term').forEach(function(t){t.setAttribute('aria-expanded','false');t.removeAttribute('aria-describedby');});}
+document.querySelectorAll('.term').forEach(function(b){b.addEventListener('mouseenter',function(){show(b);});b.addEventListener('mouseleave',function(){if(!pinned)hide();});
+b.addEventListener('focus',function(){show(b);});b.addEventListener('blur',function(){hide();});
+b.addEventListener('click',function(){if(cur===+b.dataset.t&&pinned)hide();else show(b,true);});
+b.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!document.getElementById('tip').hidden)e.preventDefault();hide();}});});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){seen={};hide();}});
+</script>
+</body>
+</html>

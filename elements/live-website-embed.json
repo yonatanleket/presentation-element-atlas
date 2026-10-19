@@ -1,0 +1,19 @@
+{
+  "id": "live-website-embed",
+  "name": "Live website / embed",
+  "category": "product",
+  "definition": "Interactive web content inside a card.",
+  "bestUse": "Demos, dashboards.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "advanced",
+  "sources": [
+    "gamma"
+  ],
+  "demo": {
+    "file": "demos/live-website-embed.html",
+    "kind": "interactive",
+    "how": "The card behaves like an embedded page: switch the period, pick a region and the chart and total update in place; Reload shows the loading skeleton a live embed would show. Everything is simulated locally, so the slide still works offline. Reset restores the defaults."
+  }
+}

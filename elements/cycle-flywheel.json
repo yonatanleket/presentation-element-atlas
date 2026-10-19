@@ -1,0 +1,24 @@
+{
+  "id": "cycle-flywheel",
+  "name": "Cycle / flywheel",
+  "category": "diagram",
+  "definition": "Self-reinforcing loop of stages.",
+  "bestUse": "Growth models.",
+  "trigger": [
+    "cause-effect"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/cycle-flywheel.html",
+    "kind": "animated",
+    "how": "Four stages sit on a loop and each arrow says the stage feeds the next one. Play adds a stage and its arrow at a time until the loop closes back on More users, then names the compounding effect in the middle. Stages are illustrative."
+  },
+  "aliases": [
+    "loop",
+    "cycle",
+    "virtuous circle"
+  ]
+}

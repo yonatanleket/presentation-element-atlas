@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timing bars with budget line: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.bar{transition:transform .45s var(--ease-out)}.bar rect{fill:var(--accent)}.bar.par rect{fill:#5b72e4}
+.bl{transition:transform .3s var(--ease-out)}.bud{stroke:var(--bad);stroke-width:2;stroke-dasharray:5 3}.grid{stroke:var(--line)}
+.ctl{position:absolute;inset-inline:1em;inset-block-end:.6em;display:flex;align-items:center;gap:.4em;flex-wrap:wrap}
+.ctl label{font-size:.8em;display:flex;align-items:center;gap:.4em;margin-inline-start:auto}.ctl input{width:7em;accent-color:var(--bad)}
+.tot.ok{fill:var(--ok)}.tot.bad{fill:var(--bad)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Timing bars with budget line</h1>
+<div class="stage" role="group" aria-label="Demo: Timing bars with budget line. Gantt bars for four page-load phases against a 500 millisecond budget line; toggle serial or parallel and move the budget.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><text x="20" y="30" class="t-b" style="font-size:15px">Page load, by phase</text><text x="20" y="52" class="t-b tot" id="tot"></text>
+<line x1="110" y1="64" x2="110" y2="200" class="grid"/><text x="110" y="218" text-anchor="middle" class="t-m t-mono">0</text><line x1="158.57142857142856" y1="64" x2="158.57142857142856" y2="200" class="grid"/><text x="158.57142857142856" y="218" text-anchor="middle" class="t-m t-mono">100</text><line x1="207.14285714285714" y1="64" x2="207.14285714285714" y2="200" class="grid"/><text x="207.14285714285714" y="218" text-anchor="middle" class="t-m t-mono">200</text><line x1="255.71428571428572" y1="64" x2="255.71428571428572" y2="200" class="grid"/><text x="255.71428571428572" y="218" text-anchor="middle" class="t-m t-mono">300</text><line x1="304.2857142857143" y1="64" x2="304.2857142857143" y2="200" class="grid"/><text x="304.2857142857143" y="218" text-anchor="middle" class="t-m t-mono">400</text><line x1="352.8571428571429" y1="64" x2="352.8571428571429" y2="200" class="grid"/><text x="352.8571428571429" y="218" text-anchor="middle" class="t-m t-mono">500</text><line x1="401.42857142857144" y1="64" x2="401.42857142857144" y2="200" class="grid"/><text x="401.42857142857144" y="218" text-anchor="middle" class="t-m t-mono">600</text><line x1="450" y1="64" x2="450" y2="200" class="grid"/><text x="450" y="218" text-anchor="middle" class="t-m t-mono">700</text>
+<text x="460" y="236" text-anchor="end" class="t-m t-mono">ms</text>
+<text x="100" y="88" text-anchor="end" class="">Auth</text><g class="bar" id="b0"><rect x="0" y="72" width="58.3" height="22" rx="3"/><text x="29.1" y="88" text-anchor="middle" class="t-w">120</text></g><text x="100" y="120" text-anchor="end" class="">Profile</text><g class="bar" id="b1"><rect x="0" y="104" width="87.4" height="22" rx="3"/><text x="43.7" y="120" text-anchor="middle" class="t-w">180</text></g><text x="100" y="152" text-anchor="end" class="">Recs</text><g class="bar" id="b2"><rect x="0" y="136" width="126.3" height="22" rx="3"/><text x="63.1" y="152" text-anchor="middle" class="t-w">260</text></g><text x="100" y="184" text-anchor="end" class="">Render</text><g class="bar" id="b3"><rect x="0" y="168" width="43.7" height="22" rx="3"/><text x="21.9" y="184" text-anchor="middle" class="t-w">90</text></g>
+<g class="bl" id="bl"><line x1="0" y1="60" x2="0" y2="202" class="bud"/><text x="0" y="242" text-anchor="middle" class="t-bad t-b" id="bt"></text></g></svg>
+<div class="ctl"><span role="group" aria-label="Execution mode" style="display:flex;gap:.3em"><button type="button" class="sbtn" data-m="s">Serial</button><button type="button" class="sbtn" data-m="p">Parallel</button></span>
+<label>Budget <input type="range" id="bud" min="300" max="700" step="50" aria-label="Budget in milliseconds"></label></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each bar is one phase of a page load placed on a millisecond axis, and the red line is the budget. Switch between Serial and Parallel to see Profile and Recs overlap and the total drop from 650 to 470 ms, and drag the budget slider to test other targets. Timings are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var T=[["Auth",120,0,0],["Profile",180,120,120],["Recs",260,300,120],["Render",90,560,380]],X0=110,SC=0.4857142857142857;var mode='s',budget=500,api;
+function draw(){var end=0;T.forEach(function(t,i){var s=mode==='s'?t[2]:t[3];end=Math.max(end,s+t[1]);var g=document.getElementById('b'+i);g.style.transform='translateX('+(X0+s*SC)+'px)';g.classList.toggle('par',mode==='p'&&(i===1||i===2));});
+  $$('[data-m]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.m===mode));});
+  $('#bl').style.transform='translateX('+(X0+budget*SC)+'px)';$('#bt').textContent='Budget '+budget+' ms';$('#bud').value=budget;$('#bud').setAttribute('aria-valuetext',budget+' milliseconds');
+  var over=end-budget,t=$('#tot');t.textContent='Total '+end+' ms · '+(over>0?over+' ms over budget':(-over)+' ms under budget');t.setAttribute('class','t-b tot '+(over>0?'bad':'ok'));return {end:end,over:over};}
+$$('[data-m]').forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.m;var r=draw();api.status((mode==='s'?'Serial':'Parallel')+': '+r.end+' ms');});});
+$('#bud').addEventListener('input',function(){budget=+this.value;var r=draw();api.status(r.over>0?'Over budget by '+r.over+' ms':'Within budget');});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Try Parallel, or move the budget',reset:function(){mode='s';budget=500;draw();}});
+</script>
+</body>
+</html>

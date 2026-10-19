@@ -1,0 +1,20 @@
+{
+  "id": "scope-bracket-diagram",
+  "name": "Scope bracket diagram",
+  "category": "diagram",
+  "definition": "Process row with brackets above and below marking what the initiative owns and what stays unchanged.",
+  "bestUse": "Clarifying scope and boundaries.",
+  "trigger": [
+    "scope-boundary",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/scope-bracket-diagram.html",
+    "kind": "interactive",
+    "how": "The process runs left to right; the bracket above marks the steps this initiative owns and the bracket below marks what stays unchanged. Click a step, or press Enter on it, to move it in or out of scope and the brackets redraw around the new boundary. Reset restores the proposed scope."
+  }
+}

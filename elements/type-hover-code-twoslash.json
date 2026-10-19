@@ -1,0 +1,20 @@
+{
+  "id": "type-hover-code-twoslash",
+  "name": "Type-hover code (TwoSlash)",
+  "category": "product",
+  "definition": "Code that shows type information on hover.",
+  "bestUse": "Developer talks.",
+  "trigger": [
+    "code",
+    "jargon-definition"
+  ],
+  "level": "advanced",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/type-hover-code-twoslash.html",
+    "kind": "interactive",
+    "how": "Hover, focus or click an underlined identifier to see the type the compiler would infer, shown in a popover under that token. Arrow keys move between identifiers and Escape closes the popover, so a presenter can answer “what is this?” without leaving the slide. Reset clears it."
+  }
+}

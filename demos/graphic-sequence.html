@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphic sequence: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-columns:12em 1fr;gap:1.1em;align-items:center}
+.pnl{position:relative;height:12em;background:var(--surface);border:1px solid var(--line);border-radius:.6em}
+.pnl svg{position:absolute;inset:1.6em;width:calc(100% - 3.2em);height:calc(100% - 3.2em);opacity:0;transition:opacity .35s var(--ease-out)}
+.pnl svg.on{opacity:1}
+.txt{display:grid;gap:.45em}.txt>*{transition:opacity .25s var(--ease-out)}
+.dots{display:flex;gap:.35em}.dots i{width:1.6em;height:.35em;border-radius:99em;background:var(--line)}.dots i.on{background:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Graphic sequence</h1>
+<div class="stage" role="img" aria-label="Demo: Graphic sequence. A fixed graphic panel swaps between three icons while the text beside it changes for each step.">
+<div class="wrap">
+  <div class="pnl" aria-hidden="true">
+    <svg viewBox="0 0 100 100" class="on"><rect x="15" y="25" width="70" height="50" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="3"/><path d="M15 50h20l6 10h18l6-10h20" fill="none" stroke="var(--accent)" stroke-width="3"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M15 20h70L58 52v24l-16 8V52z" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="3" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M20 38l30-14 30 14v34L50 86 20 72z" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="3" stroke-linejoin="round"/><path d="M20 38l30 14 30-14M50 52v34" fill="none" stroke="var(--ok)" stroke-width="3"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M28 52l15 15 30-32" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="txt"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p" id="p"></p><div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The frame and layout never move; only the picture inside the panel and the text beside it are swapped at each step. Because the eye always returns to the same spot, each new graphic reads as the next step in one story rather than a new slide.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var S=[['How a request moves','Three steps, one panel','Watch the picture on the left.'],['Step 1','Collect','Every request lands in one inbox.'],['Step 2','Sort','Rules route it to the right team.'],['Step 3','Ship','The answer goes back in one package.']];
+var svgs=document.querySelectorAll('.pnl svg'),dots=$('dots').children;
+AtlasDemo.init({frames:3,stepMs:1400,render:function(f){var s=S[f];$('k').textContent=s[0];$('t').textContent=s[1];$('p').textContent=s[2];
+  var pic=f===0?3:f-1;svgs.forEach(function(v,i){v.classList.toggle('on',i===pic);});for(var i=0;i<3;i++)dots[i].classList.toggle('on',i<f);}});
+})();
+</script>
+</body>
+</html>

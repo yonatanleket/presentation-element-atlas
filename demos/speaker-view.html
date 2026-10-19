@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speaker view: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sv{position:absolute;inset:.7em;display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:auto 1fr 1fr;gap:.5em;font-size:.85em}
+.sv .top{grid-column:1/3;display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono)}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.6em;display:flex;flex-direction:column;gap:.25em;min-height:0}
+.cur{grid-row:2/4}.cur .h{font-size:1.25em}.nx{opacity:.75}.nx .h{font-size:.95em}
+.nt{background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.5em .6em;font-size:.95em;color:var(--ink-2)}
+.clock{font-size:1.2em;font-weight:500}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Speaker view</h1>
+<div class="stage" role="img" aria-label="Demo: Speaker view">
+<span class="label-illustrative" style="inset-block-start:auto;inset-block-end:.4em">Simulated</span>
+<div class="sv"><div class="top"><span>Speaker view · <span id="pos"></span></span><span class="clock" id="clk"></span></div>
+<div class="mini cur"><span class="kicker">Current</span><p class="h" id="c"></p></div>
+<div class="mini nx"><span class="kicker">Next</span><p class="h" id="n"></p></div>
+<div class="nt" id="note"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The demo shows the presenter window: the current slide, the next slide, notes and a running clock. Play advances the talk so the preview, notes and timer change together, which is what the presenter sees while the audience sees one slide.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=['Where things stand','What slows us down','Three ways to fix it','Recommendation','Thank you'];
+var N=['Open with the release-time number.','Pause on the sign-off share.','Spend most time on option A.','Ask for the pilot decision.','Take questions.'];
+var C=['00:00','01:40','03:55','06:10'];
+AtlasDemo.init({frames:3,stepMs:1100,render:function(f){c.textContent=S[f];n.textContent=S[f+1];note.textContent='Notes: '+N[f];clk.textContent=C[f]+' / 10:00';pos.textContent='slide '+(f+1)+' of 5';}});
+</script>
+</body>
+</html>

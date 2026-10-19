@@ -1,0 +1,26 @@
+{
+  "id": "auto-animate-morph",
+  "name": "Auto-animate / morph",
+  "category": "motion",
+  "definition": "Matching elements move smoothly between slides.",
+  "bestUse": "Continuity between states.",
+  "trigger": [
+    "visual-mood",
+    "before-after"
+  ],
+  "level": "advanced",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/auto-animate-morph.html",
+    "kind": "interactive",
+    "how": "Switch between Slide 1 and Slide 2 (buttons or arrow keys). The title, circle and card exist on both slides, so they move and resize to their new spots instead of cutting. Turn Morph off to see the same change as a hard cut and compare. Reset returns to slide 1."
+  },
+  "aliases": [
+    "morph",
+    "magic move",
+    "smart animate",
+    "transition"
+  ]
+}

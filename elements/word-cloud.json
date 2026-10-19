@@ -1,0 +1,26 @@
+{
+  "id": "word-cloud",
+  "name": "Word cloud",
+  "category": "audience",
+  "definition": "Free-word responses; frequent words appear larger.",
+  "bestUse": "Openers and sentiment.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/word-cloud.html",
+    "kind": "interactive",
+    "how": "Simulated one-word answers arrive over about three seconds; each repeat of a word makes it larger, so the most common answers dominate. Type a word and press Enter or Add to submit your own: it appears outlined and grows if it matches an existing word. Reset clears everything."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience",
+    "tag cloud"
+  ]
+}

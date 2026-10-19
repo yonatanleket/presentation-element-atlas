@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary / answer first: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.ans{padding:.6em .8em;border-inline-start:.3em solid var(--accent);background:var(--accent-soft);border-radius:.3em}
+.ans p{margin:0;font:700 1.15em/1.2 var(--f-display)}
+.rs{display:grid;grid-template-columns:repeat(3,1fr);gap:.45em}
+.rs .card{padding:.45em .55em}.rs b{display:block;font:700 1.2em/1.1 var(--f-display)}.rs span{font-size:.8em;color:var(--ink-2);line-height:1.25;display:block}
+.ask{font-size:.85em;font-weight:600}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Executive summary / answer first</h1>
+<div class="stage" role="img" aria-label="Demo: Executive summary / answer first. An opening slide states the recommendation first, then three supporting reasons, then the decision needed.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.55em">
+<p class="kicker">Executive summary</p>
+<div class="ans b fx" id="a"><p>Recommendation: move all teams to one weekly release train by Q3.</p></div>
+<div class="rs"><div class="card b fx" id="r1"><b>9 → 4 days</b><span>median lead time in the pilot</span></div>
+<div class="card b fx" id="r2"><b>2 fewer</b><span>manual approvals per release</span></div>
+<div class="card b fx" id="r3"><b>+1 engineer</b><span>the only new cost</span></div></div>
+<p class="ask b fx" id="ask">Decision today: approve the Q3 rollout plan.</p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The slide opens with the conclusion as a full sentence, before any evidence. Play adds the answer, then the three reasons that support it, each with one number, and finally the decision being asked for, so a leader who reads only this slide still knows what to approve.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:3,stepMs:1000,render:function(f){on($('a'),f>=1);['r1','r2','r3'].forEach(function(i,n){var e=$(i);e.style.transitionDelay=(f===2?n*.12:0)+'s';on(e,f>=2);});on($('ask'),f>=3);}});
+</script>
+</body>
+</html>

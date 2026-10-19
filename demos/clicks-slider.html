@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clicks slider: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:.12}.b.on{opacity:1}
+.scrub{display:flex;align-items:center;gap:.6em;width:100%}
+.scrub input{flex:1;accent-color:var(--accent);min-height:1.6em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Clicks slider</h1>
+<div class="stage" role="group" aria-label="Demo: Clicks slider">
+<div class="deck"><div class="deck-body"><p class="kicker">Options</p><p class="h">What we could change</p>
+<ol class="col" style="margin:0;padding-inline-start:1.2em" id="ol"><li class="b fx">Automate the test gate</li><li class="b fx">Delegate approval to leads</li><li class="b fx">Batch low-risk changes</li><li class="b fx"><strong>Recommend: automate first</strong></li></ol></div>
+<div class="deck-foot"><label class="scrub"><span class="mono">Clicks</span><input type="range" min="0" max="4" step="1" value="0" id="r" aria-valuetext="Build 0 of 4"><span class="mono" id="lab">0 / 4</span></label></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A slider underneath the slide maps to every build step. Drag it or use the arrow keys to scrub forward and backward through the builds, which is how a presenter rehearses a complex reveal without replaying the whole slide.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var bs=ol.querySelectorAll('.b');
+function set(n){r.value=n;bs.forEach(function(b,i){b.classList.toggle('on',i<n);});lab.textContent=n+' / 4';r.setAttribute('aria-valuetext','Build '+n+' of 4');}
+r.addEventListener('input',function(){set(+r.value);api.status('Build '+r.value+' of 4');});
+var api=AtlasDemo.init({frames:0,interactive:true,idleText:'Drag the slider or use arrow keys',reset:function(){set(0);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "id": "what-if-calculator",
+  "name": "What-if calculator",
+  "category": "explore",
+  "definition": "Inputs that produce an estimate such as ROI or savings.",
+  "bestUse": "Sales and business cases.",
+  "trigger": [
+    "what-if-model",
+    "estimate-with-range"
+  ],
+  "level": "advanced",
+  "sources": [
+    "explor"
+  ],
+  "demo": {
+    "file": "demos/what-if-calculator.html",
+    "kind": "interactive",
+    "how": "Adjust team size, hours saved per person each week and hourly cost; the estimate updates as you type or slide. Savings = people × hours × 46 working weeks × hourly cost. Cost = people × $25 × 12 months. Payback = cost ÷ weekly savings. All figures are illustrative; Reset restores the defaults."
+  },
+  "aliases": [
+    "calculator",
+    "roi",
+    "savings estimate"
+  ]
+}

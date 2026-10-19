@@ -1,0 +1,24 @@
+{
+  "id": "histogram-box-plot-violin",
+  "name": "Histogram / box plot / violin",
+  "category": "chart",
+  "definition": "Shape of a distribution.",
+  "bestUse": "Spread and outliers.",
+  "trigger": [
+    "distribution"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/histogram-box-plot-violin.html",
+    "kind": "animated",
+    "how": "The same 80 release times appear three ways: a histogram of counts per day, a box plot (median, middle half, whiskers to 1.5× the box, outliers as dots), then a violin outline showing the smoothed shape. Data is illustrative."
+  },
+  "aliases": [
+    "distribution",
+    "spread",
+    "outliers"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "presenter-panel-quiet-button",
+  "name": "Presenter panel (quiet button)",
+  "category": "nav",
+  "definition": "Low-visibility button that opens presenter-only notes, ready for Q&A or any point in the talk.",
+  "bestUse": "Keeping prompts for Q&A available without showing them to the audience.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/presenter-panel-quiet-button.html",
+    "kind": "interactive",
+    "how": "A faint button sits in the corner of the slide. Activating it opens a small panel of presenter prompts; it stays visually quiet so the audience barely notices it. Reset hides the panel again."
+  },
+  "aliases": [
+    "presenter notes",
+    "hidden notes"
+  ],
+  "related": [
+    "speaker-view"
+  ]
+}

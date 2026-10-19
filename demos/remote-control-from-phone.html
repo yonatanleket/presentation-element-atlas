@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote control from phone: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap2{position:absolute;inset:.8em;display:grid;grid-template-columns:5.2em 1fr;gap:1em;align-items:center}
+.phone{height:100%;max-height:15em;border:.25em solid var(--fg);border-radius:.9em;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;padding:.4em;font-size:.8em}
+.tap{width:3.6em;height:3.6em;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:600;transition:transform .15s var(--ease-out)}
+.tap.hit{transform:scale(.88)}
+.lap{position:relative;height:78%;}
+.lap .deck{inset:0}.link{font:400 .8em var(--f-mono);color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Remote control from phone</h1>
+<div class="stage" role="img" aria-label="Demo: Remote control from phone">
+<span class="label-illustrative">Simulated</span>
+<div class="wrap2"><div class="phone" aria-hidden="true"><span class="link">deck.link/r/7f2</span><div class="tap" id="tap">Next</div><span class="link" id="cnt">0 taps</span></div>
+<div class="lap"><div class="deck"><div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p></div><div class="deck-foot"><span class="mono muted" id="pos"></span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A simulated phone sends Next taps over a shared link and the slide on the laptop advances with each tap. Play runs a short sequence of taps; nothing here connects to a real device.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=[['Context','Where things stand'],['Problem','What slows us down'],['Options','Three ways to fix it'],['Plan','Recommendation']];
+AtlasDemo.init({frames:3,stepMs:1000,render:function(f,ctx){k.textContent=S[f][0];t.textContent=S[f][1];pos.textContent=(f+1)+' / 4';cnt.textContent=f+' tap'+(f===1?'':'s');
+  if(ctx.animate&&f>0){tap.classList.add('hit');setTimeout(function(){tap.classList.remove('hit');},160);}}});
+</script>
+</body>
+</html>

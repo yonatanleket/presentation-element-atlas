@@ -1,0 +1,25 @@
+{
+  "id": "rating-scales",
+  "name": "Rating scales",
+  "category": "audience",
+  "definition": "Rate statements on a range.",
+  "bestUse": "Confidence checks.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/rating-scales.html",
+    "kind": "interactive",
+    "how": "Each statement shows how the room rated it from 1 (disagree) to 5 (agree) as a stacked bar, with the average beside it. Simulated ratings arrive over about three seconds. Use the 1–5 buttons to rate the highlighted statement; the panel then moves on to the next one. Reset clears your ratings."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

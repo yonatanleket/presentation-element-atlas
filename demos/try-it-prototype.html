@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Try-it prototype: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.tp{position:absolute;inset:2em .9em .9em;display:grid;grid-template-rows:auto 1fr;gap:.5em}
+.top{display:flex;align-items:center;gap:.35em;flex-wrap:wrap}
+.cnt{margin-inline-start:auto;font:500 .8em var(--f-mono);color:var(--muted)}
+.app{position:relative;overflow:hidden;display:flex;flex-direction:column}
+.ah{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-bottom:1px solid var(--line);font-size:.85em}
+.ab{flex:1;padding:.7em .9em;display:flex;flex-direction:column;gap:.45em;align-items:flex-start}
+.ab label{display:flex;align-items:center;gap:.4em;font-size:.85em}
+.ab input{width:1em;height:1em;margin:0}
+.msg{border-radius:.4em;padding:.5em .7em;font-size:.85em;width:100%}
+.msg.bad{background:var(--bad-soft);color:var(--bad)}.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.pop{border:1px solid var(--line);border-radius:.45em;padding:.5em .6em;display:grid;gap:.35em;box-shadow:0 .3em .8em rgba(27,30,36,.12);font-size:.85em}
+.chips{display:flex;gap:.3em;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Try-it prototype</h1>
+<div class="stage" role="group" aria-label="Demo: Try-it prototype. A mini share-report app with an old flow that fails on the last step and a new two-click flow.">
+<span class="label-illustrative">Simulated app</span>
+<div class="tp">
+  <div class="top">
+    <div class="row" role="group" aria-label="Flow" style="gap:.3em"><button class="sbtn" type="button" id="mOld">Old flow</button><button class="sbtn" type="button" id="mNew">New flow</button></div>
+    <button class="sbtn" type="button" id="rew">⟲ Rewind</button>
+    <span class="cnt" id="cnt">Clicks: 0</span>
+  </div>
+  <div class="app card"><div class="ah"><b>Q3 report</b><span class="muted" id="crumb"></span></div><div class="ab" id="ab"></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Run the old flow: three screens to share a report, then a session error wipes the selections. Rewind, switch to the new flow, and the same task takes two clicks with suggested people. The click counter makes the difference felt rather than described. Reset returns to the old flow.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var mode='old',scr=0,clicks=0,api,ab=$('ab');
+var OLD=[
+ {c:'',h:'<p class="p">Revenue grew in every region this quarter.</p><button class="sbtn primary" type="button" data-go>Share…</button>'},
+ {c:'· Step 1 of 3: people',h:'<label><input type="checkbox" checked> Dana (Finance)</label><label><input type="checkbox" checked> Lee (Sales)</label><label><input type="checkbox" checked> Sam (Ops)</label><button class="sbtn primary" type="button" data-go>Next</button>'},
+ {c:'· Step 2 of 3: access',h:'<label><input type="radio" name="a" checked> Can view</label><label><input type="radio" name="a"> Can edit</label><button class="sbtn primary" type="button" data-go>Next</button>'},
+ {c:'· Step 3 of 3: confirm',h:'<p class="p">Share with 3 people, view only.</p><button class="sbtn primary" type="button" data-go>Send</button>'},
+ {c:'· Error',h:'<div class="msg bad" role="alert">✕ Session expired. Your selections were lost; start again.</div><span class="muted" style="font-size:.85em">Try Rewind, then the new flow.</span>',fail:1}];
+var NEW=[
+ {c:'',h:'<p class="p">Revenue grew in every region this quarter.</p><button class="sbtn primary" type="button" data-go>Share…</button>'},
+ {c:'· Share',h:'<div class="pop"><span>Suggested from this report’s viewers:</span><div class="chips"><span class="pill">Dana</span><span class="pill">Lee</span><span class="pill">Sam</span></div><button class="sbtn primary" type="button" data-go>Send to 3 · view only</button></div>'},
+ {c:'· Sent',h:'<div class="msg ok" role="status">✓ Shared with 3 people.</div>',ok:1}];
+function draw(focus){var F=mode==='old'?OLD:NEW,s=F[scr];$('crumb').textContent=s.c;ab.innerHTML=s.h;$('cnt').textContent='Clicks: '+clicks;
+  $('mOld').setAttribute('aria-pressed',String(mode==='old'));$('mNew').setAttribute('aria-pressed',String(mode==='new'));
+  var go=ab.querySelector('[data-go]');if(go){go.addEventListener('click',function(){clicks++;scr++;draw(true);
+    var n=F[scr];api.status(n.fail?'Old flow failed after '+clicks+' clicks':n.ok?'New flow done in '+clicks+' clicks':'Click '+clicks);});if(focus)go.focus();}
+  else if(focus)$('rew').focus();}
+function start(m){mode=m;scr=0;clicks=0;draw();}
+$('mOld').addEventListener('click',function(){start('old');api.status('Old flow');});
+$('mNew').addEventListener('click',function(){start('new');api.status('New flow');});
+$('rew').addEventListener('click',function(){start(mode);api.status('Rewound');});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){start('old');}});
+})();
+</script>
+</body>
+</html>

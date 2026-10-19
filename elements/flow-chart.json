@@ -1,0 +1,25 @@
+{
+  "id": "flow-chart",
+  "name": "Flow chart",
+  "category": "diagram",
+  "definition": "Steps and decisions linked by arrows.",
+  "bestUse": "Explaining logic.",
+  "trigger": [
+    "sequential-process",
+    "decision-tradeoff"
+  ],
+  "level": "standard",
+  "sources": [
+    "segel"
+  ],
+  "demo": {
+    "file": "demos/flow-chart.html",
+    "kind": "animated",
+    "how": "Rounded boxes are start points, rectangles are steps and the diamond is a yes/no decision. Play or Step lights one arrow at a time, and the caption explains what happens along it, including the retry loop back to the tests."
+  },
+  "aliases": [
+    "flowchart",
+    "process",
+    "decision flow"
+  ]
+}

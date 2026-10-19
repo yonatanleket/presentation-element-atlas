@@ -1,0 +1,26 @@
+{
+  "id": "2x2-grid-vote",
+  "name": "2×2 grid vote",
+  "category": "audience",
+  "definition": "Each participant places items on two axes.",
+  "bestUse": "Group prioritization.",
+  "trigger": [
+    "audience-input",
+    "prioritization"
+  ],
+  "level": "advanced",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/2x2-grid-vote.html",
+    "kind": "interactive",
+    "how": "Each participant places every item on an impact-versus-effort grid; small dots are simulated votes and the lettered chip is the room average. Pick an item, then click the grid, or focus the grid and use the arrow keys, to place your marker. Submit adds your placements to the averages."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

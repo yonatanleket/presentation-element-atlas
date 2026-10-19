@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Return-to-hub button: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;margin-top:.3em}
+.topic{text-align:start;font:inherit;font-size:.85em;background:var(--surface);border:1px solid var(--line);border-radius:.45em;padding:.5em;cursor:pointer;min-height:4.2em}
+.topic b{display:block;color:var(--accent);font:500 .85em var(--f-mono)}
+.back{position:absolute;inset-block-end:2.9em;inset-inline-end:.8em;z-index:3;box-shadow:0 .3em .9em rgba(27,30,36,.16)}
+.back[hidden]{display:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Return-to-hub button</h1>
+<div class="stage" role="group" aria-label="Demo: Return-to-hub button">
+<div class="deck"><div class="deck-body" id="body"></div>
+<button class="sbtn primary back" id="back" hidden>← Back to topics</button>
+<div class="deck-foot"><button class="sbtn" id="pv">← Prev</button><button class="sbtn" id="nx">Next →</button><span class="mono muted" id="pos"></span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Pick a topic on the hub slide to jump to the slide that answers it. A floating Back to topics button appears only after such a jump and returns you to the hub. Navigating normally never shows it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=[null,{k:'Cost',t:'Pilot costs two engineer-weeks'},{k:'Risk',t:'The pilot is fully reversible'},{k:'Timing',t:'Decision in six weeks'}];
+var i=0,fromHub=false,api;
+function draw(){pos.textContent=(i+1)+' / 4';pv.disabled=i===0;nx.disabled=i===3;back.hidden=!fromHub||i===0;
+  if(i===0){body.innerHTML='<p class="kicker">Q&amp;A</p><p class="h">Likely questions</p><div class="topics">'+S.slice(1).map(function(s,j){return '<button class="topic" data-j="'+(j+1)+'"><b>If asked…</b>'+s.k+'</button>';}).join('')+'</div>';}
+  else body.innerHTML='<p class="kicker">'+S[i].k+'</p><p class="h">'+S[i].t+'</p><p class="p muted">Answer slide</p>';}
+body.addEventListener('click',function(e){var b=e.target.closest('[data-j]');if(!b)return;i=+b.dataset.j;fromHub=true;draw();back.focus();api.status('Jumped from hub');});
+back.addEventListener('click',function(){i=0;fromHub=false;draw();body.querySelector('.topic').focus();api.status('Back at hub');});
+pv.addEventListener('click',function(){i--;fromHub=false;draw();});nx.addEventListener('click',function(){i++;fromHub=false;draw();});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){i=0;fromHub=false;draw();}});
+</script>
+</body>
+</html>

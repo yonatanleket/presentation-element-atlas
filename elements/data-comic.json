@@ -1,0 +1,23 @@
+{
+  "id": "data-comic",
+  "name": "Data comic",
+  "category": "story",
+  "definition": "Panels with characters or UI moments telling a sequence.",
+  "bestUse": "Explaining a user experience over time.",
+  "trigger": [
+    "user-experience-story",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "segel"
+  ],
+  "demo": {
+    "file": "demos/data-comic.html",
+    "kind": "interactive",
+    "how": "Four panels tell one person’s experience in order, with a running day counter under the strip. Press Next panel or the arrow keys to reveal the story one panel at a time; click any revealed panel to return to it. The final panel contrasts the old wait with the proposed flow."
+  },
+  "related": [
+    "five-beat-storyboard"
+  ]
+}

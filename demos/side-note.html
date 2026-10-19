@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Side note: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.wrap{display:grid;grid-template-columns:1fr 8.2em;gap:.7em;flex:1;min-height:0}
+svg.c{width:100%;height:100%;display:block;overflow:visible}
+.ln{stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 1s var(--ease-out)}.ln.on{stroke-dashoffset:0}
+.ld{stroke-dasharray:4 3;opacity:0;transition:opacity .3s}.ld.on{opacity:1}
+.nt{align-self:center;font-size:.8em;line-height:1.3;color:var(--ink-2);border-inline-start:.2em solid var(--adv);padding-inline-start:.5em}
+.nt b{display:block;font:600 1em var(--f-mono);color:var(--adv);margin-bottom:.2em}
+.ax{font:500 11px var(--f-mono);fill:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Side note</h1>
+<div class="stage" role="img" aria-label="Demo: Side note. A line chart gains a small margin note, joined by a leader line to the dip it explains.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.4em">
+<p class="h" style="font-size:1.1em">Weekly active teams kept growing</p>
+<div class="wrap"><svg class="c" viewBox="0 0 300 160" aria-hidden="true">
+<line x1="20" y1="140" x2="300" y2="140" stroke="var(--line)"/>
+<polyline class="ln" id="ln" fill="none" stroke="var(--accent)" stroke-width="3" points="20,120 60,108 100,96 140,84 180,118 220,70 260,56 300,40"/>
+<circle id="pt" cx="180" cy="118" r="5" fill="none" stroke="var(--adv)" stroke-width="2" class="b fx" style="transform:none"/>
+<line class="ld" id="ld" x1="186" y1="114" x2="300" y2="96" stroke="var(--adv)" stroke-width="1.5"/>
+<text class="ax" x="20" y="156">Jan</text><text class="ax" x="170" y="156">May</text><text class="ax" x="282" y="156">Aug</text></svg>
+<p class="nt b fx" id="nt"><b>How to read</b>The May dip is a holiday week, not churn. Values are 4-week rolling averages.</p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The chart carries the message; a small note in the margin explains how to read one part of it. Play draws the chart, then adds the note in muted type and a thin leader line to the dip it refers to, so the caveat sits next to the data instead of in a footnote.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:3,stepMs:1100,render:function(f){on($('ln'),f>=1);on($('nt'),f>=2);on($('pt'),f>=3);on($('ld'),f>=3);}});
+</script>
+</body>
+</html>

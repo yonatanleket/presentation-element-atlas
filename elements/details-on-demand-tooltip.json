@@ -1,0 +1,26 @@
+{
+  "id": "details-on-demand-tooltip",
+  "name": "Details-on-demand tooltip",
+  "category": "explore",
+  "definition": "Hover or tap reveals exact values.",
+  "bestUse": "Dense charts.",
+  "trigger": [
+    "dense-detail"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/details-on-demand-tooltip.html",
+    "kind": "animated",
+    "how": "The chart stays clean, with no value labels on the line. A simulated pointer visits three points in turn; each time, the point enlarges and a tooltip shows the exact value and month, which is how detail is offered only to whoever asks for it."
+  },
+  "aliases": [
+    "tooltip",
+    "hover value"
+  ],
+  "related": [
+    "hover-glossary-term"
+  ]
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code morph (Magic Move): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:flex;flex-direction:column;gap:.5em}
+.vers{display:flex;gap:.35em}
+.code{flex:1;position:relative;background:#1f2330;border-radius:.5em;overflow:hidden;padding:.8em 1em}
+.ln{position:absolute;inset-inline-start:1em;white-space:pre;font:.8em/1 var(--f-mono);color:#e6e8ef;transition:top .55s var(--ease-out),opacity .35s var(--ease-out)}
+.ln .kw{color:#b9c4ff}.ln .fn{color:#ffd28a}.ln .nu{color:#9fe3c1}
+.ln.out{opacity:0}
+.note{font-size:.85em;color:var(--ink-2);min-height:1.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Code morph (Magic Move)</h1>
+<div class="stage" role="group" aria-label="Demo: Code morph (Magic Move). Three version buttons switch a code block; unchanged lines glide to their new position while changed lines fade.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap">
+  <div class="vers" role="group" aria-label="Code version" id="vers">
+    <button class="sbtn" type="button" data-v="0">v1 · loop</button>
+    <button class="sbtn" type="button" data-v="1">v2 · reduce</button>
+    <button class="sbtn" type="button" data-v="2">v3 · extract</button>
+  </div>
+  <div class="code" id="code" aria-hidden="true"></div>
+  <p class="note" id="note"></p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Pick a version (or use the arrow keys on the version buttons). Lines that exist in both versions glide to their new position, removed lines fade out and new lines fade in, so the refactor reads as one continuous change instead of a jump cut. Reset returns to version 1.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var V=[
+ ['function total(items) {','  let sum = 0;','  for (const i of items) {','    sum += i.price * i.qty;','  }','  return sum;','}'],
+ ['function total(items) {','  return items.reduce(','    (sum, i) => sum + i.price * i.qty,','    0','  );','}'],
+ ['const lineTotal = i => i.price * i.qty;','','function total(items) {','  return items.reduce(','    (s, i) => s + lineTotal(i),','    0','  );','}']];
+var NOTES=['v1: a plain loop that adds up price times quantity.','v2: the loop becomes reduce; the signature and return stay put.','v3: the line maths moves into lineTotal; the function body barely moves.'];
+var code=$('code'),btns=$('vers').querySelectorAll('button'),nodes={},cur=0,api;
+function hi(s){s=s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return s.replace(/\b(function|const|let|for|of|return)\b/g,'<span class="kw">$1</span>').replace(/\b(total|reduce|lineTotal)\b(?=\s*[(=])/g,'<span class="fn">$1</span>').replace(/\b(\d+)\b/g,'<span class="nu">$1</span>');}
+function keys(lines){var seen={};return lines.map(function(t){seen[t]=(seen[t]||0)+1;return t+'#'+seen[t];});}
+V.forEach(function(lines){keys(lines).forEach(function(k,i){if(nodes[k])return;var d=document.createElement('div');d.className='ln out';d.innerHTML=hi(lines[i])||' ';code.appendChild(d);nodes[k]={el:d,top:i};});});
+function show(v,announce){cur=v;var ks=keys(V[v]),on={};
+  ks.forEach(function(k,i){on[k]=1;nodes[k].top=i;});
+  Object.keys(nodes).forEach(function(k){var n=nodes[k];n.el.style.top=(0.8+n.top*1.35)+'em';n.el.classList.toggle('out',!on[k]);});
+  btns.forEach(function(b,i){b.setAttribute('aria-pressed',String(i===v));});
+  $('note').textContent=NOTES[v];if(announce)api.status('Showing '+btns[v].textContent);}
+btns.forEach(function(b,i){b.addEventListener('click',function(){show(i,true);});
+  b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;if(isRtl())d=-d;e.preventDefault();var n=(i+d+3)%3;btns[n].focus();show(n,true);});});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){show(0,false);}});
+})();
+</script>
+</body>
+</html>

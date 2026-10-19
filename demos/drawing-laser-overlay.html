@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawing &amp; laser overlay: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.chart{display:flex;align-items:flex-end;gap:.5em;height:6.5em;padding:.3em 0;border-block-end:1px solid var(--line)}
+.chart i{flex:1;background:var(--muted);opacity:.45;border-radius:.2em .2em 0 0}
+.ov{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.laser{transition:transform .6s var(--ease-out),opacity .2s}
+.ink{stroke-dasharray:240;stroke-dashoffset:240;transition:stroke-dashoffset .7s var(--ease-out)}.ink.on{stroke-dashoffset:0}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Drawing &amp; laser overlay</h1>
+<div class="stage" role="img" aria-label="Demo: Drawing &amp; laser overlay">
+<div class="deck"><div class="deck-body"><p class="kicker">Problem</p><p class="h">Wait time jumped in March</p>
+<div class="chart" aria-hidden="true"><i style="height:30%"></i><i style="height:34%"></i><i style="height:82%"></i><i style="height:40%"></i><i style="height:36%"></i><i style="height:33%"></i></div></div></div>
+<svg class="ov" viewBox="0 0 480 300" aria-hidden="true"><ellipse class="ink" id="ink" cx="223" cy="170" rx="34" ry="62" fill="none" stroke="#c0392b" stroke-width="4" stroke-linecap="round" transform="rotate(-6 223 170)"/>
+<g class="laser" id="las" style="transform:translate(60px,250px)"><circle r="9" fill="#e5484d" opacity=".25"/><circle r="4.5" fill="#e5484d"/></g></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>An ink stroke draws itself around one detail on the slide while a laser dot moves to the point being discussed. Play replays the gesture; the overlay sits above the slide and never changes its content.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+AtlasDemo.init({frames:2,stepMs:1000,render:function(f){las.style.transform=f>=1?'translate(223px,140px)':'translate(60px,250px)';las.style.opacity=f>=1?1:0;ink.classList.toggle('on',f>=2);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lessons rows (learned → change): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.hd{display:grid;grid-template-columns:1.6em 1fr 2.4em 1fr;gap:.4em;font:500 .8em var(--f-mono);color:var(--muted)}
+.lr{display:grid;grid-template-columns:1.6em 1fr 2.4em 1fr;gap:.4em;align-items:center}
+.lr .n{font:700 1.1em var(--f-display);color:var(--accent)}
+.lr .c{padding:.4em .55em;font-size:.85em;line-height:1.25}
+.lr .c.to{background:var(--ok-soft);border-color:#bfe0d2}
+.arr{height:.16em;background:var(--fg);width:0;position:relative;transition:width .45s var(--ease-out)}
+.arr::after{content:"";position:absolute;inset-inline-end:-.1em;top:-.28em;border:.36em solid transparent;border-inline-start:.45em solid var(--fg);border-inline-end:0;opacity:0;transition:opacity .2s}
+.lr.on .arr{width:80%}.lr.on .arr::after{opacity:1}
+.lr .to{opacity:0;transition:opacity .3s .25s}.lr.on .to{opacity:1}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Lessons rows (learned → change)</h1>
+<div class="stage" role="img" aria-label="Demo: Lessons rows (learned → change). Three numbered rows pair a lesson with the change it leads to, joined by an arrow.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.5em;padding-top:1.8em">
+<p class="h" style="font-size:1.15em">What we learned, and what we will change</p>
+<div class="hd"><span></span><span>Learned</span><span></span><span>Change</span></div>
+<div id="rows" class="col" style="gap:.45em"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each numbered row pairs one lesson on the left with the specific change it leads to on the right, joined by an arrow. Play builds the rows one at a time and draws each arrow after its lesson, so every lesson visibly turns into an action.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var L=[['Reviews stalled when no one owned the final call','Name one decider per launch, in the kickoff doc'],
+['Late test data hid two blocking bugs','Run the full suite nightly, not only before release'],
+['Status meetings repeated the written update','Replace the weekly meeting with a written check-in']];
+$('rows').innerHTML=L.map(function(l,i){return '<div class="lr b fx"><span class="n">'+(i+1)+'</span><span class="c card">'+l[0]+'</span><span class="arr" aria-hidden="true"></span><span class="c card to">'+l[1]+'</span></div>';}).join('');
+var rows=$('rows').children;
+AtlasDemo.init({frames:3,stepMs:1100,render:function(f){for(var i=0;i<3;i++)on(rows[i],i<f);}});
+</script>
+</body>
+</html>

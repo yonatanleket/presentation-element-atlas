@@ -1,0 +1,24 @@
+{
+  "id": "recording-with-camera-bubble",
+  "name": "Recording with camera bubble",
+  "category": "motion",
+  "definition": "Deck recorded with a webcam overlay.",
+  "bestUse": "Async talks.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "standard",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/recording-with-camera-bubble.html",
+    "kind": "animated",
+    "how": "The slide plays as normal while a round camera bubble sits in a corner it never covers, so viewers of an async recording keep a face and the content together. Each step advances the slide, the REC timer runs on, and the bubble shows a speaking ring. All of it is simulated."
+  },
+  "aliases": [
+    "webcam",
+    "video recording",
+    "async"
+  ]
+}

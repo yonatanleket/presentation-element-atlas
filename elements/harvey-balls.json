@@ -1,0 +1,23 @@
+{
+  "id": "harvey-balls",
+  "name": "Harvey balls",
+  "category": "metric",
+  "definition": "Quarter-filled circles rating options.",
+  "bestUse": "Qualitative comparison matrices.",
+  "trigger": [
+    "options-comparison"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/harvey-balls.html",
+    "kind": "animated",
+    "how": "Each circle fills in quarters to rate an option on one criterion, from empty to full. Play fills the matrix row by row; a legend explains the scale so the fills do not depend on color."
+  },
+  "aliases": [
+    "rating circles",
+    "qualitative score"
+  ]
+}

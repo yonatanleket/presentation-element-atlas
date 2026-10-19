@@ -1,0 +1,19 @@
+{
+  "id": "in-deck-search",
+  "name": "In-deck search",
+  "category": "nav",
+  "definition": "Full-text search across slides.",
+  "bestUse": "Reference decks and long decks.",
+  "trigger": [
+    "navigation-wayfinding"
+  ],
+  "level": "standard",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/in-deck-search.html",
+    "kind": "animated",
+    "how": "Play types a query into the search box; matching slides are listed with the hit highlighted, and the first result opens. Search runs over the full text of every slide."
+  }
+}

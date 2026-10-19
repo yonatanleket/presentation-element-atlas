@@ -1,0 +1,25 @@
+{
+  "id": "live-multiple-choice-poll",
+  "name": "Live multiple-choice poll",
+  "category": "audience",
+  "definition": "Audience votes; results chart updates live.",
+  "bestUse": "Checking the room.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/live-multiple-choice-poll.html",
+    "kind": "interactive",
+    "how": "Simulated votes arrive over about three seconds and each bar and percentage updates as they land. Click an option, or Tab to it and press Enter, to cast your own vote; it is added to the count and outlined, and you can change it. Reset clears all votes."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

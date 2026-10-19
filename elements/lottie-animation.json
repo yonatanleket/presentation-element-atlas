@@ -1,0 +1,24 @@
+{
+  "id": "lottie-animation",
+  "name": "Lottie animation",
+  "category": "motion",
+  "definition": "Lightweight vector animation.",
+  "bestUse": "Icons and explainers.",
+  "trigger": [
+    "visual-mood",
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/lottie-animation.html",
+    "kind": "animated",
+    "how": "A vector animation plays the kind of short icon sequence a Lottie file would carry: the ring draws, the check strokes in with a slight pop, then dots burst outward. Here it is rebuilt with SVG strokes and CSS, so it stays sharp at any size and weighs almost nothing."
+  },
+  "aliases": [
+    "animation",
+    "vector animation"
+  ]
+}

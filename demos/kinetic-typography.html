@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinetic typography: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.ln{display:flex;flex-wrap:wrap;gap:.15em .4em;align-items:baseline;justify-content:center;max-width:24em;margin:0 auto}
+.w{font:700 1.7em/1.1 var(--f-display);opacity:0;display:inline-block;transition:opacity .25s var(--ease-out),transform .35s var(--ease-out),font-weight .3s,letter-spacing .35s var(--ease-out)}
+.w.k{color:var(--accent);font-size:2.2em}
+.pop .w{transform:scale(.4)}.rise .w{transform:translateY(.8em)}.weight .w{font-weight:300;letter-spacing:.2em}
+.w.on{opacity:1;transform:none}.weight .w.on{font-weight:700;letter-spacing:0}
+.seg{display:flex;gap:.3em;justify-content:center}
+.beat{display:flex;gap:.25em;justify-content:center}.beat i{width:.55em;height:.55em;border-radius:50%;background:var(--line);transition:background-color .2s}.beat i.on{background:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Kinetic typography</h1>
+<div class="stage" role="group" aria-label="Demo: Kinetic typography. A spoken line appears word by word in rhythm; buttons switch the motion style between Pop, Rise and Weight.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="justify-content:space-between;padding-top:1.9em">
+<div class="seg" role="group" aria-label="Motion style" id="seg"><button class="sbtn" type="button" data-s="pop">Pop</button><button class="sbtn" type="button" data-s="rise">Rise</button><button class="sbtn" type="button" data-s="weight">Weight</button></div>
+<p class="ln pop" id="ln" aria-label="Ship small. Ship often. Learn every week."></p>
+<div class="beat" id="beat" aria-hidden="true"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each word lands on the beat of the spoken line, and the stressed words land bigger. Play runs the line; Step advances one beat. Choose Pop, Rise or Weight to change how words arrive, then replay. Under reduced motion all words show at once without movement.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var W=[['Ship',1],['small.',0],['Ship',1],['often.',0],['Learn',1],['every',0],['week.',1]],style='pop',fr=0;
+$('ln').innerHTML=W.map(function(w){return '<span class="w'+(w[1]?' k':'')+'" aria-hidden="true">'+w[0]+'</span>';}).join(' ');
+$('beat').innerHTML='<i></i>'.repeat(W.length);
+var ws=$('ln').children,bs=$('beat').children;
+function draw(){$('ln').className='ln '+style;for(var i=0;i<W.length;i++){on(ws[i],i<fr);on(bs[i],i<fr);}
+$('seg').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.s===style));});}
+$('seg').addEventListener('click',function(e){var b=e.target.closest('[data-s]');if(!b)return;style=b.dataset.s;var keep=fr;fr=0;draw();void $('ln').offsetWidth;
+api.status('Style: '+b.textContent+'. Press Play to hear it again');requestAnimationFrame(function(){fr=keep;draw();});});
+var api=AtlasDemo.init({frames:W.length,stepMs:480,interactive:true,reset:function(){style='pop';},
+render:function(f){fr=f;draw();api&&api.status(f===W.length?'Line complete · style '+style:f?'Beat '+f+' of '+W.length:'');}});
+</script>
+</body>
+</html>

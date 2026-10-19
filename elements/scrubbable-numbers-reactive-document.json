@@ -1,0 +1,24 @@
+{
+  "id": "scrubbable-numbers-reactive-document",
+  "name": "Scrubbable numbers / reactive document",
+  "category": "explore",
+  "definition": "Numbers in the text that you drag to change, with the dependent figures updating live.",
+  "bestUse": "Letting the audience test assumptions.",
+  "trigger": [
+    "what-if-model"
+  ],
+  "level": "advanced",
+  "sources": [
+    "victor"
+  ],
+  "demo": {
+    "file": "demos/scrubbable-numbers-reactive-document.html",
+    "kind": "interactive",
+    "how": "The blue numbers are inputs: drag one left or right, or focus it and press the arrow keys, and every dependent figure in the sentence plus the twelve-month bars recompute at once. Monthly revenue = new teams × 12 months × seats × price; annual run rate = that × 12. Reset restores the defaults."
+  },
+  "aliases": [
+    "reactive numbers",
+    "tangle",
+    "assumptions"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "annotated-screenshot",
+  "name": "Annotated screenshot",
+  "category": "product",
+  "definition": "Real UI with callouts and highlights.",
+  "bestUse": "Feature walkthroughs.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/annotated-screenshot.html",
+    "kind": "animated",
+    "how": "A simulated reports screen sits on the slide. Each step draws a highlight box with a numbered badge over one part of the UI, dims everything else, and adds a matching note on the right, so the audience reads the screen in the order the presenter intends."
+  },
+  "aliases": [
+    "callouts",
+    "screenshot",
+    "walkthrough"
+  ]
+}

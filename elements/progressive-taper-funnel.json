@@ -1,0 +1,25 @@
+{
+  "id": "progressive-taper-funnel",
+  "name": "Progressive taper funnel",
+  "category": "diagram",
+  "definition": "Stacked level bars narrowing step by step, each a share of the level above, revealed one level at a time, with the target group highlighted.",
+  "bestUse": "Sizing a problem down to the group you will focus on.",
+  "trigger": [
+    "part-to-whole",
+    "flow-between-stages"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/progressive-taper-funnel.html",
+    "kind": "interactive",
+    "how": "Each bar is a share of the level above, so the audience follows the narrowing one step at a time instead of seeing the end number cold. Press Reveal next level to add a level, or Show all; the last level is highlighted as the focus group. Reset hides all but the first. Numbers are illustrative."
+  },
+  "aliases": [
+    "funnel",
+    "drop-off",
+    "conversion"
+  ]
+}

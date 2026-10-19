@@ -1,0 +1,24 @@
+{
+  "id": "process-chevrons",
+  "name": "Process chevrons",
+  "category": "diagram",
+  "definition": "Arrow-shaped steps in a row.",
+  "bestUse": "Simple linear processes.",
+  "trigger": [
+    "sequential-process"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/process-chevrons.html",
+    "kind": "animated",
+    "how": "Each arrow is one step and the shape itself says the order, so the row needs no connecting lines. Play fills the steps left to right and adds a one-line description under each, ending with the whole process lit. Steps are illustrative."
+  },
+  "aliases": [
+    "process",
+    "steps",
+    "flow arrows"
+  ]
+}

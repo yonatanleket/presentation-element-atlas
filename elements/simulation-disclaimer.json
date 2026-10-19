@@ -1,0 +1,24 @@
+{
+  "id": "simulation-disclaimer",
+  "name": "Simulation disclaimer",
+  "category": "trust",
+  "definition": "Label such as “Simulated. Not a real product screen.”",
+  "bestUse": "Protecting confidentiality.",
+  "trigger": [
+    "claim-needing-evidence",
+    "product-ui"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/simulation-disclaimer.html",
+    "kind": "animated",
+    "how": "A mock product screen appears, then a banner states “Simulated. Not a real product screen.” and real-looking customer names swap to neutral placeholders. Use it whenever a slide shows a mockup that could be mistaken for a live system or real client data."
+  },
+  "aliases": [
+    "disclaimer",
+    "mock label"
+  ]
+}

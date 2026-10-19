@@ -1,0 +1,25 @@
+{
+  "id": "concentric-circles-tam-sam-som",
+  "name": "Concentric circles (TAM/SAM/SOM)",
+  "category": "diagram",
+  "definition": "Nested circles sizing a market.",
+  "bestUse": "Pitch decks.",
+  "trigger": [
+    "part-to-whole",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/concentric-circles-tam-sam-som.html",
+    "kind": "animated",
+    "how": "Three circles share a bottom edge so each market reads as a slice of the one around it. Play draws TAM, then SAM, then SOM, each with its value and a one-line definition on a leader line. All market sizes are illustrative."
+  },
+  "aliases": [
+    "market size",
+    "tam",
+    "bullseye"
+  ]
+}

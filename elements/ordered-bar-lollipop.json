@@ -1,0 +1,24 @@
+{
+  "id": "ordered-bar-lollipop",
+  "name": "Ordered bar / lollipop",
+  "category": "chart",
+  "definition": "Sorted bars, or dots on stems.",
+  "bestUse": "Ranking.",
+  "trigger": [
+    "ranking"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/ordered-bar-lollipop.html",
+    "kind": "animated",
+    "how": "Bars are sorted from highest to lowest so rank reads top to bottom, then they slim into lollipops: a thin stem with a dot at the value keeps the ranking while cutting ink when there are many bars. Values are illustrative."
+  },
+  "aliases": [
+    "bar chart",
+    "ranking",
+    "leaderboard"
+  ]
+}

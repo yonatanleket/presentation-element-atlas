@@ -1,0 +1,27 @@
+{
+  "id": "chapter-switcher-menu",
+  "name": "Chapter switcher menu",
+  "category": "nav",
+  "definition": "Top-bar dropdown that shows the current chapter and lists every chapter and slide for direct jumps.",
+  "bestUse": "Long talks where the presenter or audience needs to jump between chapters.",
+  "trigger": [
+    "navigation-wayfinding",
+    "section-structure"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/chapter-switcher-menu.html",
+    "kind": "interactive",
+    "how": "The demo shows a four-slide mini deck with a chapter menu in its top bar. Open the menu and pick a slide to jump there; Replay walks through an automatic jump. The label always names the chapter you are in."
+  },
+  "aliases": [
+    "chapter menu",
+    "jump menu",
+    "table of contents",
+    "toc",
+    "jump to slide"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "embedded-motion-film",
+  "name": "Embedded motion film",
+  "category": "motion",
+  "definition": "In-deck animated film with play controls, numbered scenes, a scrubber and an expandable caption transcript.",
+  "bestUse": "A 30–60 s problem/solution story.",
+  "trigger": [
+    "user-experience-story",
+    "visual-mood"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/embedded-motion-film.html",
+    "kind": "interactive",
+    "how": "A 40-second film drawn with CSS plays inside the slide (at 4× speed here). Play or pause it, drag the scrubber or use its arrow keys, or jump with the numbered scene buttons; Transcript shows the caption for the current scene. Reset rewinds to the start."
+  },
+  "aliases": [
+    "video",
+    "explainer film"
+  ]
+}

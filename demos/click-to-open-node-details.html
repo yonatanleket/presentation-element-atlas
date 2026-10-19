@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Click-to-open node details: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em}
+svg{position:absolute;inset:0;width:100%;height:100%}
+.e{stroke:#b4b9c5;stroke-width:2;fill:none;transition:stroke .25s}.e.on{stroke:var(--accent);stroke-width:3}
+.nd{position:absolute;transform:translate(-50%,-50%);min-height:max(28px,2.2em);padding:0 .7em;border-radius:.5em;border:1px solid var(--line);background:var(--surface);font:500 .85em var(--f-body);cursor:pointer;white-space:nowrap}
+.nd[aria-expanded=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.nd.dep{border-color:var(--accent);background:var(--accent-soft)}
+.det{position:absolute;inset-inline-end:0;top:0;bottom:0;width:11.4em;padding:.7em .8em;display:grid;gap:.35em;align-content:start;opacity:0;transform:translateX(1em);pointer-events:none;transition:opacity .2s var(--ease-out),transform .2s var(--ease-out);box-shadow:0 .3em 1em rgba(27,30,36,.15)}
+.det.open{opacity:1;transform:none;pointer-events:auto}
+.det dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.2em .5em;font-size:.85em}.det dt{color:var(--muted)}.det dd{margin:0}
+.det .x{justify-self:start;margin-top:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Click-to-open node details</h1>
+<div class="stage" role="group" aria-label="Demo: Click-to-open node details. A five-node system diagram; selecting a node opens a detail card with its owner, uptime and dependencies.">
+<span class="label-illustrative">Illustrative</span>
+<div class="wrap" id="wrap">
+  <svg viewBox="0 0 448 268" preserveAspectRatio="none" aria-hidden="true" id="edges"></svg>
+  <div id="nodes"></div>
+  <div class="det card" id="det" role="region" aria-label="Node details" tabindex="-1"><p class="kicker" id="dk">Service</p><p class="h" id="dt" style="font-size:1.05em"></p><dl id="dl"></dl><button class="sbtn x" type="button" id="close">Close</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The diagram stays simple until someone asks. Select a node (click, or Tab then Enter) and a detail card opens beside it with the owner, uptime target and what it depends on; the edges to its dependencies highlight. Escape or Close dismisses it and Reset clears the selection.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var N=[{n:'Web app',x:60,y:60,o:'Frontend team',u:'99.9%',d:['API']},{n:'Mobile app',x:60,y:200,o:'Mobile team',u:'99.9%',d:['API']},{n:'API',x:170,y:130,o:'Platform team',u:'99.95%',d:['Auth','Database']},{n:'Auth',x:270,y:55,o:'Identity team',u:'99.99%',d:['Database']},{n:'Database',x:270,y:210,o:'Data team',u:'99.99%',d:[]}];
+var idx={};N.forEach(function(n,i){idx[n.n]=i;});
+var E=[];N.forEach(function(n,i){n.d.forEach(function(d){E.push([i,idx[d]]);});});
+$('edges').innerHTML=E.map(function(e){var a=N[e[0]],b=N[e[1]];return '<line class="e" x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'"/>';}).join('');
+var lines=$('edges').children,open=-1,api;
+$('nodes').innerHTML=N.map(function(n,i){return '<button class="nd" type="button" aria-expanded="false" aria-controls="det" style="left:'+(n.x/448*100)+'%;top:'+(n.y/268*100)+'%">'+n.n+'</button>';}).join('');
+var bs=$('nodes').children;
+function sel(i){open=i;for(var k=0;k<bs.length;k++){bs[k].setAttribute('aria-expanded',String(k===i));bs[k].classList.toggle('dep',i>=0&&N[i].d.indexOf(N[k].n)>=0);}
+  E.forEach(function(e,k){lines[k].classList.toggle('on',e[0]===i);});
+  $('det').classList.toggle('open',i>=0);$('det').setAttribute('aria-hidden',String(i<0));
+  if(i<0)return;var n=N[i];$('dt').textContent=n.n;$('dl').innerHTML='<dt>Owner</dt><dd>'+n.o+'</dd><dt>Uptime</dt><dd>'+n.u+' target</dd><dt>Depends on</dt><dd>'+(n.d.join(', ')||'nothing')+'</dd>';}
+for(var i=0;i<bs.length;i++)(function(i){bs[i].addEventListener('click',function(){if(open===i){sel(-1);api.status('Closed');return;}sel(i);api.status(N[i].n+' details open');});})(i);
+function close(){var was=open;sel(-1);if(was>=0)bs[was].focus();api.status('Closed');}
+$('close').addEventListener('click',close);
+$('wrap').addEventListener('keydown',function(e){if(e.key==='Escape'&&open>=0){e.preventDefault();close();}});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){sel(-1);}});
+})();
+</script>
+</body>
+</html>

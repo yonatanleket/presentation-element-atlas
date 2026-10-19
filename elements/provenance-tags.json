@@ -1,0 +1,27 @@
+{
+  "id": "provenance-tags",
+  "name": "Provenance tags",
+  "category": "trust",
+  "definition": "Small pills on every claim: Measured, Estimated, Illustrative or Target.",
+  "bestUse": "Separating facts from estimates.",
+  "trigger": [
+    "claim-needing-evidence",
+    "estimate-with-range"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/provenance-tags.html",
+    "kind": "interactive",
+    "how": "Every claim carries a small pill saying what kind of number it is: Measured, Estimated, Target or Illustrative. Switch tags off to see how flat the slide reads without them, or select a tag to read the basis for that claim. Values are illustrative."
+  },
+  "aliases": [
+    "data labels",
+    "fact vs estimate"
+  ],
+  "related": [
+    "recorded-vs-inferred-line-style"
+  ]
+}

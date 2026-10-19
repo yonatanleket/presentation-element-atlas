@@ -1,0 +1,25 @@
+{
+  "id": "branching-box-tree",
+  "name": "Branching box tree",
+  "category": "diagram",
+  "definition": "Boxes that split into branches with shares, revealed stage by stage.",
+  "bestUse": "Showing how a population splits into outcomes.",
+  "trigger": [
+    "flow-between-stages",
+    "hierarchy"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/branching-box-tree.html",
+    "kind": "interactive",
+    "how": "Each box is a group of people and its children show how that group splits, with the share and the count. Click a box, or press Enter on it, to expand or collapse its branches; Expand all opens the whole tree and Reset collapses it. Numbers are illustrative."
+  },
+  "aliases": [
+    "funnel",
+    "split",
+    "outcomes tree"
+  ]
+}

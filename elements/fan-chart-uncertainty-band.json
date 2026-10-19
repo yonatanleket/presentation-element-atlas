@@ -1,0 +1,29 @@
+{
+  "id": "fan-chart-uncertainty-band",
+  "name": "Fan chart (uncertainty band)",
+  "category": "chart",
+  "definition": "Forecast line with widening confidence bands.",
+  "bestUse": "Projections.",
+  "trigger": [
+    "estimate-with-range",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/fan-chart-uncertainty-band.html",
+    "kind": "interactive",
+    "how": "History is a solid line; the forecast is dashed, with nested bands that widen each year because uncertainty compounds. Choose 50%, 80% or 95% to show how wide a range you need for that confidence; Tab to a forecast point for its range. Data is illustrative."
+  },
+  "aliases": [
+    "forecast",
+    "confidence interval",
+    "projection",
+    "error band"
+  ],
+  "related": [
+    "uncertainty-range"
+  ]
+}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annotated screenshot: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.shot{position:absolute;inset-inline-start:1em;top:1.3em;width:18.6em;height:16.2em;overflow:hidden}
+.shot>*{position:absolute}
+.s-nav{top:0;inset-inline:0;height:2.2em;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.5em;padding:0 .7em;font-size:.8em}
+.s-nav b{font-size:1em}.s-q{margin-inline-start:auto;border:1px solid var(--line);border-radius:.3em;padding:.15em .5em;color:var(--muted)}
+.s-av{width:1.3em;height:1.3em;border-radius:50%;background:var(--accent-soft)}
+.s-side{top:2.2em;bottom:0;inset-inline-start:0;width:3em;border-inline-end:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:.6em;padding-top:.7em}
+.s-side i{width:1.3em;height:1.3em;border-radius:.3em;background:var(--line)}.s-side i.on{background:var(--accent)}
+.s-t{top:2.9em;inset-inline-start:3.8em;font:600 .9em var(--f-body)}
+.s-btn{top:2.85em;inset-inline-end:.8em;font-size:.8em;background:var(--accent);color:#fff;border-radius:.3em;padding:.25em .7em}
+.s-fil{top:5em;inset-inline-start:3.8em;display:flex;gap:.3em;font-size:.8em}
+.s-fil span{border:1px solid var(--line);border-radius:99em;padding:.1em .55em}.s-fil .on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.s-bars{top:7.4em;bottom:1em;inset-inline-start:3.8em;inset-inline-end:.8em;display:flex;align-items:flex-end;gap:.45em;border-bottom:1px solid var(--line)}
+.s-bars i{flex:1;background:var(--accent-soft);border-radius:.2em .2em 0 0}.s-bars i.k{background:var(--accent)}
+.hl{border:2px solid var(--accent);border-radius:.35em;opacity:0;transition:opacity .25s var(--ease-out),box-shadow .25s var(--ease-out)}
+.hl.show{opacity:1}.hl.cur{box-shadow:0 0 0 40em rgba(27,30,36,.28)}
+.badge{position:absolute;top:-.75em;inset-inline-start:-.75em;width:1.5em;height:1.5em;border-radius:50%;background:var(--accent);color:#fff;font:700 .8em/1.5em var(--f-mono);text-align:center}
+.notes{position:absolute;inset-inline-start:20.6em;inset-inline-end:.9em;top:1.6em;margin:0;padding:0;list-style:none;display:grid;gap:.7em}
+.notes li{display:grid;grid-template-columns:1.5em 1fr;gap:.4em;font-size:.85em;opacity:0;transform:translateY(.3em)}
+.notes li.show{opacity:1;transform:none}.notes li.cur b{color:var(--accent)}
+.notes .n{width:1.5em;height:1.5em;border-radius:50%;background:var(--accent);color:#fff;font:700 .9em/1.5em var(--f-mono);text-align:center}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Annotated screenshot</h1>
+<div class="stage" role="img" aria-label="Demo: Annotated screenshot. A mock reports screen gains three numbered highlights, each explained in a note beside it.">
+<span class="label-illustrative">Simulated UI</span>
+<div class="shot card" aria-hidden="true">
+  <div class="s-nav"><b>Reports</b><span class="s-q">Search…</span><span class="s-av"></span></div>
+  <div class="s-side"><i></i><i class="on"></i><i></i><i></i></div>
+  <div class="s-t">Monthly spend</div><div class="s-btn">Export</div>
+  <div class="s-fil"><span>Q1</span><span>Q2</span><span class="on">Q3</span></div>
+  <div class="s-bars"><i style="height:45%"></i><i style="height:60%"></i><i style="height:52%"></i><i class="k" style="height:82%"></i><i style="height:66%"></i><i style="height:58%"></i></div>
+  <div class="hl" style="inset-inline-end:.45em;top:2.45em;width:4.6em;height:2.1em"><span class="badge">1</span></div>
+  <div class="hl" style="inset-inline-start:3.45em;top:4.65em;width:7.4em;height:1.9em"><span class="badge">2</span></div>
+  <div class="hl" style="inset-inline-start:.25em;top:2.65em;width:2.5em;height:13.2em"><span class="badge">3</span></div>
+</div>
+<ol class="notes" id="notes">
+  <li class="fx"><span class="n">1</span><span><b>Export</b><br>Sends the current view as a CSV file.</span></li>
+  <li class="fx"><span class="n">2</span><span><b>Quarter filter</b><br>Scopes every chart on the page.</span></li>
+  <li class="fx"><span class="n">3</span><span><b>Side nav</b><br>Collapses to icons to give charts room.</span></li>
+</ol>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A simulated reports screen sits on the slide. Each step draws a highlight box with a numbered badge over one part of the UI, dims everything else, and adds a matching note on the right, so the audience reads the screen in the order the presenter intends.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var hls=document.querySelectorAll('.hl'),notes=$('notes').children;
+AtlasDemo.init({frames:3,stepMs:1300,render:function(f){
+  for(var i=0;i<3;i++){hls[i].classList.toggle('show',i<f);hls[i].classList.toggle('cur',i===f-1);notes[i].classList.toggle('show',i<f);notes[i].classList.toggle('cur',i===f-1);}
+}});
+})();
+</script>
+</body>
+</html>

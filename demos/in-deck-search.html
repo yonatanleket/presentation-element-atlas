@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In-deck search: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sbox{display:flex;align-items:center;gap:.4em;border:1px solid var(--line);border-radius:.4em;padding:.3em .5em;background:var(--surface);flex:1;font-size:1.05em}
+.caret{display:inline-block;width:.08em;height:1em;background:var(--fg);vertical-align:-.15em}
+.res{display:grid;gap:.3em;font-size:.88em}.res div{border:1px solid var(--line);border-radius:.35em;padding:.35em .5em}
+.res div.sel{border-color:var(--accent);background:var(--accent-soft)}
+mark{background:#ffe58a;color:inherit;border-radius:.15em;padding:0 .1em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">In-deck search</h1>
+<div class="stage" role="img" aria-label="Demo: In-deck search">
+<span class="label-illustrative" style="inset-block-start:auto;inset-block-end:.4em">Illustrative</span>
+<div class="deck"><div class="deck-bar"><div class="sbox"><span aria-hidden="true">⌕</span><span id="q"></span><span class="caret"></span></div></div>
+<div class="deck-body" id="body"></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Play types a query into the search box; matching slides are listed with the hit highlighted, and the first result opens. Search runs over the full text of every slide.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var WORD='approval',typing=null;
+function results(sel){return '<p class="mono muted" style="margin:0;font-size:.8em">2 slides match</p><div class="res"><div class="'+(sel?'sel':'')+'"><b>Slide 4</b> · Sign-off is most of the wait: two thirds of release time is <mark>approval</mark>.</div><div><b>Slide 9</b> · Delegate <mark>approval</mark> to team leads.</div></div>';}
+AtlasDemo.init({frames:3,stepMs:1100,render:function(f,ctx){clearInterval(typing);
+  if(f===0){q.textContent='';body.innerHTML='<p class="kicker">Slide 1</p><p class="h">Release process review</p>';}
+  if(f===1){if(ctx.animate){var n=0;q.textContent='';typing=setInterval(function(){q.textContent=WORD.slice(0,++n);if(n>=WORD.length)clearInterval(typing);},70);}else q.textContent=WORD;body.innerHTML='<p class="muted">Searching all slides…</p>';}
+  if(f===2){q.textContent=WORD;body.innerHTML=results(true);}
+  if(f===3){q.textContent=WORD;body.innerHTML='<p class="kicker">Slide 4</p><p class="h">Sign-off is most of the wait</p><p class="p">Two thirds of release time is <mark>approval</mark>.</p>';}}});
+</script>
+</body>
+</html>

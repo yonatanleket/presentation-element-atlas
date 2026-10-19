@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendar heatmap: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.ch{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.ch text{font-family:var(--f-body);font-size:13px;fill:var(--ink-2)}
+.ch .ax{font:13px var(--f-mono);fill:var(--muted)}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .base{stroke:var(--muted);stroke-width:1}
+.ch .ttl{font:700 17px var(--f-display);fill:var(--fg)}
+.ch .sub{font-size:13px;fill:var(--muted)}
+.ch .lbl{font-weight:600;fill:var(--fg)}
+.halo{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.grow.top{transform-origin:50% 0}
+.growx{transform-box:fill-box;transform-origin:0 50%;transition:transform .6s var(--ease-out),opacity .4s var(--ease-out)}
+.growx.end{transform-origin:100% 50%}
+.off.grow{transform:scaleY(0)}.off.growx{transform:scaleX(0)}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s var(--ease-out)}.draw.off{stroke-dashoffset:1}
+.fade{transition:opacity .45s var(--ease-out)}.fade.off{opacity:0}
+@keyframes enter{from{opacity:0}to{opacity:1}}.enter{animation:enter .6s var(--ease-out) both}
+.ch [tabindex]{outline:none;cursor:pointer}
+.ch [tabindex]:focus-visible{stroke:var(--fg);stroke-width:2.5px}
+.ch .tip rect{fill:var(--fg)}.ch .tip text{fill:#fff;font:500 13px var(--f-mono)}
+.sctl{position:absolute;inset-block-start:2.2em;inset-inline-end:.6em;display:flex;gap:.3em;align-items:center;z-index:4}
+.sctl label{font-size:.8em;color:var(--muted)}
+.sctl input[type=range]{width:7em;accent-color:var(--accent)}
+.sctl output{font:600 .85em var(--f-mono);min-width:2.8em}
+
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Calendar heatmap</h1>
+<div class="stage" role="group" aria-label="Demo: Calendar heatmap. Thirteen weeks of daily releases, July to September 2026, as a grid of weeks by weekday; a toggle switches to incidents.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="ch" id="ch" viewBox="0 0 480 300"></svg><div class="sctl" role="group" aria-label="Metric"><button class="sbtn" type="button" data-m="0" aria-pressed="true">Releases</button><button class="sbtn" type="button" data-m="1" aria-pressed="false">Incidents</button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each square is one day, columns are weeks and rows are weekdays, shaded by count. Switch between releases and incidents, then hover, or Tab into the grid and use the arrow keys, to read any day. Data is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+function S(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(x!=null)n.textContent=x;if(p)p.appendChild(n);return n;}
+function lin(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0);};}
+function on(n,b){n.classList.toggle('off',!b);}
+function yAxis(g,s,ticks,x0,x1,fmt){ticks.forEach(function(t){var y=s(t);S('line',{x1:x0,x2:x1,y1:y,y2:y,'class':'grid'},g);S('text',{x:x0-6,y:y+4.5,'text-anchor':'end','class':'ax'},g,fmt?fmt(t):String(t));});}
+function title(g,t,sub){S('text',{x:16,y:27,'class':'ttl'},g,t);if(sub)S('text',{x:16,y:45,'class':'sub'},g,sub);}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function Tip(svg){var g=S('g',{'class':'tip','pointer-events':'none',opacity:0},svg),r=S('rect',{rx:5,height:24},g),t=S('text',{},g);
+ return {show:function(x,y,s){svg.appendChild(g);t.textContent=s;var w=(t.getComputedTextLength?t.getComputedTextLength():s.length*7.8)+16;var X=Math.max(4,Math.min(476-w,x-w/2)),Y=y-34<4?y+12:y-34;r.setAttribute('x',X);r.setAttribute('y',Y);r.setAttribute('width',w);t.setAttribute('x',X+8);t.setAttribute('y',Y+16.5);g.setAttribute('opacity',1);},hide:function(){g.setAttribute('opacity',0);}};}
+(function () {
+    var svg = document.getElementById('ch'), tip = Tip(svg), R = rng(11), N = 91, start = Date.UTC(2026, 5, 29);
+    var base = [[3, 5, 6, 4, 3, 0, 0], [1, 1, 1, 1, 2, 0, 0]], data = [[], []];
+    for (var i = 0; i < N; i++) { var wd = i % 7; data[0].push(Math.max(0, base[0][wd] + Math.round(R() * 4 - 1.5))); data[1].push(Math.max(0, base[1][wd] + Math.round(R() * 2.4 - 1.2) + (i === 44 || i === 58 ? 3 : 0))); }
+    var PAL = [['#e9ecf3', '#c7d0f5', '#94a6ee', '#5f78e3', '#2f4bd8'], ['#e9ecf3', '#f6c9c4', '#ec9a91', '#d65f52', '#b42318']];
+    var BR = [[0, 2, 4, 6], [0, 1, 2, 3]], NAMES = ['releases', 'incidents'], LEG = [['0', '1–2', '3–4', '5–6', '7+'], ['0', '1', '2', '3', '4+']];
+    var cls = function (m, v) { var b = BR[m]; return v <= b[0] ? 0 : v <= b[1] ? 1 : v <= b[2] ? 2 : v <= b[3] ? 3 : 4; };
+    var mt = S('text', { x: 16, y: 27, 'class': 'ttl' }, svg, 'Releases cluster midweek');
+    S('text', { x: 16, y: 45, 'class': 'sub' }, svg, 'Daily count, Jul–Sep 2026');
+    var X0 = 58, Y0 = 82, C = 26, MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], DAY = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    ['Mon', 'Wed', 'Fri', 'Sun'].forEach(function (d) { S('text', { x: X0 - 8, y: Y0 + DAY.indexOf(d) * C + 16, 'text-anchor': 'end', 'class': 'ax' }, svg, d); });
+    var cells = [], dates = [];
+    for (i = 0; i < N; i++) {
+      var dt = new Date(start + i * 864e5), w = Math.floor(i / 7), r = i % 7;
+      dates.push(DAY[r] + ' ' + dt.getUTCDate() + ' ' + MON[dt.getUTCMonth()]);
+      if (dt.getUTCDate() <= 7 && r === 0) S('text', { x: X0 + w * C, y: Y0 - 8, 'class': 'ax' }, svg, MON[dt.getUTCMonth()]);
+      var c = S('rect', { x: X0 + w * C, y: Y0 + r * C, width: C - 4, height: C - 4, rx: 3, tabindex: -1, role: 'img', 'class': 'enter' }, svg);
+      c.style.animationDelay = (w * 35) + 'ms'; c.style.transition = 'fill .35s var(--ease-out)'; c.dataset.i = i; cells.push(c);
+    }
+    var lg = S('g', {}, svg), sw = [], st = [];
+    for (var k = 0; k < 5; k++) { sw.push(S('rect', { x: 412, y: 100 + k * 26, width: 18, height: 18, rx: 3 }, lg)); st.push(S('text', { x: 436, y: 114 + k * 26, 'class': 'ax' }, lg, '')); }
+    var lt = S('text', { x: 412, y: 90, 'class': 'ax' }, lg, 'per day');
+    var m = 0, cur = 0, btns = document.querySelectorAll('[data-m]'), api;
+    function paint() {
+      cells.forEach(function (c, i) { var v = data[m][i]; c.setAttribute('fill', PAL[m][cls(m, v)]); c.setAttribute('aria-label', dates[i] + ': ' + v + ' ' + NAMES[m]); });
+      sw.forEach(function (s, k) { s.setAttribute('fill', PAL[m][k]); st[k].textContent = LEG[m][k]; });
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.m === m)); });
+      mt.textContent = m ? 'Incidents follow the busiest days' : 'Releases cluster midweek';
+      lt.textContent = 'per day';
+    }
+    function show(i, focus) {
+      cur = i; cells.forEach(function (c, j) { c.setAttribute('tabindex', j === i ? 0 : -1); });
+      var c = cells[i]; if (focus) c.focus();
+      var s = dates[i] + ': ' + data[m][i] + ' ' + NAMES[m]; tip.show(+c.getAttribute('x') + 11, +c.getAttribute('y'), s); api && api.status(s);
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () { m = +b.dataset.m; paint(); tip.hide(); api.status('Showing ' + NAMES[m]); }); });
+    svg.addEventListener('mouseover', function (e) { if (e.target.dataset && e.target.dataset.i) show(+e.target.dataset.i, false); });
+    svg.addEventListener('mouseleave', function () { tip.hide(); });
+    svg.addEventListener('focusin', function (e) { if (e.target.dataset && e.target.dataset.i) show(+e.target.dataset.i, false); });
+    svg.addEventListener('focusout', function () { tip.hide(); });
+    svg.addEventListener('keydown', function (e) {
+      var rtl = document.dir === 'rtl', d = { ArrowUp: -1, ArrowDown: 1, ArrowLeft: rtl ? 7 : -7, ArrowRight: rtl ? -7 : 7, Home: -cur, End: N - 1 - cur }[e.key];
+      if (d === undefined) return; e.preventDefault(); var n = cur + d; if (n >= 0 && n < N) show(n, true);
+    });
+    api = AtlasDemo.init({ frames: 0, interactive: true, idleText: 'Hover or Tab into the grid; arrows move by day', reset: function () { m = 0; paint(); tip.hide(); cells.forEach(function (c, j) { c.setAttribute('tabindex', j === 0 ? 0 : -1); }); cur = 0; } });
+  })();
+</script>
+</body>
+</html>

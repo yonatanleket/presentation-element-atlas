@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presenter panel (quiet button): demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.quiet{position:absolute;inset-block-end:.5em;inset-inline-end:.5em;width:2.2em;height:2.2em;border-radius:50%;border:0;background:transparent;color:var(--muted);opacity:.35;cursor:pointer;font-size:1em}
+.quiet:focus-visible,.quiet[aria-expanded=true]{opacity:1}
+@media (hover:hover){.quiet:hover{opacity:.8}}
+.notes{position:absolute;inset-block-end:3em;inset-inline-end:.6em;width:60%;background:var(--fg);color:#fff;border-radius:.5em;padding:.6em .8em;font-size:.82em;z-index:3}
+.notes[hidden]{display:none}.notes ul{margin:.3em 0 0;padding-inline-start:1.1em}.notes strong{color:#c9d2ff;font-weight:500}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Presenter panel (quiet button)</h1>
+<div class="stage" role="group" aria-label="Demo: Presenter panel (quiet button)">
+<div class="deck"><div class="deck-body center" style="text-align:center"><div><p class="h" style="font-size:1.8em">Thank you</p><p class="p muted">Questions?</p></div>
+<button class="quiet" id="q" aria-label="Presenter notes" aria-expanded="false" aria-controls="nt">•••</button>
+<div class="notes" id="nt" hidden><strong>Presenter only</strong><ul><li>If asked about cost: see backup slide 14</li><li>If asked about risk: pilot is reversible</li><li>Close with the six-week decision date</li></ul></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A faint button sits in the corner of the slide. Activating it opens a small panel of presenter prompts; it stays visually quiet so the audience barely notices it. Reset hides the panel again.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function setOpen(o){nt.hidden=!o;q.setAttribute('aria-expanded',String(o));}
+q.addEventListener('click',function(){setOpen(nt.hidden);api.status(nt.hidden?'Notes hidden':'Notes open (presenter only)');});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!nt.hidden){e.preventDefault();setOpen(false);q.focus();}});
+var api=AtlasDemo.init({frames:0,interactive:true,idleText:'Find the faint button in the corner',reset:function(){setOpen(false);}});
+</script>
+</body>
+</html>

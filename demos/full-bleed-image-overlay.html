@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full-bleed image + overlay: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.img{transition:transform 1.2s var(--ease-out)}.img.z{transform:scale(1.06)}
+.scrim{background:linear-gradient(to top,rgba(14,17,24,.82) 0%,rgba(14,17,24,.45) 45%,rgba(14,17,24,0) 75%)}
+.ov{position:absolute;inset-inline:1.3em;inset-block-end:1.1em;color:#fff}
+.ov .k{font:500 .8em/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#e6e8ee}
+.ov .t{font:700 1.6em/1.1 var(--f-display);margin:.25em 0;max-width:15em}
+.ov .s{font-size:.9em;color:#eceef3;margin:0}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Full-bleed image + overlay</h1>
+<div class="stage" role="img" aria-label="Demo: Full-bleed image + overlay. An edge-to-edge illustrated landscape gains a dark scrim, then a headline and a short line on top.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="fill img fx" id="img" viewBox="0 0 480 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4c58c"/><stop offset=".55" stop-color="#e8a37a"/><stop offset="1" stop-color="#b9727a"/></linearGradient></defs>
+<rect width="480" height="300" fill="url(#sky)"/><circle cx="330" cy="120" r="34" fill="#fbe3b8"/>
+<path d="M0 190 L70 130 L130 170 L210 105 L290 165 L360 120 L480 180 V300 H0Z" fill="#7d5a78"/>
+<path d="M0 220 L90 175 L170 210 L260 160 L350 205 L420 180 L480 200 V300 H0Z" fill="#4f3f63"/>
+<path d="M0 255 Q240 215 480 250 V300 H0Z" fill="#2c2a45"/><path d="M230 300 L250 232 L262 232 L300 300Z" fill="#53506e"/></svg>
+<div class="fill scrim b fx" id="sc" style="transform:none"></div>
+<div class="ov"><p class="k b fx" id="k">Field visit · Route 14</p><p class="t b fx" id="t">Every delivery starts with one driver at 5 a.m.</p><p class="s b fx" id="s">What we learned riding along for a week.</p></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The image runs edge to edge with no frame. Play darkens the lower part with a gradient scrim so text stays readable, then sets a short headline and one supporting line on top. The landscape is an inline SVG illustration standing in for a photograph.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:3,stepMs:1000,render:function(f){$('img').classList.toggle('z',f===0);on($('sc'),f>=1);on($('k'),f>=2);on($('t'),f>=2);on($('s'),f>=3);}});
+</script>
+</body>
+</html>

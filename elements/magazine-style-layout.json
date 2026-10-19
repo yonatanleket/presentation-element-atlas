@@ -1,0 +1,20 @@
+{
+  "id": "magazine-style-layout",
+  "name": "Magazine-style layout",
+  "category": "story",
+  "definition": "Editorial layout mixing headline, image and text columns.",
+  "bestUse": "Narrative-heavy slides.",
+  "trigger": [
+    "key-message",
+    "visual-mood"
+  ],
+  "level": "standard",
+  "sources": [
+    "segel"
+  ],
+  "demo": {
+    "file": "demos/magazine-style-layout.html",
+    "kind": "animated",
+    "how": "The slide borrows a magazine grid: a wide headline, an image block, two narrow text columns that open with a drop cap, and a large pull statistic in the margin. Play places each part in reading order so the editorial hierarchy is easy to follow."
+  }
+}

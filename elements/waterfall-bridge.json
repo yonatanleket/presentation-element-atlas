@@ -1,0 +1,25 @@
+{
+  "id": "waterfall-bridge",
+  "name": "Waterfall bridge",
+  "category": "chart",
+  "definition": "Bars stepping from a start value to an end value through the changes.",
+  "bestUse": "Explaining a change, e.g. P&L.",
+  "trigger": [
+    "before-after",
+    "part-to-whole"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/waterfall-bridge.html",
+    "kind": "animated",
+    "how": "Bars step from 2025 revenue to 2026 revenue: green steps add, red steps subtract, and dashed connectors carry the running total, so every change visibly sums to the end value. Start and end bars sit on zero. Values are illustrative."
+  },
+  "aliases": [
+    "bridge chart",
+    "p&l bridge",
+    "variance walk"
+  ]
+}

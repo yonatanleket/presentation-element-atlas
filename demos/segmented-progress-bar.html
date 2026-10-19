@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segmented progress bar: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.segs{display:flex;gap:.25em;flex:1}.seg-g{display:flex;gap:.18em;flex:1}.seg-g+.seg-g{margin-inline-start:.45em}
+.dash{flex:1;height:.4em;border-radius:.2em;background:var(--line)}.dash.on{background:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Segmented progress bar</h1>
+<div class="stage" role="img" aria-label="Demo: Segmented progress bar">
+<div class="deck"><div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p muted" id="p"></p></div>
+<div class="deck-foot"><div class="segs" id="segs" aria-hidden="true"></div><span class="mono muted" id="pos"></span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One dash stands for one slide and small gaps separate chapters. Play advances the mini deck slide by slide and fills each dash as it is reached, so position and chapter breaks stay visible at a glance.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var CH=[['Context',['Where things stand','What slows us down']],['Options',['Three ways to fix it','Trade-offs']],['Plan',['Recommendation','Next steps']]];
+var flat=[];CH.forEach(function(c,ci){c[1].forEach(function(t){flat.push({ch:c[0],t:t});});});
+segs.innerHTML=CH.map(function(c){return '<div class="seg-g">'+c[1].map(function(){return '<span class="dash fx"></span>';}).join('')+'</div>';}).join('');
+var dashes=segs.querySelectorAll('.dash');
+AtlasDemo.init({frames:5,stepMs:800,render:function(f){var s=flat[f];k.textContent=s.ch;t.textContent=s.t;p.textContent='Slide '+(f+1)+' of '+flat.length;
+  pos.textContent=(f+1)+' / '+flat.length;dashes.forEach(function(d,i){d.classList.toggle('on',i<=f);});}});
+</script>
+</body>
+</html>

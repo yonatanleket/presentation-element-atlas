@@ -1,0 +1,25 @@
+{
+  "id": "spectrum-scale",
+  "name": "Spectrum scale",
+  "category": "compare",
+  "definition": "Options placed along a continuum.",
+  "bestUse": "Showing where you sit between extremes.",
+  "trigger": [
+    "options-comparison",
+    "decision-tradeoff"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/spectrum-scale.html",
+    "kind": "animated",
+    "how": "Two named extremes anchor a continuous scale, and each option is a marker on it, so the slide shows degree rather than yes or no. Play draws the scale, places where we are today and two competitors, then lands the proposal with a one-line rationale. Positions are illustrative."
+  },
+  "aliases": [
+    "continuum",
+    "scale",
+    "slider position"
+  ]
+}

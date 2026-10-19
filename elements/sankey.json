@@ -1,0 +1,26 @@
+{
+  "id": "sankey",
+  "name": "Sankey",
+  "category": "chart",
+  "definition": "Bands whose widths show flow between stages.",
+  "bestUse": "Funnels and budgets.",
+  "trigger": [
+    "flow-between-stages",
+    "part-to-whole"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/sankey.html",
+    "kind": "interactive",
+    "how": "Band widths are proportional to dollars, so each node’s height equals its total in and out. Select a source or a spending node (click, or Tab then Enter) to isolate its flows and hear the split; hover a band for its value. Data is illustrative."
+  },
+  "aliases": [
+    "funnel",
+    "flow",
+    "budget flow",
+    "alluvial"
+  ]
+}

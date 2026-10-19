@@ -1,0 +1,25 @@
+{
+  "id": "sequence-diagram",
+  "name": "Sequence diagram",
+  "category": "diagram",
+  "definition": "Messages between actors over time.",
+  "bestUse": "API and service flows.",
+  "trigger": [
+    "system-architecture",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/sequence-diagram.html",
+    "kind": "interactive",
+    "how": "Actors sit across the top, time runs down their dashed lifelines, and each arrow is one message, with dashed arrows for replies. Use Next and Back or the arrow keys to step through, and switch to Expired token to see the flow stop early. Reset returns to the first message."
+  },
+  "aliases": [
+    "timeline",
+    "api flow",
+    "message flow"
+  ]
+}

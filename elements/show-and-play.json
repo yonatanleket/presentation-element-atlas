@@ -1,0 +1,24 @@
+{
+  "id": "show-and-play",
+  "name": "Show-and-play",
+  "category": "motion",
+  "definition": "Media starts playing when its step is reached.",
+  "bestUse": "Audio and video moments.",
+  "trigger": [
+    "visual-mood"
+  ],
+  "level": "advanced",
+  "sources": [
+    "scrolly"
+  ],
+  "demo": {
+    "file": "demos/show-and-play.html",
+    "kind": "interactive",
+    "how": "Step through the slide with Next and Back. When the build containing the clip is reached, the clip starts on its own, so the presenter never hunts for a play button; it has its own Pause, and stepping back stops and rewinds it. The clip is simulated. Reset returns to the first build."
+  },
+  "aliases": [
+    "video",
+    "audio",
+    "media"
+  ]
+}

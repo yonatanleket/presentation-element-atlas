@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero outcome + supporting stats: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:1em;align-items:center;height:100%}
+.bar{position:relative;height:.7em;border-radius:.35em;background:var(--line);margin:.5em 0 .3em}
+.bar i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--ok);border-radius:.35em;width:0;transition:width .9s var(--ease-out)}
+.bar b{position:absolute;inset-block:-.3em;width:.15em;background:var(--fg);inset-inline-start:80%}
+.side{display:grid;gap:.5em}.side div{border-inline-start:.2em solid var(--line);padding-inline-start:.5em;opacity:0;transform:translateX(.4em)}
+.side div.on{opacity:1;transform:none}.side b{font:700 1.3em/1 var(--f-display);display:block}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Hero outcome + supporting stats</h1>
+<div class="stage" role="img" aria-label="Demo: Hero outcome + supporting stats">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad"><div class="hero"><div><p class="kicker">Result after six weeks</p><div class="big" style="color:var(--ok)"><span id="v">0%</span></div><p class="p">faster releases on the pilot team</p>
+<div class="bar" aria-hidden="true"><i id="fill"></i><b></b></div><p class="mono muted" style="margin:0;font-size:.75em">Goal: 40% · marker</p></div>
+<div class="side" id="side"><div class="fx"><b>5.2 d</b><span class="muted">median, was 9.1 d</span></div><div class="fx"><b>1 team</b><span class="muted">pilot scope only</span></div><div class="fx"><b>3.1%</b><span class="muted">rollbacks, unchanged</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The hero number counts up while its fill bar grows toward the goal; the smaller stats beside it then appear to qualify the result. Reduced motion shows the final numbers at once. Values are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var sides=side.children;
+AtlasDemo.init({frames:2,stepMs:1300,render:function(f,ctx){AtlasDemo.countUp(v,f>=1?43:0,{animate:ctx.animate&&f===1,suffix:'%'});fill.style.width=f>=1?'86%':'0';
+  [].forEach.call(sides,function(s,i){s.classList.toggle('on',f>=2);s.style.transitionDelay=ctx.animate&&f===2?(i*120)+'ms':'0ms';});}});
+</script>
+</body>
+</html>

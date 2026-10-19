@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skip link and slide announcer: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.skip{position:absolute;inset-block-start:.4em;inset-inline-start:.6em;z-index:4;background:var(--fg);color:#fff;padding:.4em .7em;border-radius:.35em;font-size:.85em;transform:translateY(-200%)}
+.skip:focus{transform:none}
+.sr-view{position:absolute;inset-inline:.9em;inset-block-end:.9em;z-index:2;background:var(--fg);color:#fff;border-radius:.4em;padding:.4em .7em;font:400 .8em/1.3 var(--f-mono)}
+.sr-view b{color:#c9d2ff;font-weight:500}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Skip link and slide announcer</h1>
+<div class="stage" role="group" aria-label="Demo: Skip link and slide announcer">
+<a class="skip" href="#content" id="skip">Skip to slide content</a>
+<div class="deck" style="inset-block-end:3.6em"><div class="deck-bar"><button class="sbtn" id="pv">← Prev</button><button class="sbtn" id="nx">Next →</button><span class="muted mono" id="pos"></span></div>
+<div class="deck-body" id="content" tabindex="-1"><p class="kicker" id="k"></p><p class="h" id="t"></p></div></div>
+<div class="sr-view" aria-hidden="true"><b>Screen reader hears:</b> <span id="echo">—</span></div>
+<div class="sr-only" aria-live="polite" id="live"></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Tab into the stage to reveal the skip link, which jumps focus past the deck controls to the slide content. Changing slides writes “Slide N of M: title” into a polite live region, shown here as a visible caption so you can see what a screen reader hears.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=[['Context','Where things stand today'],['Problem','What slows releases down'],['Options','Three ways to fix it'],['Plan','Recommendation']];
+var i=0;
+function draw(announce){k.textContent=S[i][0];t.textContent=S[i][1];pos.textContent=(i+1)+' / 4';pv.disabled=i===0;nx.disabled=i===3;
+  if(announce){var msg='Slide '+(i+1)+' of 4: '+S[i][1];live.textContent=msg;echo.textContent=msg;}}
+pv.addEventListener('click',function(){i--;draw(true);});nx.addEventListener('click',function(){i++;draw(true);});
+skip.addEventListener('click',function(e){e.preventDefault();content.focus();echo.textContent='Skipped to slide content';});
+AtlasDemo.init({frames:0,interactive:true,idleText:'Tab into the stage to see the skip link',reset:function(){i=0;draw(false);echo.textContent='—';live.textContent='';}});
+</script>
+</body>
+</html>

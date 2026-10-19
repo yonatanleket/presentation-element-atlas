@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Focus dimming: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.li{display:flex;gap:.6em;align-items:baseline;font-size:1.05em;opacity:0;transform:translateY(.4em)}
+.li .n{font:700 1em var(--f-display);color:var(--accent);min-width:1.1em}
+.li.on{opacity:1;transform:none}.li.dim{opacity:.32}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Focus dimming</h1>
+<div class="stage" role="img" aria-label="Demo: Focus dimming. Four points appear one at a time; each new point is at full strength while earlier ones fade back.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.6em">
+<p class="kicker">Recommendation</p><p class="h" style="font-size:1.2em">Four changes to cut release lead time</p>
+<div class="col" id="list" style="gap:.5em"></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each step brings in the next point at full strength and fades the earlier ones back to a light gray, so the room reads the point being discussed rather than the whole list. Play walks through four points; the final step leaves only the last one emphasized.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var L=['Replace manual sign-off with automated checks','Release every week on a fixed day','Name one owner for each release','Report lead time on the team dashboard'];
+$('list').innerHTML=L.map(function(t,i){return '<div class="li fx"><span class="n">'+(i+1)+'</span><span>'+t+'</span></div>';}).join('');
+var li=$('list').children;
+AtlasDemo.init({frames:4,stepMs:1100,render:function(f){for(var i=0;i<4;i++){on(li[i],i<f);li[i].classList.toggle('dim',i<f-1);}}});
+</script>
+</body>
+</html>

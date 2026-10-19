@@ -1,0 +1,28 @@
+{
+  "id": "sparkline",
+  "name": "Sparkline",
+  "category": "metric",
+  "definition": "Word-sized line chart placed inline with a number.",
+  "bestUse": "Trend context in tight space.",
+  "trigger": [
+    "trend-over-time",
+    "single-key-number"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/sparkline.html",
+    "kind": "animated",
+    "how": "A word-sized line draws itself next to the current value and ends in a dot on the latest point. It carries no axes: it gives the shape of the trend, while the number gives the value. Data is illustrative."
+  },
+  "related": [
+    "stat-with-delta"
+  ],
+  "aliases": [
+    "kpi",
+    "mini chart",
+    "inline trend"
+  ]
+}

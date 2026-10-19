@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slidedoc page: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.doc{position:absolute;inset:.9em 2.2em;background:var(--surface);border:1px solid var(--line);border-radius:.3em;padding:.8em 1em;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto 1fr auto;gap:.45em .8em}
+.zn{position:relative;border-radius:.25em;transition:background-color .25s var(--ease-out)}
+.zn.cur{background:var(--accent-soft)}
+.nb{display:inline-block;vertical-align:.1em;margin-inline-end:.35em;width:1.3em;height:1.3em;border-radius:50%;background:var(--accent);color:#fff;font:600 .8em/1.3em var(--f-mono);text-align:center;opacity:0;transform:scale(.6);transition:opacity .2s,transform .2s var(--ease-out)}
+.zn.on .nb{opacity:1;transform:none}
+.dt{grid-column:1/-1;font:700 1.05em/1.2 var(--f-display);margin:0}
+.bd p{margin:0 0 .35em;font-size:.8em;line-height:1.35;color:var(--ink-2)}
+.ch svg{width:100%;height:5.5em;display:block}.ch p{margin:.2em 0 0;font-size:.8em;color:var(--muted)}
+.fn{grid-column:1/-1;font:500 .8em/1.2 var(--f-mono);color:var(--muted);border-top:1px solid var(--line);padding-top:.3em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Slidedoc page</h1>
+<div class="stage" role="img" aria-label="Demo: Slidedoc page. A dense, document-like slide with a sentence title, body text, a captioned chart and a footnote; numbered markers show the reading order.">
+<span class="label-illustrative">Illustrative</span>
+<div class="doc">
+<p class="dt zn" id="z1"><span class="nb">1</span>Teams that use templates ship their first report two weeks sooner.</p>
+<div class="bd zn" id="z2"><span class="nb">2</span><p>Across 40 new teams, those who started from a template published a first report in 6 days on average; teams starting blank took 20.</p><p>By month three the gap closes: templates speed up the start.</p></div>
+<div class="ch zn" id="z3"><span class="nb">3</span><svg viewBox="0 0 100 60" aria-hidden="true"><rect x="12" y="38" width="28" height="18" fill="var(--accent)"/><rect x="58" y="4" width="28" height="52" fill="var(--line)"/><text x="26" y="34" font-size="10" text-anchor="middle" fill="var(--fg)">6 d</text><text x="72" y="13" font-size="10" text-anchor="middle" fill="var(--fg)">20 d</text></svg><p>Days to first report: template vs blank</p></div>
+<p class="fn zn" id="z4"><span class="nb">4</span>Source: onboarding logs, 40 teams, Jan–Jun</p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A slidedoc page is written to be read, not projected: a full-sentence title, short paragraphs, a captioned chart and a source note, all on one idea. Play numbers the reading path one part at a time, from title to body to chart to footnote.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:4,stepMs:1000,render:function(f){for(var i=1;i<=4;i++){var z=$('z'+i);on(z,i<=f);z.classList.toggle('cur',i===f);}}});
+</script>
+</body>
+</html>

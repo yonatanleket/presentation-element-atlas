@@ -1,0 +1,25 @@
+{
+  "id": "executive-summary-answer-first",
+  "name": "Executive summary / answer first",
+  "category": "story",
+  "definition": "Opening slide that states the conclusion before the evidence.",
+  "bestUse": "Leadership audiences.",
+  "trigger": [
+    "key-message"
+  ],
+  "level": "standard",
+  "sources": [
+    "mck"
+  ],
+  "demo": {
+    "file": "demos/executive-summary-answer-first.html",
+    "kind": "animated",
+    "how": "The slide opens with the conclusion as a full sentence, before any evidence. Play adds the answer, then the three reasons that support it, each with one number, and finally the decision being asked for, so a leader who reads only this slide still knows what to approve."
+  },
+  "aliases": [
+    "tl;dr",
+    "summary",
+    "bluf",
+    "pyramid principle"
+  ]
+}

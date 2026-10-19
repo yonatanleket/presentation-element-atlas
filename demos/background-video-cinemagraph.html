@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Background video / cinemagraph: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.sc{position:absolute;inset:0;background:linear-gradient(#cfdcf5,#eef2fb 55%,#9fb6dc 55%,#7f9acb);overflow:hidden}
+.sun{position:absolute;inset-inline-end:5em;top:3em;width:3.4em;height:3.4em;border-radius:50%;background:#f6e3b4}
+.cl{position:absolute;height:1.4em;border-radius:99em;background:rgba(255,255,255,.85);animation:drift 14s linear infinite paused}
+.cl::before{content:"";position:absolute;width:55%;height:180%;bottom:0;left:20%;border-radius:50%;background:inherit}
+@keyframes drift{from{transform:translateX(-8em)}to{transform:translateX(34em)}}
+.hill{position:absolute;bottom:45%;inset-inline:0;height:2.4em;background:#7d93b8;clip-path:polygon(0 100%,0 60%,18% 20%,35% 70%,55% 10%,75% 60%,100% 30%,100% 100%)}
+.wv{position:absolute;inset-inline:-30em 0;height:.18em;background:rgba(255,255,255,.55);border-radius:99em;animation:shim 3.5s ease-in-out infinite alternate paused}
+@keyframes shim{from{transform:translateX(0);opacity:.35}to{transform:translateX(3em);opacity:.9}}
+.demo[data-state=playing] .cl,.demo[data-state=playing] .wv{animation-play-state:running}
+.scrim{position:absolute;inset-inline-start:1.2em;bottom:1.2em;max-width:17em;background:rgba(255,255,255,.88);border-radius:.5em;padding:.7em .9em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Background video / cinemagraph</h1>
+<div class="stage" role="img" aria-label="Demo: Background video / cinemagraph. A headline over a calm generated lake scene where only the water and clouds move, with a Pause control.">
+<span class="label-illustrative">Simulated video</span>
+<div class="sc" aria-hidden="true"><span class="sun"></span>
+  <span class="cl" style="top:2em;width:5em"></span><span class="cl" style="top:4.6em;width:3.6em;animation-duration:20s;animation-delay:-9s"></span>
+  <span class="hill"></span>
+  <span class="wv" style="top:60%;width:44em"></span><span class="wv" style="top:68%;width:40em;animation-delay:-1.2s"></span><span class="wv" style="top:77%;width:46em;animation-delay:-2.1s"></span><span class="wv" style="top:87%;width:42em;animation-delay:-.6s"></span>
+</div>
+<div class="scrim"><p class="kicker">Offsite 2026</p><p class="h">Slow down to plan the year</p></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A CSS-drawn scene stands in for the looping clip: the sky, sun and shore stay still while only the water shimmer and clouds drift, which is what makes a cinemagraph calm. A scrim keeps the headline readable. Pause stops the loop; reduced motion shows a still frame.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+AtlasDemo.init({frames:2,stepMs:2500,loop:true,playText:'Simulated loop playing',doneText:'Still frame',render:function(){}});
+})();
+</script>
+</body>
+</html>

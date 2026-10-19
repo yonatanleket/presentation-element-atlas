@@ -1,0 +1,23 @@
+{
+  "id": "live-code-editor",
+  "name": "Live code editor",
+  "category": "product",
+  "definition": "Editable, runnable code inside the slide.",
+  "bestUse": "Live demos.",
+  "trigger": [
+    "code"
+  ],
+  "level": "advanced",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/live-code-editor.html",
+    "kind": "interactive",
+    "how": "Edit the four lines of arithmetic and press Run (or Ctrl/Cmd+Enter). A tiny built-in interpreter evaluates each assignment top to bottom and prints the values, or a line-numbered error if something is wrong. Nothing is sent anywhere; Reset restores the original code."
+  },
+  "aliases": [
+    "code playground",
+    "repl"
+  ]
+}

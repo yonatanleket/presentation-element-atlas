@@ -1,0 +1,24 @@
+{
+  "id": "diverging-bar",
+  "name": "Diverging bar",
+  "category": "chart",
+  "definition": "Bars extending left or right of a zero or target line.",
+  "bestUse": "Deviation: above vs below plan.",
+  "trigger": [
+    "deviation-from-target"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/diverging-bar.html",
+    "kind": "animated",
+    "how": "Bars grow left or right from a zero line at plan, so above-plan and below-plan regions separate instantly. Signed labels and position, not color alone, carry the direction, and regions are sorted from furthest above to furthest below. Values are illustrative."
+  },
+  "aliases": [
+    "bar chart",
+    "variance",
+    "above below"
+  ]
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swimlane architecture board: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.vp{position:absolute;inset:0;cursor:grab;touch-action:none}.vp:active{cursor:grabbing}.vp:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.vp svg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body)}
+.lane1{fill:#f8f9fb}.lane2{fill:#eceef3}.lanel{font-size:13px}
+.dg .inf{stroke-dasharray:5 4}.dg .infl{stroke-dasharray:5 4}
+.zc{position:absolute;inset-inline-end:.6em;inset-block-end:.6em;display:flex;gap:.3em}
+.zc .sbtn{min-width:2.2em;padding:0 .5em;box-shadow:0 .1em .3em rgba(0,0,0,.08)}
+.lg{position:absolute;inset-inline-start:.6em;inset-block-end:.6em;padding:.35em .55em;font-size:.8em;display:flex;gap:.7em;align-items:center;color:var(--ink-2)}
+.lg i{display:inline-block;vertical-align:middle;margin-inline-end:.3em}.lg .r{width:1em;height:.7em;border:1.5px solid var(--muted);border-radius:.15em}
+.lg .d{width:.65em;height:.65em;border:1.5px solid var(--accent);transform:rotate(45deg)}.lg .s{width:1.2em;border-top:2px solid var(--muted)}.lg .x{width:1.2em;border-top:2px dashed var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Swimlane architecture board</h1>
+<div class="stage" role="group" aria-label="Demo: Swimlane architecture board. A pan-and-zoom swimlane board of an order flow across customer, web app, orders service and payment partner lanes.">
+<span class="label-illustrative">Illustrative</span>
+<div class="vp" id="vp" tabindex="0" role="application" aria-label="Swimlane board. Arrow keys pan, plus and minus zoom.">
+<svg class="dg" id="board" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><rect x="0" y="0" width="900" height="75" class="lane1"/><text x="8" y="18" class="t-m t-b lanel">Customer</text><rect x="0" y="75" width="900" height="75" class="lane2"/><text x="8" y="93" class="t-m t-b lanel">Web app</text><rect x="0" y="150" width="900" height="75" class="lane1"/><text x="8" y="168" class="t-m t-b lanel">Orders service</text><rect x="0" y="225" width="900" height="75" class="lane2"/><text x="8" y="243" class="t-m t-b lanel">Payment partner</text>
+<path d="M120 55 V112 H181" class="ln" marker-end="url(#ah)"/>
+<g><rect x="65" y="19" width="110" height="36" rx="6" class="nd"/><text x="120" y="41.5" text-anchor="middle">Place order</text></g><g><rect x="185" y="94" width="110" height="36" rx="6" class="nd"/><text x="240" y="116.5" text-anchor="middle">Validate cart</text></g><path d="M295 112 H310" class="ln" marker-end="url(#ah)"/><g><polygon points="360,86 410,112 360,138 310,112" class="nd-a"/><text x="360" y="116.5" text-anchor="middle" class="t-a t-b">In stock?</text></g>
+<path d="M410 112 H455" class="ln" marker-end="url(#ah)"/><text x="418" y="104" class="t-m t-mono">no</text><g><rect x="455" y="94" width="110" height="36" rx="6" class="nd"/><text x="510" y="116.5" text-anchor="middle">Show error</text></g>
+<path d="M360 138 V187 H425" class="ln" marker-end="url(#ah)"/><text x="366" y="160" class="t-m t-mono">yes</text><g><rect x="425" y="169" width="110" height="36" rx="6" class="nd"/><text x="480" y="191.5" text-anchor="middle">Reserve stock</text></g>
+<path d="M480 205 V262 H505" class="ln infl" marker-end="url(#ah)"/><g><rect x="505" y="244" width="110" height="36" rx="6" class="nd inf"/><text x="560" y="266.5" text-anchor="middle">Charge card</text></g><path d="M615 262 H630" class="ln infl" marker-end="url(#ah)"/><g><polygon points="680,236 730,262 680,288 630,262" class="nd-a inf"/><text x="680" y="266.5" text-anchor="middle" class="t-a t-b">Approved?</text></g>
+<path d="M680 236 V205" class="ln" marker-end="url(#ah)"/><text x="686" y="226" class="t-m t-mono">yes</text><g><rect x="625" y="169" width="110" height="36" rx="6" class="nd"/><text x="680" y="191.5" text-anchor="middle">Create order</text></g><path d="M735 187 H790 V55" class="ln" marker-end="url(#ah)"/><g><rect x="745" y="19" width="110" height="36" rx="6" class="nd"/><text x="800" y="41.5" text-anchor="middle">Sees confirmation</text></g>
+<path d="M730 262 H820" class="ln infl" marker-end="url(#ah)"/><text x="744" y="254" class="t-m t-mono">no: retry</text></svg></div>
+<div class="lg card"><span><i class="r"></i>action</span><span><i class="d"></i>decision</span><span><i class="s"></i>documented</span><span><i class="x"></i>inferred</span></div>
+<div class="zc"><button type="button" class="sbtn" id="zo" aria-label="Zoom out">−</button><button type="button" class="sbtn" id="zi" aria-label="Zoom in">+</button><button type="button" class="sbtn" id="zf">Fit</button></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each lane is one actor; rectangles are actions, diamonds are decisions, solid lines are documented and dashed ones inferred. Drag the board or use the arrow keys to pan, plus and minus to zoom, and Fit to see the whole flow; Reset returns to the start view. The flow is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var W=900,H=300,v={x:0,y:0,w:480},api,svgEl=$('#board'),vp=$('#vp');
+function hgt(){return v.w*300/480;}
+function clamp(){var h=hgt();v.w=Math.max(300,Math.min(960,v.w));h=hgt();
+  v.x=v.w>=W?(W-v.w)/2:Math.max(0,Math.min(W-v.w,v.x));v.y=h>=H?(H-h)/2:Math.max(0,Math.min(H-h,v.y));}
+function draw(){clamp();svgEl.setAttribute('viewBox',[v.x,v.y,v.w,hgt()].map(function(n){return Math.round(n*10)/10;}).join(' '));$('#zi').disabled=v.w<=300;$('#zo').disabled=v.w>=960;}
+function zoom(f){var cx=v.x+v.w/2,cy=v.y+hgt()/2;v.w*=f;v.x=cx-v.w/2;v.y=cy-hgt()/2;draw();api.status('Zoom '+Math.round(480/v.w*100)+'%');}
+$('#zi').addEventListener('click',function(){zoom(1/1.25);});$('#zo').addEventListener('click',function(){zoom(1.25);});
+$('#zf').addEventListener('click',function(){v.w=960;draw();api.status('Whole flow');});
+vp.addEventListener('keydown',function(e){var s=v.w/8,k=e.key,dx=0,dy=0;if(k==='ArrowRight')dx=s;else if(k==='ArrowLeft')dx=-s;else if(k==='ArrowDown')dy=s;else if(k==='ArrowUp')dy=-s;
+  else if(k==='+'||k==='='){e.preventDefault();zoom(1/1.25);return;}else if(k==='-'){e.preventDefault();zoom(1.25);return;}else return;
+  e.preventDefault();if(isRtl())dx=-dx;v.x+=dx;v.y+=dy;draw();api.status('Panned');});
+var drag=null;vp.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,vx:v.x,vy:v.y};try{vp.setPointerCapture(e.pointerId);}catch(_){}});
+vp.addEventListener('pointermove',function(e){if(!drag)return;var k=v.w/vp.clientWidth;v.x=drag.vx-(e.clientX-drag.x)*k;v.y=drag.vy-(e.clientY-drag.y)*k;draw();});
+function end(){if(drag){drag=null;api.status('Panned');}}vp.addEventListener('pointerup',end);vp.addEventListener('pointercancel',end);
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Drag or use arrow keys to pan',reset:function(){v={x:0,y:0,w:480};draw();}});
+</script>
+</body>
+</html>

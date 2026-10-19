@@ -1,0 +1,25 @@
+{
+  "id": "layered-stack",
+  "name": "Layered stack",
+  "category": "diagram",
+  "definition": "Horizontal layers of a platform.",
+  "bestUse": "Tech architecture.",
+  "trigger": [
+    "system-architecture",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/layered-stack.html",
+    "kind": "animated",
+    "how": "Horizontal bands show what each layer of the platform contains, with lower layers supporting the ones above. Play builds the stack from infrastructure upward, then marks the services layer as the one being rebuilt this quarter. Components are illustrative."
+  },
+  "aliases": [
+    "architecture",
+    "tech stack",
+    "layers"
+  ]
+}

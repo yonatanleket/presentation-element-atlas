@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embedded motion film: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.pl{position:absolute;inset:.9em;display:grid;grid-template-rows:1fr auto auto;gap:.4em}
+.scr{position:relative;background:#1f2330;border-radius:.5em;overflow:hidden;color:#fff}
+.scn{position:absolute;inset:0;padding:.7em .9em;opacity:0;transition:opacity .3s var(--ease-out)}
+.scn.on{opacity:1}.scn b{font:700 1.05em var(--f-display)}
+.tix{position:absolute;bottom:.8em;inset-inline-start:1em;display:flex;flex-direction:column-reverse;gap:.2em}
+.tix i{width:6em;height:.6em;border-radius:.2em;background:#ffb3a8}
+.clock{position:absolute;inset-inline-end:2.4em;top:1.6em;width:4.4em;height:4.4em;border-radius:50%;border:.25em solid #aab0c0}
+.hand{position:absolute;left:50%;top:50%;width:.2em;height:1.8em;background:#fff;transform-origin:50% 0}
+.pipe{position:absolute;inset-inline:1em;top:50%;height:.4em;background:#3a3f4b;border-radius:99em}
+.pipe i{position:absolute;inset-block:0;inset-inline-start:0;background:#9fe3c1;border-radius:99em}
+.rise{position:absolute;inset:2.6em 1em .6em}
+.cap{position:absolute;inset-inline:.8em;bottom:.5em;background:rgba(0,0,0,.6);border-radius:.3em;padding:.25em .5em;font-size:.8em;display:none}
+.pl.tx .cap{display:block}
+.bar{display:flex;align-items:center;gap:.45em}
+.bar input{flex:1;accent-color:var(--accent);min-height:28px}
+.tm{font:.8em var(--f-mono);color:var(--muted);min-width:5.6em;text-align:end}
+.chips{display:flex;gap:.3em;align-items:center}
+.chips .sbtn{min-width:2.2em}.chips .sp{flex:1}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Embedded motion film</h1>
+<div class="stage" role="group" aria-label="Demo: Embedded motion film. A small in-slide film player with play and pause, a scrubber, four numbered scene buttons and an expandable transcript.">
+<span class="label-illustrative">Simulated film</span>
+<div class="pl" id="pl">
+  <div class="scr" aria-hidden="true">
+    <div class="scn"><b>1 · The pile-up</b><div class="tix" id="tix"></div></div>
+    <div class="scn"><b>2 · The wait</b><div class="clock"><i class="hand" id="hand"></i></div></div>
+    <div class="scn"><b>3 · The fix</b><div class="pipe"><i id="pipe"></i></div></div>
+    <div class="scn"><b>4 · The result</b><svg class="rise" viewBox="0 0 100 40" preserveAspectRatio="none"><polyline id="rise" fill="none" stroke="#9fe3c1" stroke-width="2.5" points=""/></svg></div>
+    <div class="cap" id="cap"></div>
+  </div>
+  <div class="bar"><button class="sbtn primary" type="button" id="pp" aria-label="Play">▶</button><label class="sr-only" for="sc">Film position in seconds</label><input type="range" id="sc" min="0" max="40" step="1" value="0"><span class="tm" id="tm">0:00 / 0:40</span></div>
+  <div class="chips" id="chips"><span class="muted" style="font-size:.8em">Scenes</span><button class="sbtn" type="button">1</button><button class="sbtn" type="button">2</button><button class="sbtn" type="button">3</button><button class="sbtn" type="button">4</button><span class="sp"></span><button class="sbtn" type="button" id="txb" aria-expanded="false">Transcript</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A 40-second film drawn with CSS plays inside the slide (at 4× speed here). Play or pause it, drag the scrubber or use its arrow keys, or jump with the numbered scene buttons; Transcript shows the caption for the current scene. Reset rewinds to the start.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var CAP=['Requests arrive faster than the team can sort them.','Each one waits an average of three days for a first reply.','A shared triage queue routes every request in minutes.','Reply times drop from days to hours within a month.'];
+var t=0,tm=null,api,sc=$('sc'),scn=document.querySelectorAll('.scn'),chips=$('chips').querySelectorAll('.sbtn:not(#txb)');
+function sceneOf(x){return Math.min(3,Math.floor(x/10));}
+function draw(){var s=sceneOf(t),lp=(t-s*10)/10;scn.forEach(function(e,i){e.classList.toggle('on',i===s);});
+  $('tix').innerHTML=new Array(Math.round(2+lp*8)+1).join('<i></i>');
+  $('hand').style.transform='rotate('+(180+lp*300)+'deg)';$('pipe').style.width=Math.round(lp*100)+'%';
+  var pts=[];for(var i=0;i<=Math.round(lp*10);i++)pts.push(i*10+','+(36-i*i*.3).toFixed(1));$('rise').setAttribute('points',pts.join(' '));
+  sc.value=t;$('tm').textContent='0:'+(t<10?'0':'')+t+' / 0:40';$('cap').textContent=CAP[s];
+  chips.forEach(function(b,i){b.setAttribute('aria-current',String(i===s));b.setAttribute('aria-label','Scene '+(i+1));});}
+function pause(){clearInterval(tm);tm=null;$('pp').textContent='▶';$('pp').setAttribute('aria-label','Play');}
+function play(){if(t>=40)t=0;clearInterval(tm);$('pp').textContent='❚❚';$('pp').setAttribute('aria-label','Pause');api.status('Playing (simulated film)');
+  tm=setInterval(function(){t++;draw();if(t>=40){pause();api.status('Film ended');}},250);}
+$('pp').addEventListener('click',function(){if(tm){pause();api.status('Paused at 0:'+(t<10?'0':'')+t);}else play();});
+sc.addEventListener('input',function(){t=+sc.value;draw();api.status('Scene '+(sceneOf(t)+1)+': '+CAP[sceneOf(t)]);});
+chips.forEach(function(b,i){b.addEventListener('click',function(){t=i*10;draw();api.status('Jumped to scene '+(i+1));});});
+$('txb').addEventListener('click',function(){var on=!$('pl').classList.contains('tx');$('pl').classList.toggle('tx',on);$('txb').setAttribute('aria-expanded',String(on));api.status(on?'Transcript: '+CAP[sceneOf(t)]:'Transcript hidden');});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){pause();t=0;$('pl').classList.remove('tx');$('txb').setAttribute('aria-expanded','false');draw();}});
+})();
+</script>
+</body>
+</html>

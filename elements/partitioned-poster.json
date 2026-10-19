@@ -1,0 +1,20 @@
+{
+  "id": "partitioned-poster",
+  "name": "Partitioned poster",
+  "category": "story",
+  "definition": "One slide split into panels, each with its own data.",
+  "bestUse": "Overviews and dashboards.",
+  "trigger": [
+    "kpi-set",
+    "dense-detail"
+  ],
+  "level": "standard",
+  "sources": [
+    "segel"
+  ],
+  "demo": {
+    "file": "demos/partitioned-poster.html",
+    "kind": "animated",
+    "how": "One slide is divided into four equal panels, each answering its own question with its own small display: a headline number, a bar comparison, a status pill and a trend line. Play fills the panels one at a time; the shared title ties them together."
+  }
+}

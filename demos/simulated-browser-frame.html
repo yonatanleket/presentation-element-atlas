@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulated browser frame: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.br{position:absolute;inset:.9em;display:flex;flex-direction:column;overflow:hidden}
+.tabs{display:flex;align-items:flex-end;gap:.4em;padding:.4em .6em 0;background:#e9ebef}
+.dots{display:flex;gap:.3em;padding-bottom:.5em}.dots i{width:.6em;height:.6em;border-radius:50%;background:#c9ccd3}
+.tab{background:var(--surface);border-radius:.4em .4em 0 0;padding:.3em .8em;font-size:.8em}
+.addr{display:flex;align-items:center;gap:.5em;padding:.35em .6em;border-bottom:1px solid var(--line);font-size:.8em}
+.url{flex:1;background:var(--stage);border-radius:99em;padding:.2em .8em;font-family:var(--f-mono);min-height:1.6em}
+.url::after{content:"";display:inline-block;width:1px;height:1em;background:var(--fg);vertical-align:-.15em;margin-inline-start:1px}
+.pg{flex:1;position:relative;padding:.8em 1em}
+.sk,.ct{position:absolute;inset:.8em 1em;display:grid;gap:.5em;align-content:start;transition:opacity .3s var(--ease-out)}
+.sk i{display:block;height:.9em;border-radius:.25em;background:#eceef2}
+.ct .row{justify-content:space-between}.plan{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5em}
+.plan div{border:1px solid var(--line);border-radius:.4em;padding:.4em .5em;font-size:.8em}.plan div.on{border-color:var(--accent);background:var(--accent-soft)}
+.plan b{display:block;font:700 1.25em var(--f-display)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Simulated browser frame</h1>
+<div class="stage" role="img" aria-label="Demo: Simulated browser frame. Drawn browser chrome appears, the address types in, and a mock billing page loads from skeleton to content.">
+<span class="label-illustrative">Simulated</span>
+<div class="br card" aria-hidden="true">
+  <div class="tabs"><div class="dots"><i></i><i></i><i></i></div><div class="tab">Billing · Workspace</div></div>
+  <div class="addr"><span>‹ ›</span><span class="url" id="url"></span></div>
+  <div class="pg">
+    <div class="sk fx" id="sk"><i style="width:40%"></i><i style="width:70%"></i><i style="height:4.5em"></i></div>
+    <div class="ct fx" id="ct"><div class="row"><span class="h" style="font-size:1.1em">Choose a plan</span><span class="pill ok">Saved card on file</span></div>
+      <div class="plan"><div>Starter<b>$0</b>3 seats</div><div class="on">Team<b>$12</b>per seat</div><div>Scale<b>$29</b>per seat</div></div>
+      <span class="muted" style="font-size:.8em">Billed monthly. Cancel any time.</span></div>
+  </div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Drawn browser chrome (tab, address bar, window dots) frames a mock screen so it reads as a web product without using a real screenshot. The steps type the address, show a loading skeleton, then fill in the page; the corner label keeps it honest as simulated.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var U='app.example.test/billing',tm=null;
+AtlasDemo.init({frames:3,stepMs:1300,render:function(f,ctx){clearInterval(tm);
+  $('sk').style.opacity=f===2?1:0;$('ct').style.opacity=f>=3?1:0;
+  var url=$('url');if(f===0){url.textContent='';return;}
+  if(f===1&&ctx.animate){var n=0;url.textContent='';tm=setInterval(function(){url.textContent=U.slice(0,++n);if(n>=U.length)clearInterval(tm);},40);}
+  else url.textContent=U;}});
+})();
+</script>
+</body>
+</html>

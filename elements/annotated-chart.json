@@ -1,0 +1,25 @@
+{
+  "id": "annotated-chart",
+  "name": "Annotated chart",
+  "category": "chart",
+  "definition": "Chart with labels and notes calling out the key point.",
+  "bestUse": "Any chart you present.",
+  "trigger": [
+    "key-message",
+    "trend-over-time"
+  ],
+  "level": "standard",
+  "sources": [
+    "segel"
+  ],
+  "demo": {
+    "file": "demos/annotated-chart.html",
+    "kind": "animated",
+    "how": "The line draws in, then a shaded band and a callout mark the July launch and state the jump in words (+42% month over month), so the audience reads the point instead of hunting for it. Data is illustrative."
+  },
+  "aliases": [
+    "callout",
+    "chart annotation",
+    "highlight"
+  ]
+}

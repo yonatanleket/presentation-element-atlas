@@ -1,0 +1,25 @@
+{
+  "id": "sources-panel",
+  "name": "Sources panel",
+  "category": "nav",
+  "definition": "Global top-bar entry that opens the references and data sources behind the talk.",
+  "bestUse": "Evidence-heavy talks such as research readouts and reviews.",
+  "trigger": [
+    "claim-needing-evidence",
+    "navigation-wayfinding"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/sources-panel.html",
+    "kind": "animated",
+    "how": "A Sources entry sits in the top bar on every slide. Play opens the panel, which lists each reference with what it supports, and highlights the one behind the claim on screen. The panel is global, so it reads the same from any slide."
+  },
+  "aliases": [
+    "references",
+    "bibliography",
+    "citations"
+  ]
+}

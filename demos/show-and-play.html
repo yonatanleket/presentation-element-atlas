@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Show-and-play: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.dk{position:absolute;inset:.9em;display:flex;flex-direction:column;overflow:hidden}
+.bd{flex:1;padding:.9em 1.1em;display:grid;grid-template-columns:1fr 12em;gap:.9em}
+.bd ul{margin:.4em 0 0;padding-inline-start:1.1em;display:grid;gap:.3em}
+.bl{transition:opacity .3s var(--ease-out)}.bl.off{opacity:0}
+.md{background:#1f2330;border-radius:.5em;color:#fff;padding:.6em;display:grid;grid-template-rows:1fr auto auto;gap:.4em;align-self:start;height:9.4em}
+.wf{display:flex;align-items:center;gap:.18em;height:100%}
+.wf i{flex:1;background:#7a8cff;border-radius:.1em;height:20%;transition:height .2s}
+.pg{height:.3em;background:#3a3f4b;border-radius:99em;overflow:hidden}.pg i{display:block;height:100%;width:0;background:#9fe3c1}
+.mc{display:flex;align-items:center;justify-content:space-between;font:.8em var(--f-mono)}
+.mc .sbtn{min-height:max(26px,1.8em)}
+.ft{display:flex;align-items:center;gap:.4em;padding:.4em .7em;border-top:1px solid var(--line);font-size:.8em}
+.ft .sp{flex:1}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Show-and-play</h1>
+<div class="stage" role="group" aria-label="Demo: Show-and-play. A mini deck with Back and Next; when the third build is reached, a media tile starts playing by itself and can be paused.">
+<span class="label-illustrative">Simulated media</span>
+<div class="dk card">
+  <div class="bd"><div><p class="kicker">Customer voice</p><p class="h">What users told us</p><ul><li class="bl" id="b1">Setup takes too long</li><li class="bl" id="b2">Here is one of them, in her words:</li></ul></div>
+    <div class="md bl" id="md"><div class="wf" id="wf" aria-hidden="true"></div><div class="pg"><i id="pg"></i></div><div class="mc"><span id="mt">0:00 / 0:12</span><button class="sbtn" type="button" id="mp">Pause</button></div></div></div>
+  <div class="ft"><span class="mono muted" id="pos">Build 1 / 3</span><span class="sp"></span><button class="sbtn" type="button" id="back">‹ Back</button><button class="sbtn primary" type="button" id="next">Next ›</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Step through the slide with Next and Back. When the build containing the clip is reached, the clip starts on its own, so the presenter never hunts for a play button; it has its own Pause, and stepping back stops and rewinds it. The clip is simulated. Reset returns to the first build.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var step=0,t=0,tm=null,api,wf=$('wf');wf.innerHTML=new Array(25).join('<i></i>');var bars=wf.children;
+function media(){$('pg').style.width=(t/12*100)+'%';$('mt').textContent='0:'+(t<10?'0':'')+Math.floor(t)+' / 0:12';
+  for(var i=0;i<bars.length;i++)bars[i].style.height=tm&&!AtlasDemo.reducedMotion?(20+Math.abs(Math.sin(t*3+i*.7))*75)+'%':'20%';}
+function stopM(rewind){clearInterval(tm);tm=null;if(rewind)t=0;$('mp').textContent='Play';media();}
+function playM(){clearInterval(tm);if(t>=12)t=0;$('mp').textContent='Pause';tm=setInterval(function(){t=Math.min(12,t+.25);if(t>=12){stopM(false);api.status('Clip finished');}media();},250);media();}
+function draw(){$('b1').classList.toggle('off',step<1);$('b2').classList.toggle('off',step<2);$('md').classList.toggle('off',step<2);
+  $('md').setAttribute('aria-hidden',String(step<2));$('mp').disabled=step<2;
+  $('pos').textContent='Build '+(step+1)+' / 3';$('back').disabled=step===0;$('next').disabled=step===2;}
+$('next').addEventListener('click',function(){if(step<2){step++;draw();if(step===2){playM();api.status('Clip started automatically at build 3');}else api.status('Build '+(step+1));}});
+$('back').addEventListener('click',function(){if(step>0){if(step===2){stopM(true);api.status('Clip stopped and rewound');}else api.status('Build '+step);step--;draw();}});
+$('mp').addEventListener('click',function(){if(tm){stopM(false);api.status('Clip paused');}else{playM();api.status('Clip playing');}});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){stopM(true);step=0;draw();}});
+})();
+</script>
+</body>
+</html>

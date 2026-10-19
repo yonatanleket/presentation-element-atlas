@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magazine-style layout: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.mg{display:grid;grid-template-columns:1.05fr 1fr 1fr;grid-template-rows:auto 1fr;gap:.5em .8em;height:100%}
+.mg .hl{grid-column:1/-1;font:700 1.4em/1.08 var(--f-display);margin:0;letter-spacing:-.01em}
+.mg .hl em{font-style:normal;color:var(--accent)}
+.mg .pic{border-radius:.35em;overflow:hidden;display:flex;flex-direction:column}
+.mg .pic svg{flex:1;width:100%;display:block}.mg .cap{font:500 .8em/1.2 var(--f-mono);color:var(--muted);margin:.3em 0 0}
+.mg .tx{font-size:.8em;line-height:1.35;color:var(--ink-2);margin:0}
+.mg .tx.dc::first-letter{float:left;font:700 2.7em/.8 var(--f-display);color:var(--fg);margin:.08em .1em 0 0}
+.ps{border-block-start:.15em solid var(--fg);padding-top:.3em;margin-top:.5em}.ps b{font:700 1.8em/1 var(--f-display);color:var(--accent);display:block}.ps span{font-size:.8em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Magazine-style layout</h1>
+<div class="stage" role="img" aria-label="Demo: Magazine-style layout. An editorial slide builds a headline, an image, two text columns with a drop cap, and a pull statistic.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad"><div class="mg">
+<p class="hl b fx" id="h">The quiet week: how one team <em>halved</em> its on-call pages</p>
+<div class="pic b fx" id="i"><svg viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="120" height="90" fill="#dfe4f3"/><rect x="14" y="40" width="40" height="30" rx="3" fill="#9aa7d6"/><rect x="60" y="22" width="46" height="48" rx="3" fill="#2f4bd8"/><circle cx="34" cy="26" r="9" fill="#f2c48d"/></svg><p class="cap">Illustration</p></div>
+<div class="b fx" id="c1"><p class="tx dc">For months the team woke up to the same alerts. Most fired on noise, not on outages, and no one had time to sort them.</p></div>
+<div class="b fx" id="c2"><p class="tx">They spent one week deleting alerts nobody acted on and merging duplicates.</p><div class="ps b fx" id="ps"><b>−52%</b><span>pages per week after the cleanup</span></div></div>
+</div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The slide borrows a magazine grid: a wide headline, an image block, two narrow text columns that open with a drop cap, and a large pull statistic in the margin. Play places each part in reading order so the editorial hierarchy is easy to follow.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:4,stepMs:900,render:function(f){on($('h'),f>=1);on($('i'),f>=2);on($('c1'),f>=3);on($('c2'),f>=3);on($('ps'),f>=4);}});
+</script>
+</body>
+</html>

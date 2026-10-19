@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layered stack: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.stack{display:flex;flex-direction:column;gap:.35em;flex:1;justify-content:center}
+.layer{display:grid;grid-template-columns:6.6em 1fr;align-items:center;gap:.6em;padding:.45em .6em;border-radius:.45em;background:var(--surface);border:1px solid var(--line);border-inline-start:.35em solid var(--accent)}
+.layer[data-f]:not(.on){transform:translateY(.8em)}
+.layer b{font-size:.85em}.chips{display:flex;flex-wrap:wrap;gap:.3em}
+.chip{font-size:.8em;padding:.15em .5em;border-radius:.3em;background:var(--accent-soft);color:var(--ink-2)}
+.layer.flag{background:var(--warn-soft);border-color:var(--warn);border-inline-start-color:var(--warn)}
+.flagpill{transition:opacity .3s}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Layered stack</h1>
+<div class="stage" role="img" aria-label="Demo: Layered stack. A four-layer platform stack: infrastructure, data, services and experience, with the services layer marked for rebuild.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.5em">
+<div><p class="kicker">Platform architecture</p><p class="h">Four layers, one being rebuilt</p></div>
+<div class="stack"><div class="layer" data-f="4"><b>Experience</b><div class="chips"><span class="chip">Web app</span><span class="chip">Mobile app</span><span class="chip">Admin console</span></div></div><div class="layer svc" data-f="3"><b>Services <span class="pill warn flagpill" data-f="5">Rebuild Q3</span></b><div class="chips"><span class="chip">Auth</span><span class="chip">Billing</span><span class="chip">Search</span><span class="chip">Notifications</span></div></div><div class="layer" data-f="2"><b>Data</b><div class="chips"><span class="chip">Event stream</span><span class="chip">Warehouse</span><span class="chip">Cache</span></div></div><div class="layer" data-f="1"><b>Infrastructure</b><div class="chips"><span class="chip">Cloud regions</span><span class="chip">CDN</span><span class="chip">CI/CD</span></div></div></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Horizontal bands show what each layer of the platform contains, with lower layers supporting the ones above. Play builds the stack from infrastructure upward, then marks the services layer as the one being rebuilt this quarter. Components are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=[];
+AtlasDemo.init({frames:5,stepMs:750,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';$('.svc').classList.toggle('flag',fr>=5);}});
+</script>
+</body>
+</html>

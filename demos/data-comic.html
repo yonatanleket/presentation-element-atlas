@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data comic: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em}
+.pnl{padding:0;border:1px solid var(--line);background:var(--surface);border-radius:.35em;overflow:hidden;cursor:pointer;font:inherit;color:var(--fg);text-align:start;display:flex;flex-direction:column;transition:opacity .25s var(--ease-out),transform .25s var(--ease-out),border-color .2s}
+.pnl svg{width:100%;height:5.6em;display:block;background:#f1f3f8}
+.pnl span{font-size:.8em;line-height:1.2;padding:.3em .4em;min-height:3.1em}
+.pnl.hid{opacity:.18;pointer-events:none}.pnl.hid svg *{visibility:hidden}.pnl.hid span{visibility:hidden}
+.pnl[aria-current=true]{border-color:var(--accent);box-shadow:0 0 0 .12em var(--accent);transform:translateY(-.15em)}
+.tl{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted)}
+.tl .tr{flex:1;height:.4em;border-radius:.2em;background:var(--line);overflow:hidden}.tl .tr i{display:block;height:100%;background:var(--warn);width:0;transition:width .4s var(--ease-out)}
+.tl .tr i.ok{background:var(--ok)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Data comic</h1>
+<div class="stage" role="group" aria-label="Demo: Data comic. A four-panel comic strip tells how long a person waits for access; buttons reveal and focus each panel with a running day count.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.5em;padding-top:1.8em">
+<p class="h" style="font-size:1.05em">Getting access to the reporting tool, as Sam lived it</p>
+<div class="strip" id="strip"></div>
+<div class="tl"><span id="dc">Day 0</span><span class="tr"><i id="bar"></i></span><span>5 days</span></div>
+<div class="row"><button class="sbtn" type="button" id="pv">◂ Back</button><button class="sbtn primary" type="button" id="nx">Next panel ▸</button><span class="muted" style="font-size:.8em" id="cap"></span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Four panels tell one person’s experience in order, with a running day counter under the strip. Press Next panel or the arrow keys to reveal the story one panel at a time; click any revealed panel to return to it. The final panel contrasts the old wait with the proposed flow.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var P=[{c:'Mon: Sam asks for access to the reporting tool.',d:0,s:'<circle cx="28" cy="30" r="8" fill="#8e9bcc"/><rect x="20" y="40" width="16" height="22" rx="6" fill="#8e9bcc"/><rect x="50" y="18" width="40" height="44" rx="3" fill="#fff" stroke="#c9cede"/><rect x="56" y="26" width="28" height="4" fill="#c9cede"/><rect x="56" y="34" width="20" height="4" fill="#c9cede"/><rect x="56" y="48" width="18" height="8" rx="2" fill="#2f4bd8"/>'},
+{c:'Wed: still waiting. The request sits in a queue.',d:2,s:'<rect x="22" y="16" width="56" height="46" rx="3" fill="#fff" stroke="#c9cede"/><rect x="22" y="16" width="56" height="10" fill="#b42318"/><text x="50" y="50" font-size="20" text-anchor="middle" fill="#1b1e24" font-weight="700">3</text><circle cx="86" cy="58" r="7" fill="#fdf3d8" stroke="#8a5a00"/><path d="M86 54v4h3" stroke="#8a5a00" fill="none"/>'},
+{c:'Thu: Sam asks again in chat and is sent to a form.',d:3,s:'<circle cx="22" cy="40" r="7" fill="#8e9bcc"/><rect x="34" y="16" width="52" height="18" rx="6" fill="#e8ecfd"/><text x="60" y="29" font-size="10" text-anchor="middle" fill="#2f4bd8">any update?</text><rect x="40" y="42" width="50" height="18" rx="6" fill="#fff" stroke="#c9cede"/><text x="65" y="55" font-size="9" text-anchor="middle" fill="#565c6b">see form B</text>'},
+{c:'Proposed: self-serve request, approved in 5 minutes.',d:5,s:'<circle cx="50" cy="38" r="20" fill="#e3f3ec"/><path d="M40 38l7 7 14-14" stroke="#11734f" stroke-width="5" fill="none" stroke-linecap="round"/><text x="50" y="72" font-size="9" text-anchor="middle" fill="#11734f">5 min</text>'}];
+$('strip').innerHTML=P.map(function(p,i){return '<button class="pnl" type="button" data-i="'+i+'"><svg viewBox="0 0 100 76" aria-hidden="true">'+p.s+'</svg><span>'+p.c+'</span></button>';}).join('');
+var pn=$('strip').children,shown=1,cur=0;
+function draw(){for(var i=0;i<4;i++){pn[i].classList.toggle('hid',i>=shown);pn[i].setAttribute('aria-current',String(i===cur));pn[i].tabIndex=i<shown?0:-1;pn[i].setAttribute('aria-label','Panel '+(i+1)+(i<shown?': '+P[i].c:', not yet revealed'));}
+var p=P[cur];$('dc').textContent=cur===3?'Proposed: same day':'Day '+p.d;var b=$('bar');b.style.width=(cur===3?6:p.d/5*100)+'%';b.classList.toggle('ok',cur===3);
+$('cap').textContent='Panel '+(cur+1)+' of 4';$('pv').disabled=cur===0;$('nx').disabled=cur===3;}
+function go(d){var n=Math.max(0,Math.min(3,cur+d));if(n===cur)return;cur=n;if(cur>=shown)shown=cur+1;draw();api.status('Panel '+(cur+1)+': '+P[cur].c);}
+$('nx').addEventListener('click',function(){go(1);});$('pv').addEventListener('click',function(){go(-1);});
+$('strip').addEventListener('click',function(e){var b=e.target.closest('.pnl');if(!b)return;cur=+b.dataset.i;draw();api.status('Panel '+(cur+1)+': '+P[cur].c);});
+document.querySelector('.stage').addEventListener('keydown',function(e){var rtl=document.dir==='rtl';if(e.key==='ArrowRight'){e.preventDefault();go(rtl?-1:1);}else if(e.key==='ArrowLeft'){e.preventDefault();go(rtl?1:-1);}});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){shown=1;cur=0;draw();}});
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lottie animation: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:0;display:grid;grid-template-columns:auto 1fr;gap:1.4em;align-items:center;padding:0 2.4em}
+svg{width:9.5em;height:9.5em;overflow:visible}
+.ring,.chk{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ring{stroke:var(--ok);stroke-width:5;stroke-dasharray:1 1;transition:stroke-dashoffset .7s var(--ease-out);transform:rotate(-90deg);transform-origin:50px 50px}
+.chk{stroke:var(--ok);stroke-width:7;stroke-dasharray:1 1;transition:stroke-dashoffset .45s var(--ease-out)}
+.ic{transform-origin:50px 50px;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.ic.pop{transform:scale(1.08)}
+.dt{fill:var(--accent);opacity:0;transition:transform .55s var(--ease-out),opacity .55s var(--ease-out)}
+.burst .dt{opacity:1}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Lottie animation</h1>
+<div class="stage" role="img" aria-label="Demo: Lottie animation. A vector icon animates: a ring draws, a check mark strokes in, then small dots burst outward around it.">
+<span class="label-illustrative">Simulated (CSS, not Lottie)</span>
+<div class="wrap">
+  <svg viewBox="0 0 100 100" aria-hidden="true" id="svg"><g class="ic" id="ic"><circle class="ring" id="ring" pathLength="1" cx="50" cy="50" r="38"/><path class="chk" id="chk" pathLength="1" d="M32 52l12 12 24-26"/></g><g id="dts"></g></svg>
+  <div class="col"><p class="kicker">Upload</p><p class="h" id="t">Sending files…</p><p class="p" id="p">3 files · 4.2 MB</p></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A vector animation plays the kind of short icon sequence a Lottie file would carry: the ring draws, the check strokes in with a slight pop, then dots burst outward. Here it is rebuilt with SVG strokes and CSS, so it stays sharp at any size and weighs almost nothing.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var dts=$('dts'),N=8,h='';for(var i=0;i<N;i++)h+='<circle class="dt" cx="50" cy="50" r="3.2"/>';dts.innerHTML=h;var ds=dts.children;
+AtlasDemo.init({frames:3,stepMs:900,render:function(f){$('ring').style.strokeDashoffset=f>=1?'0':'1';$('chk').style.strokeDashoffset=f>=2?'0':'1';$('ring').style.opacity=f>=1?1:0;$('chk').style.opacity=f>=2?1:0;
+  $('ic').classList.toggle('pop',f===2);$('svg').classList.toggle('burst',f>=3);
+  for(var i=0;i<N;i++){var a=i/N*Math.PI*2,r=f>=3?52:38;ds[i].style.transform='translate('+(Math.cos(a)*r).toFixed(1)+'px,'+(Math.sin(a)*r).toFixed(1)+'px)';ds[i].style.opacity=f>=3?(f===3?.9:0):0;}
+  $('t').textContent=f>=2?'Upload complete':'Sending files…';}});
+})();
+</script>
+</body>
+</html>

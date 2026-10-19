@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Objective list with status tag: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.tb{display:grid;grid-template-columns:1fr auto;gap:.1em 1em;align-items:center}
+.tb .hd{font:500 .8em var(--f-mono);color:var(--muted);padding-bottom:.25em;border-bottom:1px solid var(--line)}
+.tb .o{font-size:.92em;padding:.3em 0;border-bottom:1px solid var(--line)}
+.tb .s{padding:.3em 0;border-bottom:1px solid var(--line);text-align:end}
+.pill.ex{background:#eef0f4;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Objective list with status tag</h1>
+<div class="stage" role="img" aria-label="Demo: Objective list with status tag. A two-column list of four objectives, each tagged Committed, Stretch or Exploring.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.5em">
+<p class="kicker">Q3 objectives</p><p class="h" style="font-size:1.15em">What Q3 commits to, and what it does not</p>
+<div class="tb" id="tb"><span class="hd">Objective</span><span class="hd" style="text-align:end">Status</span></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each objective sits on its own row with a small status pill in a second column: Committed for what will ship, Stretch for what might, Exploring for what is only being studied. Play adds the rows one at a time, so scope is stated without overclaiming.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var O=[['Weekly releases for all three teams','ok','Committed'],['Lead time under 5 days','ok','Committed'],['Self-serve rollback button','warn','Stretch'],['Release notes written automatically','ex','Exploring']];
+O.forEach(function(o){$('tb').insertAdjacentHTML('beforeend','<span class="o b fx">'+o[0]+'</span><span class="s b fx"><span class="pill '+o[1]+'">'+o[2]+'</span></span>');});
+var cells=$('tb').querySelectorAll('.b');
+AtlasDemo.init({frames:4,stepMs:900,render:function(f){cells.forEach(function(c,i){on(c,Math.floor(i/2)<f);});}});
+</script>
+</body>
+</html>

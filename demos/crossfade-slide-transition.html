@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crossfade slide transition: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.s{position:absolute;inset:.9em;display:flex;flex-direction:column;justify-content:center;gap:.5em;padding:1.4em 1.6em;opacity:0;transition:opacity 1s ease-in-out}
+.s.on{opacity:1}
+.tag{position:absolute;inset-inline-end:1.5em;bottom:1.4em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Crossfade slide transition</h1>
+<div class="stage" role="img" aria-label="Demo: Crossfade slide transition. Three slides; each step fades the current slide out while the next fades in on top of it.">
+<div class="s card on"><p class="kicker">Chapter 1</p><p class="h">Where we are today</p><p class="p">Two products, one shared backlog.</p></div>
+<div class="s card" style="background:#f3f5fd"><p class="kicker">Chapter 2</p><p class="h">What we heard</p><p class="p">Customers want one login, not two.</p></div>
+<div class="s card" style="background:#f2f8f5"><p class="kicker">Chapter 3</p><p class="h">Where we go next</p><p class="p">Merge accounts by the end of Q2.</p></div>
+<span class="pill tag">crossfade · 1s</span>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The slides sit on top of each other. Each step lowers the opacity of the current slide while the next one rises over about a second, so for a moment both are visible and the change feels continuous rather than a cut. Reduced motion swaps them instantly.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var S=document.querySelectorAll('.s');
+AtlasDemo.init({frames:2,stepMs:1800,render:function(f){S.forEach(function(s,i){s.classList.toggle('on',i===f);s.setAttribute('aria-hidden',String(i!==f));});}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "id": "clicks-slider",
+  "name": "Clicks slider",
+  "category": "nav",
+  "definition": "Presenter scrubber that steps through every build on a slide.",
+  "bestUse": "Rehearsing complex builds.",
+  "trigger": [
+    "presenter-delivery"
+  ],
+  "level": "advanced",
+  "sources": [
+    "slidev"
+  ],
+  "demo": {
+    "file": "demos/clicks-slider.html",
+    "kind": "interactive",
+    "how": "A slider underneath the slide maps to every build step. Drag it or use the arrow keys to scrub forward and backward through the builds, which is how a presenter rehearses a complex reveal without replaying the whole slide."
+  },
+  "related": [
+    "fragment-builds"
+  ]
+}

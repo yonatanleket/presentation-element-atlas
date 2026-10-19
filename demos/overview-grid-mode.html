@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview / grid mode: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.one,.grid8{position:absolute;inset:.9em;transition:opacity .25s var(--ease-out),transform .3s var(--ease-out)}
+.grid8{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:.5em}
+.th{background:var(--surface);border:1px solid var(--line);border-radius:.35em;padding:.35em;font-size:.6em;display:flex;flex-direction:column;gap:.25em}
+.th i{display:block;height:.45em;border-radius:.2em;background:var(--line)}.th b{font:500 1em var(--f-mono);color:var(--muted)}
+.th.cur{border-color:var(--muted)}.th.tgt{outline:.2em solid var(--accent);outline-offset:.1em}
+.off{opacity:0;transform:scale(.9);pointer-events:none}.zoom{opacity:0;transform:scale(1.15);pointer-events:none}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Overview / grid mode</h1>
+<div class="stage" role="img" aria-label="Demo: Overview / grid mode">
+<div class="one deck" id="one" style="inset:.9em"><div class="deck-body"><p class="kicker" id="k">Slide 2</p><p class="h" id="t">What slows releases down</p><p class="p">Most delay comes from manual sign-off.</p></div></div>
+<div class="grid8" id="g"></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Play zooms out from the current slide into a grid of all slides, highlights the target, then zooms back into it. The grid keeps slides in order, so jumping during Q&amp;A takes one glance and one click.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var T=['Context','Problem','Data','Options','Trade-offs','Plan','Risks','Next steps'];
+g.innerHTML=T.map(function(x,i){return '<div class="th'+(i===1?' cur':'')+(i===5?' tgt':'')+'"><b>'+(i+1)+'</b><span>'+x+'</span><i></i><i style="width:70%"></i></div>';}).join('');
+var tg=g.children[5];
+AtlasDemo.init({frames:3,stepMs:900,render:function(f){
+  one.classList.toggle('zoom',f===1||f===2);g.classList.toggle('off',f===0||f===3);tg.classList.toggle('tgt',f>=2);
+  if(f===3){k.textContent='Slide 6';t.textContent='Plan';}else{k.textContent='Slide 2';t.textContent='What slows releases down';}}});
+</script>
+</body>
+</html>

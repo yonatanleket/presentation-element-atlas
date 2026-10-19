@@ -1,0 +1,26 @@
+{
+  "id": "timeline-roadmap",
+  "name": "Timeline / roadmap",
+  "category": "diagram",
+  "definition": "Events or phases along a time axis.",
+  "bestUse": "History and plans.",
+  "trigger": [
+    "timeline"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/timeline-roadmap.html",
+    "kind": "animated",
+    "how": "A single time axis carries phases as bars above it and milestones as diamonds on it, so plans and dates read together. Play draws the axis, the phases, then the milestones, and drops a Today marker to show where the team is now. Dates are illustrative."
+  },
+  "aliases": [
+    "gantt",
+    "roadmap",
+    "milestones",
+    "history",
+    "schedule"
+  ]
+}

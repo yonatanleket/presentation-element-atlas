@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stakeholder whiteboard: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.wire{stroke:var(--muted);stroke-width:1.6;transition:stroke .2s,opacity .2s}.wire.hot{stroke:var(--accent);stroke-width:3}.wire.dim{opacity:.3}
+.wl{font-size:13px;fill:var(--ink-2);paint-order:stroke;stroke:var(--stage);stroke-width:4px;font-style:italic;transition:opacity .2s}.wl.hot{fill:var(--accent);font-weight:600;font-style:normal}.wl.dim{opacity:.3}
+.sticky{position:absolute;font:inherit;border:0;border-radius:.15em;background:#fff2b3;box-shadow:0 .15em .4em rgba(27,30,36,.18);cursor:pointer;color:var(--fg);transition:transform .2s,box-shadow .2s;padding:0 .3em}
+.sticky span{font-size:.85em;line-height:1.15}.sticky:nth-of-type(2n){transform:rotate(-2deg)}.sticky:nth-of-type(2n+1){transform:rotate(1.5deg)}
+.sticky[aria-pressed=true]{box-shadow:0 0 0 2px var(--accent),0 .3em .8em rgba(47,75,216,.25);transform:none}
+.me{position:absolute;background:#ffd6a8;border-radius:.15em;box-shadow:0 .15em .4em rgba(27,30,36,.18);display:grid;place-items:center;text-align:center;line-height:1.15}.me span{font-size:.85em}
+.wdet{position:absolute;inset-inline:1em;inset-block-end:.5em;font-size:.8em;color:var(--ink-2);min-height:2.6em;margin:0}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Stakeholder whiteboard</h1>
+<div class="stage" role="group" aria-label="Demo: Stakeholder whiteboard. Sticky notes for five stakeholders around a central note for the product lead, joined by labeled wires. Selecting a note explains that relationship.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs><line x1="240" y1="135" x2="92" y2="62" class="wire" id="w-eng"/><text x="168" y="92" text-anchor="middle" class="wl" id="l-eng">co-own roadmap</text><line x1="240" y1="135" x2="388" y2="62" class="wire" id="w-des"/><text x="312" y="92" text-anchor="middle" class="wl" id="l-des">weekly critique</text><line x1="240" y1="135" x2="412" y2="158" class="wire" id="w-sal"/><text x="345" y="133" text-anchor="middle" class="wl" id="l-sal">deal input</text><line x1="240" y1="135" x2="316" y2="220" class="wire" id="w-leg"/><text x="296" y="186" text-anchor="middle" class="wl" id="l-leg">review terms</text><line x1="240" y1="135" x2="128" y2="210" class="wire" id="w-dat"/><text x="172" y="178" text-anchor="middle" class="wl" id="l-dat">metric defs</text></svg>
+<div class="fill"><div class="me" style="left:11.375em;top:6.875em;width:7.25em;height:3.125em"><span><b>Me</b><br>Product lead</span></div>
+<button type="button" class="sticky" data-id="eng" style="left:2.625em;top:2.563em;width:6.25em;height:2.625em"><span>Engineering lead</span></button><button type="button" class="sticky" data-id="des" style="left:21.125em;top:2.563em;width:6.25em;height:2.625em"><span>Design lead</span></button><button type="button" class="sticky" data-id="sal" style="left:22.625em;top:8.563em;width:6.25em;height:2.625em"><span>Sales</span></button><button type="button" class="sticky" data-id="leg" style="left:16.625em;top:12.438em;width:6.25em;height:2.625em"><span>Legal</span></button><button type="button" class="sticky" data-id="dat" style="left:4.875em;top:11.813em;width:6.25em;height:2.625em"><span>Data science</span></button></div>
+<p class="wdet" id="wdet"></p>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The presenter sits on the central note and each stakeholder is a sticky joined by a wire that names the working relationship. Click a sticky, or use the arrow keys, to highlight its wire and read the cadence and who brings what; Reset clears the selection. Roles are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var D=[["eng","Engineering lead","co-own roadmap","Weekly 1:1. I bring priorities and customer evidence; they bring estimates and technical risk."],["des","Design lead","weekly critique","Weekly critique. I bring the problem framing; they own the solution and research plan."],["sal","Sales","deal input","Monthly sync. They bring lost-deal reasons; I bring roadmap dates they can share."],["leg","Legal","review terms","Ad hoc. They review data terms before any launch; I flag changes two weeks ahead."],["dat","Data science","metric defs","Bi-weekly. We agree metric definitions together; they own the dashboards."]];var sel=-1,api;var B=$$('.sticky');
+function draw(){D.forEach(function(d,i){var hot=i===sel,dim=sel>=0&&!hot;B[i].setAttribute('aria-pressed',String(hot));B[i].tabIndex=(sel<0?i===0:hot)?0:-1;
+  ['w-','l-'].forEach(function(p){var n=document.getElementById(p+d[0]);n.classList.toggle('hot',hot);n.classList.toggle('dim',dim);});});
+  $('#wdet').textContent=sel<0?'Select a sticky to see that working relationship.':D[sel][1]+' · '+D[sel][2]+'. '+D[sel][3];}
+function pick(i,focus){sel=(i+D.length)%D.length;draw();if(focus)B[sel].focus();api.status(D[sel][1]+': '+D[sel][2]);}
+B.forEach(function(b,i){b.addEventListener('click',function(){pick(i);});b.addEventListener('keydown',function(e){var d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!d)return;e.preventDefault();if(isRtl()&&/Left|Right/.test(e.key))d=-d;pick((sel<0?i:sel)+d,true);});});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Select a stakeholder',reset:function(){sel=-1;draw();}});
+</script>
+</body>
+</html>

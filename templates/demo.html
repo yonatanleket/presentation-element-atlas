@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your element name: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+  /* Demo-specific styles. Use em units inside the stage (1em = 16 logical px of a 480x300 canvas).
+     Use the harness tokens (var(--accent), var(--line) ...). Light theme only. No external files. */
+  .bar{height:1.2em;border-radius:.3em;background:var(--accent);width:0}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+  <h1 class="demo-title">Your element name</h1>
+  <div class="stage" role="img" aria-label="Demo: Your element name. Three bars grow one at a time.">
+    <span class="label-illustrative">Illustrative</span>
+    <div class="fill pad col" style="justify-content:center">
+      <p class="kicker">Kicker</p>
+      <p class="h">An action title that states the takeaway</p>
+      <div class="bar fx" data-w="40%"></div>
+      <div class="bar fx" data-w="65%"></div>
+      <div class="bar fx" data-w="90%"></div>
+    </div>
+  </div>
+  <div class="controls"></div>
+  <details class="how" open><summary>How it works</summary>
+    <p>Copy the "how" text from elements/your-element-id.json here (2–4 sentences).</p>
+  </details>
+</main>
+<script src="_harness.js"></script>
+<script>
+  var bars = document.querySelectorAll('.bar');
+  AtlasDemo.init({
+    frames: bars.length,            // number of steps after the idle frame 0
+    stepMs: 700,                    // delay between steps during Play
+    // render(frame) must fully describe the stage for that frame (idempotent):
+    // frame 0 = idle start, frame === frames = finished state.
+    render: function (frame, ctx) {
+      bars.forEach(function (b, i) { b.style.width = i < frame ? b.dataset.w : '0'; });
+      // ctx.animate is false for jumps (reset, reduced motion); use it to skip count-ups or movement.
+    }
+    // For interactive demos: interactive: true, and reset: function (ctx) { ... restore stage controls ... }
+  });
+</script>
+</body>
+</html>

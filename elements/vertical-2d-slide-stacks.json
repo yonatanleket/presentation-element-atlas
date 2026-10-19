@@ -1,0 +1,20 @@
+{
+  "id": "vertical-2d-slide-stacks",
+  "name": "Vertical (2D) slide stacks",
+  "category": "nav",
+  "definition": "Slides nested under a topic so that down means detail and right means next topic.",
+  "bestUse": "Optional deep dives.",
+  "trigger": [
+    "navigation-wayfinding",
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "sources": [
+    "reveal"
+  ],
+  "demo": {
+    "file": "demos/vertical-2d-slide-stacks.html",
+    "kind": "interactive",
+    "how": "Topics run left to right and each topic can hold detail slides stacked below it. Use the arrow buttons or arrow keys: right moves to the next topic, down opens a deeper slide. The mini map shows where you are."
+  }
+}

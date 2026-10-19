@@ -1,0 +1,54 @@
+{
+  "reveal": {
+    "label": "reveal.js",
+    "url": "https://revealjs.com/"
+  },
+  "slidev": {
+    "label": "Slidev",
+    "url": "https://sli.dev/"
+  },
+  "ft": {
+    "label": "FT Visual Vocabulary",
+    "url": "https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary"
+  },
+  "segel": {
+    "label": "Segel & Heer, Narrative Visualization",
+    "url": "https://homes.cs.washington.edu/~jheer/files/narrative.pdf"
+  },
+  "scrolly": {
+    "label": "EU Data Viz Guide: Scrollytelling",
+    "url": "https://data.europa.eu/apps/data-visualisation-guide/tag/scrollytelling"
+  },
+  "victor": {
+    "label": "Bret Victor, Explorable Explanations",
+    "url": "https://worrydream.com/ExplorableExplanations/"
+  },
+  "explor": {
+    "label": "Awesome Explorables",
+    "url": "https://github.com/blob42/awesome-explorables"
+  },
+  "menti": {
+    "label": "Mentimeter question types",
+    "url": "https://educationexpress.uts.edu.au/collections/engaging-your-audience-with-mentimeter-polls/resources/question-types-in-mentimeter/"
+  },
+  "duarte": {
+    "label": "Duarte Slidedocs",
+    "url": "https://www.duarte.com/slidedocs/"
+  },
+  "mck": {
+    "label": "McKinsey-style slide conventions",
+    "url": "https://slidespeak.co/blog/mckinsey-style-presentation"
+  },
+  "gamma": {
+    "label": "Gamma cards & embeds",
+    "url": "https://gamma.app/es/explore/content/guides/gamma-presentation-tool-live-website-video-embedding"
+  },
+  "ftv": {
+    "label": "FT Visual Vocabulary (EU guide)",
+    "url": "https://data.europa.eu/apps/data-visualisation-guide/visual-vocabulary"
+  },
+  "common": {
+    "label": "Common practice",
+    "url": null
+  }
+}

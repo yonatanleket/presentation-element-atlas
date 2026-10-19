@@ -1,0 +1,27 @@
+{
+  "id": "quiz-with-leaderboard",
+  "name": "Quiz with leaderboard",
+  "category": "audience",
+  "definition": "Timed questions with scores.",
+  "bestUse": "Training and energy.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/quiz-with-leaderboard.html",
+    "kind": "interactive",
+    "how": "A countdown bar runs while simulated players lock in answers. When time is up the correct answer turns green and the leaderboard reorders by score. Pick an answer before the reveal to join as You: faster correct answers earn more points. Reset starts the question again."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience",
+    "quiz",
+    "trivia"
+  ]
+}

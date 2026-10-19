@@ -1,0 +1,25 @@
+{
+  "id": "swimlane-architecture-board",
+  "name": "Swimlane architecture board",
+  "category": "diagram",
+  "definition": "Pan-and-zoom canvas with lanes per actor; node shapes encode type (action, decision); solid means documented, dashed means inferred.",
+  "bestUse": "Explaining a system end to end.",
+  "trigger": [
+    "system-architecture",
+    "sequential-process"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/swimlane-architecture-board.html",
+    "kind": "interactive",
+    "how": "Each lane is one actor; rectangles are actions, diamonds are decisions, solid lines are documented and dashed ones inferred. Drag the board or use the arrow keys to pan, plus and minus to zoom, and Fit to see the whole flow; Reset returns to the start view. The flow is illustrative."
+  },
+  "aliases": [
+    "swimlane",
+    "architecture",
+    "process map"
+  ]
+}

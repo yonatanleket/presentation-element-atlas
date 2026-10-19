@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix / backup slides: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.b{opacity:0;transform:translateY(.4em)}.b.on{opacity:1;transform:none}
+.rowl{font:500 .8em/1 var(--f-mono);color:var(--muted);margin:0 0 .35em}
+.strip{display:flex;gap:.45em}
+.th{width:7.9em;height:4.2em;padding:.4em .45em;display:flex;flex-direction:column;justify-content:space-between;font-size:.8em;line-height:1.2}
+.th b{font-weight:600}.th small{font:500 1em/1 var(--f-mono);color:var(--muted)}
+.th.close{border-color:var(--fg)}
+.th.div{background:var(--fg);color:var(--surface);border-color:var(--fg)}.th.div small{color:#c9ccd4}
+.th.hit{outline:.15em solid var(--accent);outline-offset:.1em;background:var(--accent-soft)}
+.q{align-self:flex-start;font-size:.85em;padding:.35em .6em;border-radius:.5em;background:var(--warn-soft);color:var(--warn);border:1px solid #ecd9a8}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Appendix / backup slides</h1>
+<div class="stage" role="img" aria-label="Demo: Appendix / backup slides. A four-slide talk ends at the close; an appendix of three backup slides follows, and a question jumps to one of them.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.7em;padding-top:1.6em">
+<div><p class="rowl">Main talk</p><div class="strip">
+<div class="th card"><small>1</small><b>Context</b></div><div class="th card"><small>2</small><b>Options</b></div>
+<div class="th card"><small>3</small><b>Proposal</b></div><div class="th card close"><small>4 · end</small><b>Thank you</b></div></div></div>
+<div><p class="rowl b fx" id="al">After the close</p><div class="strip">
+<div class="th card div b fx" id="d"><small>A</small><b>Appendix</b></div>
+<div class="th card b fx" id="b1"><small>B1</small><b>Cost model</b></div><div class="th card b fx" id="b2"><small>B2</small><b>Savings method</b></div>
+<div class="th card b fx" id="b3"><small>B3</small><b>Risks</b></div></div></div>
+<p class="q b fx" id="q">Q: “How did you size the savings?” → jump to B2</p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The main talk ends on its closing slide; backup slides sit after an Appendix divider so they never interrupt the story. Play adds the divider, then the backups, then shows a question from the room jumping straight to the backup slide that answers it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+AtlasDemo.init({frames:3,stepMs:1000,render:function(f){on($('al'),f>=1);on($('d'),f>=1);['b1','b2','b3'].forEach(function(i){on($(i),f>=2);});
+on($('q'),f>=3);$('b2').classList.toggle('hit',f>=3);}});
+</script>
+</body>
+</html>

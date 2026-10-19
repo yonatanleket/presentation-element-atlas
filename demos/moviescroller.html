@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moviescroller: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:.9em;display:grid;grid-template-rows:1fr auto;gap:.4em}
+.view{position:relative;border-radius:.5em;background:linear-gradient(#f9fafc,#e6e9f0);overflow:hidden}
+.view:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.cap{position:absolute;inset-inline-start:.8em;top:.6em;max-width:11em}
+.bar{display:flex;align-items:center;gap:.5em}.bar input{flex:1;accent-color:var(--accent);min-height:28px}
+.fr{font:.8em var(--f-mono);color:var(--muted);min-width:5.4em;text-align:end}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Moviescroller</h1>
+<div class="stage" role="group" aria-label="Demo: Moviescroller. A product rendered as 36 frames; a slider, the mouse wheel or arrow keys scrub the device through a full turn.">
+<span class="label-illustrative">Simulated frames</span>
+<div class="wrap">
+  <div class="view" id="view" tabindex="0" aria-label="Product frames. Use arrow keys or the mouse wheel to scrub."><canvas id="cv" aria-hidden="true"></canvas><div class="cap"><p class="kicker" id="ck"></p><p class="p" id="cp"></p></div></div>
+  <div class="bar"><label for="rg" class="kicker">Frame</label><input type="range" id="rg" min="0" max="35" value="0"><span class="fr" id="fr">1 / 36</span></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The device is drawn as a sequence of 36 frames, the way a moviescroller steps through video frames. Drag the slider, scroll over the picture, or focus the picture and use the arrow keys to scrub; captions change as the front, edge and back come round. Reset returns to frame 1.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+function rot(p,ay,ax){var x=p[0]*Math.cos(ay)+p[2]*Math.sin(ay),z=-p[0]*Math.sin(ay)+p[2]*Math.cos(ay),y=p[1]*Math.cos(ax)-z*Math.sin(ax),z2=p[1]*Math.sin(ax)+z*Math.cos(ax);return [x,y,z2];}
+function drawBox(c,o){var w=o.w/2,h=o.h/2,d=o.d/2,oy=o.oy||0,D=6,L=[-.35,-.55,.76];
+  var V=[[-w,-h,-d],[w,-h,-d],[w,h,-d],[-w,h,-d],[-w,-h,d],[w,-h,d],[w,h,d],[-w,h,d]].map(function(p){return rot([p[0],p[1]+oy,p[2]],o.ay,o.ax);});
+  var F=[[1,0,3,2,'back',[0,0,-1]],[4,5,6,7,'front',[0,0,1]],[0,4,7,3,'left',[-1,0,0]],[5,1,2,6,'right',[1,0,0]],[0,1,5,4,'top',[0,-1,0]],[7,6,2,3,'bottom',[0,1,0]]];
+  function P(v){var s=D/(D-v[2]);return [o.cx+v[0]*s*o.k,o.cy+v[1]*s*o.k];}
+  var shown=[];
+  F.forEach(function(f){var n=rot(f[5],o.ay,o.ax);if(n[2]<=0.01)return;
+    var b=.5+.5*Math.max(0,n[0]*L[0]+n[1]*L[1]+n[2]*L[2]),col=o.col.map(function(x){return Math.round(x*b);});
+    var q=[V[f[0]],V[f[1]],V[f[2]],V[f[3]]].map(P);
+    c.beginPath();c.moveTo(q[0][0],q[0][1]);for(var i=1;i<4;i++)c.lineTo(q[i][0],q[i][1]);c.closePath();
+    c.fillStyle='rgb('+col.join(',')+')';c.fill();c.strokeStyle='rgba(27,30,36,.35)';c.lineWidth=1;c.stroke();
+    if(o.face)o.face(c,f[4],q,n[2]);shown.push(f[4]);});
+  return shown;}
+function inset(q,u0,v0,u1,v1){function at(u,v){var a=[q[0][0]+(q[1][0]-q[0][0])*u,q[0][1]+(q[1][1]-q[0][1])*u],b=[q[3][0]+(q[2][0]-q[3][0])*u,q[3][1]+(q[2][1]-q[3][1])*u];return [a[0]+(b[0]-a[0])*v,a[1]+(b[1]-a[1])*v];}
+  return [at(u0,v0),at(u1,v0),at(u1,v1),at(u0,v1)];}
+function poly(c,q,fill){c.beginPath();c.moveTo(q[0][0],q[0][1]);for(var i=1;i<q.length;i++)c.lineTo(q[i][0],q[i][1]);c.closePath();c.fillStyle=fill;c.fill();}
+function fitCanvas(cv){var r=cv.getBoundingClientRect(),dp=window.devicePixelRatio||1,w=Math.max(1,Math.round(r.width*dp)),h=Math.max(1,Math.round(r.height*dp));if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}var c=cv.getContext('2d');c.setTransform(dp,0,0,dp,0,0);c.clearRect(0,0,r.width,r.height);return {c:c,w:r.width,h:r.height};}
+var f=0,api,cv=$('cv');
+var CAP=[[0,'Front','Edge-to-edge display.'],[7,'Edge','7 mm aluminium frame.'],[14,'Back','Dual sensor array.'],[23,'Edge','One USB-C port, no buttons.'],[30,'Front','Back where we started.']];
+function cap(){var c=CAP[0];CAP.forEach(function(x){if(f>=x[0])c=x;});return c;}
+function draw(){var g=fitCanvas(cv),c=g.c,ay=f/36*Math.PI*2;
+  c.fillStyle='rgba(27,30,36,.12)';c.beginPath();c.ellipse(g.w*.6,g.h*.86,g.h*.22,g.h*.05,0,0,7);c.fill();
+  drawBox(c,{w:1,h:1.9,d:.14,ay:ay,ax:-.18,cx:g.w*.6,cy:g.h*.47,k:g.h*.36,col:[198,204,216],face:function(c,name,q){
+    if(name==='front'){poly(c,inset(q,.06,.04,.94,.96),'#1f2330');var s=inset(q,.12,.1,.88,.4);poly(c,s,'#2f4bd8');poly(c,inset(q,.12,.46,.88,.54),'#3a3f4b');poly(c,inset(q,.12,.6,.6,.66),'#3a3f4b');}
+    if(name==='back'){poly(c,inset(q,.62,.05,.92,.22),'#3a3f4b');poly(c,inset(q,.68,.08,.86,.12),'#8d93a6');poly(c,inset(q,.68,.15,.86,.19),'#8d93a6');}}});
+  var k=cap();$('ck').textContent=k[1];$('cp').textContent=k[2];$('rg').value=f;$('fr').textContent=(f+1)+' / 36';$('rg').setAttribute('aria-valuetext','Frame '+(f+1)+', '+k[1]);}
+function set(n,announce){f=((n%36)+36)%36;draw();if(announce)api.status('Frame '+(f+1)+': '+cap()[1]);}
+$('rg').addEventListener('input',function(e){set(+e.target.value,true);});
+$('view').addEventListener('wheel',function(e){e.preventDefault();set(f+(e.deltaY>0?1:-1),true);},{passive:false});
+$('view').addEventListener('keydown',function(e){var d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!d)return;if(isRtl()&&(e.key==='ArrowRight'||e.key==='ArrowLeft'))d=-d;e.preventDefault();set(f+d,true);});
+if(window.ResizeObserver)new ResizeObserver(function(){draw();}).observe(cv);
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){set(0);}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "id": "your-element-id",
+  "name": "Your element name",
+  "category": "story",
+  "definition": "What it is, in one sentence (200 characters max).",
+  "bestUse": "When to use it (140 characters max).",
+  "trigger": ["key-message"],
+  "level": "standard",
+  "sources": ["common"],
+  "demo": {
+    "file": "demos/your-element-id.html",
+    "kind": "animated",
+    "how": "Explain the mechanism the demo shows in 15 to 60 words: what moves or changes, what the controls do, and which values are illustrative."
+  },
+  "aliases": [],
+  "related": []
+}

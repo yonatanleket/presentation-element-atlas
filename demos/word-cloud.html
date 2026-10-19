@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word cloud: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.cloud{flex:1;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:.1em .6em;min-height:0;overflow:hidden}
+.wd{font-family:var(--f-display);font-weight:700;line-height:1.05;transition:font-size .35s var(--ease-out),opacity .3s}
+.wd.c0{color:var(--accent)}.wd.c1{color:var(--fg)}.wd.c2{color:var(--adv)}.wd.c3{color:var(--ok)}
+.wd.mine{outline:.1em dashed var(--accent);outline-offset:.1em;border-radius:.15em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Word cloud</h1>
+<div class="stage" role="group" aria-label="Demo: Word cloud. Simulated one-word answers arrive and frequent words grow larger; the viewer can add a word.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.35em;padding-top:1.8em">
+<p class="q">One word for how releases feel today</p>
+<div class="cloud" id="cl" aria-live="off"></div>
+<div class="row"><label class="sr-only" for="in">Your word</label><input class="tin" id="in" maxlength="16" placeholder="Your word" autocomplete="off" style="flex:1"><button class="sbtn primary" type="button" id="add">Add</button></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Simulated one-word answers arrive over about three seconds; each repeat of a word makes it larger, so the most common answers dominate. Type a word and press Enter or Add to submit your own: it appears outlined and grows if it matches an existing word. Reset clears everything.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var W={slow:9,stressful:7,manual:6,unpredictable:5,okay:4,risky:4,late:3,improving:3,fine:2,chaotic:2,blocked:2,calm:1};
+var seq=[],k=Object.keys(W),left=k.map(function(x){return W[x];});
+while(seq.length<46)for(var i=0;i<k.length;i++)if(left[i]>0){seq.push(k[i]);left[i]--;}
+var F=8,lf=0,mine={};
+function draw(f){lf=f;var n=Math.round(seq.length*f/F),c={};seq.slice(0,n).forEach(function(w){c[w]=(c[w]||0)+1;});
+for(var m in mine)c[m]=(c[m]||0)+mine[m];var keys=k.concat(Object.keys(mine).filter(function(m){return k.indexOf(m)<0;}));var tot=0;
+$('cl').innerHTML=keys.filter(function(w){return c[w];}).map(function(w,i){tot+=c[w];return '<span class="wd c'+(i%4)+(mine[w]?' mine':'')+'" style="font-size:'+Math.min(2.6,.85+c[w]*.2).toFixed(2)+'em" title="'+c[w]+'">'+w+'</span>';}).join(' ');
+$('n').textContent=tot+' responses';}
+function add(){var v=$('in').value.trim().toLowerCase().replace(/[^a-z\- ]/g,'').slice(0,16);if(!v){api.status('Type a word first');return;}mine[v]=(mine[v]||0)+1;$('in').value='';draw(lf);api.status('Added your word: '+v);}
+$('add').addEventListener('click',add);$('in').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();add();}});
+var api=AtlasDemo.init({frames:F,stepMs:380,step:false,idleText:'Simulated responses',doneText:'Simulated responses: all words in',reset:function(){mine={};$('in').value='';},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

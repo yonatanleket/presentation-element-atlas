@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upvoted Q&amp;A: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.q{font:700 1.1em/1.2 var(--f-display);margin:0}
+.foot{display:flex;align-items:center;gap:.5em;font:500 .8em var(--f-mono);color:var(--muted);margin-top:auto}
+.live{display:inline-flex;align-items:center;gap:.3em;color:var(--bad)}.live i{width:.5em;height:.5em;border-radius:50%;background:var(--bad)}
+.tin{font:inherit;font-size:.9em;min-height:max(28px,2.1em);padding:0 .6em;border:1px solid var(--line);border-radius:.4em;background:var(--surface);color:var(--fg);min-width:0}
+
+.ql{display:flex;flex-direction:column;gap:.3em;flex:1;min-height:0;overflow:hidden}
+.qi{display:flex;align-items:center;gap:.5em;padding:.3em .5em;font-size:.88em}
+.qi .t{flex:1;line-height:1.25}.qi .nw{font:500 .8em var(--f-mono);color:var(--ok)}
+.up{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:max(32px,2.6em);min-height:max(32px,2.4em);padding:0;font:600 .9em/1 var(--f-mono);line-height:1.05}
+.qi.top{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Upvoted Q&amp;A</h1>
+<div class="stage" role="group" aria-label="Demo: Upvoted Q&amp;A. Questions arrive and collect upvotes; the list re-sorts so the most wanted question rises to the top. The viewer can upvote any question.">
+<span class="label-illustrative">Illustrative · simulated</span>
+<div class="fill pad col" style="gap:.35em;padding-top:1.8em">
+<p class="q" style="font-size:1em">Questions for the panel · sorted by votes</p>
+<div class="ql" id="ql"></div><div class="foot"><span class="live"><i aria-hidden="true"></i>Live</span><span id="n"></span><span style="margin-inline-start:auto">Simulated responses</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Simulated questions arrive and collect votes over about three seconds; the list re-sorts so the question most of the room wants answered rises to the top. Press the ▲ button beside any question to add or remove your own upvote and watch it move. Reset clears votes.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var Q=[{q:'Will the pilot change how on-call works?',v:9,a:0},{q:'Who approves releases during the pilot?',v:23,a:1},{q:'How will we measure lead time?',v:14,a:1},{q:'What happens if a check fails at night?',v:18,a:3},{q:'Can teams opt out?',v:6,a:4},{q:'Is there budget for more test machines?',v:11,a:5}];
+var F=8,lf=0,mine={};
+function votes(i,f){var q=Q[i];if(f<q.a)return -1;return Math.round(q.v*Math.min(1,(f-q.a+1)/(F-q.a+1)))+(mine[i]?1:0);}
+function draw(f,fi){lf=f;var vis=[];for(var i=0;i<Q.length;i++){var v=votes(i,f);if(v>=0)vis.push([i,v]);}vis.sort(function(a,b){return b[1]-a[1]||a[0]-b[0];});
+$('ql').innerHTML=vis.slice(0,4).map(function(x,r){var i=x[0];return '<div class="qi card'+(r===0?' top':'')+'"><button class="sbtn up" type="button" data-i="'+i+'" aria-pressed="'+!!mine[i]+'" aria-label="Upvote: '+Q[i].q+', '+x[1]+' votes"><span aria-hidden="true">▲</span>'+x[1]+'</button><span class="t">'+Q[i].q+'</span>'+(f-Q[i].a<=1&&f<F?'<span class="nw">new</span>':'')+'</div>';}).join('');
+$('n').textContent=vis.length+' questions · '+vis.reduce(function(a,b){return a+b[1];},0)+' votes';if(fi!=null){var b=$('ql').querySelector('[data-i="'+fi+'"]');if(b)b.focus();}}
+$('ql').addEventListener('click',function(e){var b=e.target.closest('.up');if(!b)return;var i=+b.dataset.i;mine[i]=!mine[i];draw(lf,i);api.status((mine[i]?'Upvoted: ':'Removed upvote: ')+Q[i].q);});
+var api=AtlasDemo.init({frames:F,stepMs:400,step:false,idleText:'Simulated responses',doneText:'Simulated responses: voting settled',reset:function(){mine={};},render:function(f){draw(f);}});
+</script>
+</body>
+</html>

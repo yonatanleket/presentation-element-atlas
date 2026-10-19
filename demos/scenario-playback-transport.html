@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario playback transport: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.wrap{position:absolute;inset:2em .9em .9em;display:grid;grid-template-rows:auto 1fr auto;gap:.4em}
+.tr{display:flex;align-items:center;gap:.3em;flex-wrap:wrap}
+.tr select{font:inherit;font-size:.85em;min-height:max(28px,2.1em);border:1px solid var(--line);border-radius:.4em;background:var(--surface);padding:0 .4em}
+.tr .sbtn{min-width:2.4em}
+svg{width:100%;height:100%}
+.nd rect{fill:var(--surface);stroke:#b4b9c5;stroke-width:2;transition:stroke .2s,fill .2s}
+.nd.on rect{stroke:var(--accent);fill:var(--accent-soft)}.nd.fail rect{stroke:var(--bad);fill:var(--bad-soft)}
+.nd text{font:600 14px var(--f-body);fill:var(--fg)}
+.ed{stroke:#c9ccd3;stroke-width:2}
+.log{font-size:.85em;min-height:1.3em;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Scenario playback transport</h1>
+<div class="stage" role="group" aria-label="Demo: Scenario playback transport. A request-flow diagram with a scenario menu and play, pause, step and rewind buttons that move a packet hop by hop.">
+<span class="label-illustrative">Simulated</span>
+<div class="wrap">
+  <div class="tr"><label class="sr-only" for="sc">Scenario</label><select id="sc"><option value="0">Cache hit</option><option value="1">Cache miss</option><option value="2">Database fails, retry</option></select>
+    <button class="sbtn primary" type="button" id="pp" aria-label="Play">▶</button><button class="sbtn" type="button" id="st" aria-label="Step one hop">Step</button><button class="sbtn" type="button" id="rw" aria-label="Rewind">⏮</button><span class="mono muted" id="hop" style="font-size:.8em;margin-inline-start:auto"></span></div>
+  <svg viewBox="0 0 440 170" aria-hidden="true" id="svg"></svg>
+  <p class="log" id="log" aria-live="off"></p>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Pick a scenario, then use the transport: Play runs the packet through the diagram hop by hop, Pause holds it, Step advances one hop and Rewind returns to the start. The same system shows a cache hit, a cache miss and a failed database call with retry. Reset restores the first scenario.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+(function(){'use strict';
+var $=function(i){return document.getElementById(i);};
+var isRtl=function(){return (document.dir||document.documentElement.dir)==='rtl';};
+var N={C:['Client',45,85],G:['Gateway',145,85],S:['Service',255,85],K:['Cache',375,35],D:['Database',375,135]};
+var SC=[
+ [['C','G','Client sends GET /orders'],['G','S','Gateway forwards'],['S','K','Service checks cache'],['K','S','Cache hit: data returned'],['S','G','Service responds'],['G','C','200 OK in 40 ms']],
+ [['C','G','Client sends GET /orders'],['G','S','Gateway forwards'],['S','K','Service checks cache'],['K','S','Cache miss'],['S','D','Service queries database'],['D','S','Rows returned; cache filled'],['S','G','Service responds'],['G','C','200 OK in 180 ms']],
+ [['C','G','Client sends GET /orders'],['G','S','Gateway forwards'],['S','D','Service queries database'],['D','S','Timeout!',1],['S','D','Retry after 100 ms'],['D','S','Rows returned'],['S','G','Service responds'],['G','C','200 OK in 420 ms']]];
+var svg=$('svg'),h='';
+[['C','G'],['G','S'],['S','K'],['S','D']].forEach(function(e){var a=N[e[0]],b=N[e[1]];h+='<line class="ed" x1="'+a[1]+'" y1="'+a[2]+'" x2="'+b[1]+'" y2="'+b[2]+'"/>';});
+Object.keys(N).forEach(function(k){var n=N[k];h+='<g class="nd" id="n'+k+'"><rect x="'+(n[1]-40)+'" y="'+(n[2]-18)+'" width="80" height="36" rx="8"/><text x="'+n[1]+'" y="'+(n[2]+5)+'" text-anchor="middle">'+n[0]+'</text></g>';});
+h+='<circle id="pk" r="7" fill="var(--accent)" stroke="#fff" stroke-width="2"/>';svg.innerHTML=h;
+var s=0,i=0,tm=null,raf=0,api;
+function place(k){$('pk').setAttribute('cx',N[k][1]);$('pk').setAttribute('cy',N[k][2]-18);}
+function mark(){var H=SC[s];Object.keys(N).forEach(function(k){$('n'+k).classList.remove('on','fail');});
+  var at=i===0?'C':H[i-1][1];$('n'+at).classList.add(i>0&&H[i-1][3]?'fail':'on');
+  $('pk').setAttribute('fill',i>0&&H[i-1][3]?'var(--bad)':'var(--accent)');
+  $('log').textContent=i===0?'Ready: '+$('sc').options[s].text:H[i-1][2];$('hop').textContent='Hop '+i+' / '+H.length;$('st').disabled=i>=H.length;}
+function hop(cb){var H=SC[s];if(i>=H.length){if(cb)cb(false);return;}var e=H[i],a=N[e[0]],b=N[e[1]];i++;
+  if(AtlasDemo.reducedMotion){place(e[1]);mark();if(cb)cb(true);return;}
+  var t0=performance.now();cancelAnimationFrame(raf);(function f(now){var p=Math.min(1,(now-t0)/450),q=1-Math.pow(1-p,3);
+    $('pk').setAttribute('cx',a[1]+(b[1]-a[1])*q);$('pk').setAttribute('cy',a[2]+(b[2]-a[2])*q-18);if(p<1)raf=requestAnimationFrame(f);else{mark();if(cb)cb(true);}})(t0);}
+function pause(){clearTimeout(tm);tm=null;$('pp').textContent='▶';$('pp').setAttribute('aria-label','Play');}
+function run(){hop(function(ok){if(!ok||i>=SC[s].length){pause();api.status('Scenario finished: '+SC[s][SC[s].length-1][2]);return;}if(tm!==null)tm=setTimeout(run,350);});}
+function rewind(){pause();cancelAnimationFrame(raf);i=0;place('C');mark();}
+$('pp').addEventListener('click',function(){if(tm!==null){pause();api.status('Paused at hop '+i);return;}if(i>=SC[s].length)rewind();$('pp').textContent='❚❚';$('pp').setAttribute('aria-label','Pause');tm=0;api.status('Playing: '+$('sc').options[s].text);run();});
+$('st').addEventListener('click',function(){pause();hop(function(){api.status(SC[s][i-1][2]);});});
+$('rw').addEventListener('click',function(){rewind();api.status('Rewound');});
+$('sc').addEventListener('change',function(e){s=+e.target.value;rewind();api.status('Scenario: '+e.target.options[s].text);});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){s=0;$('sc').value='0';rewind();}});
+})();
+</script>
+</body>
+</html>

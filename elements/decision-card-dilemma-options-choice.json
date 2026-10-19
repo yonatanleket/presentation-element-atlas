@@ -1,0 +1,25 @@
+{
+  "id": "decision-card-dilemma-options-choice",
+  "name": "Decision card (dilemma → options → choice)",
+  "category": "compare",
+  "definition": "Wired columns: the dilemma, the options considered, the chosen option, the trade-off, and what changed.",
+  "bestUse": "Slides about a hard choice and its consequences.",
+  "trigger": [
+    "decision-tradeoff",
+    "options-comparison"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/decision-card-dilemma-options-choice.html",
+    "kind": "interactive",
+    "how": "The card wires the dilemma to the options considered and on to the choice, its trade-off and what changed. Select another option, by click or arrow keys, to see the road not taken; the Chosen tag stays on what the team actually picked. Reset returns to it. Content is illustrative."
+  },
+  "aliases": [
+    "trade-off",
+    "hard choice",
+    "decision record"
+  ]
+}

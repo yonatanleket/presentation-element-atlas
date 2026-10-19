@@ -1,0 +1,20 @@
+{
+  "id": "bridge-line",
+  "name": "Bridge line",
+  "category": "story",
+  "definition": "One sentence at the bottom of a slide that sets up the next slide.",
+  "bestUse": "Linking slides into one storyline.",
+  "trigger": [
+    "key-message",
+    "section-structure"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/bridge-line.html",
+    "kind": "interactive",
+    "how": "Each slide ends with one sentence that poses the question the next slide answers; the echoed words are highlighted in the next title. Use Prev and Next or the arrow keys to move through the three slides, and switch bridge lines off to feel how the story falls apart without them."
+  }
+}

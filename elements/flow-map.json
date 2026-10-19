@@ -1,0 +1,25 @@
+{
+  "id": "flow-map",
+  "name": "Flow map",
+  "category": "chart",
+  "definition": "Lines on a map whose thickness shows volume.",
+  "bestUse": "Movement between places.",
+  "trigger": [
+    "spatial-data",
+    "flow-between-stages"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/flow-map.html",
+    "kind": "interactive",
+    "how": "Lines run from the chosen origin to each destination, and line thickness is proportional to weekly shipments (see the key). Switch the origin to redraw the flows; hover or Tab to a line for its exact volume. Places and volumes are illustrative."
+  },
+  "aliases": [
+    "map",
+    "migration",
+    "routes"
+  ]
+}

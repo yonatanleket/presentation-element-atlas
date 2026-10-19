@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progressive taper funnel: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.fun{display:flex;flex-direction:column;gap:.35em;align-items:center;flex:1;justify-content:center}
+.lv{height:2.3em;border-radius:.35em;background:var(--accent-soft);border:1px solid #b9c4f5;display:flex;align-items:center;justify-content:space-between;padding:0 .7em;gap:.5em;
+  opacity:0;transform:scaleX(.6);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),background-color .3s}
+.lv.vis{opacity:1;transform:none}.lv b{font-size:.85em}.lv span{font-size:.8em;color:var(--ink-2);white-space:nowrap}.lv .num{font:700 .9em var(--f-mono);color:var(--fg)}
+.lv.tgt.vis{background:var(--accent);border-color:var(--accent)}.lv.tgt.vis b,.lv.tgt.vis span,.lv.tgt.vis .num{color:#fff}
+.fc{display:flex;gap:.4em;justify-content:center}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Progressive taper funnel</h1>
+<div class="stage" role="group" aria-label="Demo: Progressive taper funnel. A funnel narrowing from 120,000 active users to 3,881 who hit the export row limit, revealed one level at a time.">
+<span class="label-illustrative">Illustrative</span>
+<div class="fill pad col" style="gap:.45em;padding-block:.8em">
+<div><p class="kicker">Export limits</p><p class="h" style="font-size:1.15em">Who is the row limit really hurting?</p></div>
+<div class="fun"><div class="lv" style="width:100%"><b>All active users</b><span>100%</span><span class="num">120,000</span></div><div class="lv" style="width:80%"><b>Use export</b><span>42% of above</span><span class="num">50,400</span></div><div class="lv" style="width:60%"><b>Export weekly</b><span>35% of above</span><span class="num">17,640</span></div><div class="lv tgt" style="width:40%"><b>Hit the row limit</b><span>22% of above</span><span class="num">3,881</span></div></div>
+<div class="fc"><button type="button" class="sbtn primary" id="nx">Reveal next level</button><button type="button" class="sbtn" id="sa">Show all</button></div>
+</div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each bar is a share of the level above, so the audience follows the narrowing one step at a time instead of seeing the end number cold. Press Reveal next level to add a level, or Show all; the last level is highlighted as the focus group. Reset hides all but the first. Numbers are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var L=$$('.lv'),shown,api;var NAMES=["All active users: 120,000","Use export: 50,400","Export weekly: 17,640","Hit the row limit: 3,881"];
+function draw(){L.forEach(function(l,i){l.classList.toggle('vis',i<shown);l.setAttribute('aria-hidden',String(i>=shown));});var done=shown>=L.length;$('#nx').disabled=done;$('#sa').disabled=done;}
+$('#nx').addEventListener('click',function(){shown=Math.min(L.length,shown+1);draw();api.status(shown===L.length?'Focus group: 3,881 users hit the row limit':NAMES[shown-1]);});
+$('#sa').addEventListener('click',function(){shown=L.length;draw();api.status('All levels shown; focus group is 3,881 users');});
+api=AtlasDemo.init({frames:0,interactive:true,idleText:'Reveal the funnel one level at a time',reset:function(){shown=1;draw();}});
+</script>
+</body>
+</html>

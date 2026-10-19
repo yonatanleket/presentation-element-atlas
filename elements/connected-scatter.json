@@ -1,0 +1,20 @@
+{
+  "id": "connected-scatter",
+  "name": "Connected scatter",
+  "category": "chart",
+  "definition": "Scatter points joined in time order.",
+  "bestUse": "Two metrics evolving together.",
+  "trigger": [
+    "correlation",
+    "trend-over-time"
+  ],
+  "level": "advanced",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/connected-scatter.html",
+    "kind": "interactive",
+    "how": "Each dot is a year placed by cost per ticket and satisfaction, and the line joins the years in order so the path tells the story: costs fell while satisfaction dipped, then recovered from 2023. Drag the year slider or press Play. Data is illustrative."
+  }
+}

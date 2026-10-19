@@ -1,0 +1,20 @@
+{
+  "id": "side-note",
+  "name": "Side note",
+  "category": "text",
+  "definition": "Small margin annotation explaining how to read the main visual.",
+  "bestUse": "Clarifying method next to a chart.",
+  "trigger": [
+    "method-explanation",
+    "jargon-definition"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/side-note.html",
+    "kind": "animated",
+    "how": "The chart carries the message; a small note in the margin explains how to read one part of it. Play draws the chart, then adds the note in muted type and a thin leader line to the dip it refers to, so the caveat sits next to the data instead of in a footnote."
+  }
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow chart: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+svg.dg{position:absolute;inset:0;width:100%;height:100%;font-family:var(--f-body);overflow:visible}
+.dg text{font-size:13px;fill:var(--fg)}
+.dg .t-m{fill:var(--muted)} .dg .t-mono{font-family:var(--f-mono);font-size:13px}
+.dg .t-b{font-weight:600} .dg .t-w{fill:#fff} .dg .t-a{fill:var(--accent)} .dg .t-bad{fill:var(--bad)} .dg .t-ok{fill:var(--ok)}
+.dg .nd{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.dg .nd-a{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.dg .nd-ok{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.2}
+.dg .nd-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.dg .nd-bad{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.2}
+.dg .ln{fill:none;stroke:var(--muted);stroke-width:1.6}
+.dg .ah{fill:var(--muted)} .dg .ah-a{fill:var(--accent)} .dg .ah-bad{fill:var(--bad)}
+[data-f]{opacity:0;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),stroke-dashoffset .6s var(--ease-out)}
+[data-f].on{opacity:1}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}.draw.on{stroke-dashoffset:0}
+.cap{position:absolute;inset-inline:1.2em;inset-block-end:.6em;font-size:.8em;color:var(--ink-2);min-height:1.3em}
+.dg path.ln.cur{stroke:var(--accent);stroke-width:2.4;marker-end:url(#aha)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Flow chart</h1>
+<div class="stage" role="img" aria-label="Demo: Flow chart. A release gate flow: merge, run tests, a pass decision, deploy on yes, fix and retry on no.">
+<span class="label-illustrative">Illustrative</span>
+<svg class="dg" viewBox="0 0 480 300" aria-hidden="true"><defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah"/></marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-a"/></marker>
+<marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ah-bad"/></marker>
+</defs>
+<text x="16" y="36" class="t-b" style="font-size:15px">Release gate</text><text x="16" y="62" class="t-m" id="cap"></text>
+<g data-f="1"><rect x="14" y="132" width="80" height="36" rx="18" class="nd"/><text x="54" y="154.5" text-anchor="middle" class="">Merge PR</text></g>
+<path d="M94 150 H120" class="ln " marker-end="url(#ah)" data-f="1"/>
+<g data-f="1"><rect x="124" y="132" width="92" height="36" rx="6" class="nd"/><text x="170" y="154.5" text-anchor="middle" class="">Run tests</text></g>
+<path d="M216 150 H236" class="ln " marker-end="url(#ah)" data-f="2"/>
+<g data-f="2"><polygon points="290,108 340,150 290,192 240,150" class="nd-a"/><text x="290" y="155" text-anchor="middle" class="t-b t-a">Pass?</text></g>
+<path d="M340 150 H372" class="ln " marker-end="url(#ah)" data-f="3"/><text x="356" y="142" text-anchor="middle" class="t-m t-mono" data-f="3">yes</text>
+<g data-f="3"><rect x="376" y="132" width="90" height="36" rx="6" class="nd-ok"/><text x="421" y="154.5" text-anchor="middle" class="">Deploy</text></g>
+<path d="M290 192 V222" class="ln " marker-end="url(#ah)" data-f="4"/><text x="298" y="212" class="t-m t-mono" data-f="4">no</text>
+<g data-f="4"><rect x="244" y="226" width="92" height="36" rx="6" class="nd-warn"/><text x="290" y="248.5" text-anchor="middle" class="">Fix &amp; push</text></g>
+<path d="M244 244 H170 V172" class="ln " marker-end="url(#ah)" data-f="5"/><text x="207" y="238" text-anchor="middle" class="t-m t-mono" data-f="5">retry</text></svg>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Rounded boxes are start points, rectangles are steps and the diamond is a yes/no decision. Play or Step lights one arrow at a time, and the caption explains what happens along it, including the retry loop back to the tests.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){var k=+n.getAttribute('data-f');n.classList.toggle('on',f>=k);n.classList.toggle('cur',f===k);});}
+function isRtl(){return (document.dir||document.documentElement.dir||'').toLowerCase()==='rtl';}
+var CAPS=["","Every merge triggers the full test suite.","One question gates the release: did every test pass?","Yes: the build deploys with no manual step.","No: the author gets the failing tests to fix.","After the fix, the loop runs the tests again."];
+AtlasDemo.init({frames:5,stepMs:1000,render:function(fr,ctx){showFrames(fr);var c=$('#cap');if(c)c.textContent=CAPS[fr]||'';}});
+</script>
+</body>
+</html>

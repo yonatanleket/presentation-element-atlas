@@ -1,0 +1,25 @@
+{
+  "id": "stacked-bar-waffle",
+  "name": "Stacked bar / waffle",
+  "category": "chart",
+  "definition": "Shares of a whole as segments or grid cells.",
+  "bestUse": "Part to whole.",
+  "trigger": [
+    "part-to-whole"
+  ],
+  "level": "standard",
+  "sources": [
+    "ft"
+  ],
+  "demo": {
+    "file": "demos/stacked-bar-waffle.html",
+    "kind": "animated",
+    "how": "The same shares appear twice: a 100% stacked bar, then a 10 × 10 waffle where each square is 1% of revenue. Bars suit precise comparison; waffles make the part-to-whole feel countable. Values are illustrative."
+  },
+  "aliases": [
+    "pie",
+    "part to whole",
+    "percent",
+    "share"
+  ]
+}

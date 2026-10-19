@@ -1,0 +1,19 @@
+{
+  "id": "3d-model-viewer",
+  "name": "3D model viewer",
+  "category": "explore",
+  "definition": "Rotatable 3D object.",
+  "bestUse": "Hardware and spatial products.",
+  "trigger": [
+    "product-ui"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/3d-model-viewer.html",
+    "kind": "interactive",
+    "how": "A simple hub device is rendered live on a canvas with flat shading. Drag it, or focus the view and use the arrow keys, to orbit and tilt; the buttons rotate by 45° and the slider zooms. The status names the side facing you. Reset returns to the front three-quarter view."
+  }
+}

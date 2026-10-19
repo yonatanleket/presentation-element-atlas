@@ -1,0 +1,24 @@
+{
+  "id": "decision-tree",
+  "name": "Decision tree",
+  "category": "diagram",
+  "definition": "Branches of choices and their outcomes.",
+  "bestUse": "Rules and policies.",
+  "trigger": [
+    "decision-tradeoff",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/decision-tree.html",
+    "kind": "animated",
+    "how": "Each box is a yes/no question and the coloured leaves are outcomes. Play reveals the tree one level at a time, then traces one example case from the root to its outcome so the audience sees how the policy is applied. The policy is illustrative."
+  },
+  "aliases": [
+    "if then",
+    "rules"
+  ]
+}

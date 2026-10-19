@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pacing timer: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.track{position:relative;height:.7em;border-radius:.35em;background:var(--line);overflow:hidden}
+.used{position:absolute;inset-block:0;inset-inline-start:0;background:var(--ok);border-radius:.35em;transition:width .2s linear,background-color .2s}
+.used.behind{background:var(--warn)}
+.budget{position:absolute;inset-block:-.2em;width:.15em;background:var(--fg)}
+.pace{font:500 .9em var(--f-mono)}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Pacing timer</h1>
+<div class="stage" role="group" aria-label="Demo: Pacing timer">
+<span class="label-illustrative">Simulated clock</span>
+<div class="deck"><div class="deck-body"><p class="kicker" id="k"></p><p class="h" id="t"></p><p class="p muted" id="bud"></p></div>
+<div class="deck-foot" style="flex-direction:column;align-items:stretch;gap:.35em">
+<div class="row"><span class="pace" id="pace">Ready</span><span style="flex:1"></span><span class="mono muted" id="clk">0:00 / 5:30</span></div>
+<div class="track" aria-hidden="true"><div class="used" id="used" style="width:0"></div><div class="budget" id="mark"></div></div>
+<div class="row"><button class="sbtn primary" id="go">Start</button><button class="sbtn" id="nx" disabled>Next slide →</button></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each slide has a time budget. Advance slides with Next while the simulated clock runs; the bar compares elapsed time with the budget so far and turns amber when you fall behind. Times are illustrative and the clock runs fast.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+var S=[['Context','Where things stand',60],['Problem','What slows us down',90],['Options','Three ways to fix it',120],['Plan','Recommendation',60]];
+var TOTAL=330,i=0,el=0,run=null,api;
+var fmt=function(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+function budgetSoFar(){var b=0;for(var j=0;j<=i;j++)b+=S[j][2];return b;}
+function draw(){k.textContent=S[i][0];t.textContent=S[i][1];bud.textContent='Budget for this slide: '+fmt(S[i][2]);
+  var b=budgetSoFar();mark.style.insetInlineStart=(b/TOTAL*100)+'%';used.style.width=Math.min(100,el/TOTAL*100)+'%';clk.textContent=fmt(el)+' / '+fmt(TOTAL);
+  var diff=el-b;used.classList.toggle('behind',diff>0);
+  pace.textContent=run===null&&el===0?'Ready':(diff>0?'Behind by '+fmt(diff):'On pace · '+fmt(-diff)+' left on this slide');}
+function stopRun(){if(run){clearInterval(run);run=null;}}
+go.addEventListener('click',function(){if(run){stopRun();go.textContent='Resume';api.status('Paused');}else{run=setInterval(function(){el+=5;draw();if(el>=TOTAL+60){stopRun();go.textContent='Start';}},250);go.textContent='Pause';nx.disabled=i===3;api.status('Clock running (20× speed)');}});
+nx.addEventListener('click',function(){if(i<3){i++;draw();api.status('Slide '+(i+1));}nx.disabled=i===3;});
+api=AtlasDemo.init({frames:0,interactive:true,reset:function(){stopRun();i=0;el=0;go.textContent='Start';nx.disabled=true;draw();}});
+</script>
+</body>
+</html>

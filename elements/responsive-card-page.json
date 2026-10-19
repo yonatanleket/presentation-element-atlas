@@ -1,0 +1,19 @@
+{
+  "id": "responsive-card-page",
+  "name": "Responsive card page",
+  "category": "story",
+  "definition": "Web-native card of any height that holds text, media and embeds instead of a fixed 16:9 slide.",
+  "bestUse": "Async decks read on screens.",
+  "trigger": [
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "sources": [
+    "gamma"
+  ],
+  "demo": {
+    "file": "demos/responsive-card-page.html",
+    "kind": "interactive",
+    "how": "The card is not a fixed 16:9 slide: it reflows to the reader’s screen and grows as tall as its content. Pick Phone, Tablet or Wide to see the image stack above or sit beside the text, and use Show more to expand the card past one screen; the frame scrolls."
+  }
+}

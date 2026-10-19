@@ -1,0 +1,26 @@
+{
+  "id": "timing-bars-with-budget-line",
+  "name": "Timing bars with budget line",
+  "category": "diagram",
+  "definition": "Gantt-style bars, serial vs parallel, against a vertical deadline line.",
+  "bestUse": "Latency and performance stories.",
+  "trigger": [
+    "sequential-process",
+    "deviation-from-target"
+  ],
+  "level": "advanced",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/timing-bars-with-budget-line.html",
+    "kind": "interactive",
+    "how": "Each bar is one phase of a page load placed on a millisecond axis, and the red line is the budget. Switch between Serial and Parallel to see Profile and Recs overlap and the total drop from 650 to 470 ms, and drag the budget slider to test other targets. Timings are illustrative."
+  },
+  "aliases": [
+    "gantt",
+    "timeline",
+    "latency",
+    "deadline"
+  ]
+}

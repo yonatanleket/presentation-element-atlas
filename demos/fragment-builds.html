@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fragment builds: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<style>
+.fr{font-size:1.02em;padding:.45em .7em;transition:opacity .35s var(--ease-out),transform .4s var(--ease-out),background-color .3s}
+.f1{opacity:0}.f1.on{opacity:1}
+.f2{opacity:0;transform:scale(.6)}.f2.on{opacity:1;transform:none}.f2.out{opacity:0;transform:none}
+.f3{opacity:0;transform:scale(1.35)}.f3.on{opacity:1;transform:none}
+.f1.hl{background:#fde7a8;border-color:#ecd28a}
+.fx-tag{align-self:flex-start;min-height:1.6em}
+</style>
+</head>
+<body>
+<main class="demo" data-state="loading">
+<h1 class="demo-title">Fragment builds</h1>
+<div class="stage" role="img" aria-label="Demo: Fragment builds. One slide shows five build effects in turn: fade in, grow in, highlight, shrink in, and fade out, each named as it runs.">
+<span class="label-illustrative">Illustrative</span>
+<div class="deck"><div class="deck-body" style="gap:.5em">
+<div class="row"><p class="kicker" style="margin:0">Builds</p><span class="pill adv fx-tag" id="tag" style="margin-inline-start:auto">—</span></div>
+<p class="h" style="font-size:1.2em">What the pilot showed</p>
+<div class="fr card f1" id="a">Lead time fell from 9 days to 4</div>
+<div class="fr card f2" id="b">Approvers spent 2 fewer hours a week</div>
+<div class="fr card f3" id="c">No increase in rollbacks</div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A fragment is one piece of a slide with its own build effect. Play runs five in turn on one slide: a point fades in, a second grows in, the first gets highlighted, a third shrinks into place, and the second fades out. A tag names each effect as it runs.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(i){return document.getElementById(i);}
+function on(n,v){n.classList.toggle('on',!!v);}
+var T=['Waiting to build','1 · fade in','2 · grow in','3 · highlight','4 · shrink in','5 · fade out'];
+AtlasDemo.init({frames:5,stepMs:1200,render:function(f){on($('a'),f>=1);on($('b'),f>=2);$('b').classList.toggle('out',f>=5);$('a').classList.toggle('hl',f>=3);on($('c'),f>=4);$('tag').textContent=T[f];}});
+</script>
+</body>
+</html>

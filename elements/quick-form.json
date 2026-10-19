@@ -1,0 +1,25 @@
+{
+  "id": "quick-form",
+  "name": "Quick form",
+  "category": "audience",
+  "definition": "A short multi-field form.",
+  "bestUse": "Collecting structured input.",
+  "trigger": [
+    "audience-input"
+  ],
+  "level": "standard",
+  "sources": [
+    "menti"
+  ],
+  "demo": {
+    "file": "demos/quick-form.html",
+    "kind": "interactive",
+    "how": "A short form asks two things: your role and your confidence from 1 to 5. Simulated submissions arrive over about three seconds and the summary beside the form updates the role split and average. Fill in both fields and press Submit to add yours; Reset clears it."
+  },
+  "aliases": [
+    "poll",
+    "audience vote",
+    "survey",
+    "interactive audience"
+  ]
+}

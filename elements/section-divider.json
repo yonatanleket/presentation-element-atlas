@@ -1,0 +1,23 @@
+{
+  "id": "section-divider",
+  "name": "Section divider",
+  "category": "story",
+  "definition": "Full slide marking a chapter break.",
+  "bestUse": "Long decks.",
+  "trigger": [
+    "section-structure"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/section-divider.html",
+    "kind": "animated",
+    "how": "A divider is a full slide that marks a chapter break: a large number, the chapter name and a small tracker of all chapters with the new one highlighted. Play moves from the last slide of chapter one to the divider, then into the first slide of chapter two."
+  },
+  "aliases": [
+    "chapter slide",
+    "break slide"
+  ]
+}

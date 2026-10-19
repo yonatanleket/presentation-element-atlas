@@ -1,0 +1,24 @@
+{
+  "id": "rag-status",
+  "name": "RAG status",
+  "category": "metric",
+  "definition": "Red / amber / green status indicator.",
+  "bestUse": "Project status updates.",
+  "trigger": [
+    "status-update"
+  ],
+  "level": "standard",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/rag-status.html",
+    "kind": "animated",
+    "how": "Each workstream gets a red, amber or green status plus a text label and icon, so the status still reads without color. Play updates the statuses one by one as a weekly review would."
+  },
+  "aliases": [
+    "traffic light",
+    "status report",
+    "red amber green"
+  ]
+}
