@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "wall-of-text",
+  "name": "Wall of text",
+  "category": "text",
+  "axis": "auto",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "medium",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Reading competes with listening.",
+  "before": "Reading competes with listening.",
+  "after": "Keep every paragraph; give existing lead text hierarchy and reveal remaining paragraphs on demand. Read-ahead exposes all detail.",
+  "fixedBy": [
+    "collapsible-detail-card",
+    "slidedoc-page"
+  ],
+  "demo": {
+    "file": "hazard-demos/wall-of-text.html",
+    "how": "Keep every paragraph; give existing lead text hierarchy and reveal remaining paragraphs on demand. Read-ahead exposes all detail."
+  },
+  "ruleId": "wall-of-text"
+}

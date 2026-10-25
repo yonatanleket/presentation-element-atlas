@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "fade-out-empty-state",
   "name": "Fade-out empty state",
   "category": "motion",

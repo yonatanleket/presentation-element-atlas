@@ -1,0 +1,7 @@
+{
+  "id": "chart-without-takeaway",
+  "fictional": true,
+  "baselineHash": "072cdb4b5c71fbd991ded2e06baa196e13f9a348b1ef776fe36b0ab5f04bffb3",
+  "inventoryHash": "e617b8aec0f4f5ded6d419eb9b826f0ae44576d1ca71709dd8efeacc1486ef3e",
+  "provenance": "Authored fictional inventory and original presentation policy; never derived from candidate DOM."
+}

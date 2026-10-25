@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bullet-overload",
+  "name": "Bullet overload",
+  "category": "text",
+  "axis": "auto",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "medium",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Seven competing points have no reading order.",
+  "before": "Seven competing points have no reading order.",
+  "after": "Reveal the same seven bullets sequentially; retain accessible full-list access. This improves live pacing, not total content volume.",
+  "fixedBy": [
+    "fragment-builds"
+  ],
+  "demo": {
+    "file": "hazard-demos/bullet-overload.html",
+    "how": "Reveal the same seven bullets sequentially; retain accessible full-list access. This improves live pacing, not total content volume."
+  },
+  "ruleId": "bullet-overload"
+}

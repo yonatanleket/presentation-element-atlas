@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "filler-agenda",
+  "name": "Filler agenda",
+  "category": "structure",
+  "axis": "judgment",
+  "severityByMode": {
+    "pitch": "medium",
+    "teach": "medium",
+    "report": "low",
+    "keynote": "high",
+    "workshop": "low",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "A full slide delays the substantive opening.",
+  "before": "A full slide delays the substantive opening.",
+  "after": "Move the same agenda wording into a compact tracker beside existing content. Do not delete agenda items or invent an opening claim.",
+  "fixedBy": [
+    "agenda-contents-tracker"
+  ],
+  "demo": {
+    "file": "hazard-demos/filler-agenda.html",
+    "how": "Move the same agenda wording into a compact tracker beside existing content. Do not delete agenda items or invent an opening claim."
+  }
+}

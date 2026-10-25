@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "transition-overload",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Keep attention on the content"
+      },
+      "claims": [
+        {
+          "id": "first",
+          "segments": [
+            "The request history stays with the work."
+          ]
+        },
+        {
+          "id": "second",
+          "segments": [
+            "The next owner is visible before the handoff."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ]
+}

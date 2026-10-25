@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "three-dimensional-pie",
+  "name": "Three-dimensional pie",
+  "category": "data",
+  "axis": "rendered",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "medium",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "medium"
+  },
+  "audienceImpact": "Perspective distorts part comparison.",
+  "before": "Perspective distorts part comparison.",
+  "after": "Plot the exact labeled shares as flat bars, keeping category/value pairs, original order and percentage units. Override the element's usual ranking sort.",
+  "fixedBy": [
+    "ordered-bar-lollipop"
+  ],
+  "demo": {
+    "file": "hazard-demos/three-dimensional-pie.html",
+    "how": "Plot the exact labeled shares as flat bars, keeping category/value pairs, original order and percentage units. Override the element's usual ranking sort."
+  }
+}

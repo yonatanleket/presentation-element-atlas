@@ -1,0 +1,238 @@
+[
+  {
+    "name": "missing version",
+    "mutation": {
+      "remove": "schemaVersion"
+    },
+    "expected": "schemaVersion: required"
+  },
+  {
+    "name": "unsupported version",
+    "mutation": {
+      "schemaVersion": "2.0.0"
+    },
+    "expected": "schemaVersion:"
+  },
+  {
+    "name": "malformed version",
+    "mutation": {
+      "schemaVersion": "v1"
+    },
+    "expected": "schemaVersion:"
+  },
+  {
+    "name": "null record",
+    "mutation": {
+      "replace": null
+    },
+    "expected": "expected object"
+  },
+  {
+    "name": "wrong tags type",
+    "mutation": {
+      "trigger": {}
+    },
+    "expected": "trigger: expected array"
+  },
+  {
+    "name": "wrong sources type",
+    "mutation": {
+      "sources": {}
+    },
+    "expected": "sources: expected array"
+  },
+  {
+    "name": "wrong related type",
+    "mutation": {
+      "related": {}
+    },
+    "expected": "related: expected array"
+  },
+  {
+    "name": "wrong demo type",
+    "mutation": {
+      "demo": "bad"
+    },
+    "expected": "demo: expected object"
+  },
+  {
+    "name": "demo missing file",
+    "mutation": {
+      "demo": {
+        "kind": "static",
+        "how": "A single tile shows one number and its label. Play counts the number up from zero and settles on the final value; nothing else competes with it, which is the point of the tile. The value is illustrative."
+      }
+    },
+    "expected": "demo.file: required"
+  },
+  {
+    "name": "unknown field",
+    "mutation": {
+      "surprise": true
+    },
+    "expected": "surprise: unknown field"
+  },
+  {
+    "name": "empty name",
+    "mutation": {
+      "name": ""
+    },
+    "expected": "name: shorter"
+  },
+  {
+    "name": "long name",
+    "mutation": {
+      "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "expected": "name: longer"
+  },
+  {
+    "name": "invalid id",
+    "mutation": {
+      "id": "Wrong ID"
+    },
+    "expected": "id:"
+  },
+  {
+    "name": "invalid category",
+    "mutation": {
+      "category": "missing"
+    },
+    "expected": "category:"
+  },
+  {
+    "name": "unknown trigger",
+    "mutation": {
+      "trigger": [
+        "missing"
+      ]
+    },
+    "expected": "not in triggers.json"
+  },
+  {
+    "name": "duplicate trigger",
+    "mutation": {
+      "trigger": [
+        "metric",
+        "metric"
+      ]
+    },
+    "expected": "items must be unique"
+  },
+  {
+    "name": "unknown source",
+    "mutation": {
+      "sources": [
+        "missing"
+      ]
+    },
+    "expected": "not in sources.json"
+  },
+  {
+    "name": "broken related",
+    "mutation": {
+      "related": [
+        "missing"
+      ]
+    },
+    "expected": "not an element id"
+  },
+  {
+    "name": "bad level",
+    "mutation": {
+      "level": "unknown"
+    },
+    "expected": "level:"
+  },
+  {
+    "name": "short how",
+    "mutation": {
+      "demo": {
+        "file": "demos/kpi-tile.html",
+        "kind": "animated",
+        "how": "Too short"
+      }
+    },
+    "expected": "demo.how must be"
+  },
+  {
+    "name": "wrong demo path",
+    "mutation": {
+      "demo": {
+        "file": "demos/wrong.html",
+        "kind": "animated",
+        "how": "A single tile shows one number and its label. Play counts the number up from zero and settles on the final value; nothing else competes with it, which is the point of the tile. The value is illustrative."
+      }
+    },
+    "expected": "demo.file must be"
+  },
+  {
+    "name": "required definition",
+    "mutation": {
+      "remove": "definition"
+    },
+    "expected": "definition: required"
+  },
+  {
+    "name": "too many triggers",
+    "mutation": {
+      "trigger": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ]
+    },
+    "expected": "at most 5"
+  },
+  {
+    "name": "empty triggers",
+    "mutation": {
+      "trigger": []
+    },
+    "expected": "at least 1"
+  },
+  {
+    "name": "wrong how type",
+    "mutation": {
+      "demo": {
+        "file": "demos/kpi-tile.html",
+        "kind": "animated",
+        "how": {}
+      }
+    },
+    "expected": "demo.how: expected string"
+  },
+  {
+    "name": "hostile top field __proto__",
+    "mutation": {
+      "__proto__": "hostile"
+    },
+    "expected": "__proto__: unknown field"
+  },
+  {
+    "name": "hostile top field constructor",
+    "mutation": {
+      "constructor": "hostile"
+    },
+    "expected": "constructor: unknown field"
+  },
+  {
+    "name": "hostile top field toString",
+    "mutation": {
+      "toString": "hostile"
+    },
+    "expected": "toString: unknown field"
+  },
+  {
+    "name": "inherited source key",
+    "mutation": {
+      "sources": [
+        "constructor"
+      ]
+    },
+    "expected": "not in sources.json"
+  }
+]

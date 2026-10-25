@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "transition-overload",
+  "name": "Transition overload",
+  "category": "motion",
+  "axis": "rendered",
+  "severityByMode": {
+    "pitch": "medium",
+    "teach": "high",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "high",
+    "read-ahead": "medium"
+  },
+  "audienceImpact": "Motion interrupts attention or causes discomfort.",
+  "before": "Motion interrupts attention or causes discomfort.",
+  "after": "Replace decorative transitions with one restrained crossfade; reduced motion uses instant swaps. All slide content and sequence remain.",
+  "fixedBy": [
+    "crossfade-slide-transition"
+  ],
+  "demo": {
+    "file": "hazard-demos/transition-overload.html",
+    "how": "Replace decorative transitions with one restrained crossfade; reduced motion uses instant swaps. All slide content and sequence remain."
+  }
+}

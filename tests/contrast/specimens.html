@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:20px;background:white;color:black;font:16px Arial}p{margin:8px}#fail{color:#aaa}#large{font-size:24px;color:#888}#gradient{background:linear-gradient(white,black)}#opacity{opacity:.5}section{background:rgba(0,0,0,.1)}#alpha{background:rgba(255,255,255,.5)}</style>
+<p id="pass">Black text on white passes.</p>
+<p id="fail">Light gray ordinary text fails.</p>
+<p id="large">Qualifying large text passes 3:1.</p>
+<section><p id="alpha">Transparent backgrounds compose.</p></section>
+<p id="gradient">Gradient requires assessment.</p>
+<p id="opacity">Group opacity requires assessment.</p>
+<svg width="250" height="30"><text id="svg-text" x="0" y="20">SVG backing requires assessment.</text></svg>
+
+<p id="text-fill" style="color:black;-webkit-text-fill-color:#eee">Text fill override requires assessment.</p>
+<p id="text-stroke" style="-webkit-text-stroke:1px white">Text stroke requires assessment.</p>
+
+<style>.layer-fixture{position:relative;width:350px;height:45px}.layer-fixture>svg,.layer-fixture>.gradient-backing{position:absolute;inset:0;width:100%;height:100%}.layer-fixture>p{position:relative;margin:0;padding:10px;z-index:1}.gradient-backing{background:linear-gradient(black,#222)}</style>
+<div class="layer-fixture"><div class="gradient-backing"></div><p id="sibling-gradient">Sibling gradient cannot be measured as white.</p></div>
+<div class="layer-fixture"><svg><rect width="100%" height="100%" fill="black"></rect></svg><p id="sibling-svg">Sibling SVG cannot be measured as white.</p></div>

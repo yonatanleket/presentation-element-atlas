@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "three-dimensional-pie",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Regional mix"
+      },
+      "claims": [
+        {
+          "id": "north",
+          "segments": [
+            "North: ",
+            {
+              "id": "north-value",
+              "kind": "number",
+              "text": "40",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "north-unit",
+              "kind": "unit",
+              "text": "%"
+            },
+            "."
+          ]
+        },
+        {
+          "id": "south",
+          "segments": [
+            "South: ",
+            {
+              "id": "south-value",
+              "kind": "number",
+              "text": "35",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "south-unit",
+              "kind": "unit",
+              "text": "%"
+            },
+            "."
+          ]
+        },
+        {
+          "id": "west",
+          "segments": [
+            "West: ",
+            {
+              "id": "west-value",
+              "kind": "number",
+              "text": "25",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "west-unit",
+              "kind": "unit",
+              "text": "%"
+            },
+            "."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": [
+        {
+          "id": "src",
+          "text": "Source: fictional regional mix ledger, 2026."
+        }
+      ]
+    }
+  ],
+  "seriesValues": [
+    40,
+    35,
+    25
+  ]
+}

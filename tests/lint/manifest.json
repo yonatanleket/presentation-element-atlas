@@ -1,0 +1,1711 @@
+{
+  "datasetVersion": "m1-lint-v1",
+  "contract": "work/team-workflow/impeccable-m1/eval-fixtures.md",
+  "cases": [
+    {
+      "id": "L-W01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-W01.html",
+      "inputHash": "b33249ea0ea66538b547859be2825552e1b402bdd814b704bda4c2d3e682517e",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-W01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-W02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-W02.html",
+      "inputHash": "aadb249c1c04679b6b9c85c5ccf0857d2cadb6933b4cc25e8dbc571d9589fbcb",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-W02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "wall-of-text",
+          "slideId": "s1",
+          "location": "body",
+          "observed": 81,
+          "threshold": 80
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-W03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-W03.html",
+      "inputHash": "4e0357c3d24b60fcda12ccea48c565f94106f9ffb81212c2bb83ac242c229c0e",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-W03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-W04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-W04.html",
+      "inputHash": "82f45cc48986f00bfc26b32d74fbfd18e1c0dc380a3e08d9dc44f36f0c060913",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-W04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "wall-of-text",
+          "slideId": "s1",
+          "location": "body",
+          "observed": 81,
+          "threshold": 80
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-W05",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-W05.html",
+      "inputHash": "a1191b9374f5bfd8b2ffeaa2ff8de1e3878337911ca935427bd5d0d17e9ec5c9",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-W05 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-B01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-B01.html",
+      "inputHash": "18fa45f290f6aafd08e13fa43e4d5bcefc86d80f35ab767d72ff02726e5fd97b",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-B01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-B02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-B02.html",
+      "inputHash": "de1db8fb809f2bd6836a00c01cc3f76c419df2e7059bf93da1b324cb51fa251e",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-B02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "bullet-overload",
+          "slideId": "s1",
+          "location": "body/list/1",
+          "observed": 7,
+          "threshold": 6
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-B03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-B03.html",
+      "inputHash": "83f9a69ce39d2bbaf341576fe8bf89ad99f297eedfa07dfac288c928b20724b0",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-B03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-B04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-B04.html",
+      "inputHash": "80e5cff1c3fa0a5e92ddcfaca8614246408c33f78be91adc7502cc5b0084e38e",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-B04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "bullet-overload",
+          "slideId": "s1",
+          "location": "body/list/2",
+          "observed": 7,
+          "threshold": 6
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T01.html",
+      "inputHash": "db86433354bd4a170353b0f9443005bcaed8de1b31ad75fb1988be8421a2ee41",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "Results",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T02.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T03.html",
+      "inputHash": "2ec97311aa0e86e1a4252bf69e9ce140f2cb52b666b59ff48897d72082983a53",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "RESULTS: pilot",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T04.html",
+      "inputHash": "fb54b241fb5a55c635fca7804628e95769d954fc94a79d3dd3b4d5db50fa97c8",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "Results-driven teams improve",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T05",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T05.html",
+      "inputHash": "1ebf800786edce9ea993b02b4468e21b3d7042299439e863c5b1968c3f2f611f",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T05 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-T06",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T06.html",
+      "inputHash": "ef15d1b1ed70cd73bae01be58f3ddea1b056af22445ff1c55d17ac6b9eff860f",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-T06 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "Results improved",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S01.html",
+      "inputHash": "f804a69810d0c72cfa9ef6863d2e4621ce2db3b60271521aaa7ba6e77bfbaac8",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S02.html",
+      "inputHash": "08a827a4604a770ea88d159fbfdea803e20c81deb36e81cf13dd91413e196386",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": null,
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S03.html",
+      "inputHash": "0ccea561da7d79c31843220722d02d9438f38ee9b73e2212663a16424a495f2d",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": "src9",
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S04.html",
+      "inputHash": "d949f359380cfd694f3331508f4537b1a709d6eb38fe14964b8cb5e169397214",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": "src2",
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 2,
+        "claims": 1,
+        "facts": 5,
+        "sources": 2,
+        "required": 2,
+        "optional": 0,
+        "total": 2
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S05-a",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S05-a.html",
+      "inputHash": "3b54d97a50bb43d27858d11c5b799b3b0b837cd6df985d5a06d8e95163b2373e",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S05-a as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": "",
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S05-b",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S05-b.html",
+      "inputHash": "e05414091c22913fedddd69e5cc65d5568354cac51908e077f33ad9e8ad3ab28",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S05-b as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": "   ",
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-S06",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S06.html",
+      "inputHash": "9f4748bad6cb317331b08bc2f5f324db3a3dbe8463dbc15495915096f6f9e2be",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S06 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-structure",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-S07",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S07.html",
+      "inputHash": "614261a1ad395384fdf41d20aa0613ba3ce8d235760f17a5caf29482a43629be",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S07 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "unclassified-number",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-S08",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S08.html",
+      "inputHash": "1ba9fa4764d5c997f05ea1a065960acc0a8c23f68995b456f978d408be48d23b",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-S08 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 1,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-P01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-P01.html",
+      "inputHash": "e574a542f070d05b81b5bbc041bfd86dc8f6b40fd519ff2afc43a83b48738fb5",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-P01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 10,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 10,
+        "optional": 0,
+        "total": 10
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-P02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-P02.html",
+      "inputHash": "ba20f2eba3bceb2ab937242b0740c38780a81abb1be15a1587d098448f75dcd7",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-P02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "time-slot-overload",
+          "slideId": null,
+          "location": "deck",
+          "observed": 11,
+          "threshold": 10
+        }
+      ],
+      "counts": {
+        "slides": 11,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 11,
+        "optional": 0,
+        "total": 11
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-P03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-P03.html",
+      "inputHash": "3307f2a0c349ab897b3aa72324613457db6f64b2d1fa27d9ab7c46a4618c9795",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-P03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 12,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 10,
+        "optional": 2,
+        "total": 12
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-P04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-P04.html",
+      "inputHash": "c9e66828d9421ec20deed255ffc5ee7f93087a72156e0acd9df573b65f879e6e",
+      "args": [
+        "--minutes",
+        "2.5"
+      ],
+      "mutationDescription": "L-P04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "time-slot-overload",
+          "slideId": null,
+          "location": "deck",
+          "observed": 3,
+          "threshold": 2
+        }
+      ],
+      "counts": {
+        "slides": 3,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 3,
+        "optional": 0,
+        "total": 3
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-P05",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-P05.html",
+      "inputHash": "71ded88bf8502da4a8c594d8426f6ec05bca5bfff324b1d92ccd23b1f3f0c7c7",
+      "args": [
+        "--minutes",
+        "2.5",
+        "--slides-per-minute",
+        "2"
+      ],
+      "mutationDescription": "L-P05 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [],
+      "counts": {
+        "slides": 5,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 5,
+        "optional": 0,
+        "total": 5
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-X01-a",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [],
+      "mutationDescription": "L-X01-a as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X01-b",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "0"
+      ],
+      "mutationDescription": "L-X01-b as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X01-c",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "-1"
+      ],
+      "mutationDescription": "L-X01-c as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X01-d",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "Infinity"
+      ],
+      "mutationDescription": "L-X01-d as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X02-a",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--slides-per-minute",
+        "0"
+      ],
+      "mutationDescription": "L-X02-a as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X02-b",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--slides-per-minute",
+        "-1"
+      ],
+      "mutationDescription": "L-X02-b as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X02-c",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--slides-per-minute",
+        "NaN"
+      ],
+      "mutationDescription": "L-X02-c as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T01.html",
+      "inputHash": "db86433354bd4a170353b0f9443005bcaed8de1b31ad75fb1988be8421a2ee41",
+      "args": [
+        "--minutes",
+        "10",
+        "--fail-on",
+        "high"
+      ],
+      "mutationDescription": "L-X03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 0,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "Results",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-X04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-S02.html",
+      "inputHash": "08a827a4604a770ea88d159fbfdea803e20c81deb36e81cf13dd91413e196386",
+      "args": [
+        "--minutes",
+        "10",
+        "--fail-on",
+        "high"
+      ],
+      "mutationDescription": "L-X04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s1",
+          "location": "fact/v1",
+          "observed": null,
+          "threshold": null
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-X05",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-T01.html",
+      "inputHash": "db86433354bd4a170353b0f9443005bcaed8de1b31ad75fb1988be8421a2ee41",
+      "args": [
+        "--minutes",
+        "10",
+        "--fail-on",
+        "low"
+      ],
+      "mutationDescription": "L-X05 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 1,
+      "primaryDiagnostic": null,
+      "findings": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s1",
+          "location": "title",
+          "observed": "Results",
+          "threshold": [
+            "overview",
+            "background",
+            "results",
+            "metrics",
+            "roadmap",
+            "conclusion",
+            "quarterly support"
+          ]
+        }
+      ],
+      "counts": {
+        "slides": 1,
+        "claims": 0,
+        "facts": 0,
+        "sources": 0,
+        "required": 1,
+        "optional": 0,
+        "total": 1
+      },
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation",
+      "assertions": [
+        "exact exit and primary diagnostic",
+        "exact finding tuples, observed values and thresholds",
+        "Report severity and frozen suggested element IDs",
+        "exact record/slide counts and timing assumptions",
+        "human and JSON output"
+      ]
+    },
+    {
+      "id": "L-X06-a",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--fail-on",
+        "critical"
+      ],
+      "mutationDescription": "L-X06-a as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X06-b",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--unknown"
+      ],
+      "mutationDescription": "L-X06-b as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X07-a",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/unsupported.md",
+      "inputHash": "95a4b78e5c0bebf716ee99d81fddf38c8b611b7310c35bf9a639f64daa21dbd2",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-X07-a as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "unsupported-format",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X07-b",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/does-not-exist.html",
+      "inputHash": null,
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-X07-b as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "input-unavailable",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-X07-c",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/L-X07-c.html",
+      "inputHash": "7727e63aa8210344c721ae1d422226f82d629445794716a8b70a1b37cc3c1e82",
+      "args": [
+        "--minutes",
+        "10"
+      ],
+      "mutationDescription": "L-X07-c as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-structure",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A01",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes"
+      ],
+      "mutationDescription": "L-A01 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A02",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--minutes",
+        "20"
+      ],
+      "mutationDescription": "L-A02 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A03",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--json",
+        "--json"
+      ],
+      "mutationDescription": "L-A03 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A04",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--slides-per-minute"
+      ],
+      "mutationDescription": "L-A04 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A05",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--fail-on"
+      ],
+      "mutationDescription": "L-A05 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A06",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "10",
+        "--slides-per-minute",
+        "1e309"
+      ],
+      "mutationDescription": "L-A06 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A07",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        "1e308",
+        "--slides-per-minute",
+        "1e308"
+      ],
+      "mutationDescription": "L-A07 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    },
+    {
+      "id": "L-A08",
+      "requirementId": "EX-4",
+      "datasetVersion": "m1-lint-v1",
+      "createdAt": "2026-10-20",
+      "owner": "Eval AI oracle / Dev materialization",
+      "source": "Frozen eval-fixtures.md L-*; enriched fictional fixture design",
+      "input": "inputs/clean.html",
+      "inputHash": "958d0c3607cc8d8b4c4ece814fbcae56efa2cce9e3ac76707d1b2640a64ac2b5",
+      "args": [
+        "--minutes",
+        " "
+      ],
+      "mutationDescription": "L-A08 as specified by frozen L-* table (supplemental IDs explicitly test CLI validity)",
+      "expectedExit": 2,
+      "primaryDiagnostic": "invalid-options",
+      "findings": [],
+      "counts": null,
+      "risk": "Deterministic bounded HTML heuristic; not semantic or browser validation"
+    }
+  ]
+}

@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 .deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
 .deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
-</style>
+
+.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}</style>
 <style>
 .ag{display:flex;gap:.3em;flex-wrap:wrap}.ag span{font-size:.95em;padding:.15em .45em;border-radius:.3em;color:var(--muted)}
 .ag span.done{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
@@ -274,7 +275,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 
   window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
 })();
-</script>
+
+if(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");</script>
 <script>
 var A=[['Context','Where things stand today','Three teams share one release process.'],['Problem','Sign-off is most of the wait','Two thirds of release time is approval.'],['Options','Three ways to fix it','Automate, delegate or batch.'],['Plan','Pilot automated checks','One team, six weeks.']];
 AtlasDemo.init({frames:3,stepMs:900,render:function(f){ag.innerHTML=A.map(function(a,i){return '<span class="fx '+(i<f?'done':i===f?'cur':'')+'"'+(i===f?' aria-current="step"':'')+'>'+a[0]+'</span>';}).join('');k.textContent=A[f][0];t.textContent=A[f][1];p.textContent=A[f][2];}});

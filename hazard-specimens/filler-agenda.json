@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "filler-agenda",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Support review"
+      },
+      "claims": [
+        {
+          "id": "agenda-first",
+          "segments": [
+            "Understand the handoff"
+          ]
+        },
+        {
+          "id": "agenda-second",
+          "segments": [
+            "Choose the pilot"
+          ]
+        },
+        {
+          "id": "agenda-third",
+          "segments": [
+            "Agree the review"
+          ]
+        },
+        {
+          "id": "substance",
+          "segments": [
+            "The pilot keeps a complete request history with a visible owner."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ]
+}

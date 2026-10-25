@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bullet-overload",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "A deliberate support handoff"
+      },
+      "claims": [
+        {
+          "id": "bullet-1",
+          "segments": [
+            "Name the customer task."
+          ]
+        },
+        {
+          "id": "bullet-2",
+          "segments": [
+            "Keep the original request history."
+          ]
+        },
+        {
+          "id": "bullet-3",
+          "segments": [
+            "Make the next owner visible."
+          ]
+        },
+        {
+          "id": "bullet-4",
+          "segments": [
+            "Write the unresolved question."
+          ]
+        },
+        {
+          "id": "bullet-5",
+          "segments": [
+            "Record the decision and its reason."
+          ]
+        },
+        {
+          "id": "bullet-6",
+          "segments": [
+            "Check the handoff with the customer."
+          ]
+        },
+        {
+          "id": "bullet-7",
+          "segments": [
+            "Review the complete journey."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ]
+}

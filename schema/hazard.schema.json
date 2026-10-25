@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hazard.schema.json",
+  "title": "Presentation Element Atlas hazard",
+  "description": "M1 metadata contract1.0.0; cross-file, rule/axis and approved-count constraints enforced by scripts/hazards.mjs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "category",
+    "axis",
+    "severityByMode",
+    "audienceImpact",
+    "before",
+    "after",
+    "fixedBy",
+    "demo"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "enum": [
+        "1.0.0"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 48
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "text",
+        "titles",
+        "data",
+        "color-type",
+        "layout",
+        "motion",
+        "structure",
+        "evidence"
+      ]
+    },
+    "axis": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "rendered",
+        "judgment"
+      ]
+    },
+    "severityByMode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pitch",
+        "teach",
+        "report",
+        "keynote",
+        "workshop",
+        "read-ahead"
+      ],
+      "properties": {
+        "pitch": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "teach": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "report": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "keynote": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "workshop": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "read-ahead": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      }
+    },
+    "audienceImpact": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "before": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "after": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "fixedBy": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "maxLength": 48
+      }
+    },
+    "demo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "how"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "^hazard-demos/[a-z0-9]+(-[a-z0-9]+)*\\.html$"
+        },
+        "how": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        }
+      }
+    },
+    "ruleId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 48
+    }
+  }
+}

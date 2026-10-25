@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "hero-outcome-supporting-stats",
   "name": "Hero outcome + supporting stats",
   "category": "metric",

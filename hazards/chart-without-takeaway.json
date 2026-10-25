@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "chart-without-takeaway",
+  "name": "Chart without takeaway",
+  "category": "data",
+  "axis": "judgment",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "medium"
+  },
+  "audienceImpact": "Viewers decode a chart without knowing its point.",
+  "before": "Viewers decode a chart without knowing its point.",
+  "after": "Reposition an existing conclusion as the chart callout; retain labels and values. No supplied conclusion means unresolved author judgment.",
+  "fixedBy": [
+    "annotated-chart"
+  ],
+  "demo": {
+    "file": "hazard-demos/chart-without-takeaway.html",
+    "how": "Reposition an existing conclusion as the chart callout; retain labels and values. No supplied conclusion means unresolved author judgment."
+  }
+}

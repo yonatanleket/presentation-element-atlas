@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "small-body-text",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "A complete handoff"
+      },
+      "claims": [
+        {
+          "id": "paragraph-1",
+          "segments": [
+            "The support team grouped incoming requests by the work a customer was trying to finish. Every group retained a named owner and a clearly described next step, so the review could follow a request from arrival through resolution without losing its context."
+          ]
+        },
+        {
+          "id": "paragraph-2",
+          "segments": [
+            "The review found that handoffs created the most avoidable waiting. Requests moved between queues while customers repeated the same explanation. The team kept the original request history together and made the next owner visible before transferring the work."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ]
+}

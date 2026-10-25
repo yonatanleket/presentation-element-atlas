@@ -1,0 +1,1687 @@
+{
+  "datasetVersion": "v1",
+  "node": "v22.23.1",
+  "command": "node tests/integrity/test.mjs",
+  "cases": [
+    {
+      "id": "I-C01",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-C02",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-C03",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-C04",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-C05",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N01",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": "21"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N02",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "n1",
+        "expected": "Mira",
+        "actual": "Mina"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N03",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "d1",
+        "expected": "2026-10-01",
+        "actual": "2026-10-02"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N04",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "q1",
+        "expected": "“Ready for review.”",
+        "actual": "“Ready for release.”"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N05",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "u1",
+        "expected": "ms",
+        "actual": "s"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N06",
+      "exitCode": 1,
+      "primary": {
+        "code": "source-text-changed",
+        "slideId": "s1",
+        "recordId": "src1",
+        "expected": "Fictional lab log, October release.",
+        "actual": "Fictional lab log, November release."
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N07",
+      "exitCode": 1,
+      "primary": {
+        "code": "claim-removed",
+        "slideId": "s2",
+        "recordId": "c2",
+        "expected": "Arun reported 120 ms.",
+        "actual": null
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 0
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N08",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-removed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": null
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N09",
+      "exitCode": 1,
+      "primary": {
+        "code": "claim-added",
+        "slideId": "s1",
+        "recordId": "c3",
+        "expected": null,
+        "actual": "The pilot succeeded."
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 2
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N10",
+      "exitCode": 2,
+      "primary": {
+        "code": "duplicate-id",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N11",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-added",
+        "slideId": "s1",
+        "recordId": "v3",
+        "expected": null,
+        "actual": "12"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N12",
+      "exitCode": 1,
+      "primary": {
+        "code": "slide-association-changed",
+        "slideId": "s1",
+        "recordId": "c1",
+        "expected": "s1",
+        "actual": "s2"
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 0
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 2
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N13",
+      "exitCode": 1,
+      "primary": {
+        "code": "claim-association-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "c1",
+        "actual": "c2"
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N14",
+      "exitCode": 1,
+      "primary": {
+        "code": "source-association-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "src1",
+        "actual": "src9"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N15",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-removed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": null
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N16",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-removed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": null
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N17",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": "12.0"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N18",
+      "exitCode": 1,
+      "primary": {
+        "code": "claim-text-changed",
+        "slideId": "s1",
+        "recordId": "c1",
+        "expected": "Mira reported 12 ms on 2026-10-01: “Ready for review.”",
+        "actual": "Mira 12 ms on 2026-10-01: “Ready for review.”"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N19",
+      "exitCode": 1,
+      "primary": {
+        "code": "source-link-changed",
+        "slideId": "s1",
+        "recordId": "src1",
+        "expected": [
+          {
+            "ownerId": "src1",
+            "slideId": "s1",
+            "href": "https://example.invalid/a",
+            "normalizedText": "Fictional lab log, October release.",
+            "position": 0
+          }
+        ],
+        "actual": [
+          {
+            "ownerId": "src1",
+            "slideId": "s1",
+            "href": "https://example.invalid/b",
+            "normalizedText": "Fictional lab log, October release.",
+            "position": 0
+          }
+        ]
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-N20",
+      "exitCode": 2,
+      "primary": {
+        "code": "unclassified-number",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P01",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [
+        {
+          "policy": "citation-repair",
+          "recordId": "v1",
+          "from": null,
+          "to": "src1"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "I-P02",
+      "exitCode": 1,
+      "primary": {
+        "code": "source-association-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "missing",
+        "actual": "src1"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P03",
+      "exitCode": 1,
+      "primary": {
+        "code": "disallowed-repair",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": null,
+        "actual": "src2"
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P04",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P05",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [
+        {
+          "policy": "appendix-reflow",
+          "movedIds": [
+            "s1",
+            "s2"
+          ],
+          "reclassifiedIds": [
+            "s1"
+          ],
+          "oldCounts": {
+            "required": 2,
+            "optional": 0
+          },
+          "newCounts": {
+            "required": 1,
+            "optional": 1
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "I-P06-a",
+      "exitCode": 1,
+      "primary": {
+        "code": "disallowed-reflow",
+        "slideId": null,
+        "recordId": null,
+        "expected": {
+          "order": [
+            "s1",
+            "s2"
+          ]
+        },
+        "actual": {
+          "order": [
+            "s2",
+            "s1"
+          ]
+        }
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P06-b",
+      "exitCode": 1,
+      "primary": {
+        "code": "disallowed-reflow",
+        "slideId": null,
+        "recordId": null,
+        "expected": {
+          "order": [
+            "s1",
+            "s2"
+          ]
+        },
+        "actual": {
+          "order": [
+            "s2",
+            "s1"
+          ]
+        }
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P07",
+      "exitCode": 1,
+      "primary": {
+        "code": "disallowed-reflow",
+        "slideId": null,
+        "recordId": null,
+        "expected": {
+          "order": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        },
+        "actual": {
+          "order": [
+            "s1",
+            "s3",
+            "s2"
+          ]
+        }
+      },
+      "counts": {
+        "slides": 3,
+        "claims": 3,
+        "facts": 11,
+        "sources": 3,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s3",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P08",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-text-changed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": "21"
+      },
+      "counts": {
+        "slides": 2,
+        "claims": 2,
+        "facts": 8,
+        "sources": 2,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "slideId": "s2",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [
+        {
+          "policy": "appendix-reflow",
+          "movedIds": [
+            "s1",
+            "s2"
+          ],
+          "reclassifiedIds": [
+            "s1"
+          ],
+          "oldCounts": {
+            "required": 2,
+            "optional": 0
+          },
+          "newCounts": {
+            "required": 1,
+            "optional": 1
+          }
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "I-P09-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P09-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P09-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P09-d",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P10-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P10-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P10-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P10-d",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P11-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P11-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P11-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-policy",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-P12",
+      "exitCode": 1,
+      "primary": {
+        "code": "disallowed-repair",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": null,
+        "actual": "src9"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U01",
+      "exitCode": 1,
+      "primary": {
+        "code": "fact-removed",
+        "slideId": "s1",
+        "recordId": "v1",
+        "expected": "12",
+        "actual": null
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U02-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "hidden-evidence",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U02-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "hidden-evidence",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U02-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "hidden-evidence",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U03-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "hidden-evidence",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U03-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "hidden-evidence",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U04-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-content",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U04-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-content",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U04-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-content",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U04-d",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-content",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U05",
+      "exitCode": 2,
+      "primary": {
+        "code": "unowned-text",
+        "slideId": "s1",
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U06",
+      "exitCode": 2,
+      "primary": {
+        "code": "unclassified-number",
+        "slideId": "s1",
+        "recordId": "c9",
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U07-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U07-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "duplicate-id",
+        "slideId": null,
+        "recordId": "s1",
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U07-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U08-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "input-unavailable",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U08-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-format",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U08-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-format",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U08-d",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U09",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U10-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-entity",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": "&bogus;"
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U10-b",
+      "exitCode": 1,
+      "primary": {
+        "code": "claim-text-changed",
+        "slideId": "s1",
+        "recordId": "c9",
+        "expected": "A & B",
+        "actual": "A &amp; B"
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 2,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 2,
+            "actual": 2
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U10-c",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U11-a",
+      "exitCode": 2,
+      "primary": {
+        "code": "duplicate-id",
+        "slideId": "s1",
+        "recordId": "c1",
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U11-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "duplicate-attribute",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U11-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-content",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U12-a",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U12-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U12-c",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U12-d",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U12-e",
+      "exitCode": 2,
+      "primary": {
+        "code": "unsupported-attribute",
+        "slideId": "s1",
+        "recordId": null,
+        "expected": null,
+        "actual": "mystery"
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U13-a",
+      "exitCode": 0,
+      "primary": null,
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U13-b",
+      "exitCode": 2,
+      "primary": {
+        "code": "invalid-structure",
+        "slideId": null,
+        "recordId": null,
+        "expected": null,
+        "actual": null
+      },
+      "counts": null,
+      "repairs": [],
+      "pass": true
+    },
+    {
+      "id": "I-U14",
+      "exitCode": 1,
+      "primary": {
+        "code": "evidence-link-changed",
+        "slideId": "s1",
+        "recordId": "c1",
+        "expected": [
+          {
+            "ownerId": "c1",
+            "slideId": "s1",
+            "href": "https://example.invalid/a",
+            "normalizedText": "reported",
+            "position": 0
+          }
+        ],
+        "actual": [
+          {
+            "ownerId": "c1",
+            "slideId": "s1",
+            "href": "https://example.invalid/b",
+            "normalizedText": "reported",
+            "position": 0
+          }
+        ]
+      },
+      "counts": {
+        "slides": 1,
+        "claims": 1,
+        "facts": 5,
+        "sources": 1,
+        "claimCounts": [
+          {
+            "slideId": "s1",
+            "expected": 1,
+            "actual": 1
+          }
+        ]
+      },
+      "repairs": [],
+      "pass": true
+    }
+  ]
+}

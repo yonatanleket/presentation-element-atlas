@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 .deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
 .deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
-</style>
+
+.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}</style>
 <style>
 .panel{position:absolute;inset-block-start:2.6em;inset-inline-end:.6em;width:62%;z-index:3;background:var(--surface);border:1px solid var(--line);border-radius:.5em;box-shadow:0 .4em 1.2em rgba(27,30,36,.14);padding:.6em .8em;font-size:.85em;opacity:0;transform:translateY(-.4em)}
 .panel.open{opacity:1;transform:none}.panel ol{margin:.3em 0 0;padding-inline-start:1.3em;display:grid;gap:.3em}
@@ -277,7 +278,8 @@ sup{color:var(--accent);font-weight:600}
 
   window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
 })();
-</script>
+
+if(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");</script>
 <script>
 AtlasDemo.init({frames:2,stepMs:1000,render:function(f){pn.classList.toggle('open',f>=1);sb.setAttribute('aria-pressed',String(f>=1));s3.classList.toggle('hit',f>=2);}});
 </script>

@@ -1,0 +1,245 @@
+{
+  "datasetVersion": "m1-h2h-fictional-v1",
+  "deckId": "H-PITCH-01",
+  "baselineHash": "dda657ee48c5a5db86f0eb352923632fae9e283af11967edbdf978ad02a4cecc",
+  "provenance": "Independently authored structured fixture content, rendered without using the Atlas parser.",
+  "records": {
+    "slides": [
+      {
+        "id": "s1",
+        "optional": false
+      },
+      {
+        "id": "s2",
+        "optional": false
+      },
+      {
+        "id": "s3",
+        "optional": false
+      },
+      {
+        "id": "s4",
+        "optional": false
+      },
+      {
+        "id": "s5",
+        "optional": false
+      },
+      {
+        "id": "s6",
+        "optional": false
+      }
+    ],
+    "copies": [
+      {
+        "id": "s1-title",
+        "slideId": "s1",
+        "normalizedText": "Start with a reversible pilot"
+      },
+      {
+        "id": "s2-title",
+        "slideId": "s2",
+        "normalizedText": "Overview"
+      },
+      {
+        "id": "s3-title",
+        "slideId": "s3",
+        "normalizedText": "Give every request a clear next step"
+      },
+      {
+        "id": "s4-title",
+        "slideId": "s4",
+        "normalizedText": "Shorter handoffs can protect investigation time"
+      },
+      {
+        "id": "s5-title",
+        "slideId": "s5",
+        "normalizedText": "Review the staffing assumptions"
+      },
+      {
+        "id": "s6-title",
+        "slideId": "s6",
+        "normalizedText": "Keep the operating checklist available"
+      }
+    ],
+    "claims": [
+      {
+        "id": "s1-intro",
+        "slideId": "s1",
+        "normalizedText": "Luma Desk asks Mira Hale to lead a limited support pilot."
+      },
+      {
+        "id": "s1-launch",
+        "slideId": "s1",
+        "normalizedText": "The proposed kickoff is 2026-11-02."
+      },
+      {
+        "id": "s1-quote",
+        "slideId": "s1",
+        "normalizedText": "The team principle is “Keep the next step reversible.”"
+      },
+      {
+        "id": "s2-takeaway",
+        "slideId": "s2",
+        "normalizedText": "A smaller queue gives specialists more time to investigate."
+      },
+      {
+        "id": "s2-scope",
+        "slideId": "s2",
+        "normalizedText": "The pilot tests a triage lane without changing the service promise."
+      },
+      {
+        "id": "s3-b1",
+        "slideId": "s3",
+        "normalizedText": "Read the original request before assigning it."
+      },
+      {
+        "id": "s3-b2",
+        "slideId": "s3",
+        "normalizedText": "Name the person responsible for the handoff."
+      },
+      {
+        "id": "s3-b3",
+        "slideId": "s3",
+        "normalizedText": "Keep the supporting note beside the summary."
+      },
+      {
+        "id": "s3-b4",
+        "slideId": "s3",
+        "normalizedText": "State the next action in plain language."
+      },
+      {
+        "id": "s3-b5",
+        "slideId": "s3",
+        "normalizedText": "Record the caveat before making a commitment."
+      },
+      {
+        "id": "s3-b6",
+        "slideId": "s3",
+        "normalizedText": "Offer a route for questions from the reviewer."
+      },
+      {
+        "id": "s3-b7",
+        "slideId": "s3",
+        "normalizedText": "Keep the previous decision available for inspection."
+      },
+      {
+        "id": "s4-estimate",
+        "slideId": "s4",
+        "normalizedText": "The fictional pilot estimate is 12 hours saved per reporting cycle."
+      },
+      {
+        "id": "s4-caveat",
+        "slideId": "s4",
+        "normalizedText": "This is a planning estimate, not an observed result."
+      },
+      {
+        "id": "s5-staff",
+        "slideId": "s5",
+        "normalizedText": "The plan reserves 2 analysts for the pilot; staffing remains provisional."
+      },
+      {
+        "id": "s6-b1",
+        "slideId": "s6",
+        "normalizedText": "Retain the service escalation route."
+      },
+      {
+        "id": "s6-b2",
+        "slideId": "s6",
+        "normalizedText": "Review feedback before extending the pilot."
+      },
+      {
+        "id": "s6-b3",
+        "slideId": "s6",
+        "normalizedText": "Stop if the handoff adds confusion."
+      }
+    ],
+    "facts": [
+      {
+        "id": "s1-company",
+        "kind": "name",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "Luma Desk",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-owner",
+        "kind": "name",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "Mira Hale",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-date",
+        "kind": "date",
+        "slideId": "s1",
+        "claimId": "s1-launch",
+        "normalizedText": "2026-11-02",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-quotation",
+        "kind": "quote",
+        "slideId": "s1",
+        "claimId": "s1-quote",
+        "normalizedText": "“Keep the next step reversible.”",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s4-saving",
+        "kind": "number",
+        "slideId": "s4",
+        "claimId": "s4-estimate",
+        "normalizedText": "12",
+        "sourceId": null,
+        "missing": true
+      },
+      {
+        "id": "s4-saving-unit",
+        "kind": "unit",
+        "slideId": "s4",
+        "claimId": "s4-estimate",
+        "normalizedText": "hours",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s5-analysts",
+        "kind": "number",
+        "slideId": "s5",
+        "claimId": "s5-staff",
+        "normalizedText": "2",
+        "sourceId": "s5-staffing-note",
+        "missing": false
+      },
+      {
+        "id": "s5-analyst-unit",
+        "kind": "unit",
+        "slideId": "s5",
+        "claimId": "s5-staff",
+        "normalizedText": "analysts",
+        "sourceId": null,
+        "missing": false
+      }
+    ],
+    "sources": [
+      {
+        "id": "s4-worksheet",
+        "slideId": "s4",
+        "normalizedText": "Fictional pilot worksheet A, authored 2026-10-01; invented planning estimate for this benchmark."
+      },
+      {
+        "id": "s5-staffing-note",
+        "slideId": "s5",
+        "normalizedText": "Fictional staffing note B; invented capacity allocation, not production staffing."
+      }
+    ],
+    "links": []
+  }
+}

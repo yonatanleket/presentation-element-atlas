@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "time-slot-overload",
+  "name": "Time slot overload",
+  "category": "structure",
+  "axis": "auto",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "medium",
+    "keynote": "high",
+    "workshop": "high",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Delivery exceeds the agreed slot.",
+  "before": "Delivery exceeds the agreed slot.",
+  "after": "Move existing optional slides to an accessible appendix, preserving slide IDs, order within groups and all content; display supplied timing. Do not invent durations or delete slides.",
+  "fixedBy": [
+    "appendix-backup-slides",
+    "pacing-timer"
+  ],
+  "demo": {
+    "file": "hazard-demos/time-slot-overload.html",
+    "how": "Move existing optional slides to an accessible appendix, preserving slide IDs, order within groups and all content; display supplied timing. Do not invent durations or delete slides."
+  },
+  "ruleId": "time-slot-overload"
+}

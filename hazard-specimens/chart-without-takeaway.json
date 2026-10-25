@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "chart-without-takeaway",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Support trend"
+      },
+      "claims": [
+        {
+          "id": "start",
+          "segments": [
+            "Start: ",
+            {
+              "id": "start-value",
+              "kind": "number",
+              "text": "8",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "start-unit",
+              "kind": "unit",
+              "text": "h"
+            },
+            "."
+          ]
+        },
+        {
+          "id": "end",
+          "segments": [
+            "End: ",
+            {
+              "id": "end-value",
+              "kind": "number",
+              "text": "5",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "end-unit",
+              "kind": "unit",
+              "text": "h"
+            },
+            "."
+          ]
+        },
+        {
+          "id": "takeaway",
+          "segments": [
+            "Response time fell across the review period."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": [
+        {
+          "id": "src",
+          "text": "Source: fictional support log, Q3 2026."
+        }
+      ]
+    }
+  ],
+  "seriesValues": [
+    8,
+    5
+  ],
+  "calloutClaim": "takeaway"
+}

@@ -24,6 +24,7 @@ Thanks for helping grow the atlas. Each element is one JSON file plus one demo p
 
 | Field | Required | Rule |
 |---|---|---|
+| `schemaVersion` | yes | Exactly `1.0.0`; see [version policy](schema/README.md). |
 | `id` | yes | Kebab slug, equals the filename, immutable. |
 | `name` | yes | At most 60 characters, unique (ignoring case). |
 | `category` | yes | One id from `categories.json`. |
@@ -69,7 +70,7 @@ Every demo is one HTML file in `demos/` that links the shared harness:
 <script> AtlasDemo.init({ ... }); </script>
 ```
 
-Link the harness with exactly these relative paths and reference no other files. The build inlines the harness into `dist/demos/`, so demos also work when the catalog is opened from disk. The catalog loads each demo in a sandboxed iframe (`sandbox="allow-scripts"`), so a demo cannot reach the page, storage or the network.
+Link the harness with exactly these relative paths and reference no other files. The build inlines the harness into `dist/demos/`, so demos also work when the catalog is opened from disk. The catalog loads each demo in a sandboxed iframe (`sandbox="allow-scripts"`), with an opaque origin, so demo code cannot access the parent document or its storage. The sandbox alone does not prevent network requests: keep source demos self-contained and network-free, and verify that separately.
 
 ### Markup contract
 
@@ -128,3 +129,10 @@ The helper `AtlasDemo.countUp(node, to, { animate, from, decimals, prefix, suffi
 - **Advanced** (`kind: "interactive"`): at least one real control (button, slider, drag, key or input) that visibly changes state, operable by keyboard, with `reset` restoring the start. If an advanced element cannot be meaningfully interactive, set it to `standard` and say why in the pull request.
 - **Data**: use plausible, invented values and add `<span class="label-illustrative">Illustrative</span>`. Label simulated UI or responses "Simulated".
 - See `demos/kpi-tile.html` (simple animated), `demos/segmented-progress-bar.html` (multi-step) and `demos/context-aware-next-reveal-button.html` (interactive) for reference.
+
+
+## Actual specimen previews
+
+After changing a demo, harness or recipe, regenerate its real stage capture with `scripts/capture-previews.mjs` using the explicit installed Playwright and browser paths documented in README. Review its authored state in `preview-recipes.json`, including any required real control selection. Preserve sample data and visible Illustrative/Simulated labels. A still must show the distinguishing composition; a Motion label does not turn it into evidence of animation.
+
+Review the generated contact sheet and the actual card at desktop/mobile sizes. For problem comparisons, retain matched evidence, scale and order in the Before/After captures. Do not substitute synthetic category drawings for an unavailable capture. Build validates freshness and image integrity; invalid/missing captures remain a truthful Preview unavailable state with a usable Try demo action. Commit source captures/manifest/recipes with the rebuilt `dist/` output when delivering a preview change. Preview generation needs authoring tools; the catalog and normal static build introduce no runtime dependency.

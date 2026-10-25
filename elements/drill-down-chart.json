@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "drill-down-chart",
   "name": "Drill-down chart",
   "category": "explore",

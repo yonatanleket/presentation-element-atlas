@@ -1,0 +1,212 @@
+{
+  "datasetVersion": "m1-h2h-fictional-v1",
+  "deckId": "H-TRAIN-01",
+  "baselineHash": "1f0fe5bc5282cdb43be9686cb1d3e150feeb2586115273f7f790e43c1c59edda",
+  "provenance": "Independently authored structured fixture content, rendered without using the Atlas parser.",
+  "records": {
+    "slides": [
+      {
+        "id": "s1",
+        "optional": false
+      },
+      {
+        "id": "s2",
+        "optional": false
+      },
+      {
+        "id": "s3",
+        "optional": false
+      },
+      {
+        "id": "s4",
+        "optional": false
+      },
+      {
+        "id": "s5",
+        "optional": false
+      },
+      {
+        "id": "s6",
+        "optional": false
+      },
+      {
+        "id": "s7",
+        "optional": false
+      }
+    ],
+    "copies": [
+      {
+        "id": "s1-title",
+        "slideId": "s1",
+        "normalizedText": "Keep the original note beside the handoff"
+      },
+      {
+        "id": "s2-title",
+        "slideId": "s2",
+        "normalizedText": "Give the reviewer a complete handoff"
+      },
+      {
+        "id": "s3-title",
+        "slideId": "s3",
+        "normalizedText": "Preserve the reasoning behind each handoff"
+      },
+      {
+        "id": "s4-title",
+        "slideId": "s4",
+        "normalizedText": "Background"
+      },
+      {
+        "id": "s5-title",
+        "slideId": "s5",
+        "normalizedText": "Practice with the sample queue"
+      },
+      {
+        "id": "s6-title",
+        "slideId": "s6",
+        "normalizedText": "Explain uncertainty before handing work over"
+      },
+      {
+        "id": "s7-title",
+        "slideId": "s7",
+        "normalizedText": "Check the record before finishing"
+      }
+    ],
+    "claims": [
+      {
+        "id": "s1-intro",
+        "slideId": "s1",
+        "normalizedText": "Nora Vale prepared this fictional software walkthrough on 2026-10-01."
+      },
+      {
+        "id": "s1-quote",
+        "slideId": "s1",
+        "normalizedText": "The working principle is “Ask before filling a gap with a guess.”"
+      },
+      {
+        "id": "s2-b1",
+        "slideId": "s2",
+        "normalizedText": "Read the original note."
+      },
+      {
+        "id": "s2-b2",
+        "slideId": "s2",
+        "normalizedText": "Check the assigned owner."
+      },
+      {
+        "id": "s2-b3",
+        "slideId": "s2",
+        "normalizedText": "Keep the source link."
+      },
+      {
+        "id": "s2-b4",
+        "slideId": "s2",
+        "normalizedText": "Name the next action."
+      },
+      {
+        "id": "s2-b5",
+        "slideId": "s2",
+        "normalizedText": "State the remaining caveat."
+      },
+      {
+        "id": "s2-b6",
+        "slideId": "s2",
+        "normalizedText": "Ask about missing context."
+      },
+      {
+        "id": "s2-b7",
+        "slideId": "s2",
+        "normalizedText": "Preserve the earlier record."
+      },
+      {
+        "id": "s3-instructions",
+        "slideId": "s3",
+        "normalizedText": "When a request arrives, read the original note before choosing a label. Check whether the author has named an owner and preserve that name in the handoff. Use the checklist to identify missing context, then ask a focused question rather than guessing. Keep the source note linked beside the summary so another colleague can inspect it. If the request changes, update the next action and explain the change without deleting the record or making a promise on behalf of someone else."
+      },
+      {
+        "id": "s4-takeaway",
+        "slideId": "s4",
+        "normalizedText": "A shared record lets the next reviewer inspect the same evidence."
+      },
+      {
+        "id": "s4-scope",
+        "slideId": "s4",
+        "normalizedText": "The software example demonstrates a handoff and makes no claim about actual team performance."
+      },
+      {
+        "id": "s5-exercise",
+        "slideId": "s5",
+        "normalizedText": "The exercise contains 3 cards; use the fictional source note when assigning each owner."
+      },
+      {
+        "id": "s6-caveat",
+        "slideId": "s6",
+        "normalizedText": "If an owner or date is missing, leave the gap visible and ask the author for clarification."
+      },
+      {
+        "id": "s6-limits",
+        "slideId": "s6",
+        "normalizedText": "The checklist does not authorize a promise or an external message."
+      },
+      {
+        "id": "s7-close",
+        "slideId": "s7",
+        "normalizedText": "Confirm that the owner, source note, next action, and caveat remain available to the next reviewer."
+      }
+    ],
+    "facts": [
+      {
+        "id": "s1-trainer",
+        "kind": "name",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "Nora Vale",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-date",
+        "kind": "date",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "2026-10-01",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-quotation",
+        "kind": "quote",
+        "slideId": "s1",
+        "claimId": "s1-quote",
+        "normalizedText": "“Ask before filling a gap with a guess.”",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s5-cards",
+        "kind": "number",
+        "slideId": "s5",
+        "claimId": "s5-exercise",
+        "normalizedText": "3",
+        "sourceId": "s5-exercise-note",
+        "missing": false
+      },
+      {
+        "id": "s5-card-unit",
+        "kind": "unit",
+        "slideId": "s5",
+        "claimId": "s5-exercise",
+        "normalizedText": "cards",
+        "sourceId": null,
+        "missing": false
+      }
+    ],
+    "sources": [
+      {
+        "id": "s5-exercise-note",
+        "slideId": "s5",
+        "normalizedText": "Fictional training exercise E, version 1; invented card count for this benchmark."
+      }
+    ],
+    "links": []
+  }
+}

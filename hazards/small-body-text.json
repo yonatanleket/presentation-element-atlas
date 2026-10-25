@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "small-body-text",
+  "name": "Small body text",
+  "category": "color-type",
+  "axis": "rendered",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "medium",
+    "keynote": "high",
+    "workshop": "high",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Projected copy cannot be read.",
+  "before": "Projected copy cannot be read.",
+  "after": "Increase type and reflow the same text into readable regions/disclosure. Keep a full-text route; no truncation.",
+  "fixedBy": [
+    "collapsible-detail-card",
+    "slidedoc-page"
+  ],
+  "demo": {
+    "file": "hazard-demos/small-body-text.html",
+    "how": "Increase type and reflow the same text into readable regions/disclosure. Keep a full-text route; no truncation."
+  }
+}

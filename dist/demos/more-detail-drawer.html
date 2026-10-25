@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 .deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
 .deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
-</style>
+
+.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}</style>
 <style>
 .drawer{position:absolute;inset-block:0;inset-inline-end:0;width:58%;background:var(--surface);border-inline-start:1px solid var(--line);box-shadow:-.4em 0 1em rgba(27,30,36,.12);padding:.8em 1em;transform:translateX(105%);visibility:hidden;transition:transform .22s var(--ease-out),visibility 0s .22s;font-size:.9em;display:flex;flex-direction:column;gap:.4em}
 .drawer.open{transform:none;visibility:visible;transition:transform .22s var(--ease-out)}
@@ -277,7 +278,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 
   window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
 })();
-</script>
+
+if(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");</script>
 <script>
 var S=[{k:'Problem',t:'Releases take 9 days',p:'Most of the wait is sign-off.',n:['Median of the last 40 releases','Excludes hotfixes','Sign-off share estimated from tickets']},
 {k:'Options',t:'Automating checks saves the most',p:'Delegation helps less.',n:['Automation removes two hand-offs','Delegation needs new roles','Batching delays urgent fixes']},

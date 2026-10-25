@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 .deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
 .deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
-</style>
+
+.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}</style>
 <style>
 .chart{display:flex;align-items:flex-end;gap:.5em;height:6.5em;padding:.3em 0;border-block-end:1px solid var(--line)}
 .chart i{flex:1;background:var(--muted);opacity:.45;border-radius:.2em .2em 0 0}
@@ -278,7 +279,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 
   window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
 })();
-</script>
+
+if(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");</script>
 <script>
 AtlasDemo.init({frames:2,stepMs:1000,render:function(f){las.style.transform=f>=1?'translate(223px,140px)':'translate(60px,250px)';las.style.opacity=f>=1?1:0;ink.classList.toggle('on',f>=2);}});
 </script>

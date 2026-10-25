@@ -1,0 +1,1372 @@
+{
+  "version": 1,
+  "entries": {
+    "100-points-allocation": {
+      "description": "100-points allocation — actual demo stage.",
+      "reason": "Completed labeled composition; You have 100 points to spread across four options. Drag a slider or use the arrow keys to move points in steps of 5; a slider cannot go past what is left. Simulated allocations build the room average shown beside each option, and Submit adds your split once all 100 points are placed.",
+      "frame": "last",
+      "actions": []
+    },
+    "2x2-grid-vote": {
+      "description": "2×2 grid vote — actual demo stage.",
+      "reason": "Completed labeled composition; Each participant places every item on an impact-versus-effort grid; small dots are simulated votes and the lettered chip is the room average. Pick an item, then click the grid, or focus the grid and use the arrow keys, to place your marker. Submit adds your placements to the averages.",
+      "frame": "last",
+      "actions": []
+    },
+    "2x2-matrix": {
+      "description": "2×2 matrix — actual demo stage.",
+      "reason": "Completed labeled composition; Two axes split the slide into four named quadrants, so where an item lands says what to do with it. Play draws the grid, places six backlog items by impact and effort, then highlights the quick-wins quadrant as the recommendation. Placements are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "3d-model-viewer": {
+      "description": "3D model viewer — actual demo stage.",
+      "reason": "Populated reset composition; A simple hub device is rendered live on a canvas with flat shading. Drag it, or focus the view and use the arrow keys, to orbit and tilt; the buttons rotate by 45° and the slider zooms. The status names the side facing you. Reset returns to the front three-quarter view.",
+      "frame": 0,
+      "actions": []
+    },
+    "agenda-contents-tracker": {
+      "description": "Agenda / contents tracker — actual demo stage.",
+      "reason": "Completed labeled composition; A small header lists every section of the talk. Play moves through the sections and highlights the current one while earlier ones dim, so the audience always knows where the argument stands.",
+      "frame": 2,
+      "actions": []
+    },
+    "animated-number-count-up": {
+      "description": "Animated number count-up — actual demo stage.",
+      "reason": "Completed labeled composition; The headline number starts at zero and rolls up to its value with an ease-out, so it slows and settles before the eye reads it. Play counts it up, then adds a context line comparing it with last year. Under reduced motion the final number appears directly.",
+      "frame": 2,
+      "actions": []
+    },
+    "animated-transition-between-states": {
+      "description": "Animated transition between states — actual demo stage.",
+      "reason": "Populated reset composition; Choose a year (buttons or arrow keys). The same five bars grow or shrink to the new values and the labels count to their new numbers, so the eye tracks each category through the change instead of comparing two separate charts. Reset returns to 2024.",
+      "frame": 0,
+      "actions": []
+    },
+    "annotated-chart": {
+      "description": "Annotated chart — actual demo stage.",
+      "reason": "Completed labeled composition; The line draws in, then a shaded band and a callout mark the July launch and state the jump in words (+42% month over month), so the audience reads the point instead of hunting for it. Data is illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "annotated-screenshot": {
+      "description": "Annotated screenshot — actual demo stage.",
+      "reason": "Completed labeled composition; A simulated reports screen sits on the slide. Each step draws a highlight box with a numbered badge over one part of the UI, dims everything else, and adds a matching note on the right, so the audience reads the screen in the order the presenter intends.",
+      "frame": 3,
+      "actions": []
+    },
+    "annotated-wireframe": {
+      "description": "Annotated wireframe — actual demo stage.",
+      "reason": "Completed labeled composition; A grey-box sketch stands in for the real screen, so attention goes to structure rather than styling. Each step drops a numbered marker on one region and adds the matching line to the legend, building the explanation part by part.",
+      "frame": 4,
+      "actions": []
+    },
+    "appendix-backup-slides": {
+      "description": "Appendix / backup slides — actual demo stage.",
+      "reason": "Completed labeled composition; The main talk ends on its closing slide; backup slides sit after an Appendix divider so they never interrupt the story. Play adds the divider, then the backups, then shows a question from the room jumping straight to the backup slide that answers it.",
+      "frame": 3,
+      "actions": []
+    },
+    "auto-animate-morph": {
+      "description": "Auto-animate / morph — actual demo stage.",
+      "reason": "Slide 1 plus actual Slide 2 still; motion is demonstrated only in explicit Demo.",
+      "frame": 0,
+      "actions": [],
+      "secondary": {
+        "frame": 0,
+        "actions": [
+          {
+            "type": "click",
+            "selector": ".sbtn:nth-child(2)"
+          }
+        ],
+        "state": "slide-2"
+      }
+    },
+    "background-video-cinemagraph": {
+      "description": "Background video / cinemagraph — actual demo stage.",
+      "reason": "Completed labeled composition; A CSS-drawn scene stands in for the looping clip: the sky, sun and shore stay still while only the water shimmer and clouds drift, which is what makes a cinemagraph calm. A scrim keeps the headline readable. Pause stops the loop; reduced motion shows a still frame.",
+      "frame": 2,
+      "actions": []
+    },
+    "beeswarm-strip-plot": {
+      "description": "Beeswarm / strip plot — actual demo stage.",
+      "reason": "Populated reset composition; Every deal is one dot on a single dollar axis. Swarm nudges dots vertically so none overlap; Strip keeps them on one line, where clusters hide. Toggle the layout, then Tab to a dot and use the arrow keys to step through deals in order. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "before-after-rows": {
+      "description": "Before / after rows — actual demo stage.",
+      "reason": "Completed labeled composition; The old and new flows sit in two aligned rows so the audience compares step by step. Play builds the old row and marks its pain points, then builds the shorter new row with what improved, and ends on the summary of steps and time saved. Data is illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "branching-box-tree": {
+      "description": "Branching box tree — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#n-root"
+        },
+        {
+          "type": "click",
+          "selector": "#n-a1"
+        }
+      ]
+    },
+    "bridge-line": {
+      "description": "Bridge line — actual demo stage.",
+      "reason": "Populated reset composition; Each slide ends with one sentence that poses the question the next slide answers; the echoed words are highlighted in the next title. Use Prev and Next or the arrow keys to move through the three slides, and switch bridge lines off to feel how the story falls apart without them.",
+      "frame": 0,
+      "actions": []
+    },
+    "bullet-chart": {
+      "description": "Bullet chart — actual demo stage.",
+      "reason": "Completed labeled composition; Grey bands mark poor, fair and good ranges, a thin vertical line marks the target, and the dark bar grows to the actual value. One glance shows the value, the goal and how good it is. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "bump-chart": {
+      "description": "Bump chart — actual demo stage.",
+      "reason": "Populated reset composition; Each line tracks one product’s rank (1 = top) across six quarters, so crossings show who overtook whom. Select a product on the right to highlight its path and hear its ranks; others fade. Ranks show order, not size. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "calendar-heatmap": {
+      "description": "Calendar heatmap — actual demo stage.",
+      "reason": "Populated reset composition; Each square is one day, columns are weeks and rows are weekdays, shaded by count. Switch between releases and incidents, then hover, or Tab into the grid and use the arrow keys, to read any day. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "chapter-switcher-menu": {
+      "description": "Chapter switcher menu — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 1,
+      "actions": []
+    },
+    "chord-diagram": {
+      "description": "Chord diagram — actual demo stage.",
+      "reason": "Populated reset composition; Each team owns an arc sized by its total shared projects, and each ribbon joins two teams with width equal to the projects they share. Select a team (click, or Tab then Enter) to isolate its ribbons and hear the counts; hover a ribbon for its value. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "choropleth-dot-density-map": {
+      "description": "Choropleth / dot-density map — actual demo stage.",
+      "reason": "Completed labeled composition; Fifteen tile regions fill with a four-step color scale keyed in the legend, then the same values switch to dots (one dot per four customers per 1,000 residents), so you can compare a shaded and a counted reading. Regions and values are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "click-to-open-node-details": {
+      "description": "Click-to-open node details — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".nd:nth-child(2)"
+        }
+      ]
+    },
+    "clicks-slider": {
+      "description": "Clicks slider — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "value",
+          "selector": "#r",
+          "value": "3"
+        }
+      ]
+    },
+    "code-morph-magic-move": {
+      "description": "Code morph (Magic Move) — actual demo stage.",
+      "reason": "Populated reset composition; Pick a version (or use the arrow keys on the version buttons). Lines that exist in both versions glide to their new position, removed lines fade out and new lines fade in, so the refactor reads as one continuous change instead of a jump cut. Reset returns to version 1.",
+      "frame": 0,
+      "actions": []
+    },
+    "code-with-stepped-line-highlight": {
+      "description": "Code with stepped line highlight — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 2,
+      "actions": []
+    },
+    "collapsible-detail-card": {
+      "description": "Collapsible detail card — actual demo stage.",
+      "reason": "Completed labeled composition; Each card shows only a one-line finding and a chevron. Play opens the first card to reveal its evidence, then closes it and opens the second, so readers choose their depth. The cards are also real buttons: click or press Enter on any card to open or close it.",
+      "frame": 2,
+      "actions": []
+    },
+    "comparison-table": {
+      "description": "Comparison table — actual demo stage.",
+      "reason": "Completed labeled composition; Criteria run down the rows and options across the columns, with checks, crosses and dashes for partial support. Play fills the table one criterion at a time, then highlights the column that best fits the must-haves, even though it is not the cheapest. Data is illustrative.",
+      "frame": 6,
+      "actions": []
+    },
+    "concentric-circles-tam-sam-som": {
+      "description": "Concentric circles (TAM/SAM/SOM) — actual demo stage.",
+      "reason": "Completed labeled composition; Three circles share a bottom edge so each market reads as a slice of the one around it. Play draws TAM, then SAM, then SOM, each with its value and a one-line definition on a leader line. All market sizes are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "connected-scatter": {
+      "description": "Connected scatter — actual demo stage.",
+      "reason": "Completed labeled composition; Each dot is a year placed by cost per ticket and satisfaction, and the line joins the years in order so the path tells the story: costs fell while satisfaction dipped, then recovered from 2023. Drag the year slider or press Play. Data is illustrative.",
+      "frame": 7,
+      "actions": []
+    },
+    "context-aware-next-reveal-button": {
+      "description": "Context-aware Next / Reveal button — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#nr"
+        },
+        {
+          "type": "click",
+          "selector": "#nr"
+        }
+      ]
+    },
+    "crossfade-slide-transition": {
+      "description": "Crossfade slide transition — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 1,
+      "actions": [],
+      "secondary": {
+        "frame": 0,
+        "actions": [],
+        "state": "slide-1"
+      }
+    },
+    "customer-journey-map": {
+      "description": "Customer journey map — actual demo stage.",
+      "reason": "Completed labeled composition; Columns are the journey stages, the row below says what the customer does, and the curve plots how they feel against a neutral line. Play builds stages, actions and the curve, then circles the deepest dip as the pain point. Data is illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "cycle-flywheel": {
+      "description": "Cycle / flywheel — actual demo stage.",
+      "reason": "Completed labeled composition; Four stages sit on a loop and each arrow says the stage feeds the next one. Play adds a stage and its arrow at a time until the loop closes back on More users, then names the compounding effect in the middle. Stages are illustrative.",
+      "frame": 5,
+      "actions": []
+    },
+    "data-comic": {
+      "description": "Data comic — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#nx"
+        },
+        {
+          "type": "click",
+          "selector": "#nx"
+        },
+        {
+          "type": "click",
+          "selector": "#nx"
+        }
+      ]
+    },
+    "dateline": {
+      "description": "Dateline — actual demo stage.",
+      "reason": "Completed labeled composition; Without a dateline the reader has to guess when the chart applies. Play adds a small label in the slide corner naming the period and data cut-off, then moves to a baseline slide whose dateline names a different period, so the time frame is always explicit.",
+      "frame": 2,
+      "actions": []
+    },
+    "decision-card-dilemma-options-choice": {
+      "description": "Decision card (dilemma → options → choice) — actual demo stage.",
+      "reason": "Populated reset composition; The card wires the dilemma to the options considered and on to the choice, its trade-off and what changed. Select another option, by click or arrow keys, to see the road not taken; the Chosen tag stays on what the team actually picked. Reset returns to it. Content is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "decision-tree": {
+      "description": "Decision tree — actual demo stage.",
+      "reason": "Completed labeled composition; Each box is a yes/no question and the coloured leaves are outcomes. Play reveals the tree one level at a time, then traces one example case from the root to its outcome so the audience sees how the policy is applied. The policy is illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "details-on-demand-tooltip": {
+      "description": "Details-on-demand tooltip — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 2,
+      "actions": []
+    },
+    "device-mockup": {
+      "description": "Device mockup — actual demo stage.",
+      "reason": "Completed labeled composition; A mock screen is placed inside drawn device frames so it reads as a real product. The laptop appears first with the desktop view, then the phone slides in front with the mobile view, and a notification lands to show the moment the product is about.",
+      "frame": 3,
+      "actions": []
+    },
+    "diverging-bar": {
+      "description": "Diverging bar — actual demo stage.",
+      "reason": "Completed labeled composition; Bars grow left or right from a zero line at plan, so above-plan and below-plan regions separate instantly. Signed labels and position, not color alone, carry the direction, and regions are sorted from furthest above to furthest below. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "draggable-zoomable-canvas": {
+      "description": "Draggable / zoomable canvas — actual demo stage.",
+      "reason": "Populated reset composition; Drag the board to pan and use the wheel or the + and − buttons to zoom; with the board focused, arrow keys pan and +/− zoom. Tab moves through the sticky notes and centres each one; select a note to read its details. Fit or Reset brings the whole board back.",
+      "frame": 0,
+      "actions": []
+    },
+    "drawing-laser-overlay": {
+      "description": "Drawing & laser overlay — actual demo stage.",
+      "reason": "Completed labeled composition; An ink stroke draws itself around one detail on the slide while a laser dot moves to the point being discussed. Play replays the gesture; the overlay sits above the slide and never changes its content.",
+      "frame": 2,
+      "actions": []
+    },
+    "drill-down-chart": {
+      "description": "Drill-down chart — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".br:first-child"
+        }
+      ]
+    },
+    "embedded-motion-film": {
+      "description": "Embedded motion film — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "value",
+          "selector": "#sc",
+          "value": "22"
+        }
+      ]
+    },
+    "executive-summary-answer-first": {
+      "description": "Executive summary / answer first — actual demo stage.",
+      "reason": "Completed labeled composition; The slide opens with the conclusion as a full sentence, before any evidence. Play adds the answer, then the three reasons that support it, each with one number, and finally the decision being asked for, so a leader who reads only this slide still knows what to approve.",
+      "frame": 3,
+      "actions": []
+    },
+    "explorable-example-with-sliders": {
+      "description": "Explorable example with sliders — actual demo stage.",
+      "reason": "Populated reset composition; Move the request and agent sliders; utilisation, average wait and the curve update live. Utilisation ρ = requests ÷ (agents × 6), since each request takes 10 minutes. Wait ≈ 10 min × ρ^(√(2(agents+1))−1) ÷ (agents × (1−ρ)). Watch the wait explode as ρ nears 100%. Reset restores 30 requests, 6 agents.",
+      "frame": 0,
+      "actions": []
+    },
+    "fade-out-empty-state": {
+      "description": "Fade-out empty state — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "value",
+          "selector": "#rg",
+          "value": "2"
+        }
+      ]
+    },
+    "fan-chart-uncertainty-band": {
+      "description": "Fan chart (uncertainty band) — actual demo stage.",
+      "reason": "Populated reset composition; History is a solid line; the forecast is dashed, with nested bands that widen each year because uncertainty compounds. Choose 50%, 80% or 95% to show how wide a range you need for that confidence; Tab to a forecast point for its range. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "fishbone-ishikawa": {
+      "description": "Fishbone (Ishikawa) — actual demo stage.",
+      "reason": "Completed labeled composition; The effect sits in the head and each bone is a cause category, with specific causes along it. Play draws the spine, then the four categories, then the causes, and finally marks the biggest driver so the root-cause discussion has a starting point. Data is illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "five-beat-storyboard": {
+      "description": "Five-beat storyboard — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#next"
+        },
+        {
+          "type": "click",
+          "selector": "#next"
+        }
+      ]
+    },
+    "flow-chart": {
+      "description": "Flow chart — actual demo stage.",
+      "reason": "Completed labeled composition; Rounded boxes are start points, rectangles are steps and the diamond is a yes/no decision. Play or Step lights one arrow at a time, and the caption explains what happens along it, including the retry loop back to the tests.",
+      "frame": 5,
+      "actions": []
+    },
+    "flow-map": {
+      "description": "Flow map — actual demo stage.",
+      "reason": "Populated reset composition; Lines run from the chosen origin to each destination, and line thickness is proportional to weekly shipments (see the key). Switch the origin to redraw the flows; hover or Tab to a line for its exact volume. Places and volumes are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "focus-dimming": {
+      "description": "Focus dimming — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 2,
+      "actions": []
+    },
+    "fragment-builds": {
+      "description": "Fragment builds — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 3,
+      "actions": []
+    },
+    "full-bleed-image-overlay": {
+      "description": "Full-bleed image + overlay — actual demo stage.",
+      "reason": "Completed labeled composition; The image runs edge to edge with no frame. Play darkens the lower part with a gradient scrim so text stays readable, then sets a short headline and one supporting line on top. The landscape is an inline SVG illustration standing in for a photograph.",
+      "frame": 3,
+      "actions": []
+    },
+    "graphic-sequence": {
+      "description": "Graphic sequence — actual demo stage.",
+      "reason": "Completed labeled composition; The frame and layout never move; only the picture inside the panel and the text beside it are swapped at each step. Because the eye always returns to the same spot, each new graphic reads as the next step in one story rather than a new slide.",
+      "frame": 3,
+      "actions": []
+    },
+    "harvey-balls": {
+      "description": "Harvey balls — actual demo stage.",
+      "reason": "Completed labeled composition; Each circle fills in quarters to rate an option on one criterion, from empty to full. Play fills the matrix row by row; a legend explains the scale so the fills do not depend on color.",
+      "frame": 3,
+      "actions": []
+    },
+    "hero-outcome-supporting-stats": {
+      "description": "Hero outcome + supporting stats — actual demo stage.",
+      "reason": "Completed labeled composition; The hero number counts up while its fill bar grows toward the goal; the smaller stats beside it then appear to qualify the result. Reduced motion shows the final numbers at once. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "histogram-box-plot-violin": {
+      "description": "Histogram / box plot / violin — actual demo stage.",
+      "reason": "Completed labeled composition; The same 80 release times appear three ways: a histogram of counts per day, a box plot (median, middle half, whiskers to 1.5× the box, outliers as dots), then a violin outline showing the smoothed shape. Data is illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "hover-glossary-term": {
+      "description": "Hover glossary term — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".term:first-child"
+        }
+      ]
+    },
+    "hub-and-spoke": {
+      "description": "Hub and spoke — actual demo stage.",
+      "reason": "Completed labeled composition; One central node and every item that depends on it, each on its own spoke so no consumer looks more important than another. Play draws the hub, then the spokes in two waves, and ends with the takeaway: one contract serves six consumers. Names are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "in-deck-search": {
+      "description": "In-deck search — actual demo stage.",
+      "reason": "Completed labeled composition; Play types a query into the search box; matching slides are listed with the hit highlighted, and the first result opens. Search runs over the full text of every slide.",
+      "frame": 3,
+      "actions": []
+    },
+    "interactive-station-strip": {
+      "description": "Interactive station strip — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-i=\"3\"]"
+        }
+      ]
+    },
+    "isotype-unit-chart": {
+      "description": "Isotype / unit chart — actual demo stage.",
+      "reason": "Populated reset composition; Each icon stands for a fixed 1,000 daily users, so the count becomes something you can see and tally. Choose a year to fill or empty icons; the total counts to match. Keep the unit fixed across views or the comparison breaks. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "issue-logic-tree": {
+      "description": "Issue / logic tree — actual demo stage.",
+      "reason": "Completed labeled composition; The question on the left splits into branches that do not overlap and together cover every cause, then each branch splits again into testable drivers. Play builds one level at a time and marks the hypothesis to test first. Figures are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "kicker-action-title-lede": {
+      "description": "Kicker + action title + lede — actual demo stage.",
+      "reason": "Completed labeled composition; The kicker names the chapter in small type, the title states the takeaway as a full sentence, and the lede adds one supporting line. Play builds the three layers in that order, with margin tags naming each, then adds the chart that proves the title.",
+      "frame": 4,
+      "actions": []
+    },
+    "kinetic-typography": {
+      "description": "Kinetic typography — actual demo stage.",
+      "reason": "Completed labeled composition; Each word lands on the beat of the spoken line, and the stressed words land bigger. Play runs the line; Step advances one beat. Choose Pop, Rise or Weight to change how words arrive, then replay. Under reduced motion all words show at once without movement.",
+      "frame": "last",
+      "actions": []
+    },
+    "kpi-tile": {
+      "description": "KPI tile — actual demo stage.",
+      "reason": "Completed labeled composition; A single tile shows one number and its label. Play counts the number up from zero and settles on the final value; nothing else competes with it, which is the point of the tile. The value is illustrative.",
+      "frame": 1,
+      "actions": []
+    },
+    "layered-stack": {
+      "description": "Layered stack — actual demo stage.",
+      "reason": "Completed labeled composition; Horizontal bands show what each layer of the platform contains, with lower layers supporting the ones above. Play builds the stack from infrastructure upward, then marks the services layer as the one being rebuilt this quarter. Components are illustrative.",
+      "frame": 5,
+      "actions": []
+    },
+    "lessons-rows-learned-change": {
+      "description": "Lessons rows (learned → change) — actual demo stage.",
+      "reason": "Completed labeled composition; Each numbered row pairs one lesson on the left with the specific change it leads to on the right, joined by an arrow. Play builds the rows one at a time and draws each arrow after its lesson, so every lesson visibly turns into an action.",
+      "frame": 3,
+      "actions": []
+    },
+    "line-area-chart": {
+      "description": "Line / area chart — actual demo stage.",
+      "reason": "Completed labeled composition; The line draws month by month, then the area beneath it fills in to stress volume, and the last point gets a direct label so no legend is needed. The y-axis starts at zero, which an area chart requires. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "line-draw-on": {
+      "description": "Line draw-on — actual demo stage.",
+      "reason": "Use actual drawing slider at100% to retain complete boxes, arrows and feedback label.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "value",
+          "selector": "#rg",
+          "value": "100"
+        }
+      ]
+    },
+    "live-code-editor": {
+      "description": "Live code editor — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#run"
+        }
+      ]
+    },
+    "live-multiple-choice-poll": {
+      "description": "Live multiple-choice poll — actual demo stage.",
+      "reason": "Completed labeled composition; Simulated votes arrive over about three seconds and each bar and percentage updates as they land. Click an option, or Tab to it and press Enter, to cast your own vote; it is added to the count and outlined, and you can change it. Reset clears all votes.",
+      "frame": "last",
+      "actions": []
+    },
+    "live-website-embed": {
+      "description": "Live website / embed — actual demo stage.",
+      "reason": "Populated reset composition; The card behaves like an embedded page: switch the period, pick a region and the chart and total update in place; Reload shows the loading skeleton a live embed would show. Everything is simulated locally, so the slide still works offline. Reset restores the defaults.",
+      "frame": 0,
+      "actions": []
+    },
+    "loop-diagram": {
+      "description": "Loop diagram — actual demo stage.",
+      "reason": "Completed labeled composition; Boxes are steps and the arrows leaving the review carry the share that takes each exit. Play draws the happy path first, then the fail exit and the loop back in red, and finishes with what the loop costs per month. Counts are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "lottie-animation": {
+      "description": "Lottie animation — actual demo stage.",
+      "reason": "Completed labeled composition; A vector animation plays the kind of short icon sequence a Lottie file would carry: the ring draws, the check strokes in with a slight pop, then dots burst outward. Here it is rebuilt with SVG strokes and CSS, so it stays sharp at any size and weighs almost nothing.",
+      "frame": 3,
+      "actions": []
+    },
+    "magazine-style-layout": {
+      "description": "Magazine-style layout — actual demo stage.",
+      "reason": "Completed labeled composition; The slide borrows a magazine grid: a wide headline, an image block, two narrow text columns that open with a drop cap, and a large pull statistic in the margin. Play places each part in reading order so the editorial hierarchy is easy to follow.",
+      "frame": 4,
+      "actions": []
+    },
+    "marimekko": {
+      "description": "Marimekko — actual demo stage.",
+      "reason": "Populated reset composition; Column width is segment size and height within a column is each player’s share, so every rectangle’s area is that player’s dollars in that segment. Highlight a player to see where its revenue sits; hover or Tab to a cell for its value. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "methodology-box": {
+      "description": "Methodology box — actual demo stage.",
+      "reason": "Completed labeled composition; The headline number appears first, then a compact methodology box states the metric, sample, period and exclusions, and finally the main caveat is highlighted. Anyone challenging the number can see how it was built without leaving the slide. Values are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "metric-card-grid-with-limitations": {
+      "description": "Metric card grid with limitations — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-i=\"0\"]"
+        }
+      ]
+    },
+    "mind-map": {
+      "description": "Mind map — actual demo stage.",
+      "reason": "Completed labeled composition; The central topic sits in the middle and each idea branches from it on its own curve, with one detail as a leaf. Play adds the centre, then the five branches, then the leaves, the order a brainstorm summary is usually read. Content is illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "more-detail-drawer": {
+      "description": "“More detail” drawer — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#md"
+        }
+      ]
+    },
+    "moviescroller": {
+      "description": "Moviescroller — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "value",
+          "selector": "#rg",
+          "value": "18"
+        }
+      ]
+    },
+    "not-to-scale-note": {
+      "description": "“Not to scale” note — actual demo stage.",
+      "reason": "Completed labeled composition; Market-size circles are drawn schematically so all three labels fit, then a “Not to scale” note appears beside them. A small inset shows the true proportions, where the obtainable market is barely a dot, which is exactly why the note matters. Values are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "objective-list-with-status-tag": {
+      "description": "Objective list with status tag — actual demo stage.",
+      "reason": "Completed labeled composition; Each objective sits on its own row with a small status pill in a second column: Committed for what will ship, Stretch for what might, Exploring for what is only being studied. Play adds the rows one at a time, so scope is stated without overclaiming.",
+      "frame": 4,
+      "actions": []
+    },
+    "open-ended-responses": {
+      "description": "Open-ended responses — actual demo stage.",
+      "reason": "Completed labeled composition; Short simulated answers arrive as cards over about three seconds, newest first, so the room sees ideas as they come in. Type an answer and press Enter or Send to add your own; it appears first, marked You. Only the six most recent cards show at once. Reset clears them.",
+      "frame": "last",
+      "actions": []
+    },
+    "ordered-bar-lollipop": {
+      "description": "Ordered bar / lollipop — actual demo stage.",
+      "reason": "Completed labeled composition; Bars are sorted from highest to lowest so rank reads top to bottom, then they slim into lollipops: a thin stem with a dot at the value keeps the ranking while cutting ink when there are many bars. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "overview-grid-mode": {
+      "description": "Overview / grid mode — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 2,
+      "actions": []
+    },
+    "pacing-timer": {
+      "description": "Pacing timer — actual demo stage.",
+      "reason": "Populated reset composition; Each slide has a time budget. Advance slides with Next while the simulated clock runs; the bar compares elapsed time with the budget so far and turns amber when you fall behind. Times are illustrative and the clock runs fast.",
+      "frame": 0,
+      "actions": []
+    },
+    "paired-grouped-bar": {
+      "description": "Paired / grouped bar — actual demo stage.",
+      "reason": "Completed labeled composition; Each region gets a pair of bars on one zero-based axis: last year in grey, this year in blue. Pairs make the within-region change easy to judge while keeping regions comparable; South is the one decline. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "pan-and-zoom": {
+      "description": "Pan and zoom — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".stage button:nth-child(3)"
+        }
+      ]
+    },
+    "parallax-layers": {
+      "description": "Parallax layers — actual demo stage.",
+      "reason": "Completed labeled composition; Three layers sit on top of each other: far hills, near hills and the foreground. Each step moves all of them in the same direction, but the far layer moves least and the foreground most, which the eye reads as depth. Reduced motion shows the final position without movement.",
+      "frame": 3,
+      "actions": []
+    },
+    "partitioned-poster": {
+      "description": "Partitioned poster — actual demo stage.",
+      "reason": "Completed labeled composition; One slide is divided into four equal panels, each answering its own question with its own small display: a headline number, a bar comparison, a status pill and a trend line. Play fills the panels one at a time; the shared title ties them together.",
+      "frame": 4,
+      "actions": []
+    },
+    "pin-on-image": {
+      "description": "Pin on image — actual demo stage.",
+      "reason": "Completed labeled composition; Participants answer by clicking a spot on the image. Simulated pins arrive over about three seconds and cluster around the Export button, which the counter reports. Click anywhere on the mock screen to drop your own pin, or focus it and use the arrow keys, then Enter. Reset removes all pins.",
+      "frame": "last",
+      "actions": []
+    },
+    "predict-then-reveal": {
+      "description": "Predict-then-reveal — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#rev"
+        }
+      ]
+    },
+    "presenter-panel-quiet-button": {
+      "description": "Presenter panel (quiet button) — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#q"
+        }
+      ]
+    },
+    "process-chevrons": {
+      "description": "Process chevrons — actual demo stage.",
+      "reason": "Completed labeled composition; Each arrow is one step and the shape itself says the order, so the row needs no connecting lines. Play fills the steps left to right and adds a one-line description under each, ending with the whole process lit. Steps are illustrative.",
+      "frame": 5,
+      "actions": []
+    },
+    "progress-ring-gauge": {
+      "description": "Progress ring / gauge — actual demo stage.",
+      "reason": "Completed labeled composition; A circular track fills clockwise toward the goal while the percentage in the middle counts up. Reduced motion shows the final fill. The completion rate is illustrative.",
+      "frame": 1,
+      "actions": []
+    },
+    "progressive-taper-funnel": {
+      "description": "Progressive taper funnel — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#nx"
+        },
+        {
+          "type": "click",
+          "selector": "#nx"
+        }
+      ],
+      "limitation": "First 3 levels shown; open demo for target group."
+    },
+    "pros-cons-t-chart": {
+      "description": "Pros / cons T-chart — actual demo stage.",
+      "reason": "Completed labeled composition; One option, two columns: what speaks for it on the left and against it on the right, drawn as a T so the halves read as a balance. Play adds each pro with its matching con, then states the verdict the weighing leads to. Content is illustrative.",
+      "frame": 5,
+      "actions": []
+    },
+    "provenance-tags": {
+      "description": "Provenance tags — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".pill[data-i=\"0\"]"
+        }
+      ]
+    },
+    "pull-quote": {
+      "description": "Pull quote — actual demo stage.",
+      "reason": "Completed labeled composition; A single quotation fills the slide in large type, set off by an oversized quotation mark, with the attribution underneath in small type. Play brings in the mark, the quote and then the attribution, and highlights the phrase that carries the point. The quote is invented.",
+      "frame": 3,
+      "actions": []
+    },
+    "q-a-topic-hub": {
+      "description": "Q&A topic hub — actual demo stage.",
+      "reason": "Populated reset composition; The closing slide is a grid of likely questions, each with an “If asked…” cue and the backup slide that answers it. Choose a card to jump to that slide, then press Back to topics to return; visited cards get a check so the presenter sees what is already covered.",
+      "frame": 0,
+      "actions": []
+    },
+    "quick-form": {
+      "description": "Quick form — actual demo stage.",
+      "reason": "Completed labeled composition; A short form asks two things: your role and your confidence from 1 to 5. Simulated submissions arrive over about three seconds and the summary beside the form updates the role split and average. Fill in both fields and press Submit to add yours; Reset clears it.",
+      "frame": "last",
+      "actions": []
+    },
+    "quiz-with-leaderboard": {
+      "description": "Quiz with leaderboard — actual demo stage.",
+      "reason": "Completed labeled composition; A countdown bar runs while simulated players lock in answers. When time is up the correct answer turns green and the leaderboard reorders by score. Pick an answer before the reveal to join as You: faster correct answers earn more points. Reset starts the question again.",
+      "frame": "last",
+      "actions": []
+    },
+    "radar-chart": {
+      "description": "Radar chart — actual demo stage.",
+      "reason": "Completed labeled composition; Six attributes radiate from the center on the same 1–5 scale. Vendor A’s profile draws first, then Vendor B overlays it, so strengths and gaps show as bulges and dents. Keep axes few and scales shared. Scores are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "rag-status": {
+      "description": "RAG status — actual demo stage.",
+      "reason": "Completed labeled composition; Each workstream gets a red, amber or green status plus a text label and icon, so the status still reads without color. Play updates the statuses one by one as a weekly review would.",
+      "frame": 4,
+      "actions": []
+    },
+    "ranking-vote": {
+      "description": "Ranking vote — actual demo stage.",
+      "reason": "Completed labeled composition; Simulated rankings arrive over about three seconds and the room order updates by points: first place earns 4, last earns 1. Reorder your own list with the up and down buttons, then press Submit to add your ranking to the room totals. Reset clears your vote.",
+      "frame": "last",
+      "actions": []
+    },
+    "rating-scales": {
+      "description": "Rating scales — actual demo stage.",
+      "reason": "Completed labeled composition; Each statement shows how the room rated it from 1 (disagree) to 5 (agree) as a stacked bar, with the average beside it. Simulated ratings arrive over about three seconds. Use the 1–5 buttons to rate the highlighted statement; the panel then moves on to the next one. Reset clears your ratings.",
+      "frame": "last",
+      "actions": []
+    },
+    "recorded-vs-inferred-line-style": {
+      "description": "Recorded vs inferred line style — actual demo stage.",
+      "reason": "Populated reset composition; Solid arrows are links documented in a source; dashed arrows are links inferred from indirect evidence. Filter to recorded or inferred links, then hover or Tab to an arrow to read its evidence. The legend makes the convention explicit. Systems and sources are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "recording-with-camera-bubble": {
+      "description": "Recording with camera bubble — actual demo stage.",
+      "reason": "Completed labeled composition; The slide plays as normal while a round camera bubble sits in a corner it never covers, so viewers of an async recording keep a face and the content together. Each step advances the slide, the REC timer runs on, and the bubble shows a speaking ring. All of it is simulated.",
+      "frame": 3,
+      "actions": []
+    },
+    "remote-control-from-phone": {
+      "description": "Remote control from phone — actual demo stage.",
+      "reason": "Completed labeled composition; A simulated phone sends Next taps over a shared link and the slide on the laptop advances with each tap. Play runs a short sequence of taps; nothing here connects to a real device.",
+      "frame": 3,
+      "actions": []
+    },
+    "responsive-card-page": {
+      "description": "Responsive card page — actual demo stage.",
+      "reason": "Populated reset composition; The card is not a fixed 16:9 slide: it reflows to the reader’s screen and grows as tall as its content. Pick Phone, Tablet or Wide to see the image stack above or sit beside the text, and use Show more to expand the card past one screen; the frame scrolls.",
+      "frame": 0,
+      "actions": []
+    },
+    "return-to-hub-button": {
+      "description": "Return-to-hub button — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".topic:first-child"
+        }
+      ]
+    },
+    "sankey": {
+      "description": "Sankey — actual demo stage.",
+      "reason": "Populated reset composition; Band widths are proportional to dollars, so each node’s height equals its total in and out. Select a source or a spending node (click, or Tab then Enter) to isolate its flows and hear the split; hover a band for its value. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "scatter-bubble": {
+      "description": "Scatter / bubble — actual demo stage.",
+      "reason": "Completed labeled composition; Each dot is one sales region placed by marketing spend and new customers; the dots then grow into bubbles whose area (not radius) shows average deal size, and a fitted trend line shows the correlation. Data is illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "scenario-playback-transport": {
+      "description": "Scenario playback transport — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#st"
+        },
+        {
+          "type": "click",
+          "selector": "#st"
+        }
+      ]
+    },
+    "scenario-toggle": {
+      "description": "Scenario toggle — actual demo stage.",
+      "reason": "Completed labeled composition; One chart, three cases. Each step switches the active case: the bars move to that scenario’s monthly cash balance and the summary line restates what changes, so the audience compares cases on identical axes instead of flipping between three separate charts.",
+      "frame": 2,
+      "actions": []
+    },
+    "scope-bracket-diagram": {
+      "description": "Scope bracket diagram — actual demo stage.",
+      "reason": "Populated reset composition; The process runs left to right; the bracket above marks the steps this initiative owns and the bracket below marks what stays unchanged. Click a step, or press Enter on it, to move it in or out of scope and the brackets redraw around the new boundary. Reset restores the proposed scope.",
+      "frame": 0,
+      "actions": []
+    },
+    "scrubbable-numbers-reactive-document": {
+      "description": "Scrubbable numbers / reactive document — actual demo stage.",
+      "reason": "Populated reset composition; The blue numbers are inputs: drag one left or right, or focus it and press the arrow keys, and every dependent figure in the sentence plus the twelve-month bars recompute at once. Monthly revenue = new teams × 12 months × seats × price; annual run rate = that × 12. Reset restores the defaults.",
+      "frame": 0,
+      "actions": []
+    },
+    "section-divider": {
+      "description": "Section divider — actual demo stage.",
+      "reason": "Completed labeled composition; A divider is a full slide that marks a chapter break: a large number, the chapter name and a small tracker of all chapters with the new one highlighted. Play moves from the last slide of chapter one to the divider, then into the first slide of chapter two.",
+      "frame": 2,
+      "actions": []
+    },
+    "segmented-progress-bar": {
+      "description": "Segmented progress bar — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 3,
+      "actions": []
+    },
+    "sequence-diagram": {
+      "description": "Sequence diagram — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#nx"
+        },
+        {
+          "type": "click",
+          "selector": "#nx"
+        },
+        {
+          "type": "click",
+          "selector": "#nx"
+        }
+      ]
+    },
+    "show-and-play": {
+      "description": "Show-and-play — actual demo stage.",
+      "reason": "Reveal authored clip at build three, immediately pause using its real control; static poster preserves simulated clip label.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#next"
+        },
+        {
+          "type": "click",
+          "selector": "#next"
+        },
+        {
+          "type": "click",
+          "selector": "#mp"
+        }
+      ]
+    },
+    "side-note": {
+      "description": "Side note — actual demo stage.",
+      "reason": "Completed labeled composition; The chart carries the message; a small note in the margin explains how to read one part of it. Play draws the chart, then adds the note in muted type and a thin leader line to the dip it refers to, so the caveat sits next to the data instead of in a footnote.",
+      "frame": 3,
+      "actions": []
+    },
+    "simulated-browser-frame": {
+      "description": "Simulated browser frame — actual demo stage.",
+      "reason": "Completed labeled composition; Drawn browser chrome (tab, address bar, window dots) frames a mock screen so it reads as a web product without using a real screenshot. The steps type the address, show a loading skeleton, then fill in the page; the corner label keeps it honest as simulated.",
+      "frame": 3,
+      "actions": []
+    },
+    "simulation-disclaimer": {
+      "description": "Simulation disclaimer — actual demo stage.",
+      "reason": "Completed labeled composition; A mock product screen appears, then a banner states “Simulated. Not a real product screen.” and real-looking customer names swap to neutral placeholders. Use it whenever a slide shows a mockup that could be mistaken for a live system or real client data.",
+      "frame": 2,
+      "actions": []
+    },
+    "situation-complication-resolution": {
+      "description": "Situation–Complication–Resolution — actual demo stage.",
+      "reason": "Completed labeled composition; The opener runs in three beats. Situation states the shared context, Complication adds the tension that makes it a problem now, and Resolution answers it with the proposal. Play reveals one beat per step, with the resolution emphasized because it is the point of the deck.",
+      "frame": 3,
+      "actions": []
+    },
+    "skip-link-and-slide-announcer": {
+      "description": "Skip link and slide announcer — actual demo stage.",
+      "reason": "Use actual Next control so visible live-region caption announces the changed slide.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#nx"
+        }
+      ]
+    },
+    "slidedoc-page": {
+      "description": "Slidedoc page — actual demo stage.",
+      "reason": "Completed labeled composition; A slidedoc page is written to be read, not projected: a full-sentence title, short paragraphs, a captioned chart and a source note, all on one idea. Play numbers the reading path one part at a time, from title to body to chart to footnote.",
+      "frame": 4,
+      "actions": []
+    },
+    "slope-chart": {
+      "description": "Slope chart — actual demo stage.",
+      "reason": "Completed labeled composition; Each product is one line from its 2024 score to its 2026 score, so the angle shows the direction and size of change at a glance. After the lines draw, the two decliners are colored and labeled while the rest fade. Scores are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "small-multiples": {
+      "description": "Small multiples — actual demo stage.",
+      "reason": "Completed labeled composition; Six identical mini line charts share one 0–100% scale and the same eight weeks, so shapes compare directly without a cluttered legend. After the lines draw, the one region moving against the rest is highlighted. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "source-chips": {
+      "description": "Source chips — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".chip[data-i=\"0\"]"
+        }
+      ]
+    },
+    "sourced-footer": {
+      "description": "Sourced footer — actual demo stage.",
+      "reason": "Completed labeled composition; The chart builds, then a single footer line appears at the bottom of the slide naming the source, period, sample size and exclusions, with the key parts briefly highlighted. Readers can check the evidence without it competing with the headline. Values are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "sources-panel": {
+      "description": "Sources panel — actual demo stage.",
+      "reason": "Completed labeled composition; A Sources entry sits in the top bar on every slide. Play opens the panel, which lists each reference with what it supports, and highlights the one behind the claim on screen. The panel is global, so it reads the same from any slide.",
+      "frame": 2,
+      "actions": []
+    },
+    "sparkline": {
+      "description": "Sparkline — actual demo stage.",
+      "reason": "Completed labeled composition; A word-sized line draws itself next to the current value and ends in a dot on the latest point. It carries no axes: it gives the shape of the trend, while the number gives the value. Data is illustrative.",
+      "frame": 1,
+      "actions": []
+    },
+    "speaker-intro-card": {
+      "description": "Speaker intro card — actual demo stage.",
+      "reason": "Completed labeled composition; The card introduces the speaker before the content: a photo, name and role, three bullets on what they are responsible for, and a scope note saying what this talk covers and what it does not. Play builds those parts in order. The person and photo are invented placeholders.",
+      "frame": 4,
+      "actions": []
+    },
+    "speaker-view": {
+      "description": "Speaker view — actual demo stage.",
+      "reason": "Completed labeled composition; The demo shows the presenter window: the current slide, the next slide, notes and a running clock. Play advances the talk so the preview, notes and timer change together, which is what the presenter sees while the audience sees one slide.",
+      "frame": 3,
+      "actions": []
+    },
+    "spectrum-scale": {
+      "description": "Spectrum scale — actual demo stage.",
+      "reason": "Completed labeled composition; Two named extremes anchor a continuous scale, and each option is a marker on it, so the slide shows degree rather than yes or no. Play draws the scale, places where we are today and two competitors, then lands the proposal with a one-line rationale. Positions are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "split-screen": {
+      "description": "Split screen — actual demo stage.",
+      "reason": "Completed labeled composition; The slide is cut into two equal halves that use the same layout, so every difference between them is the point. Play fills the left half with today, then the right half with the new state, and finishes by marking the contrast down the middle. Numbers are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "stacked-bar-waffle": {
+      "description": "Stacked bar / waffle — actual demo stage.",
+      "reason": "Completed labeled composition; The same shares appear twice: a 100% stacked bar, then a 10 × 10 waffle where each square is 1% of revenue. Bars suit precise comparison; waffles make the part-to-whole feel countable. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "stakeholder-whiteboard": {
+      "description": "Stakeholder whiteboard — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-id=\"eng\"]"
+        }
+      ]
+    },
+    "stat-with-delta": {
+      "description": "Stat with delta — actual demo stage.",
+      "reason": "Completed labeled composition; The number counts up, then a delta chip shows the change against the comparison period with an arrow and a sign, so direction never depends on color alone. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "stepper": {
+      "description": "Stepper — actual demo stage.",
+      "reason": "Selected in-progress frame preserves the distinguishing focus/navigation cue.",
+      "frame": 2,
+      "actions": []
+    },
+    "surplus-deficit-line": {
+      "description": "Surplus / deficit line — actual demo stage.",
+      "reason": "Populated reset composition; The line is monthly cash flow and the dashed line is the target. Area above the target shades green (surplus), area below shades red (deficit). Drag the target slider to see how the balance of good and bad months shifts. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "swimlane-architecture-board": {
+      "description": "Swimlane architecture board — actual demo stage.",
+      "reason": "Use actual Fit control to show the whole authored flow.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#zf"
+        }
+      ]
+    },
+    "system-context-map": {
+      "description": "System context map — actual demo stage.",
+      "reason": "Populated reset composition; Zones group the systems by who runs them, the highlighted area is what your team owns, and each connector is labeled with what flows along it. Select any system to light up only its connections and list them below; Reset returns to the owned service. Systems are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "terminal-typing-animation": {
+      "description": "Terminal typing animation — actual demo stage.",
+      "reason": "Completed labeled composition; Each step types the next command character by character in a drawn terminal, then prints its output, so the audience reads at typing speed instead of facing a wall of text. Under reduced motion the full session appears at once. Commands and output are simulated.",
+      "frame": 3,
+      "actions": []
+    },
+    "tier-cards": {
+      "description": "Tier cards — actual demo stage.",
+      "reason": "Completed labeled composition; Each plan gets a card with the same structure, price first, so the cards compare at a glance. Play deals the three cards in, then lifts and outlines the middle plan with a Most popular tag, the usual way to steer the choice. Prices are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "timeline-roadmap": {
+      "description": "Timeline / roadmap — actual demo stage.",
+      "reason": "Completed labeled composition; A single time axis carries phases as bars above it and milestones as diamonds on it, so plans and dates read together. Play draws the axis, the phases, then the milestones, and drops a Today marker to show where the team is now. Dates are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "timing-bars-with-budget-line": {
+      "description": "Timing bars with budget line — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-m=\"p\"]"
+        }
+      ]
+    },
+    "treemap-sunburst": {
+      "description": "Treemap / sunburst — actual demo stage.",
+      "reason": "Completed labeled composition; Rectangle area is proportional to budget: column widths split the $10M by department, then each column divides into its teams. Nesting shows hierarchy and size at once; a sunburst shows the same tree as rings. Values are illustrative.",
+      "frame": 2,
+      "actions": []
+    },
+    "try-it-prototype": {
+      "description": "Try-it prototype — actual demo stage.",
+      "reason": "Show actual new-flow sharing screen with suggested people and click count; preserve Simulated app label.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#mNew"
+        },
+        {
+          "type": "click",
+          "selector": "[data-go]"
+        }
+      ]
+    },
+    "type-hover-code-twoslash": {
+      "description": "Type-hover code (TwoSlash) — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-t=\"1\"]"
+        }
+      ]
+    },
+    "uncertainty-range": {
+      "description": "Uncertainty range — actual demo stage.",
+      "reason": "Completed labeled composition; A falsely precise point estimate (1.43 million) appears first, then widens into the honest range, 1.2–1.6 million, and finally a darker inner band marks the likeliest half. The headline changes with it, so the slide never claims more certainty than the model has. Values are illustrative.",
+      "frame": 3,
+      "actions": []
+    },
+    "upvoted-q-a": {
+      "description": "Upvoted Q&A — actual demo stage.",
+      "reason": "Completed labeled composition; Simulated questions arrive and collect votes over about three seconds; the list re-sorts so the question most of the room wants answered rises to the top. Press the ▲ button beside any question to add or remove your own upvote and watch it move. Reset clears votes.",
+      "frame": "last",
+      "actions": []
+    },
+    "venn-diagram": {
+      "description": "Venn diagram — actual demo stage.",
+      "reason": "Completed labeled composition; Each circle is a set and the overlaps show what two or three sets share. Play draws design, engineering and research one at a time, then names the pairwise overlaps and the centre where all three meet. Labels are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "vertical-2d-slide-stacks": {
+      "description": "Vertical (2D) slide stacks — actual demo stage.",
+      "reason": "Use authored controls to expose the named interaction and its actual visible result.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#rt"
+        },
+        {
+          "type": "click",
+          "selector": "#dn"
+        }
+      ]
+    },
+    "waterfall-bridge": {
+      "description": "Waterfall bridge — actual demo stage.",
+      "reason": "Completed labeled composition; Bars step from 2025 revenue to 2026 revenue: green steps add, red steps subtract, and dashed connectors carry the running total, so every change visibly sums to the end value. Start and end bars sit on zero. Values are illustrative.",
+      "frame": 6,
+      "actions": []
+    },
+    "weighted-decision-matrix": {
+      "description": "Weighted decision matrix — actual demo stage.",
+      "reason": "Completed labeled composition; Each criterion gets a weight, each option a 1–5 score, and the total is the sum of score times weight. Play reveals the weights, then the scores, counts up the weighted totals and highlights the winner, which makes the choice auditable. Scores are illustrative.",
+      "frame": 4,
+      "actions": []
+    },
+    "what-if-calculator": {
+      "description": "What-if calculator — actual demo stage.",
+      "reason": "Populated reset composition; Adjust team size, hours saved per person each week and hourly cost; the estimate updates as you type or slide. Savings = people × hours × 46 working weeks × hourly cost. Cost = people × $25 × 12 months. Payback = cost ÷ weekly savings. All figures are illustrative; Reset restores the defaults.",
+      "frame": 0,
+      "actions": []
+    },
+    "wipe-slider-table": {
+      "description": "Wipe slider table — actual demo stage.",
+      "reason": "Populated reset composition; The old and new versions of the same table are stacked, and the handle wipes between them row by row: left of it is the old outcome, right of it the new. Drag the handle, use the slider and arrow keys, or jump with Old and New; Reset centres it. Data is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "word-cloud": {
+      "description": "Word cloud — actual demo stage.",
+      "reason": "Completed labeled composition; Simulated one-word answers arrive over about three seconds; each repeat of a word makes it larger, so the most common answers dominate. Type a word and press Enter or Add to submit your own: it appears outlined and grows if it matches an existing word. Reset clears everything.",
+      "frame": "last",
+      "actions": []
+    }
+  },
+  "hazards": {
+    "bullet-overload": {
+      "description": "bullet overload — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "unqualified-metric": {
+      "description": "unqualified metric — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "wall-of-text": {
+      "description": "wall of text — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "chart-without-takeaway": {
+      "description": "chart without takeaway — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "small-body-text": {
+      "description": "small body text — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "repetitive-layout": {
+      "description": "repetitive layout — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "time-slot-overload": {
+      "description": "time slot overload — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-appendix-slide=\"slide-3\"]"
+        }
+      ],
+      "limitation": "Appendix organization — open comparison for timing and main/backup slides."
+    },
+    "three-dimensional-pie": {
+      "description": "three dimensional pie — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": [],
+      "bounds": "full-content",
+      "limitation": "Full comparison overview."
+    },
+    "topic-title": {
+      "description": "topic title — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "unlabeled-axis": {
+      "description": "unlabeled axis — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "transition-overload": {
+      "description": "transition overload — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": [],
+      "limitation": "Motion comparison — play demo to see the transition."
+    },
+    "filler-agenda": {
+      "description": "filler agenda — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "rainbow-palette": {
+      "description": "rainbow palette — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": [],
+      "bounds": "full-content",
+      "limitation": "Full comparison overview."
+    },
+    "unsourced-number": {
+      "description": "unsourced number — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    },
+    "buried-decision": {
+      "description": "buried decision — fictional supplied evidence, actual Before/After stages.",
+      "states": [
+        "before",
+        "after"
+      ],
+      "actions": []
+    }
+  }
+}

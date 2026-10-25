@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 .deck-bar{display:flex;align-items:center;gap:.5em;padding:.45em .7em;border-block-end:1px solid var(--line);font-size:.8em;min-height:2.6em}
 .deck-body{flex:1;position:relative;padding:1em 1.2em;display:flex;flex-direction:column;gap:.45em;min-height:0}
 .deck-foot{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-block-start:1px solid var(--line);font-size:.8em}
-</style>
+
+.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}</style>
 <style>
 .sbox{display:flex;align-items:center;gap:.4em;border:1px solid var(--line);border-radius:.4em;padding:.3em .5em;background:var(--surface);flex:1;font-size:1.05em}
 .caret{display:inline-block;width:.08em;height:1em;background:var(--fg);vertical-align:-.15em}
@@ -277,7 +278,8 @@ mark{background:#ffe58a;color:inherit;border-radius:.15em;padding:0 .1em}
 
   window.AtlasDemo = { init: init, countUp: countUp, get reducedMotion() { return reducedQuery.matches; } };
 })();
-</script>
+
+if(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");</script>
 <script>
 var WORD='approval',typing=null;
 function results(sel){return '<p class="mono muted" style="margin:0;font-size:.8em">2 slides match</p><div class="res"><div class="'+(sel?'sel':'')+'"><b>Slide 4</b> · Sign-off is most of the wait: two thirds of release time is <mark>approval</mark>.</div><div><b>Slide 9</b> · Delegate <mark>approval</mark> to team leads.</div></div>';}

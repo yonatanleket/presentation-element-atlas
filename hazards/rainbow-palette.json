@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "rainbow-palette",
+  "name": "Rainbow palette",
+  "category": "color-type",
+  "axis": "rendered",
+  "severityByMode": {
+    "pitch": "medium",
+    "teach": "medium",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "medium"
+  },
+  "audienceImpact": "Arbitrary colors imply unsupported groups.",
+  "before": "Arbitrary colors imply unsupported groups.",
+  "after": "Reflow identical series into directly labeled panels sharing scales; retain every label/value and meaningful category mapping. Do not erase a real color encoding.",
+  "fixedBy": [
+    "small-multiples"
+  ],
+  "demo": {
+    "file": "hazard-demos/rainbow-palette.html",
+    "how": "Reflow identical series into directly labeled panels sharing scales; retain every label/value and meaningful category mapping. Do not erase a real color encoding."
+  }
+}

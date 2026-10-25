@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "buried-decision",
+  "name": "Buried decision",
+  "category": "structure",
+  "axis": "judgment",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "medium",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "medium"
+  },
+  "audienceImpact": "Decision makers cannot find the requested choice.",
+  "before": "Decision makers cannot find the requested choice.",
+  "after": "Promote the existing ask and options; retain trade-offs and evidence. Do not infer the chosen option or manufacture a decision.",
+  "fixedBy": [
+    "decision-card-dilemma-options-choice",
+    "executive-summary-answer-first"
+  ],
+  "demo": {
+    "file": "hazard-demos/buried-decision.html",
+    "how": "Promote the existing ask and options; retain trade-offs and evidence. Do not infer the chosen option or manufacture a decision."
+  }
+}

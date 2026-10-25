@@ -1,0 +1,182 @@
+{
+  "datasetVersion": "m1-h2h-fictional-v1",
+  "deckId": "H-REPORT-01",
+  "baselineHash": "4c07bf7b470f6d2bcc4bd2286767339ffb0d9105b94f72d84ea2f05bc801fbf4",
+  "provenance": "Independently authored structured fixture content, rendered without using the Atlas parser.",
+  "records": {
+    "slides": [
+      {
+        "id": "s1",
+        "optional": false
+      },
+      {
+        "id": "s2",
+        "optional": false
+      },
+      {
+        "id": "s3",
+        "optional": false
+      },
+      {
+        "id": "s4",
+        "optional": false
+      },
+      {
+        "id": "s5",
+        "optional": false
+      }
+    ],
+    "copies": [
+      {
+        "id": "s1-title",
+        "slideId": "s1",
+        "normalizedText": "Keep the owner beside the request"
+      },
+      {
+        "id": "s2-title",
+        "slideId": "s2",
+        "normalizedText": "Keep the full handoff rationale available"
+      },
+      {
+        "id": "s3-title",
+        "slideId": "s3",
+        "normalizedText": "Results"
+      },
+      {
+        "id": "s4-title",
+        "slideId": "s4",
+        "normalizedText": "Inspect the estimate before extending the pilot"
+      },
+      {
+        "id": "s5-title",
+        "slideId": "s5",
+        "normalizedText": "Decide whether to continue the limited review"
+      }
+    ],
+    "claims": [
+      {
+        "id": "s1-intro",
+        "slideId": "s1",
+        "normalizedText": "Jonas Reed reviewed the service handoff pilot on 2026-10-01."
+      },
+      {
+        "id": "s1-volume",
+        "slideId": "s1",
+        "normalizedText": "The fictional review covered 48 requests; it was a limited sample."
+      },
+      {
+        "id": "s2-rationale",
+        "slideId": "s2",
+        "normalizedText": "The service team reviewed the handoff process after colleagues described a slow search for the owner. Notes lived across separate documents, so reviewers repeated questions before deciding who should respond. The proposed change keeps the owner, next action, caveat, and supporting note beside the request. Specialists can open the complete history when they need context. The pilot will keep the existing escalation route, collect reviewer feedback, and preserve the original notes so that a clearer view never replaces the underlying evidence."
+      },
+      {
+        "id": "s3-takeaway",
+        "slideId": "s3",
+        "normalizedText": "A visible owner reduced repeated clarification in this fictional review."
+      },
+      {
+        "id": "s3-qualification",
+        "slideId": "s3",
+        "normalizedText": "The review does not establish a causal effect or a forecast."
+      },
+      {
+        "id": "s4-delay",
+        "slideId": "s4",
+        "normalizedText": "The modeled handoff delay is 18 minutes per reviewed request."
+      },
+      {
+        "id": "s4-quote",
+        "slideId": "s4",
+        "normalizedText": "The review note says “Treat this estimate as a starting point.”"
+      },
+      {
+        "id": "s5-decision",
+        "slideId": "s5",
+        "normalizedText": "Keep the review limited until the team checks the original notes and hears from the assigned owners."
+      },
+      {
+        "id": "s5-next",
+        "slideId": "s5",
+        "normalizedText": "A continuation decision should retain the caveat and the source record."
+      }
+    ],
+    "facts": [
+      {
+        "id": "s1-owner",
+        "kind": "name",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "Jonas Reed",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-date",
+        "kind": "date",
+        "slideId": "s1",
+        "claimId": "s1-intro",
+        "normalizedText": "2026-10-01",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s1-requests",
+        "kind": "number",
+        "slideId": "s1",
+        "claimId": "s1-volume",
+        "normalizedText": "48",
+        "sourceId": "s1-review-log",
+        "missing": false
+      },
+      {
+        "id": "s1-request-unit",
+        "kind": "unit",
+        "slideId": "s1",
+        "claimId": "s1-volume",
+        "normalizedText": "requests",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s4-delay-value",
+        "kind": "number",
+        "slideId": "s4",
+        "claimId": "s4-delay",
+        "normalizedText": "18",
+        "sourceId": null,
+        "missing": true
+      },
+      {
+        "id": "s4-delay-unit",
+        "kind": "unit",
+        "slideId": "s4",
+        "claimId": "s4-delay",
+        "normalizedText": "minutes",
+        "sourceId": null,
+        "missing": false
+      },
+      {
+        "id": "s4-quotation",
+        "kind": "quote",
+        "slideId": "s4",
+        "claimId": "s4-quote",
+        "normalizedText": "“Treat this estimate as a starting point.”",
+        "sourceId": null,
+        "missing": false
+      }
+    ],
+    "sources": [
+      {
+        "id": "s1-review-log",
+        "slideId": "s1",
+        "normalizedText": "Fictional Harbor review log C, October 2026; invented sample for this benchmark."
+      },
+      {
+        "id": "s4-delay-note",
+        "slideId": "s4",
+        "normalizedText": "Fictional Harbor modeling note D; invented estimate, not an observed service result."
+      }
+    ],
+    "links": []
+  }
+}

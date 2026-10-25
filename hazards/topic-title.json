@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "topic-title",
+  "name": "Topic title",
+  "category": "titles",
+  "axis": "auto",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "medium",
+    "report": "medium",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Audience must infer the conclusion.",
+  "before": "Audience must infer the conclusion.",
+  "after": "Promote an existing takeaway verbatim; retain the original topic as kicker. Without an existing takeaway, flag the fix as unresolved.",
+  "fixedBy": [
+    "kicker-action-title-lede"
+  ],
+  "demo": {
+    "file": "hazard-demos/topic-title.html",
+    "how": "Promote an existing takeaway verbatim; retain the original topic as kicker. Without an existing takeaway, flag the fix as unresolved."
+  },
+  "ruleId": "topic-title"
+}

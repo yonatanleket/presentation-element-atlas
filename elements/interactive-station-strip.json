@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "interactive-station-strip",
   "name": "Interactive station strip",
   "category": "diagram",

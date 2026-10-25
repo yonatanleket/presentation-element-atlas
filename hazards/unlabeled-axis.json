@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "unlabeled-axis",
+  "name": "Unlabeled axis",
+  "category": "data",
+  "axis": "rendered",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "high",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "high"
+  },
+  "audienceImpact": "Scale and units are unclear.",
+  "before": "Scale and units are unclear.",
+  "after": "Expose existing axis labels and unit text from the specimen's supplied content. Missing labels require author input.",
+  "fixedBy": [
+    "annotated-chart"
+  ],
+  "demo": {
+    "file": "hazard-demos/unlabeled-axis.html",
+    "how": "Expose existing axis labels and unit text from the specimen's supplied content. Missing labels require author input."
+  }
+}

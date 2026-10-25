@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "unqualified-metric",
+  "name": "Unqualified metric",
+  "category": "evidence",
+  "axis": "judgment",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "medium",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "high"
+  },
+  "audienceImpact": "A value appears more general or certain than supported.",
+  "before": "A value appears more general or certain than supported.",
+  "after": "Put the existing definition, period, denominator and caveat next to their metric. Missing qualifications stay unresolved. No computed range is invented.",
+  "fixedBy": [
+    "metric-card-grid-with-limitations",
+    "methodology-box"
+  ],
+  "demo": {
+    "file": "hazard-demos/unqualified-metric.html",
+    "how": "Put the existing definition, period, denominator and caveat next to their metric. Missing qualifications stay unresolved. No computed range is invented."
+  }
+}

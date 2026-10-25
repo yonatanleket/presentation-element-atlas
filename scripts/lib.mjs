@@ -4,10 +4,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const readJSON = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
+export const readJSON = (p, root = ROOT) => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
+export const SCHEMA_VERSION = '1.0.0';
 
-export function loadAtlas() {
-  const dir = path.join(ROOT, 'elements');
+export function loadAtlas(root = ROOT) {
+  const dir = path.join(root, 'elements');
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.json')).sort();
   const elements = [];
   const parseErrors = [];
@@ -17,10 +18,10 @@ export function loadAtlas() {
   }
   return {
     elements, parseErrors,
-    categories: readJSON('categories.json'),
-    triggers: readJSON('triggers.json'),
-    sources: readJSON('sources.json'),
-    schema: readJSON('schema/element.schema.json')
+    categories: readJSON('categories.json', root),
+    triggers: readJSON('triggers.json', root),
+    sources: readJSON('sources.json', root),
+    schema: readJSON('schema/element.schema.json', root)
   };
 }
 
@@ -44,9 +45,9 @@ export function checkSchema(value, schema, at = '') {
     if (schema.items) value.forEach((v, i) => errs.push(...checkSchema(v, schema.items, `${at}[${i}]`)));
   }
   if (t === 'object') {
-    for (const k of schema.required || []) if (!(k in value)) errs.push(`${at ? at + '.' : ''}${k}: required`);
+    for (const k of schema.required || []) if (!Object.hasOwn(value, k)) errs.push(`${at ? at + '.' : ''}${k}: required`);
     for (const [k, v] of Object.entries(value)) {
-      const sub = schema.properties && schema.properties[k];
+      const sub = schema.properties && Object.hasOwn(schema.properties, k) ? schema.properties[k] : undefined;
       if (sub) errs.push(...checkSchema(v, sub, at ? `${at}.${k}` : k));
       else if (schema.additionalProperties === false) errs.push(`${at ? at + '.' : ''}${k}: unknown field`);
     }

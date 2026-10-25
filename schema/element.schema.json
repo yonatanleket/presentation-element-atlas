@@ -5,27 +5,137 @@
   "description": "One element per file at elements/<id>.json. Cross-file rules (id equals filename, unique names, keys exist in categories.json / triggers.json / sources.json, related ids exist) are enforced by scripts/validate.mjs.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name", "category", "definition", "bestUse", "trigger", "level", "sources", "demo"],
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "category",
+    "definition",
+    "bestUse",
+    "trigger",
+    "level",
+    "sources",
+    "demo"
+  ],
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 48, "description": "Kebab slug, equals the filename, immutable once merged." },
-    "name": { "type": "string", "minLength": 1, "maxLength": 60, "description": "Display name, unique case-insensitively." },
-    "category": { "type": "string", "enum": ["nav", "story", "text", "metric", "chart", "diagram", "compare", "product", "motion", "explore", "audience", "trust"] },
-    "definition": { "type": "string", "minLength": 1, "maxLength": 200, "description": "What it is." },
-    "bestUse": { "type": "string", "minLength": 1, "maxLength": 140, "description": "When to use it." },
-    "trigger": { "type": "array", "minItems": 1, "maxItems": 5, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }, "description": "Content-type tags from triggers.json." },
-    "level": { "type": "string", "enum": ["standard", "advanced"] },
-    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" }, "description": "Keys in sources.json; use \"common\" when there is no single source." },
+    "schemaVersion": {
+      "type": "string",
+      "enum": [
+        "1.0.0"
+      ],
+      "description": "SemVer record format. Only explicitly supported versions are accepted; see schema/README.md."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 48,
+      "description": "Kebab slug, equals the filename, immutable once merged."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "description": "Display name, unique case-insensitively."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "nav",
+        "story",
+        "text",
+        "metric",
+        "chart",
+        "diagram",
+        "compare",
+        "product",
+        "motion",
+        "explore",
+        "audience",
+        "trust"
+      ]
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "What it is."
+    },
+    "bestUse": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 140,
+      "description": "When to use it."
+    },
+    "trigger": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "description": "Content-type tags from triggers.json."
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "advanced"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      },
+      "description": "Keys in sources.json; use \"common\" when there is no single source."
+    },
     "demo": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["file", "kind", "how"],
+      "required": [
+        "file",
+        "kind",
+        "how"
+      ],
       "properties": {
-        "file": { "type": "string", "pattern": "^demos/[a-z0-9]+(-[a-z0-9]+)*\\.html$" },
-        "kind": { "type": "string", "enum": ["static", "animated", "interactive"] },
-        "how": { "type": "string", "minLength": 1, "description": "How the demo works, 15-60 words." }
+        "file": {
+          "type": "string",
+          "pattern": "^demos/[a-z0-9]+(-[a-z0-9]+)*\\.html$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "static",
+            "animated",
+            "interactive"
+          ]
+        },
+        "how": {
+          "type": "string",
+          "minLength": 1,
+          "description": "How the demo works, 15-60 words."
+        }
       }
     },
-    "aliases": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
-    "related": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" } }
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "related": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      }
+    }
   }
 }

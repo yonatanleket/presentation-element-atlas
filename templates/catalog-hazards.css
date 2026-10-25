@@ -1,0 +1,50 @@
+#hazards-heading{font:700 clamp(28px,3vw,40px)/1.15 var(--f-display);letter-spacing:-.025em;margin:0 0 8px;text-wrap:balance}
+.hazards-intro .scope-note{margin:10px 0 0}
+.hazard-cat h2{margin-bottom:16px}
+/* The redesign sheet styles the element sidebar only; mirror it for problem categories on desktop. */
+@media(min-width:900px){
+ #hazard-cats{display:flex;flex-direction:column;gap:2px;align-items:stretch}
+ #hazard-cats .chip{border-color:transparent;display:flex;justify-content:space-between;align-items:center}
+ #hazard-cats .chip small{margin-inline-start:8px}
+}
+#hazard-axes .chip{font-size:13px;padding-inline:10px}
+.relations{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px}
+.relations b{flex-basis:100%;font-weight:500;color:var(--muted)}
+.relations a{display:inline-flex;align-items:center;min-height:44px;padding:6px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--accent);text-decoration:none;overflow-wrap:anywhere;max-width:100%}
+.hazard-label,.review-note{font-size:12px;color:var(--muted)}
+.pill-axis{font:10px var(--f-mono);color:var(--accent);background:var(--accent-soft);padding:3px 7px;border-radius:4px;white-space:nowrap}
+.severity{font:12px var(--f-mono);text-transform:capitalize;color:var(--adv)}
+.announcement{font-size:13px;color:var(--muted);min-height:1.5em}
+.announcement:empty{margin:0;min-height:0}
+#hazard-route-error a{display:inline-flex;align-items:center;text-decoration:none;color:var(--accent)}
+#pReturn{padding:8px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+#pReturn button{max-width:100%;white-space:normal;text-align:start}
+.ph{position:sticky;inset-block-start:0;z-index:4;flex-shrink:0}
+.ph button{flex-shrink:0}
+.pfoot .relations{margin-top:8px}
+.pfoot details{margin-top:10px}
+#elements-view,#hazards-view{min-width:0}
+.poster[data-hover-demo]{position:relative;cursor:pointer}
+.poster[data-hover-demo]::after{content:"Hover to quick-play";position:absolute;inset-block-end:8px;inset-inline-end:8px;z-index:3;font:500 10px/1 var(--f-mono);padding:4px 7px;border-radius:4px;background:#142d3bd9;color:#fff;pointer-events:none;opacity:0;transition:opacity .15s ease}
+.poster[data-hover-demo].is-playing::after{content:"Playing demo";opacity:1}
+@media(hover:hover) and (pointer:fine){.poster[data-hover-demo]:hover::after{opacity:1}}
+.hover-demo-frame{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2;background:var(--stage);pointer-events:none;opacity:0;transition:opacity .18s ease}
+.poster.is-playing .hover-demo-frame{opacity:1}
+.problem-pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer}
+.problem-pair figure{margin:0;min-width:0;transition:transform .22s ease,opacity .22s ease}
+.problem-pair figcaption{font:500 11px var(--f-mono);margin-bottom:4px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+.problem-pair figure:last-child figcaption{color:var(--accent)}
+.problem-pair .preview-shell{border:1px solid var(--line);transition:border-color .22s ease,box-shadow .22s ease}
+.pair-crossfade{position:absolute;inset:6px;z-index:2;pointer-events:none;opacity:0;transform:scale(.98);transition:opacity .24s ease,transform .24s ease;display:flex;align-items:center;justify-content:center;background:var(--stage);border-radius:4px}
+.pair-crossfade .preview-shell{width:100%;height:100%;aspect-ratio:auto;border:1px solid var(--accent);box-shadow:0 6px 18px #006c8526}
+.pair-badge{position:absolute;inset-block-start:8px;inset-inline-end:8px;z-index:3;font:500 10px/1 var(--f-mono);padding:4px 7px;border-radius:4px;background:var(--accent);color:#fff}
+@media(hover:hover) and (pointer:fine){.problem-pair:hover .pair-crossfade{opacity:1;transform:scale(1)}}
+.problem-pair.is-previewing .pair-crossfade{opacity:1;transform:scale(1)}
+@media(prefers-reduced-motion:reduce){.pair-crossfade{transition:none}}
+.hazard-card .relations{margin-top:2px}
+@media(max-width:899px){
+ #hazard-cats .chip{border-color:var(--line)}
+ #hazard-cats.is-expanded{gap:6px}
+ #hazard-rail .seg{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:599px){.problem-pair{grid-template-columns:1fr}.problem-pair .preview-shell{aspect-ratio:16/10}}

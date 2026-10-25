@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "repetitive-layout",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Two kinds of support work"
+      },
+      "claims": [
+        {
+          "id": "current",
+          "segments": [
+            "Current work: preserve the customer request history."
+          ]
+        },
+        {
+          "id": "next",
+          "segments": [
+            "Next work: make the next owner and unresolved question visible."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ]
+}

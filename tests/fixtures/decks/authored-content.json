@@ -1,0 +1,707 @@
+{
+  "datasetVersion": "m1-h2h-fictional-v1",
+  "decks": [
+    {
+      "id": "H-PITCH-01",
+      "file": "pitch-original.html",
+      "title": "Luma Desk pilot pitch",
+      "minutes": 4,
+      "slides": [
+        {
+          "id": "s1",
+          "title": "Start with a reversible pilot",
+          "blocks": [
+            {
+              "id": "intro",
+              "kind": "p",
+              "segments": [
+                {
+                  "id": "company",
+                  "kind": "name",
+                  "value": "Luma Desk"
+                },
+                " asks ",
+                {
+                  "id": "owner",
+                  "kind": "name",
+                  "value": "Mira Hale"
+                },
+                " to lead a limited support pilot."
+              ]
+            },
+            {
+              "id": "launch",
+              "kind": "p",
+              "segments": [
+                "The proposed kickoff is ",
+                {
+                  "id": "date",
+                  "kind": "date",
+                  "value": "2026-11-02"
+                },
+                "."
+              ]
+            },
+            {
+              "id": "quote",
+              "kind": "p",
+              "segments": [
+                "The team principle is ",
+                {
+                  "id": "quotation",
+                  "kind": "quote",
+                  "value": "“Keep the next step reversible.”"
+                }
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s2",
+          "title": "Overview",
+          "blocks": [
+            {
+              "id": "takeaway",
+              "kind": "p",
+              "segments": [
+                "A smaller queue gives specialists more time to investigate."
+              ]
+            },
+            {
+              "id": "scope",
+              "kind": "p",
+              "segments": [
+                "The pilot tests a triage lane without changing the service promise."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s3",
+          "title": "Give every request a clear next step",
+          "blocks": [
+            {
+              "kind": "ul",
+              "items": [
+                {
+                  "id": "b1",
+                  "kind": "p",
+                  "segments": [
+                    "Read the original request before assigning it."
+                  ]
+                },
+                {
+                  "id": "b2",
+                  "kind": "p",
+                  "segments": [
+                    "Name the person responsible for the handoff."
+                  ]
+                },
+                {
+                  "id": "b3",
+                  "kind": "p",
+                  "segments": [
+                    "Keep the supporting note beside the summary."
+                  ]
+                },
+                {
+                  "id": "b4",
+                  "kind": "p",
+                  "segments": [
+                    "State the next action in plain language."
+                  ]
+                },
+                {
+                  "id": "b5",
+                  "kind": "p",
+                  "segments": [
+                    "Record the caveat before making a commitment."
+                  ]
+                },
+                {
+                  "id": "b6",
+                  "kind": "p",
+                  "segments": [
+                    "Offer a route for questions from the reviewer."
+                  ]
+                },
+                {
+                  "id": "b7",
+                  "kind": "p",
+                  "segments": [
+                    "Keep the previous decision available for inspection."
+                  ]
+                }
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s4",
+          "title": "Shorter handoffs can protect investigation time",
+          "blocks": [
+            {
+              "id": "estimate",
+              "kind": "p",
+              "segments": [
+                "The fictional pilot estimate is ",
+                {
+                  "id": "saving",
+                  "kind": "number",
+                  "value": "12",
+                  "sourceStatus": "missing"
+                },
+                " ",
+                {
+                  "id": "saving-unit",
+                  "kind": "unit",
+                  "value": "hours"
+                },
+                " saved per reporting cycle."
+              ]
+            },
+            {
+              "id": "caveat",
+              "kind": "p",
+              "segments": [
+                "This is a planning estimate, not an observed result."
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "id": "worksheet",
+              "text": "Fictional pilot worksheet A, authored 2026-10-01; invented planning estimate for this benchmark."
+            }
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Review the staffing assumptions",
+          "blocks": [
+            {
+              "id": "staff",
+              "kind": "p",
+              "segments": [
+                "The plan reserves ",
+                {
+                  "id": "analysts",
+                  "kind": "number",
+                  "value": "2",
+                  "sourceId": "staffing-note"
+                },
+                " ",
+                {
+                  "id": "analyst-unit",
+                  "kind": "unit",
+                  "value": "analysts"
+                },
+                " for the pilot; staffing remains provisional."
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "id": "staffing-note",
+              "text": "Fictional staffing note B; invented capacity allocation, not production staffing."
+            }
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Keep the operating checklist available",
+          "blocks": [
+            {
+              "kind": "ul",
+              "items": [
+                {
+                  "id": "b1",
+                  "kind": "p",
+                  "segments": [
+                    "Retain the service escalation route."
+                  ]
+                },
+                {
+                  "id": "b2",
+                  "kind": "p",
+                  "segments": [
+                    "Review feedback before extending the pilot."
+                  ]
+                },
+                {
+                  "id": "b3",
+                  "kind": "p",
+                  "segments": [
+                    "Stop if the handoff adds confusion."
+                  ]
+                }
+              ]
+            }
+          ],
+          "sources": []
+        }
+      ],
+      "expected": [
+        {
+          "ruleId": "topic-title",
+          "slideId": "s2",
+          "location": "title",
+          "severity": "medium"
+        },
+        {
+          "ruleId": "bullet-overload",
+          "slideId": "s3",
+          "location": "body/list/1",
+          "severity": "medium",
+          "observed": 7,
+          "threshold": 6
+        },
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s4",
+          "location": "fact/s4-saving",
+          "severity": "high"
+        },
+        {
+          "ruleId": "time-slot-overload",
+          "slideId": null,
+          "location": "deck",
+          "severity": "medium",
+          "observed": 6,
+          "threshold": 4
+        }
+      ],
+      "citation": {
+        "s4-saving": "s4-worksheet"
+      },
+      "appendix": [
+        "s5",
+        "s6"
+      ],
+      "policyBasis": "Fixture author permits existing staffing assumptions and operating checklist to move to an appendix; the four-slide main pitch remains. Citation provenance is the original fictional worksheet on the metric's own slide."
+    },
+    {
+      "id": "H-REPORT-01",
+      "file": "report-original.html",
+      "title": "Harbor service quarterly report",
+      "minutes": 6,
+      "slides": [
+        {
+          "id": "s1",
+          "title": "Keep the owner beside the request",
+          "blocks": [
+            {
+              "id": "intro",
+              "kind": "p",
+              "segments": [
+                {
+                  "id": "owner",
+                  "kind": "name",
+                  "value": "Jonas Reed"
+                },
+                " reviewed the service handoff pilot on ",
+                {
+                  "id": "date",
+                  "kind": "date",
+                  "value": "2026-10-01"
+                },
+                "."
+              ]
+            },
+            {
+              "id": "volume",
+              "kind": "p",
+              "segments": [
+                "The fictional review covered ",
+                {
+                  "id": "requests",
+                  "kind": "number",
+                  "value": "48",
+                  "sourceId": "review-log"
+                },
+                " ",
+                {
+                  "id": "request-unit",
+                  "kind": "unit",
+                  "value": "requests"
+                },
+                "; it was a limited sample."
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "id": "review-log",
+              "text": "Fictional Harbor review log C, October 2026; invented sample for this benchmark."
+            }
+          ]
+        },
+        {
+          "id": "s2",
+          "title": "Keep the full handoff rationale available",
+          "blocks": [
+            {
+              "id": "rationale",
+              "kind": "p",
+              "segments": [
+                "The service team reviewed the handoff process after colleagues described a slow search for the owner. Notes lived across separate documents, so reviewers repeated questions before deciding who should respond. The proposed change keeps the owner, next action, caveat, and supporting note beside the request. Specialists can open the complete history when they need context. The pilot will keep the existing escalation route, collect reviewer feedback, and preserve the original notes so that a clearer view never replaces the underlying evidence."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s3",
+          "title": "Results",
+          "blocks": [
+            {
+              "id": "takeaway",
+              "kind": "p",
+              "segments": [
+                "A visible owner reduced repeated clarification in this fictional review."
+              ]
+            },
+            {
+              "id": "qualification",
+              "kind": "p",
+              "segments": [
+                "The review does not establish a causal effect or a forecast."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s4",
+          "title": "Inspect the estimate before extending the pilot",
+          "blocks": [
+            {
+              "id": "delay",
+              "kind": "p",
+              "segments": [
+                "The modeled handoff delay is ",
+                {
+                  "id": "delay-value",
+                  "kind": "number",
+                  "value": "18",
+                  "sourceStatus": "missing"
+                },
+                " ",
+                {
+                  "id": "delay-unit",
+                  "kind": "unit",
+                  "value": "minutes"
+                },
+                " per reviewed request."
+              ]
+            },
+            {
+              "id": "quote",
+              "kind": "p",
+              "segments": [
+                "The review note says ",
+                {
+                  "id": "quotation",
+                  "kind": "quote",
+                  "value": "“Treat this estimate as a starting point.”"
+                }
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "id": "delay-note",
+              "text": "Fictional Harbor modeling note D; invented estimate, not an observed service result."
+            }
+          ]
+        },
+        {
+          "id": "s5",
+          "title": "Decide whether to continue the limited review",
+          "blocks": [
+            {
+              "id": "decision",
+              "kind": "p",
+              "segments": [
+                "Keep the review limited until the team checks the original notes and hears from the assigned owners."
+              ]
+            },
+            {
+              "id": "next",
+              "kind": "p",
+              "segments": [
+                "A continuation decision should retain the caveat and the source record."
+              ]
+            }
+          ],
+          "sources": []
+        }
+      ],
+      "expected": [
+        {
+          "ruleId": "wall-of-text",
+          "slideId": "s2",
+          "location": "body",
+          "severity": "medium",
+          "observed": 81,
+          "threshold": 80
+        },
+        {
+          "ruleId": "topic-title",
+          "slideId": "s3",
+          "location": "title",
+          "severity": "medium"
+        },
+        {
+          "ruleId": "unsourced-number",
+          "slideId": "s4",
+          "location": "fact/s4-delay-value",
+          "severity": "high"
+        }
+      ],
+      "citation": {
+        "s4-delay-value": "s4-delay-note"
+      },
+      "appendix": [],
+      "policyBasis": "Fixture author confirms the modeled delay comes from the already supplied original fictional modeling note D; no slide is preapproved for appendix reclassification."
+    },
+    {
+      "id": "H-TRAIN-01",
+      "file": "training-original.html",
+      "title": "Fictional handoff software training",
+      "minutes": 8,
+      "slides": [
+        {
+          "id": "s1",
+          "title": "Keep the original note beside the handoff",
+          "blocks": [
+            {
+              "id": "intro",
+              "kind": "p",
+              "segments": [
+                {
+                  "id": "trainer",
+                  "kind": "name",
+                  "value": "Nora Vale"
+                },
+                " prepared this fictional software walkthrough on ",
+                {
+                  "id": "date",
+                  "kind": "date",
+                  "value": "2026-10-01"
+                },
+                "."
+              ]
+            },
+            {
+              "id": "quote",
+              "kind": "p",
+              "segments": [
+                "The working principle is ",
+                {
+                  "id": "quotation",
+                  "kind": "quote",
+                  "value": "“Ask before filling a gap with a guess.”"
+                }
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s2",
+          "title": "Give the reviewer a complete handoff",
+          "blocks": [
+            {
+              "kind": "ul",
+              "items": [
+                {
+                  "id": "b1",
+                  "kind": "p",
+                  "segments": [
+                    "Read the original note."
+                  ]
+                },
+                {
+                  "id": "b2",
+                  "kind": "p",
+                  "segments": [
+                    "Check the assigned owner."
+                  ]
+                },
+                {
+                  "id": "b3",
+                  "kind": "p",
+                  "segments": [
+                    "Keep the source link."
+                  ]
+                },
+                {
+                  "id": "b4",
+                  "kind": "p",
+                  "segments": [
+                    "Name the next action."
+                  ]
+                },
+                {
+                  "id": "b5",
+                  "kind": "p",
+                  "segments": [
+                    "State the remaining caveat."
+                  ]
+                },
+                {
+                  "id": "b6",
+                  "kind": "p",
+                  "segments": [
+                    "Ask about missing context."
+                  ]
+                },
+                {
+                  "id": "b7",
+                  "kind": "p",
+                  "segments": [
+                    "Preserve the earlier record."
+                  ]
+                }
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s3",
+          "title": "Preserve the reasoning behind each handoff",
+          "blocks": [
+            {
+              "id": "instructions",
+              "kind": "p",
+              "segments": [
+                "When a request arrives, read the original note before choosing a label. Check whether the author has named an owner and preserve that name in the handoff. Use the checklist to identify missing context, then ask a focused question rather than guessing. Keep the source note linked beside the summary so another colleague can inspect it. If the request changes, update the next action and explain the change without deleting the record or making a promise on behalf of someone else."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s4",
+          "title": "Background",
+          "blocks": [
+            {
+              "id": "takeaway",
+              "kind": "p",
+              "segments": [
+                "A shared record lets the next reviewer inspect the same evidence."
+              ]
+            },
+            {
+              "id": "scope",
+              "kind": "p",
+              "segments": [
+                "The software example demonstrates a handoff and makes no claim about actual team performance."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s5",
+          "title": "Practice with the sample queue",
+          "blocks": [
+            {
+              "id": "exercise",
+              "kind": "p",
+              "segments": [
+                "The exercise contains ",
+                {
+                  "id": "cards",
+                  "kind": "number",
+                  "value": "3",
+                  "sourceId": "exercise-note"
+                },
+                " ",
+                {
+                  "id": "card-unit",
+                  "kind": "unit",
+                  "value": "cards"
+                },
+                "; use the fictional source note when assigning each owner."
+              ]
+            }
+          ],
+          "sources": [
+            {
+              "id": "exercise-note",
+              "text": "Fictional training exercise E, version 1; invented card count for this benchmark."
+            }
+          ]
+        },
+        {
+          "id": "s6",
+          "title": "Explain uncertainty before handing work over",
+          "blocks": [
+            {
+              "id": "caveat",
+              "kind": "p",
+              "segments": [
+                "If an owner or date is missing, leave the gap visible and ask the author for clarification."
+              ]
+            },
+            {
+              "id": "limits",
+              "kind": "p",
+              "segments": [
+                "The checklist does not authorize a promise or an external message."
+              ]
+            }
+          ],
+          "sources": []
+        },
+        {
+          "id": "s7",
+          "title": "Check the record before finishing",
+          "blocks": [
+            {
+              "id": "close",
+              "kind": "p",
+              "segments": [
+                "Confirm that the owner, source note, next action, and caveat remain available to the next reviewer."
+              ]
+            }
+          ],
+          "sources": []
+        }
+      ],
+      "expected": [
+        {
+          "ruleId": "bullet-overload",
+          "slideId": "s2",
+          "location": "body/list/1",
+          "severity": "medium",
+          "observed": 7,
+          "threshold": 6
+        },
+        {
+          "ruleId": "wall-of-text",
+          "slideId": "s3",
+          "location": "body",
+          "severity": "medium",
+          "observed": 81,
+          "threshold": 80
+        },
+        {
+          "ruleId": "topic-title",
+          "slideId": "s4",
+          "location": "title",
+          "severity": "medium"
+        }
+      ],
+      "citation": {},
+      "appendix": [],
+      "policyBasis": "Every quantitative claim is already associated with its supplied fictional source; no citation or appendix repair policy is needed."
+    }
+  ]
+}

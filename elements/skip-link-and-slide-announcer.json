@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "skip-link-and-slide-announcer",
   "name": "Skip link and slide announcer",
   "category": "nav",

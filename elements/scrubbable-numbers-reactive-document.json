@@ -1,4 +1,5 @@
 {
+  "schemaVersion": "1.0.0",
   "id": "scrubbable-numbers-reactive-document",
   "name": "Scrubbable numbers / reactive document",
   "category": "explore",

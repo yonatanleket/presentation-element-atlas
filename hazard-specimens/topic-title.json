@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "topic-title",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Quarterly support"
+      },
+      "claims": [
+        {
+          "id": "response",
+          "segments": [
+            "Median response time fell from ",
+            {
+              "id": "old-time",
+              "kind": "number",
+              "text": "8",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "old-unit",
+              "kind": "unit",
+              "text": "h"
+            },
+            " to ",
+            {
+              "id": "new-time",
+              "kind": "number",
+              "text": "5",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "new-unit",
+              "kind": "unit",
+              "text": "h"
+            },
+            "."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": [
+        {
+          "id": "src",
+          "text": "Source: fictional support log, Q3 2026."
+        }
+      ]
+    }
+  ],
+  "promoteClaim": "response"
+}

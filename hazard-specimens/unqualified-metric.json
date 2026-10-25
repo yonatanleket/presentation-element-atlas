@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "unqualified-metric",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Response time"
+      },
+      "claims": [
+        {
+          "id": "metric",
+          "segments": [
+            "Median response time: ",
+            {
+              "id": "metric-number",
+              "kind": "number",
+              "text": "5",
+              "sourceId": "src"
+            },
+            " ",
+            {
+              "id": "metric-unit",
+              "kind": "unit",
+              "text": "h"
+            },
+            "."
+          ]
+        },
+        {
+          "id": "definition",
+          "segments": [
+            "Definition: elapsed time from a new request to the first human response."
+          ]
+        },
+        {
+          "id": "period",
+          "segments": [
+            "Period: the autumn support review."
+          ]
+        },
+        {
+          "id": "denominator",
+          "segments": [
+            "Coverage: requests in the shared queue."
+          ]
+        },
+        {
+          "id": "caveat",
+          "segments": [
+            "Limitation: urgent escalations are excluded."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": [
+        {
+          "id": "src",
+          "text": "Source: fictional support log, Q3 2026."
+        }
+      ]
+    }
+  ]
+}

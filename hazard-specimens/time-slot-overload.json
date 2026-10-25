@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "time-slot-overload",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-1",
+      "title": {
+        "id": "title-slide-1",
+        "text": "Choose the pilot"
+      },
+      "claims": [
+        {
+          "id": "content-1",
+          "segments": [
+            "Start with the shared support queue."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    },
+    {
+      "id": "slide-2",
+      "title": {
+        "id": "title-slide-2",
+        "text": "Agree the review"
+      },
+      "claims": [
+        {
+          "id": "content-2",
+          "segments": [
+            "Compare the complete request history."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    },
+    {
+      "id": "slide-3",
+      "title": {
+        "id": "title-slide-3",
+        "text": "Queue taxonomy"
+      },
+      "claims": [
+        {
+          "id": "content-3",
+          "segments": [
+            "Background categories remain available for questions."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    },
+    {
+      "id": "slide-4",
+      "title": {
+        "id": "title-slide-4",
+        "text": "Review checklist"
+      },
+      "claims": [
+        {
+          "id": "content-4",
+          "segments": [
+            "Supporting review steps remain available for questions."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ],
+  "minutes": 2,
+  "slidesPerMinute": 1,
+  "appendixEligibleSlideIds": [
+    "slide-3",
+    "slide-4"
+  ]
+}

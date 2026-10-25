@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "unsourced-number",
+  "name": "Unsourced number",
+  "category": "evidence",
+  "axis": "auto",
+  "severityByMode": {
+    "pitch": "high",
+    "teach": "medium",
+    "report": "high",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "high"
+  },
+  "audienceImpact": "Readers cannot inspect a claim's origin.",
+  "before": "Readers cannot inspect a claim's origin.",
+  "after": "Reveal and associate an already supplied source line. Truly absent evidence requires author input; never fabricate a citation.",
+  "fixedBy": [
+    "sourced-footer",
+    "source-chips"
+  ],
+  "demo": {
+    "file": "hazard-demos/unsourced-number.html",
+    "how": "Reveal and associate an already supplied source line. Truly absent evidence requires author input; never fabricate a citation."
+  },
+  "ruleId": "unsourced-number"
+}

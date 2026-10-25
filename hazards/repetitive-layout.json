@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "repetitive-layout",
+  "name": "Repetitive layout",
+  "category": "layout",
+  "axis": "judgment",
+  "severityByMode": {
+    "pitch": "medium",
+    "teach": "medium",
+    "report": "low",
+    "keynote": "high",
+    "workshop": "medium",
+    "read-ahead": "low"
+  },
+  "audienceImpact": "Different relationships look equally important.",
+  "before": "Different relationships look equally important.",
+  "after": "Apply editorial hierarchy or side-by-side placement to existing text and imagery; preserve reading associations. Repetition alone is not a failure in reporting.",
+  "fixedBy": [
+    "magazine-style-layout",
+    "split-screen"
+  ],
+  "demo": {
+    "file": "hazard-demos/repetitive-layout.html",
+    "how": "Apply editorial hierarchy or side-by-side placement to existing text and imagery; preserve reading associations. Repetition alone is not a failure in reporting."
+  }
+}

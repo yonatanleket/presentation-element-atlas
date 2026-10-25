@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "buried-decision",
+  "fictional": true,
+  "slides": [
+    {
+      "id": "slide-main",
+      "title": {
+        "id": "title-slide-main",
+        "text": "Shared queue review"
+      },
+      "claims": [
+        {
+          "id": "context",
+          "segments": [
+            "The handoff currently separates ownership from request history."
+          ]
+        },
+        {
+          "id": "option-a",
+          "segments": [
+            "Option A: pilot a shared queue with a visible owner."
+          ]
+        },
+        {
+          "id": "option-b",
+          "segments": [
+            "Option B: keep separate queues and add a handoff checklist."
+          ]
+        },
+        {
+          "id": "ask",
+          "segments": [
+            "Choose the pilot approach for the next review."
+          ]
+        }
+      ],
+      "copies": [],
+      "sources": []
+    }
+  ],
+  "promoteClaim": "ask"
+}
