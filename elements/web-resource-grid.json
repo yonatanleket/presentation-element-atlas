@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-resource-grid",
+  "name": "Resource teaser grid",
+  "category": "web-content",
+  "definition": "Grid of article, guide and webinar cards with type labels and a filter, linking out to the full resource library.",
+  "bestUse": "Content-led marketing pages and the bottom of product pages, to keep curious visitors reading.",
+  "trigger": [
+    "dense-detail",
+    "navigation-wayfinding"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "landbook",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-resource-grid.html",
+    "kind": "interactive",
+    "how": "A few strong resources are teased with a type label, title and reading time, and a filter narrows them without leaving the page. Choose All, Guides, Webinars or Templates: the grid updates and the count says how many match. The full library is one link away. Titles are illustrative."
+  },
+  "aliases": [
+    "resources section",
+    "blog teaser",
+    "content hub"
+  ]
+}

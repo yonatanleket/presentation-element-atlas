@@ -16,10 +16,13 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Breadcrumb trail</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Breadcrumb trail above a documentation page: Docs, Integrations, Messaging, Webhooks.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>docs.acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><nav class="bc" aria-label="Breadcrumb"><ol id="ol"></ol></nav><div class="doc"><p class="web-h2" id="tt"></p><i></i><i></i><i></i><i></i></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Each crumb is a link to a parent level and the last item is the current page, marked as current rather than linked. Click a crumb to go up to that level: the trail shortens and the page title follows. Reset returns to the deepest page. Page names are illustrative.</p></details>
 </main>

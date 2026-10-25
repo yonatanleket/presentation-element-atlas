@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-about-us",
+  "name": "About-us block",
+  "category": "web-content",
+  "definition": "Section with the company mission in one sentence, a few hard facts and a row of team faces, linking to the full story.",
+  "bestUse": "Building trust on landing pages for products where buyers want to know who is behind them.",
+  "trigger": [
+    "social-proof",
+    "key-message"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "landbook",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-about-us.html",
+    "kind": "animated",
+    "how": "People buy from people, so the section pairs a one-sentence mission with checkable facts and real faces. Play shows the mission, then the facts, then the team row and the link to the full story. Use real photos with permission; these people and figures are invented."
+  },
+  "aliases": [
+    "about section",
+    "our story",
+    "team section"
+  ],
+  "related": [
+    "speaker-intro-card"
+  ]
+}

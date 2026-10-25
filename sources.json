@@ -66,5 +66,9 @@
   "navbargallery": {
     "label": "Navbar Gallery",
     "url": "https://navbar.gallery/"
+  },
+  "landbook": {
+    "label": "Land-book (landing page sections)",
+    "url": "https://land-book.com/sections"
   }
 }

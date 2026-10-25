@@ -25,6 +25,11 @@ const hazards = HAZARD_IDS.map(id => hazardResult.hazards.find(h => h.data.id ==
 const elById = Object.fromEntries(els.map(e => [e.id, e]));
 const hazardCats = {text:'Text',titles:'Titles',data:'Data','color-type':'Color & type',layout:'Layout',motion:'Motion',structure:'Structure',evidence:'Evidence'};
 const reverse = hazardResult.reverseLinks;
+// Related elements in both directions: an element's own related list plus every element that lists it.
+const relatedOf = Object.fromEntries(els.map(e => [e.id, new Set(e.related || [])]));
+for (const e of els) for (const r of e.related || []) relatedOf[r]?.add(e.id);
+const relatedIds = id => [...(relatedOf[id] || [])].filter(r => elById[r]).sort((a, b) => elById[a].name.localeCompare(elById[b].name, 'en'));
+const relatedElements = id => relatedIds(id).map(r => `<a href="#${r}" data-relation="element:${r}" data-origin-element="${id}">${esc(elById[r].name)}${(elById[r].surface || 'slide') !== (elById[id].surface || 'slide') ? ` <small>${(elById[r].surface || 'slide') === 'web' ? 'Web' : 'Slide'}</small>` : ''}</a>`).join('');
 const relatedHazards = id => (reverse[id] || []).map(h => `<a href="#hazard-${h}" data-relation="hazard:${h}" data-origin-element="${id}">${esc(hazards.find(x => x.id === h).name)}</a>`).join('');
 
 
@@ -54,14 +59,14 @@ const surfaceCount = id => els.filter(e => (e.surface || 'slide') === id).length
 const slideCount = surfaceCount('slide'), webCount = surfaceCount('web');
 const counts = Object.fromEntries(categories.map(c => [c.id, els.filter(e => e.category === c.id).length]));
 const card = e => {
-  const search = [e.name, e.definition, e.bestUse, ...(e.aliases || [])].join(' ').toLowerCase();
+  const search = [e.name, e.definition, e.bestUse, ...(e.aliases || []), ...e.trigger, ...e.trigger.map(t => t.replace(/-/g, ' '))].join(' ').toLowerCase();
   return `<article class="card" id="card-${e.id}" data-id="${e.id}" data-cat="${e.category}" data-level="${e.level}" data-surface="${e.surface || 'slide'}"${e.added ? ` data-added="${e.added}"` : ''} data-search="${esc(search)}">
 <div class="poster" data-hover-demo="${e.id}" data-open="${e.id}">${poster(e.id, e.name)}</div>
 <p class="specimen-caption">Illustrative demo</p>${limitationCaption(e.id)}
 <div class="ch"><h3>${esc(e.name)}</h3>${e.added ? '<span class="pill-new" hidden>New</span>' : ''}${e.level === 'advanced' ? '<span class="pill-adv">Advanced</span>' : ''}</div>
 
 <p class="use"><b>Best for</b> ${esc(e.bestUse)}</p>
-<details class="card-details"><summary>Definition & related problems</summary><p class="def">${esc(e.definition)}</p>${reverse[e.id] ? `<div class="relations"><b>Helps with</b>${relatedHazards(e.id)}</div>` : ''}</details>
+<details class="card-details"><summary>Definition & related</summary><p class="def">${esc(e.definition)}</p>${relatedIds(e.id).length ? `<div class="relations"><b>Related</b>${relatedElements(e.id)}</div>` : ''}${reverse[e.id] ? `<div class="relations"><b>Helps with</b>${relatedHazards(e.id)}</div>` : ''}</details>
 <div class="cf"><button class="demo-btn" type="button" data-open="${e.id}" aria-label="Try demo: ${esc(e.name)}">Try demo</button><span class="cat-mono">${e.demo.kind === 'animated' ? 'Motion' : e.demo.kind === 'interactive' ? 'Interactive' : 'Still'}</span></div>
 </article>`;
 };
@@ -81,7 +86,7 @@ const extraCss = fs.readFileSync(path.join(ROOT,'templates/catalog-hazards.css')
 const redesignCss = fs.readFileSync(path.join(ROOT,'templates/catalog-redesign.css'),'utf8');
 const catalogScript = fs.readFileSync(path.join(ROOT,'scripts/catalog-ui.js'),'utf8');
 const data = els.map(e => ({ id: e.id, name: e.name, cat: e.category, level: e.level, surface: e.surface || 'slide', added: e.added || null, demo: hasDemo(e.id),
-  definition:e.definition, bestUse:e.bestUse, kind:e.demo.kind, preview:previewAssets.get(e.id), sources: e.sources.map(k => sources[k]).filter(Boolean), hazards: reverse[e.id] || [] }));
+  definition:e.definition, bestUse:e.bestUse, kind:e.demo.kind, preview:previewAssets.get(e.id), sources: e.sources.map(k => sources[k]).filter(Boolean), hazards: reverse[e.id] || [], related: relatedIds(e.id), trigger: e.trigger }));
 const json = JSON.stringify({ elements: data, hazards:hazards.map(h=>({...h,preview:previewAssets.get('hazard:'+h.id+':before')})), hazardCats }).replace(/</g, '\\u003c');
 
 const html = `<!doctype html>

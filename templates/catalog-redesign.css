@@ -26,3 +26,5 @@
 .pill-new{font-size:10px;color:var(--ok,#11734f);background:#e3f3ec;padding:3px 7px;border-radius:4px;margin-inline-start:auto}
 .ch .pill-new+.pill-adv{margin-inline-start:0}
 #new-filter{flex:none}
+.relations small{font:10px var(--f-mono);color:var(--muted);margin-inline-start:4px}
+.tag-chips{display:flex;flex-wrap:wrap;gap:6px}.tag-chip{min-height:32px;padding:4px 10px;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--fg);font-size:12px}.tag-chip:hover{border-color:var(--accent)}

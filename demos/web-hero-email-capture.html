@@ -17,11 +17,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Email-capture hero</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Email-capture hero: headline with an email field and Join the waitlist button directly below.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="ec"><span class="pill">Private beta</span><p class="web-h1">Your inbox, finally quiet</p><p class="web-lede">Join the waitlist and get early access in the next cohort.</p>
 <form id="f" novalidate><label class="sr-only" for="em">Email address</label><input id="em" type="email" placeholder="you@company.com" aria-describedby="er" autocomplete="off"><button class="web-btn" type="submit">Join the waitlist</button></form><p class="err" id="er" aria-live="polite"></p></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>The field sits right under the promise, so signing up takes one step. Type an email and press Join: an invalid address shows an inline error next to the field, a valid one replaces the form with a confirmation. Nothing is sent anywhere; the form is simulated.</p></details>
 </main>

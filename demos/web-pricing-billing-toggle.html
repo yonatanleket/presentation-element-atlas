@@ -18,11 +18,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Billing-period toggle</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Billing-period toggle above three plan cards whose prices change between monthly and annual.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="pr"><p class="web-h2">Simple pricing for growing teams</p><div class="bt"><div class="seg2" role="radiogroup" aria-label="Billing period" id="bp"><button type="button" role="radio" data-p="m">Monthly</button><button type="button" role="radio" data-p="y">Annual</button></div><span class="pill ok">Save 20% annually</span></div>
 <div class="plans"><div class="plan card"><b>Starter</b><span class="amt" data-m="0" data-y="0"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn ghost">Start free</span></div><div class="plan card pop"><b>Team <span class="pill">Popular</span></b><span class="amt" data-m="15" data-y="12"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn">Start trial</span></div><div class="plan card"><b>Business</b><span class="amt" data-m="30" data-y="24"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn ghost">Start trial</span></div></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>One switch controls every price on the page, so plans stay comparable whichever period the visitor prefers. Choose Monthly or Annual: prices update, annual shows the monthly equivalent with the yearly total underneath, and the saving is stated next to the switch. Prices are illustrative.</p></details>
 </main>

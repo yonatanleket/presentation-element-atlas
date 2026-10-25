@@ -34,7 +34,10 @@ export function loadValidatedPreviews(root) {
       const required=group==='hazards'?['before','after']:['representative'];
       for(const state of required)if(!entry.images.some(image=>image.state===state))throw Error(`missing ${state} image`);
       for(const image of entry.images){
-        if(!Number.isInteger(image.width)||!Number.isInteger(image.height)||image.width!==800||!(recipe.bounds==='full-content'?image.height>=500&&image.height<=2400:(web?[450,451]:[500,501]).includes(image.height))||!Number.isInteger(image.bytes)||image.bytes<1)throw Error('invalid image dimensions/size');
+        if(!Number.isInteger(image.width)||!Number.isInteger(image.height)||image.width!==800||!Number.isInteger(image.bytes)||image.bytes<1)throw Error(`invalid image size: expected 800px wide, got ${image.width}x${image.height}`);
+        // Expected height follows the stage aspect: 16:10 for slides, 16:9 for web sections (allow 1px rounding).
+        const expected=Math.round(800/(web?16/9:16/10));
+        if(recipe.bounds==='full-content'?image.height<500||image.height>2400:Math.abs(image.height-expected)>1)throw Error(`invalid image height: expected ${recipe.bounds==='full-content'?'500-2400':expected}px for a ${web?'16:9 web':'16:10 slide'} stage, got ${image.height}`);
         if(!/^previews\/(elements|hazards)\/[a-z0-9-]+\.png$/.test(image.src))throw Error('unsafe asset path');
         const data=fs.readFileSync(path.join(root,image.src));
         if(data.toString('hex',0,8)!=='89504e470d0a1a0a'||data.readUInt32BE(16)!==image.width||data.readUInt32BE(20)!==image.height||hash(data)!==image.sha256||data.length!==image.bytes)throw Error('asset dimensions/hash/bytes mismatch');

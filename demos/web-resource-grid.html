@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resource teaser grid: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.rg{height:100%;display:grid;align-content:start;gap:.7em;padding:.9em 2.4em}.rg .top{display:flex;align-items:center;justify-content:space-between;gap:1em}
+.fl{display:flex;gap:.3em}.fl button{font:500 .85em/1 var(--f-body);min-height:2.3em;padding:0 .9em;border-radius:99em;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}.fl button[aria-pressed=true]{background:var(--fg);border-color:var(--fg);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em}.rc{display:grid;grid-template-rows:2.4em auto;overflow:hidden}.rc .web-shot{border:0;border-radius:0}.rc div{padding:.45em .7em;display:grid;gap:.2em}.rc b{font-size:.9em;line-height:1.25}.rc small{font:400 .8em/1 var(--f-mono);color:var(--muted)}
+.ct{font:400 .85em/1 var(--f-mono);color:var(--muted)}.rg a{color:var(--accent);font-weight:600;font-size:.9em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Resource teaser grid</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Resource teaser grid: filter buttons All, Guides, Webinars and Templates above a grid of resource cards.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="rg"><div class="top"><p class="web-h2" style="font-size:1.4em">Learn from the team</p><a href="#" id="all">Browse all resources →</a></div><div class="top"><div class="fl" role="group" aria-label="Resource type" id="fl"><button type="button" data-t="all">All</button><button type="button" data-t="Guide">Guides</button><button type="button" data-t="Webinar">Webinars</button><button type="button" data-t="Template">Templates</button></div><span class="ct" id="ct" aria-live="polite"></span></div><div class="cards" id="cards"></div></div></div></div>
+</div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A few strong resources are teased with a type label, title and reading time, and a filter narrows them without leaving the page. Choose All, Guides, Webinars or Templates: the grid updates and the count says how many match. The full library is one link away. Titles are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var R=[['Guide','Run a ten-minute stand-up','6 min read'],['Webinar','Planning a quarter in one afternoon','42 min'],['Template','Weekly status update','Duplicate'],['Guide','Write tickets people finish','8 min read'],['Template','Launch checklist','Duplicate'],['Webinar','Roadmaps that survive contact','35 min']],t='all';
+function draw(){var c=$('#cards');c.textContent='';var list=R.filter(function(r){return t==='all'||r[0]===t;});list.slice(0,6).forEach(function(r){var a=document.createElement('article');a.className='rc card';a.innerHTML='<span class="web-shot"></span><div><small></small><b></b><small></small></div>';var s=a.querySelectorAll('small');s[0].textContent=r[0];a.querySelector('b').textContent=r[1];s[1].textContent=r[2];c.appendChild(a);});
+$$('#fl button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.t===t));});$('#ct').textContent=list.length+' resource'+(list.length===1?'':'s');return list.length;}
+$$('#fl button').forEach(function(b){b.addEventListener('click',function(){t=b.dataset.t;var n=draw();api.status(b.textContent+': '+n+' shown');});});
+$('#all').addEventListener('click',function(e){e.preventDefault();api.status('Would open the resource library');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){t='all';draw();}});
+</script>
+</body>
+</html>

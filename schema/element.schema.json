@@ -57,7 +57,8 @@
         "web-navigation",
         "web-pricing",
         "web-social-proof",
-        "web-conversion"
+        "web-conversion",
+        "web-content"
       ]
     },
     "definition": {

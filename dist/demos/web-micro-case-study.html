@@ -108,7 +108,18 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 /* ---------- Stage: 16:9, scaled 768x432 logical canvas (1em = 16 logical px) ----------
    Layout is in em and scales with the stage, so a section looks the same at any width. */
 .stage[data-aspect=web]{max-width:848px;aspect-ratio:16/9;background:var(--surface)}
-.stage[data-aspect=web]>*{font-size:2.0833cqi}
+.stage[data-aspect=web]>*{font-size:max(10px,2.0833cqi)}
+
+/* ---------- Narrow screens: keep the section's layout and pan across it ----------
+   Shrinking a 16:9 page section to phone width makes its text unreadable, so below 600px the stage
+   keeps a 560px minimum width inside a keyboard-focusable horizontal scroller. Not applied to hover quick-play. */
+.stage-scroll{border-radius:var(--radius-sm)}
+.scroll-hint{display:none;margin:0;font:400 13px/1.3 var(--f-body);color:var(--muted)}
+@media (max-width:599px){
+  html:not(.quickplay) .stage-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+  html:not(.quickplay) .stage-scroll>.stage[data-aspect=web]{min-width:560px}
+  html:not(.quickplay) .scroll-hint{display:block}
+}
 
 /* ---------- Page building blocks ---------- */
 /* A simulated browser window: a thin address bar over the page body. */
@@ -146,11 +157,14 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Micro case study</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="img" aria-label="Demo: Micro case study card: customer name, challenge, a large result of 41% fewer tickets, a short quote and a read link.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="cs card"><div class="l" data-f="1"><span class="web-logo">Brand K · Retail</span><h4>Challenge</h4><p class="p">Support volume doubled every holiday season, and hiring could not keep up.</p></div>
 <div class="r"><h4 data-f="2">Result</h4><span class="res" data-f="2">41% fewer tickets</span><p class="p" data-f="2">in the first quarter after launching self-serve answers.</p><blockquote data-f="3">“Peak season felt like a normal week.” Morgan T., Support director</blockquote><a data-f="3">Read the full story →</a></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>A case study shrunk to one card: who the customer is, what was wrong, one measured result and a short quote, then a link for those who want the full story. Play shows the customer and challenge, then the result, then the quote and link. The customer and figures are invented.</p></details>
 </main>

@@ -95,8 +95,29 @@ for(const width of [320,375,640]){
  await p.goto(url+'#elements');await p.reload();assert.equal(await surf('slide'),true);
  await p.evaluate(()=>location.hash='web-faq-accordion');await p.locator('#pBody[data-state="ready"]').waitFor();assert.equal(await p.locator('[data-surface-filter=web]').getAttribute('aria-checked'),'true');assert.equal(await p.locator('#prev').isDisabled()&&await p.locator('#next').isDisabled(),false);
  await p.locator('#close').click();assert.equal(await p.locator('button[data-level=all]').getAttribute('aria-pressed'),'true');assert.equal(await p.locator('#out .card:not([hidden])').count(),await p.locator('#out .card[data-surface=web]').count());
- await p.locator('#new-filter').click();assert.ok(await p.locator('#out .card:not([hidden])').evaluateAll(cards=>cards.every(c=>c.dataset.added)));await p.locator('#new-filter').click();
+ if(await p.locator('#new-filter').isVisible()){await p.locator('#new-filter').click();assert.ok(await p.locator('#out .card:not([hidden])').evaluateAll(cards=>cards.every(c=>c.dataset.added)));await p.locator('#new-filter').click();}
+ await p.locator('[data-surface-filter=slide]').click();assert.equal(await p.locator('#new-filter').isVisible(),await p.locator('#out .card[data-surface=slide][data-added]').count()>0);
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
- check('surface switch: Slides default, Web filter and categories, radio arrow keys, #surface-web refresh, element route switches surface without changing Level, New filter');await ctx.close();}
+ check('surface switch (New chip hidden when the surface has nothing new): Slides default, Web filter and categories, radio arrow keys, #surface-web refresh, element route switches surface without changing Level, New filter');await ctx.close();}
+// Related links render in both directions and cross surfaces; tag chips search the catalog.
+{const ctx=await browser.newContext({viewport:{width:1280,height:900}});await ctx.route(/https?:\/\//,r=>r.abort());const p=await ctx.newPage();p.on('pageerror',e=>report.errors.push(e.message));
+ await p.goto(url+'#web-pricing-billing-toggle');await p.locator('#pBody[data-state="ready"]').waitFor();
+ const link=p.locator('#pFoot [data-relation="element:tier-cards"]');assert.equal(await link.count(),1);await link.click();
+ await p.locator('#pBody[data-state="ready"]').waitFor();assert.equal(await p.locator('#pTitle').textContent(),'Tier cards');assert.equal(await p.locator('[data-surface-filter=slide]').getAttribute('aria-checked'),'true');
+ assert.equal(await p.locator('#pFoot [data-relation="element:web-pricing-billing-toggle"]').count(),1);
+ await p.locator('#pMeta [data-tag="options-comparison"]').click();await p.waitForTimeout(250);assert.equal(await p.locator('#panel').evaluate(d=>d.open),false);assert.equal(await p.locator('#q').inputValue(),'options comparison');assert.ok(await p.locator('#card-tier-cards:not([hidden])').count()===1);
+ check('related links both ways across surfaces; panel tag chip searches the catalog');await ctx.close();}
+// Web demos stay legible on phones: text at least 8px and no text cut off outside the stage, at 320/375/640.
+{const ids=fs.readdirSync(path.join(ROOT,'elements')).filter(f=>f.startsWith('web-')).map(f=>f.slice(0,-5));const problems=[];
+ for(const width of [320,375,640]){const ctx=await browser.newContext({viewport:{width,height:800},reducedMotion:'reduce'});await ctx.route(/https?:\/\//,r=>r.abort());const p=await ctx.newPage();p.on('pageerror',e=>report.errors.push(e.message));
+  for(const id of ids){await p.goto(new URL('demos/'+id+'.html',url).href);await p.locator('.demo[data-state]:not([data-state=loading])').waitFor();
+   const r=await p.evaluate(()=>{const s=document.querySelector('.stage'),sb=s.getBoundingClientRect();let min=99,cut=0;const walk=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let n;
+    while((n=walk.nextNode())){if(!n.textContent.trim())continue;const el=n.parentElement;if(el.closest('[hidden],.sr-only'))continue;const cs=getComputedStyle(el);if(cs.visibility==='hidden'||+cs.opacity===0)continue;
+     let scroll=false;for(let a=el;a&&a!==s;a=a.parentElement){const o=getComputedStyle(a).overflowY;if((o==='auto'||o==='scroll')&&a.scrollHeight>a.clientHeight){scroll=true;break;}}
+     min=Math.min(min,parseFloat(cs.fontSize));const rg=document.createRange();rg.selectNodeContents(n);const b=rg.getBoundingClientRect();if(!scroll&&b.width&&(b.left<sb.left-1||b.right>sb.right+1||b.top<sb.top-1||b.bottom>sb.bottom+1))cut++;}
+    return {min,cut,pageOverflow:document.documentElement.scrollWidth>innerWidth};});
+   if(r.min<8||r.cut||r.pageOverflow)problems.push({id,width,...r});}
+  await ctx.close();}
+ assert.deepEqual(problems,[],JSON.stringify(problems));check(ids.length+' web demos legible at 320/375/640: text >= 8px, nothing cut off, no page overflow');}
 assert.equal(report.errors.length,0,JSON.stringify(report.errors));report.status='functional-checks-passed';process.exitCode=0;
 }catch(error){report.status='failed';report.failure=error.stack;process.exitCode=1;}finally{if(browser)await browser.close();fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({report:reportFile,status:report.status,checks:report.checks.length,failure:report.failure}));}

@@ -18,11 +18,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Audience-switch hero</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Audience-switch hero: three tabs, Designers, Engineers and Managers, above a headline that changes with the selected tab.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="as"><div class="tabs" role="tablist" aria-label="Audience" id="tl"><button role="tab" type="button" id="t0" aria-controls="pn">Designers</button><button role="tab" type="button" id="t1" aria-controls="pn">Engineers</button><button role="tab" type="button" id="t2" aria-controls="pn">Managers</button></div>
 <div class="pane" role="tabpanel" id="pn" tabindex="0"><div class="col" style="gap:.8em"><p class="web-h1" id="hh"></p><p class="web-lede" id="hl"></p><span class="web-btn" style="justify-self:start">Start free</span></div><div class="web-shot" id="hv"></div></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>One page, several first impressions: each tab rewrites the headline and the value line for one role while the call to action stays the same. Click a tab, or focus the tabs and use the arrow keys, to switch audience. The copy is illustrative.</p></details>
 </main>

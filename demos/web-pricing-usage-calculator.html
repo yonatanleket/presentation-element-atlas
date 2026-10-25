@@ -17,11 +17,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Usage-based price calculator</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Usage-based price calculator: a slider for monthly events with the estimated price and its breakdown.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="uc"><div class="col" style="gap:.8em"><p class="web-h2">Pay for what you send</p><label for="sl">Events per month</label><span class="vol" id="vv"></span><input type="range" id="sl" min="1" max="12" step="1" aria-describedby="vv"><div class="ticks"><span>10k</span><span>1M</span><span>10M+</span></div></div>
 <div class="est card"><span class="kicker" id="tier"></span><span class="big2" id="pr" aria-live="polite"></span><span class="brk" id="bk"></span><span class="web-btn" id="cta">Start free</span></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Visitors move a slider to their expected monthly volume and see the estimate immediately, with the plan tier named and the arithmetic shown so the number can be trusted. Drag the slider or use the arrow keys. Above the last tier the price is replaced by a contact link. Prices are illustrative.</p></details>
 </main>

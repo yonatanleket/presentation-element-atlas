@@ -96,6 +96,12 @@
     "description": "Logos, testimonials, ratings and outcomes that show other people trust the product."
   },
   {
+    "id": "web-content",
+    "surface": "web",
+    "label": "Content sections",
+    "description": "The body of a landing page: value proposition, how it works, resources and the people behind the product."
+  },
+  {
     "id": "web-conversion",
     "surface": "web",
     "label": "Conversion & footer",

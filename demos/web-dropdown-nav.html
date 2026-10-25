@@ -18,6 +18,7 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Dropdown navigation</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Dropdown navigation: a top bar whose Product item opens a list of four sub-pages.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav" id="nv"><span class="logo">Acme</span>
@@ -25,6 +26,8 @@
 <div class="dd"><button type="button" aria-expanded="false" aria-controls="m2">Resources</button><div class="menu card" id="m2" hidden><a href="#">Guides</a><a href="#">Templates</a><a href="#">Changelog</a></div></div>
 <a>Pricing</a><span class="web-btn ghost sm">Sign in</span></nav><div class="pg"></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>The Product and Resources items are buttons that open a short list of sub-pages under the bar. Click one or press Enter on it, use Tab through the links, and press Escape or click elsewhere to close. Only one menu is open at a time, and the open button is marked expanded.</p></details>
 </main>

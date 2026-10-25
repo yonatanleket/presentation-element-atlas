@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About-us block: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.ab2{height:100%;display:grid;grid-template-columns:1.1fr 1fr;gap:2.2em;align-items:center;padding:1.4em 2.4em}.ab2 .web-h2{font-size:1.6em}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em;margin-top:.4em}.facts div{display:grid;gap:.15em}.facts b{font:700 1.4em/1 var(--f-display)}.facts span{font-size:.8em;color:var(--muted)}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:.9em}.team div{display:grid;justify-items:center;gap:.3em;text-align:center}.team i{width:3.4em;height:3.4em;border-radius:50%;background:var(--accent-soft)}.team div:nth-child(3n+2) i{background:var(--ok-soft)}.team div:nth-child(3n) i{background:var(--warn-soft)}
+.team b{font-size:.85em}.team small{font-size:.8em;color:var(--muted)}.ab2 a{color:var(--accent);font-weight:600;font-size:.9em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">About-us block</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: About-us block: mission sentence, three facts about the company and a row of six team avatars.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="ab2"><div class="col" style="gap:.6em"><span class="kicker" data-f="1">About Acme</span><p class="web-h2" data-f="1">We build calm tools for busy teams.</p><div class="facts" data-f="2"><div><b>2019</b><span>founded</span></div><div><b>48</b><span>people, fully remote</span></div><div><b>11</b><span>countries</span></div></div><a data-f="3">Read our story →</a></div>
+<div class="team" data-f="3"><div><i></i><b>Noa B.</b><small>CEO</small></div><div><i></i><b>Eli K.</b><small>CTO</small></div><div><i></i><b>Maya R.</b><small>Design</small></div><div><i></i><b>Jon T.</b><small>Support</small></div><div><i></i><b>Ida S.</b><small>Product</small></div><div><i></i><b>Omar F.</b><small>Sales</small></div></div></div></div></div>
+</div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>People buy from people, so the section pairs a one-sentence mission with checkable facts and real faces. Play shows the mission, then the facts, then the team row and the link to the full story. Use real photos with permission; these people and figures are invented.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How-it-works steps: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.hw{height:100%;display:grid;align-content:center;gap:1.6em;padding:1.4em 2.4em}.hw .hd{text-align:center;display:grid;gap:.3em}
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:1.6em}.steps::before{content:"";position:absolute;inset-inline:16%;inset-block-start:1.2em;border-block-start:2px dashed var(--line)}
+.st{position:relative;display:grid;justify-items:center;text-align:center;gap:.45em}.st i{width:2.4em;height:2.4em;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font:700 1em/1 var(--f-display);font-style:normal;box-shadow:0 0 0 .35em var(--surface)}
+.st b{font-size:1.05em}.st span{font-size:.9em;color:var(--ink-2);max-width:13em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">How-it-works steps</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: How-it-works steps: three numbered steps, Connect, Set rules and Get alerts, joined by a line.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="hw"><div class="hd"><span class="kicker">How it works</span><p class="web-h2">Up and running in three steps</p></div><div class="steps">
+<div class="st" data-f="1"><i>1</i><b>Connect your tools</b><span>Sign in with your work account and pick the apps to watch.</span></div>
+<div class="st" data-f="2"><i>2</i><b>Set simple rules</b><span>Choose what counts as urgent with plain-language filters.</span></div>
+<div class="st" data-f="3"><i>3</i><b>Get the right alerts</b><span>Only what matters reaches you, grouped once an hour.</span></div></div></div></div></div>
+</div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Three steps make an unfamiliar product feel simple: each has a number, a verb-first title and one sentence on what happens. Play reveals the steps in order along the connecting line. More than four steps usually means the section is describing the product, not the path. The steps are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

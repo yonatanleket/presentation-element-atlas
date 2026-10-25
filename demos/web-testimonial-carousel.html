@@ -17,11 +17,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Testimonial carousel</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Testimonial carousel showing one large quote with the person and role, previous and next buttons and three position dots.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="tc" id="tc" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Customer testimonials"><blockquote id="qt" aria-live="polite"></blockquote><span class="who"><i></i><span><b id="nm"></b><small id="rl"></small></span></span>
 <div class="ctl"><button class="sbtn" type="button" id="pv" aria-label="Previous testimonial">←</button><div class="dots" id="dt"></div><button class="sbtn" type="button" id="nx" aria-label="Next testimonial">→</button></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Each quote gets the full width, with the person named so it reads as real voice rather than marketing. Use Previous and Next, the dots, or the arrow keys after focusing the carousel; it never advances on its own, so readers keep control. People and quotes are invented examples.</p></details>
 </main>

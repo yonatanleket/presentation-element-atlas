@@ -1,6 +1,6 @@
 # Presentation Element Atlas
 
-An open catalog of slide and web page elements: what each one is, when to use it, and a live demo of how it works. It covers 166 slide elements in 12 categories, from progress bars and KPI tiles to sankeys, explorable sliders and audience polls, and 30 web page sections in 5 categories, from heroes and mega menus to pricing toggles, testimonial carousels and consent banners.
+An open catalog of slide and web page elements: what each one is, when to use it, and a live demo of how it works. It covers 166 slide elements in 12 categories, from progress bars and KPI tiles to sankeys, explorable sliders and audience polls, and 34 web page sections in 6 categories, from heroes and mega menus to pricing toggles, how-it-works steps, testimonial carousels and consent banners.
 
 Use it to pick the right element for a slide or a page, to share a vocabulary with the people you build with, or to copy a working demo into your own work.
 
@@ -9,7 +9,8 @@ Use it to pick the right element for a slide or a page, to share a vocabulary wi
 Open `dist/index.html` in a browser. It works straight from disk or from any static host. No server or install is needed.
 
 - **Slides / Web sections** switches surface. Slides is the default; `#surface-web` opens the web sections directly.
-- **New** shows elements added in the last 30 days, newest first.
+- **New** shows elements added in the last 30 days, newest first. It is hidden when the current surface has nothing new.
+- **Related** links (in card details and the demo panel) connect slide and web elements in both directions. **Tags** in the panel search the catalog for that content type.
 - **Search** matches names, definitions, "best for" text and aliases. Press Esc to clear it.
 - **Standard / Advanced** filters by level. Advanced elements are interactive or less common.
 - **Categories** in the desktop sidebar narrow the list; on mobile, open the Categories disclosure.
@@ -23,7 +24,7 @@ elements/<id>.json        one file per element (the source of truth)
 demos/<id>.html           one live demo per element
 demos/_harness.css|js     the shared demo frame every demo uses
 demos/_web.css            the wider 16:9 stage web-section demos add on top
-categories.json           the 17 categories, each with a surface (slide or web)
+categories.json           the 18 categories, each with a surface (slide or web)
 triggers.json             controlled list of content-type tags (what kind of content an element suits)
 sources.json              references cited by elements ("common" = common practice)
 schema/element.schema.json  JSON Schema for element files
@@ -51,11 +52,11 @@ Adding one valid file to `elements/` and rebuilding adds exactly one card.
 
 Cards use inert, 800px-wide captures of each actual demo stage, with labeled full-content overview exceptions, with authored state recipes in `preview-recipes.json`. Motion and interactive specimens carry a text cue; use Try demo to explore behavior. Pointing at an element poster with a mouse mounts one sandboxed quick-play frame over the still after a short delay, and it is unmounted when the pointer leaves; keyboard focus never loads a frame, and reduced-motion or touch devices keep the still. Only one sandboxed live frame is mounted at a time.
 
-The optional authoring command `node scripts/capture-previews.mjs --playwright /absolute/path/to/playwright/index.mjs --browser /absolute/path/to/Chrome` regenerates `previews/manifest.json` and content-addressed PNGs. Capture requires an existing Playwright/browser installation; browsing and building require no install. Build validates source, harness, recipe and capture-environment fingerprints plus asset hashes, dimensions and byte lengths, then copies valid images into `dist/previews/`. Missing, stale or broken captures show **Preview unavailable** while Try demo remains usable. The first six element images load eagerly; remaining images use native lazy loading with reserved 16:10 dimensions. Captures add bytes over the previous SVG motifs; no speed improvement is claimed.
+The optional authoring command `node scripts/capture-previews.mjs --playwright /absolute/path/to/playwright/index.mjs --browser /absolute/path/to/Chrome` regenerates `previews/manifest.json` and content-addressed PNGs. Capture requires an existing Playwright/browser installation; browsing and building require no install. Build validates source, harness, recipe and capture-environment fingerprints plus asset hashes, dimensions and byte lengths, then copies valid images into `dist/previews/`. Missing, stale or broken captures show **Preview unavailable** while Try demo remains usable. The first six element images load eagerly; remaining images use native lazy loading with reserved dimensions (16:10 for slide elements, 16:9 for web sections). Captures add bytes over the previous SVG motifs; no speed improvement is claimed.
 
 ## Demo status
 
-Every element has a live demo: all 196 run in the catalog panel and on their own from `dist/demos/`. If you add an element without a demo, its panel shows "No demo yet" until you add `demos/<id>.html`.
+Every element has a live demo: all 200 run in the catalog panel and on their own from `dist/demos/`. If you add an element without a demo, its panel shows "No demo yet" until you add `demos/<id>.html`.
 
 ## Contributing
 

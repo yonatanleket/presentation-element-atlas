@@ -19,12 +19,15 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Sticky shrinking header</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Sticky shrinking header over a scrollable page with several sections.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="sc" id="sc" tabindex="0" aria-label="Scrollable page">
 <nav class="web-nav sh" id="sh"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn sm">Get started</span></nav>
 <div class="blk">Hero</div><div class="blk">Features</div><div class="blk">Testimonials</div><div class="blk">Pricing</div><div class="blk">Footer</div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Scroll the page inside the window: the header stays at the top and, once you leave the first screen, shrinks to a compact bar with a shadow so it takes less room while keeping the call to action visible. The page can be scrolled with the mouse or with the arrow keys after focusing it.</p></details>
 </main>

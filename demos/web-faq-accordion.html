@@ -16,10 +16,13 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">FAQ accordion</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: FAQ accordion with four questions; the first answer is expanded.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="fq"><p class="web-h2" style="text-align:center;margin-bottom:.4em">Frequently asked questions</p><div id="fq"></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Questions are buttons that expand their answer below, so visitors scan the questions and open only what worries them. Click a question or press Enter or Space; the plus turns to a minus and the button reports expanded. Opening one closes the others to keep the list short. Answers are illustrative.</p></details>
 </main>

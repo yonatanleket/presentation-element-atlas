@@ -18,11 +18,14 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Per-seat price stepper</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Per-seat price stepper: minus and plus buttons around a seat count, the price per seat and the monthly total.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="ss"><div class="col" style="gap:.8em"><p class="web-h2">How big is your team?</p><label for="n" style="font-weight:600">Seats</label><div class="stp"><button type="button" id="mi" aria-label="Remove a seat">−</button><input id="n" type="number" min="1" max="200" inputmode="numeric"><button type="button" id="pl" aria-label="Add a seat">+</button></div></div>
 <div class="sum card"><span class="kicker" id="unit"></span><span class="tot" id="tot" aria-live="polite"></span><span class="per muted" style="font-size:.85em">per month, billed monthly</span><span class="nx" id="nx"></span></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>The visitor sets the team size and sees the unit price and total update, with the next discount threshold named so a bigger plan feels earned rather than hidden. Use the minus and plus buttons or type a number. The discount steps at 10 and 50 seats; prices are illustrative.</p></details>
 </main>

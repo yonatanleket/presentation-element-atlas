@@ -108,7 +108,18 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 /* ---------- Stage: 16:9, scaled 768x432 logical canvas (1em = 16 logical px) ----------
    Layout is in em and scales with the stage, so a section looks the same at any width. */
 .stage[data-aspect=web]{max-width:848px;aspect-ratio:16/9;background:var(--surface)}
-.stage[data-aspect=web]>*{font-size:2.0833cqi}
+.stage[data-aspect=web]>*{font-size:max(10px,2.0833cqi)}
+
+/* ---------- Narrow screens: keep the section's layout and pan across it ----------
+   Shrinking a 16:9 page section to phone width makes its text unreadable, so below 600px the stage
+   keeps a 560px minimum width inside a keyboard-focusable horizontal scroller. Not applied to hover quick-play. */
+.stage-scroll{border-radius:var(--radius-sm)}
+.scroll-hint{display:none;margin:0;font:400 13px/1.3 var(--f-body);color:var(--muted)}
+@media (max-width:599px){
+  html:not(.quickplay) .stage-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+  html:not(.quickplay) .stage-scroll>.stage[data-aspect=web]{min-width:560px}
+  html:not(.quickplay) .scroll-hint{display:block}
+}
 
 /* ---------- Page building blocks ---------- */
 /* A simulated browser window: a thin address bar over the page body. */
@@ -146,11 +157,14 @@ body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body)}
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Testimonial carousel</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Testimonial carousel showing one large quote with the person and role, previous and next buttons and three position dots.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="tc" id="tc" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Customer testimonials"><blockquote id="qt" aria-live="polite"></blockquote><span class="who"><i></i><span><b id="nm"></b><small id="rl"></small></span></span>
 <div class="ctl"><button class="sbtn" type="button" id="pv" aria-label="Previous testimonial">←</button><div class="dots" id="dt"></div><button class="sbtn" type="button" id="nx" aria-label="Next testimonial">→</button></div></div></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Each quote gets the full width, with the person named so it reads as real voice rather than marketing. Use Previous and Next, the dots, or the arrow keys after focusing the carousel; it never advances on its own, so readers keep control. People and quotes are invented examples.</p></details>
 </main>

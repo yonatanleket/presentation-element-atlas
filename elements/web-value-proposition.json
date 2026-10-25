@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-value-proposition",
+  "name": "Value proposition block",
+  "category": "web-content",
+  "definition": "Section that states one core benefit in a sentence, then backs it with three concrete supporting points.",
+  "bestUse": "Right after the hero, to say why this product rather than the alternatives.",
+  "trigger": [
+    "key-message",
+    "claim-needing-evidence"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "landbook",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-value-proposition.html",
+    "kind": "animated",
+    "how": "One sentence makes the claim and three short points prove it, each with a concrete number or fact rather than an adjective. Play shows the claim, then the supporting points one group at a time. Keep it to one benefit; a list of everything belongs in a feature grid. Figures are illustrative."
+  },
+  "aliases": [
+    "value prop",
+    "why us",
+    "benefit statement"
+  ],
+  "related": [
+    "kicker-action-title-lede",
+    "web-feature-grid"
+  ]
+}

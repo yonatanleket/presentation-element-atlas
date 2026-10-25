@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const readJSON = (p, root = ROOT) => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
-export const SCHEMA_VERSION = '1.0.0';
+// Element record formats the validator accepts; mirrors the schemaVersion enum in schema/element.schema.json.
+export const SCHEMA_VERSIONS = ['1.0.0', '1.1.0'];
 
 export function loadAtlas(root = ROOT) {
   const dir = path.join(root, 'elements');

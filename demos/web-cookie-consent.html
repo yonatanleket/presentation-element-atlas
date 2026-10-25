@@ -18,12 +18,15 @@
 <body>
 <main class="demo" data-surface="web" data-state="loading">
 <h1 class="demo-title">Cookie consent banner</h1>
+<div class="stage-scroll" tabindex="0" role="region" aria-label="Section preview, scrolls sideways on narrow screens">
 <div class="stage" data-aspect="web" role="group" aria-label="Demo: Cookie consent banner at the bottom of a page with Reject all, Accept all and Settings buttons of equal weight.">
 <span class="label-illustrative">Illustrative</span>
 <div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="pg4"></div><div class="ck2 card" id="bn" role="region" aria-label="Cookie consent"><b>We use cookies</b><p>Essential cookies keep the site working. With your permission we also use analytics and marketing cookies.</p>
 <div class="pp" id="pp" hidden><label>Essential <input type="checkbox" checked disabled></label><label>Analytics <input type="checkbox" id="c1"></label><label>Marketing <input type="checkbox" id="c2"></label></div>
 <div class="row"><button class="web-btn ghost" type="button" id="rj">Reject all</button><button class="web-btn ghost" type="button" id="ac">Accept all</button><button class="web-btn ghost" type="button" id="st" aria-expanded="false" aria-controls="pp">Settings</button><button class="web-btn" type="button" id="sv" hidden>Save choices</button></div></div><p class="done card" id="dn" tabindex="-1" hidden></p></div></div>
 </div>
+</div>
+<p class="scroll-hint">Scroll sideways to see the full section.</p>
 <div class="controls"></div>
 <details class="how" open><summary>How it works</summary><p>Accept and reject get equal visual weight, so refusing is as easy as agreeing, and Settings lists each purpose with its own switch, with essential cookies always on. Choose any option: the banner closes and states your choice. This is a pattern illustration, not legal advice.</p></details>
 </main>
