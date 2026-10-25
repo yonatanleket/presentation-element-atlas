@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-sticky-header",
+  "name": "Sticky shrinking header",
+  "category": "web-navigation",
+  "definition": "Site header that stays pinned while the page scrolls, compacting and gaining a divider once the visitor leaves the top.",
+  "bestUse": "Long pages where navigation and the main call to action should stay one click away.",
+  "trigger": [
+    "navigation-wayfinding",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-sticky-header.html",
+    "kind": "interactive",
+    "how": "Scroll the page inside the window: the header stays at the top and, once you leave the first screen, shrinks to a compact bar with a shadow so it takes less room while keeping the call to action visible. The page can be scrolled with the mouse or with the arrow keys after focusing it."
+  },
+  "aliases": [
+    "sticky nav",
+    "fixed header",
+    "condensing header"
+  ]
+}

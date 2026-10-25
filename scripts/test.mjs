@@ -36,6 +36,7 @@ try {
       const run = cli(['--strict']); assert.equal(run.status, 1, run.stderr);
     });
   }
+  test('format 1.1.0 record with surface and added accepted', () => { write({ ...base, schemaVersion: '1.1.0', surface: 'slide', added: '2026-10-25' }); assert.deepEqual(result().errors, []); });
   write();
   test('missing demo is strict-only failure', () => { fs.unlinkSync(demo); assert.deepEqual(result(false).errors, []); assert.ok(result().errors.some(e => e.includes('is missing'))); });
   for (const [name, change, expected] of [
@@ -46,6 +47,12 @@ try {
     ['missing init', s => s.replace('AtlasDemo.init(', 'Wrong.init('), 'call AtlasDemo.init'],
     ['mismatched note', s => s.replace(base.demo.how, 'A different note.'), 'differs from demo.how']
   ]) test(name, () => { write(); fs.writeFileSync(demo, change(originalDemo)); assert.ok(result().errors.some(e => e.includes(expected)), JSON.stringify(result().errors)); });
+  test('slide demo may not link _web.css', () => { write(); fs.writeFileSync(demo, originalDemo.replace('<link rel="stylesheet" href="_harness.css">', '<link rel="stylesheet" href="_harness.css"><link rel="stylesheet" href="_web.css">')); assert.ok(result().errors.some(e => e.includes('only web-surface demos'))); });
+  test('web record needs a web demo frame', () => {
+    const cats = JSON.parse(fs.readFileSync(path.join(ROOT, 'categories.json'), 'utf8'));
+    write({ ...base, schemaVersion: '1.1.0', surface: 'web', category: cats.find(c => c.surface === 'web').id });
+    assert.ok(result().errors.some(e => e.includes('web demo must link _web.css')), JSON.stringify(result().errors));
+  });
   test('malformed JSON gives validation exit 1', () => { write(); fs.writeFileSync(file, '{bad'); assert.equal(cli(['--strict']).status, 1); });
   test('duplicate names rejected', () => { write(); const p = path.join(root, 'elements', 'other.json'); fs.writeFileSync(p, JSON.stringify({ ...base, id: 'other' })); assert.ok(result().errors.some(e => e.includes('duplicates'))); fs.unlinkSync(p); });
   test('unsupported CLI arguments exit 2', () => assert.equal(cli(['--surprise']).status, 2));

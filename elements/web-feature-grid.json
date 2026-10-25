@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-feature-grid",
+  "name": "Feature grid",
+  "category": "web-conversion",
+  "definition": "Grid of six short benefit blocks, each with an icon, a bold title and one supporting sentence.",
+  "bestUse": "Summarising what the product does after the hero, before deeper sections.",
+  "trigger": [
+    "key-message",
+    "dense-detail"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-feature-grid.html",
+    "kind": "animated",
+    "how": "Six parallel blocks let a visitor scan what the product does in seconds; each title is a benefit and the sentence says how. Play shows the section title, then the six blocks. Keep titles to a few words and the sentences to one line. Features are illustrative."
+  },
+  "aliases": [
+    "features section",
+    "benefits grid",
+    "icon grid"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-faq-accordion",
+  "name": "FAQ accordion",
+  "category": "web-conversion",
+  "definition": "List of common questions where each answer expands in place, so objections are handled without leaving the page.",
+  "bestUse": "Just above the final call to action, or on pricing pages.",
+  "trigger": [
+    "dense-detail",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-faq-accordion.html",
+    "kind": "interactive",
+    "how": "Questions are buttons that expand their answer below, so visitors scan the questions and open only what worries them. Click a question or press Enter or Space; the plus turns to a minus and the button reports expanded. Opening one closes the others to keep the list short. Answers are illustrative."
+  },
+  "aliases": [
+    "faq",
+    "questions",
+    "expandable answers"
+  ],
+  "related": [
+    "collapsible-detail-card"
+  ]
+}

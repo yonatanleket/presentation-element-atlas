@@ -154,5 +154,21 @@
   {
     "id": "accessibility",
     "description": "Making the deck usable with keyboards and assistive tech."
+  },
+  {
+    "id": "conversion-ask",
+    "description": "A request for the visitor to act: sign up, buy, book or contact."
+  },
+  {
+    "id": "pricing-plans",
+    "description": "Plans and prices a visitor chooses between."
+  },
+  {
+    "id": "social-proof",
+    "description": "Evidence that other people use, trust and value the product."
+  },
+  {
+    "id": "consent-choice",
+    "description": "A choice the visitor makes about data, privacy or messages."
   }
 ]

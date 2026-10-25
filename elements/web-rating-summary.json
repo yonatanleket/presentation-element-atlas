@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-rating-summary",
+  "name": "Rating summary",
+  "category": "web-social-proof",
+  "definition": "Average star rating with the review count and a bar for each star level, showing how the score is distributed.",
+  "bestUse": "Product and app pages where third-party reviews exist.",
+  "trigger": [
+    "social-proof",
+    "distribution"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-rating-summary.html",
+    "kind": "animated",
+    "how": "The average alone hides whether reviews are mostly glowing or split; the bars show the spread and the review count shows how much weight the average deserves. Play shows the score, then grows the five bars. Ratings are illustrative and would link to their source."
+  },
+  "aliases": [
+    "star rating",
+    "review summary",
+    "ratings breakdown"
+  ]
+}

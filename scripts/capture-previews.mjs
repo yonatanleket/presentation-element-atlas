@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import {pathToFileURL,fileURLToPath} from 'node:url';
-import {hash,fileHash,sourceFingerprint,loadValidatedPreviews,previewDependencies} from './preview-assets.mjs';
+import {hash,fileHash,sourceFingerprint,loadValidatedPreviews,previewDependencies,isWebDemo} from './preview-assets.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const args=process.argv.slice(2),options={};
 for(let i=0;i<args.length;i++){
@@ -31,7 +31,7 @@ else {
  async function action(page,a){const loc=page.locator(a.selector);if(a.type==='click')await loc.click({timeout:2000});else if(a.type==='value')await loc.evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},a.value);else throw Error('Unsupported finite action '+a.type);}
  async function capture(job){
   const {group,id,recipe}=job,file=group==='entries'?`demos/${id}.html`:`hazard-demos/${id}.html`;
-  const deps=previewDependencies(group,id);
+  const web=isWebDemo(root,group,id),deps=previewDependencies(group,id,web);
   const fingerprint=sourceFingerprint(root,deps,recipe,environment);
   const entry={id,status:'error',...fingerprint,description:recipe.description,...(recipe.limitation?{limitation:recipe.limitation}:{}),images:[],errors:[]};manifest[group][id]=entry;
   const context=await browser.newContext({...environment.viewport,viewport:environment.viewport,deviceScaleFactor:environment.deviceScaleFactor,locale:'en-US',timezoneId:'UTC',colorScheme:'light',reducedMotion:'reduce'});
@@ -46,6 +46,8 @@ else {
    if(await page.locator('.stage').count()!==1)throw Error('Expected exactly one .stage');
    await page.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}'});
    await page.evaluate(()=>document.fonts.ready);
+   // Web stages may grow wider than a slide stage; pin them to the slide stage width so images stay 800px wide (800x450).
+   if(web)await page.locator('.stage').evaluate(el=>{el.style.width='544px';el.style.maxWidth='544px';});
    if(recipe.bounds==='full-content'){
     const heights=[];for(const state of ['before','after']){await page.locator(`[data-state="${state}"]`).click();heights.push(await page.locator('.stage').evaluate(el=>el.scrollHeight));}
     const height=Math.max(...heights)+2;

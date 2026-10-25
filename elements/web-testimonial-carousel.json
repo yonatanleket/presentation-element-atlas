@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-testimonial-carousel",
+  "name": "Testimonial carousel",
+  "category": "web-social-proof",
+  "definition": "One large testimonial at a time with the person, role and company, and previous, next and position controls.",
+  "bestUse": "A few strong, detailed quotes that deserve full attention each.",
+  "trigger": [
+    "social-proof",
+    "quote-or-voice"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-testimonial-carousel.html",
+    "kind": "interactive",
+    "how": "Each quote gets the full width, with the person named so it reads as real voice rather than marketing. Use Previous and Next, the dots, or the arrow keys after focusing the carousel; it never advances on its own, so readers keep control. People and quotes are invented examples."
+  },
+  "aliases": [
+    "quote slider",
+    "review carousel",
+    "testimonial slider"
+  ],
+  "related": [
+    "web-wall-of-love"
+  ]
+}

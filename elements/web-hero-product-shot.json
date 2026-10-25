@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-product-shot",
+  "name": "Product-shot hero",
+  "category": "web-hero",
+  "definition": "Centered headline and call to action above a large product screenshot that rises into view.",
+  "bestUse": "Software whose interface is the main selling point.",
+  "trigger": [
+    "product-ui",
+    "key-message"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-product-shot.html",
+    "kind": "animated",
+    "how": "A short centered headline makes the promise, and a large product screen directly below backs it up. Play shows the headline, then the call to action, then slides the product window up from the fold so it reads as the next thing to look at. The interface is a simplified illustration."
+  },
+  "aliases": [
+    "screenshot hero",
+    "centered hero",
+    "app hero"
+  ],
+  "related": [
+    "device-mockup"
+  ]
+}

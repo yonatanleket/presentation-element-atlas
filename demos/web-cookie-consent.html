@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookie consent banner: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.pg4{margin:1.4em 2.4em;height:15em;border-radius:.6em;background:var(--stage)}.ck2{position:absolute;inset-inline:1.4em;inset-block-end:1em;padding:1em 1.2em;display:grid;gap:.7em;box-shadow:0 .6em 1.6em rgba(27,30,36,.18)}
+.ck2 p{margin:0;font-size:.9em;color:var(--ink-2)}.ck2 .row{gap:.5em;flex-wrap:wrap}.ck2 .web-btn{min-width:8em}.ck2 .web-btn.ghost{color:var(--fg)}
+.pp{display:grid;gap:.4em}.pp label{display:flex;justify-content:space-between;align-items:center;gap:1em;font-size:.9em;padding:.3em 0;border-block-end:1px solid var(--line)}.pp input{width:1.2em;height:1.2em;accent-color:var(--accent)}
+.done{position:absolute;inset-inline:1.4em;inset-block-end:1em;padding:.8em 1em;font-size:.9em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Cookie consent banner</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Cookie consent banner at the bottom of a page with Reject all, Accept all and Settings buttons of equal weight.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="pg4"></div><div class="ck2 card" id="bn" role="region" aria-label="Cookie consent"><b>We use cookies</b><p>Essential cookies keep the site working. With your permission we also use analytics and marketing cookies.</p>
+<div class="pp" id="pp" hidden><label>Essential <input type="checkbox" checked disabled></label><label>Analytics <input type="checkbox" id="c1"></label><label>Marketing <input type="checkbox" id="c2"></label></div>
+<div class="row"><button class="web-btn ghost" type="button" id="rj">Reject all</button><button class="web-btn ghost" type="button" id="ac">Accept all</button><button class="web-btn ghost" type="button" id="st" aria-expanded="false" aria-controls="pp">Settings</button><button class="web-btn" type="button" id="sv" hidden>Save choices</button></div></div><p class="done card" id="dn" tabindex="-1" hidden></p></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Accept and reject get equal visual weight, so refusing is as easy as agreeing, and Settings lists each purpose with its own switch, with essential cookies always on. Choose any option: the banner closes and states your choice. This is a pattern illustration, not legal advice.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var bn=$('#bn'),dn=$('#dn');
+function finish(t){bn.hidden=true;dn.hidden=false;dn.textContent=t;dn.focus();api.status(t);}
+$('#rj').addEventListener('click',function(){finish('Saved: essential cookies only.');});$('#ac').addEventListener('click',function(){finish('Saved: all cookies accepted.');});
+$('#st').addEventListener('click',function(){var o=$('#pp').hidden;$('#pp').hidden=!o;$('#sv').hidden=!o;$('#st').setAttribute('aria-expanded',String(o));if(o)$('#c1').focus();});
+$('#sv').addEventListener('click',function(){var on=[$('#c1').checked&&'analytics',$('#c2').checked&&'marketing'].filter(Boolean);finish('Saved: essential'+(on.length?' + '+on.join(' + '):' only')+'.');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){bn.hidden=false;dn.hidden=true;$('#pp').hidden=true;$('#sv').hidden=true;$('#st').setAttribute('aria-expanded','false');$('#c1').checked=false;$('#c2').checked=false;}});
+</script>
+</body>
+</html>

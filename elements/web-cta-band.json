@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-cta-band",
+  "name": "Closing CTA band",
+  "category": "web-conversion",
+  "definition": "Full-width, high-contrast band near the end of a page that restates the promise with one primary and one secondary action.",
+  "bestUse": "The last section before the footer, for visitors who read to the end.",
+  "trigger": [
+    "conversion-ask",
+    "key-message"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-cta-band.html",
+    "kind": "animated",
+    "how": "Visitors who reach the end are ready to decide, so the page repeats its promise in one band with a clear primary action and a lower-commitment secondary one. Play shows the band, the headline, then the two buttons. The copy is illustrative."
+  },
+  "aliases": [
+    "call to action",
+    "cta section",
+    "final cta"
+  ]
+}

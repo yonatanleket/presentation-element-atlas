@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-pricing-usage-calculator",
+  "name": "Usage-based price calculator",
+  "category": "web-pricing",
+  "definition": "Slider for expected usage that shows the estimated monthly bill, the plan it falls into and how the total is built.",
+  "bestUse": "Metered pricing where the bill depends on volume rather than seats.",
+  "trigger": [
+    "pricing-plans",
+    "what-if-model",
+    "method-explanation"
+  ],
+  "level": "advanced",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-pricing-usage-calculator.html",
+    "kind": "interactive",
+    "how": "Visitors move a slider to their expected monthly volume and see the estimate immediately, with the plan tier named and the arithmetic shown so the number can be trusted. Drag the slider or use the arrow keys. Above the last tier the price is replaced by a contact link. Prices are illustrative."
+  },
+  "aliases": [
+    "pricing calculator",
+    "cost estimator",
+    "metered pricing"
+  ],
+  "related": [
+    "what-if-calculator"
+  ]
+}

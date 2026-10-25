@@ -1,13 +1,15 @@
 # Presentation Element Atlas
 
-An open catalog of slide elements: what each one is, when to use it, and a live demo of how it works. It covers 166 elements in 12 categories, from progress bars and KPI tiles to sankeys, explorable sliders and audience polls.
+An open catalog of slide and web page elements: what each one is, when to use it, and a live demo of how it works. It covers 166 slide elements in 12 categories, from progress bars and KPI tiles to sankeys, explorable sliders and audience polls, and 30 web page sections in 5 categories, from heroes and mega menus to pricing toggles, testimonial carousels and consent banners.
 
-Use it to pick the right element for a slide, to share a vocabulary with the people you build decks with, or to copy a working demo into your own talk.
+Use it to pick the right element for a slide or a page, to share a vocabulary with the people you build with, or to copy a working demo into your own work.
 
 ## Browse
 
 Open `dist/index.html` in a browser. It works straight from disk or from any static host. No server or install is needed.
 
+- **Slides / Web sections** switches surface. Slides is the default; `#surface-web` opens the web sections directly.
+- **New** shows elements added in the last 30 days, newest first.
 - **Search** matches names, definitions, "best for" text and aliases. Press Esc to clear it.
 - **Standard / Advanced** filters by level. Advanced elements are interactive or less common.
 - **Categories** in the desktop sidebar narrow the list; on mobile, open the Categories disclosure.
@@ -20,7 +22,8 @@ Open `dist/index.html` in a browser. It works straight from disk or from any sta
 elements/<id>.json        one file per element (the source of truth)
 demos/<id>.html           one live demo per element
 demos/_harness.css|js     the shared demo frame every demo uses
-categories.json           the 12 categories
+demos/_web.css            the wider 16:9 stage web-section demos add on top
+categories.json           the 17 categories, each with a surface (slide or web)
 triggers.json             controlled list of content-type tags (what kind of content an element suits)
 sources.json              references cited by elements ("common" = common practice)
 schema/element.schema.json  JSON Schema for element files
@@ -30,7 +33,7 @@ scripts/build.mjs         generates dist/
 dist/                     the generated catalog (committed, so it can be browsed without building)
 ```
 
-Each element file lists the content types it suits in `trigger` (for example `single-key-number`, `trend-over-time` or `options-comparison`). Tools can read `elements/*.json` to suggest elements for a given slide.
+Each element file lists the content types it suits in `trigger` (for example `single-key-number`, `trend-over-time` or `options-comparison`). Tools can read `elements/*.json` to suggest elements for a given slide or page; filter on `surface` (absent means `slide`) to keep the two apart.
 
 ## Build
 
@@ -52,7 +55,7 @@ The optional authoring command `node scripts/capture-previews.mjs --playwright /
 
 ## Demo status
 
-Every element has a live demo: all 166 run in the catalog panel and on their own from `dist/demos/`. If you add an element without a demo, its panel shows "No demo yet" until you add `demos/<id>.html`.
+Every element has a live demo: all 196 run in the catalog panel and on their own from `dist/demos/`. If you add an element without a demo, its panel shows "No demo yet" until you add `demos/<id>.html`.
 
 ## Contributing
 

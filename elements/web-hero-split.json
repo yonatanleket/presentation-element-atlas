@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-split",
+  "name": "Split hero",
+  "category": "web-hero",
+  "definition": "Opening section with the headline, value line and calls to action on one side and a product visual on the other.",
+  "bestUse": "Landing pages where the product is easy to show in one picture.",
+  "trigger": [
+    "key-message",
+    "product-ui",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-split.html",
+    "kind": "animated",
+    "how": "Words sit on the reading side and the picture on the other, so the eye moves from claim to proof. Play builds the badge and headline, then the value line, the two buttons with one clearly primary, and finally the product visual. Brand and copy are illustrative."
+  },
+  "aliases": [
+    "hero",
+    "above the fold",
+    "two-column hero"
+  ],
+  "related": [
+    "kicker-action-title-lede"
+  ]
+}

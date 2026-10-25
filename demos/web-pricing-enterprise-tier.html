@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact-sales enterprise tier: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.et{height:100%;align-content:center;padding:1.4em 2.4em;display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:.9em;align-items:stretch}.et .card{padding:1.1em;display:grid;gap:.35em;align-content:start}
+.amt{font:700 1.9em/1 var(--f-display)}.per{font-size:.85em;color:var(--muted)}.et ul{margin:.4em 0 0;padding:0;list-style:none;font-size:.85em;display:grid;gap:.3em}.et li::before{content:"✓ ";color:var(--ok)}
+.ent{background:var(--fg);color:#fff;border-color:var(--fg)}.ent .per,.ent li{color:#d9dce2}.ent li::before{color:#8fe0b5}.ent .web-btn{background:#fff;color:var(--fg);border-color:#fff;margin-top:.6em}.et .web-btn{align-self:end}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Contact-sales enterprise tier</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Two self-serve plan cards with prices next to a dark enterprise card that says Custom and Talk to sales.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="et"><div class="card" data-f="1"><b>Pro</b><span class="amt">$19</span><span class="per">per user / month</span><ul><li>Unlimited projects</li><li>Integrations</li></ul><span class="web-btn ghost">Start trial</span></div><div class="card" data-f="1"><b>Business</b><span class="amt">$39</span><span class="per">per user / month</span><ul><li>Single sign-on</li><li>Admin roles</li></ul><span class="web-btn ghost">Start trial</span></div>
+<div class="card ent" data-f="2"><b>Enterprise</b><span class="amt">Custom</span><span class="per">annual contract</span><ul><li>Security review and DPA</li><li>Dedicated account manager</li><li>99.9% uptime SLA</li></ul><span class="web-btn" data-f="3">Talk to sales</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Self-serve plans show a price and a sign-up button; the enterprise tier is styled differently and lists what only a contract brings, such as security review and an account manager, with Talk to sales instead of a price. Play shows the self-serve cards, then the enterprise card, then its call to action.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

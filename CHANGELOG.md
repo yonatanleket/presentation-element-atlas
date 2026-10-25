@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add 30 web page sections in five categories (hero, navigation, pricing, social proof, conversion), each with an original, network-free live demo on a new 16:9 web stage (`demos/_web.css`) and a captured preview. Catalog gains a Slides / Web sections switch (`#surface-web`), a New filter and badge, surface-aware category chips and a debounced search. Four trigger tags (`conversion-ask`, `pricing-plans`, `social-proof`, `consent-choice`) and four gallery sources join the registries. All previews were recaptured.
+- Add element format `1.1.0` with optional `surface` (`slide` | `web`) and `added` date fields; `1.0.0` records stay valid unchanged. Categories carry a `surface`, and five web categories (hero, navigation, pricing, social proof, conversion) join the 12 slide categories.
 - Establish element schema format `1.0.0`; migrate all 166 records and the authoring template. Unsupported or absent format versions fail validation and build.
 - Share strict record, reference and demo validation between CLI and build; add validator regression fixtures and `node scripts/test.mjs`.
 - Preserve source element fields and existing catalog/demo behavior during migration.

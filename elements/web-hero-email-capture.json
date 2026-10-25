@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-email-capture",
+  "name": "Email-capture hero",
+  "category": "web-hero",
+  "definition": "Hero whose call to action is an inline email field and button, with inline error and success states.",
+  "bestUse": "Waitlists, trials and newsletters where an email is the only ask.",
+  "trigger": [
+    "conversion-ask",
+    "key-message"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-email-capture.html",
+    "kind": "interactive",
+    "how": "The field sits right under the promise, so signing up takes one step. Type an email and press Join: an invalid address shows an inline error next to the field, a valid one replaces the form with a confirmation. Nothing is sent anywhere; the form is simulated."
+  },
+  "aliases": [
+    "waitlist hero",
+    "signup hero",
+    "lead capture"
+  ]
+}

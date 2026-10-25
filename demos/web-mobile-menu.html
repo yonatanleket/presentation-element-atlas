@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full-screen mobile menu: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.phone{position:absolute;inset-block:1em;inset-inline-start:50%;width:13.5em;transform:translateX(-50%);border:.5em solid var(--fg);border-radius:1.6em;overflow:hidden;background:var(--surface)}
+.pt{display:flex;align-items:center;justify-content:space-between;padding:.7em .9em;border-block-end:1px solid var(--line)}.pt .logo{font:700 1em/1 var(--f-display)}
+.pt button,.ov button{font:600 .85em/1 var(--f-body);min-height:2.6em;padding:0 .9em;border-radius:.4em;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.pc{padding:.9em;display:grid;gap:.6em}.pc i{display:block;height:2.4em;border-radius:.4em;background:var(--stage)}.pc i:first-child{height:5em;background:var(--accent-soft)}
+.ov{position:absolute;inset:0;background:var(--surface);z-index:3;display:flex;flex-direction:column;padding:.7em .9em;gap:.3em}.ov .top{display:flex;justify-content:flex-end}
+.ov a{display:flex;align-items:center;min-height:2.75em;font:700 1.15em/1 var(--f-display);color:var(--fg);text-decoration:none;border-block-end:1px solid var(--line)}.ov .web-btn{margin-top:.6em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Full-screen mobile menu</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Full-screen mobile menu: a phone-width page with a Menu button that opens an overlay of large links.">
+<span class="label-illustrative">Illustrative</span>
+<div class="phone" id="ph"><div class="pt"><span class="logo">Acme</span><button type="button" id="mb" aria-expanded="false" aria-controls="ov">☰ Menu</button></div><div class="pc"><i></i><i></i><i></i><i></i></div>
+<div class="ov" id="ov" hidden role="dialog" aria-label="Site menu"><div class="top"><button type="button" id="cl">✕ Close</button></div><a href="#">Product</a><a href="#">Pricing</a><a href="#">Customers</a><a href="#">Docs</a><span class="web-btn">Start free</span></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>At phone width the links collapse behind one Menu button. Opening it covers the page with large, well-spaced links and moves focus into the menu; Close or Escape returns focus to the Menu button. Tap targets stay at least 44 pixels tall. Shown inside a phone-sized frame.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var mb=$('#mb'),ov=$('#ov');
+function set(o,focus){ov.hidden=!o;mb.setAttribute('aria-expanded',String(o));if(focus)(o?$('#cl'):mb).focus();}
+mb.addEventListener('click',function(){set(true,true);api.status('Menu open');});$('#cl').addEventListener('click',function(){set(false,true);api.status('Menu closed');});
+$$('#ov a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();api.status('Would go to: '+a.textContent);});});
+ov.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();set(false,true);api.status('Menu closed');}});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){set(false);}});
+</script>
+</body>
+</html>

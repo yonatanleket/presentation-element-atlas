@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-mega-menu",
+  "name": "Mega menu",
+  "category": "web-navigation",
+  "definition": "Wide navigation panel that groups many links into labelled columns, often with one featured item.",
+  "bestUse": "Sites with several product lines or audiences and dozens of destination pages.",
+  "trigger": [
+    "navigation-wayfinding",
+    "hierarchy",
+    "dense-detail"
+  ],
+  "level": "advanced",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-mega-menu.html",
+    "kind": "interactive",
+    "how": "One trigger opens a full-width panel so many destinations fit without nesting. Links are grouped under column headings and one featured card highlights what is new. Open Products by click or Enter, move through the links with Tab, and close with Escape or the trigger. Names are illustrative."
+  },
+  "aliases": [
+    "mega dropdown",
+    "full-width menu",
+    "flyout menu"
+  ],
+  "related": [
+    "web-dropdown-nav"
+  ]
+}

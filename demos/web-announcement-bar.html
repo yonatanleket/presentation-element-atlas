@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Announcement bar: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.ab{display:flex;align-items:center;justify-content:center;gap:.8em;padding:.55em 3em;background:var(--fg);color:#fff;font-size:.85em;position:relative}
+.ab a{color:#fff;font-weight:600}.ab button{position:absolute;inset-inline-end:.6em;background:none;border:0;color:#fff;font:inherit;font-size:1.1em;cursor:pointer;min-width:2em;min-height:2em;border-radius:.3em}.ab button:focus-visible{outline-color:#fff}
+.pg{margin:1.4em 2.4em;height:13em;border-radius:.6em;background:var(--stage)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Announcement bar</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Announcement bar: a coloured strip above the header with a launch message, a link and a close button.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="ab" id="ab" role="region" aria-label="Announcement"><span>Acme 3.0 is here: offline mode and a faster editor.</span><a href="#" id="ln">Read the launch post →</a><button type="button" id="x" aria-label="Dismiss announcement">✕</button></div><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="pg"></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One sentence and one link sit above the header, where every visitor sees them without blocking the page. The close button removes the bar and the header moves up; Reset brings it back, as a returning visitor would see it again after a new announcement. The message is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var ab=$('#ab');
+$('#x').addEventListener('click',function(){ab.hidden=true;api.status('Announcement dismissed');});
+$('#ln').addEventListener('click',function(e){e.preventDefault();api.status('Would open the launch post');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){ab.hidden=false;}});
+</script>
+</body>
+</html>

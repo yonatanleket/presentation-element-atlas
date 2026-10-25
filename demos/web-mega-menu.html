@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mega menu: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.mt{font:inherit;background:none;border:0;color:var(--ink-2);cursor:pointer;min-height:2em}.mt::after{content:" ▾";font-size:.8em}.mt[aria-expanded=true]{color:var(--accent)}
+.mega{position:absolute;inset-inline:0;inset-block-start:3.1em;z-index:3;background:var(--surface);border-block:1px solid var(--line);box-shadow:0 1em 1.6em rgba(27,30,36,.12);padding:1.2em 2.4em;display:grid;grid-template-columns:repeat(3,1fr) 1.3fr;gap:1.4em}
+.mega h4{margin:0 0 .4em;font:600 .8em/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.mega a{display:block;padding:.3em 0;color:var(--fg);text-decoration:none;font-size:.9em}.mega a:hover,.mega a:focus-visible{color:var(--accent)}
+.feat{padding:1em;display:grid;gap:.4em;align-content:start;background:var(--accent-soft);border-radius:.6em}.feat b{font-family:var(--f-display)}.feat p{margin:0;font-size:.85em;color:var(--ink-2)}
+.pg{margin:1.4em 2.4em;height:14em;border-radius:.6em;background:var(--stage)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Mega menu</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Mega menu: the Products item opens a full-width panel with three labelled link columns and a featured card.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body" id="wb"><nav class="web-nav"><span class="logo">Acme</span><button type="button" class="mt" id="mt" aria-expanded="false" aria-controls="mg">Products</button><a>Solutions</a><a>Pricing</a><span class="web-btn ghost sm">Sign in</span></nav>
+<div class="mega" id="mg" hidden><div><h4>Plan</h4><a href="#">Boards</a><a href="#">Roadmaps</a><a href="#">Goals</a></div><div><h4>Build</h4><a href="#">Issues</a><a href="#">Releases</a><a href="#">Code review</a></div><div><h4>Support</h4><a href="#">Help desk</a><a href="#">Knowledge base</a><a href="#">Status page</a></div>
+<div class="feat"><span class="pill">New</span><b>Automations</b><p>Rules that move work forward without a click.</p><a href="#">See what is new →</a></div></div><div class="pg"></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One trigger opens a full-width panel so many destinations fit without nesting. Links are grouped under column headings and one featured card highlights what is new. Open Products by click or Enter, move through the links with Tab, and close with Escape or the trigger. Names are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var mt=$('#mt'),mg=$('#mg');
+function set(o){mt.setAttribute('aria-expanded',String(o));mg.hidden=!o;}
+mt.addEventListener('click',function(){var o=mg.hidden;set(o);api.status(o?'Products menu open':'Menu closed');});
+$$('#mg a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();api.status('Would go to: '+a.textContent);});});
+$('#wb').addEventListener('keydown',function(e){if(e.key==='Escape'&&!mg.hidden){e.preventDefault();set(false);mt.focus();api.status('Menu closed');}});
+document.addEventListener('click',function(e){if(!e.target.closest('#mg,#mt'))set(false);});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){set(false);}});
+</script>
+</body>
+</html>

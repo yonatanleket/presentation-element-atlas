@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sticky shrinking header: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.sc{position:absolute;inset:0;overflow-y:auto;scroll-behavior:smooth}.sc:focus-visible{outline-offset:-3px}
+.sh{position:sticky;top:0;z-index:2;transition:padding .25s var(--ease-out),box-shadow .25s var(--ease-out)}.sh.compact{padding-block:.35em;box-shadow:0 .3em .8em rgba(27,30,36,.12)}
+.sh .logo{transition:font-size .25s var(--ease-out)}.sh.compact .logo{font-size:.9em}
+.blk{margin:1.2em 2.4em;height:9em;border-radius:.6em;background:var(--stage);display:grid;place-items:center;color:var(--muted);font:500 .9em/1 var(--f-mono)}
+.blk:first-of-type{height:12em;background:var(--accent-soft);color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Sticky shrinking header</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Sticky shrinking header over a scrollable page with several sections.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="sc" id="sc" tabindex="0" aria-label="Scrollable page">
+<nav class="web-nav sh" id="sh"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn sm">Get started</span></nav>
+<div class="blk">Hero</div><div class="blk">Features</div><div class="blk">Testimonials</div><div class="blk">Pricing</div><div class="blk">Footer</div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Scroll the page inside the window: the header stays at the top and, once you leave the first screen, shrinks to a compact bar with a shadow so it takes less room while keeping the call to action visible. The page can be scrolled with the mouse or with the arrow keys after focusing it.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var sc=$('#sc'),sh=$('#sh'),was=false;
+sc.addEventListener('scroll',function(){var c=sc.scrollTop>40;sh.classList.toggle('compact',c);if(c!==was){was=c;api.status(c?'Header compacted':'Header at full size');}});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){sc.scrollTop=0;sh.classList.remove('compact');was=false;}});
+</script>
+</body>
+</html>

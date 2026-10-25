@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-announcement-bar",
+  "name": "Announcement bar",
+  "category": "web-navigation",
+  "definition": "Thin full-width strip above the header with one short message, a link and a dismiss button.",
+  "bestUse": "Time-bound news such as a launch, an event or a policy change.",
+  "trigger": [
+    "key-message",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-announcement-bar.html",
+    "kind": "interactive",
+    "how": "One sentence and one link sit above the header, where every visitor sees them without blocking the page. The close button removes the bar and the header moves up; Reset brings it back, as a returning visitor would see it again after a new announcement. The message is illustrative."
+  },
+  "aliases": [
+    "top banner",
+    "promo bar",
+    "site notice"
+  ]
+}

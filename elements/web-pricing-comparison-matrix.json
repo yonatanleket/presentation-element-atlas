@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-pricing-comparison-matrix",
+  "name": "Plan comparison matrix",
+  "category": "web-pricing",
+  "definition": "Table of features grouped by theme down the side and plans across the top, with a filter to show only differences.",
+  "bestUse": "Buyers checking a specific capability before choosing a plan.",
+  "trigger": [
+    "pricing-plans",
+    "options-comparison",
+    "dense-detail"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-pricing-comparison-matrix.html",
+    "kind": "interactive",
+    "how": "Features are grouped under short headings and every plan is a column, so one capability can be checked across plans in a single row. Turn on Show differences only to hide rows where every plan is the same; the middle plan column stays highlighted. Features are illustrative."
+  },
+  "aliases": [
+    "feature table",
+    "compare plans",
+    "pricing table"
+  ],
+  "related": [
+    "comparison-table"
+  ]
+}

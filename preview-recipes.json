@@ -1234,6 +1234,201 @@
       "reason": "Completed labeled composition; Simulated one-word answers arrive over about three seconds; each repeat of a word makes it larger, so the most common answers dominate. Type a word and press Enter or Add to submit your own: it appears outlined and grows if it matches an existing word. Reset clears everything.",
       "frame": "last",
       "actions": []
+    },
+    "web-hero-split": {
+      "description": "Split hero — actual demo stage.",
+      "reason": "Completed labeled composition; Words sit on the reading side and the picture on the other, so the eye moves from claim to proof. Play builds the badge and headline, then the value line, the two buttons with one clearly primary, and finally the product visual. Brand and copy are illustrative.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-hero-product-shot": {
+      "description": "Product-shot hero — actual demo stage.",
+      "reason": "Completed labeled composition; A short centered headline makes the promise, and a large product screen directly below backs it up. Play shows the headline, then the call to action, then slides the product window up from the fold so it reads as the next thing to look at. The interface is a simplified illustration.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-hero-video-background": {
+      "description": "Video-background hero — actual demo stage.",
+      "reason": "Completed labeled composition; Muted ambient footage sets the mood behind the headline while a scrim keeps the text readable. The pause button stops the motion, as anything that moves for more than five seconds needs a way to stop it; with reduced motion the hero starts paused on a still. The footage is simulated.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-hero-statement": {
+      "description": "Statement hero — actual demo stage.",
+      "reason": "Completed labeled composition; With no picture competing, the sentence itself carries the page, so it must be specific and short. Play shows the kicker, then the statement with its key phrase in the accent colour, then the single call to action. The copy is illustrative.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-hero-email-capture": {
+      "description": "Email-capture hero — actual demo stage.",
+      "reason": "Completed labeled composition; The field sits right under the promise, so signing up takes one step. Type an email and press Join: an invalid address shows an inline error next to the field, a valid one replaces the form with a confirmation. Nothing is sent anywhere; the form is simulated.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-hero-audience-switch": {
+      "description": "Audience-switch hero — actual demo stage.",
+      "reason": "Completed labeled composition; One page, several first impressions: each tab rewrites the headline and the value line for one role while the call to action stays the same. Click a tab, or focus the tabs and use the arrow keys, to switch audience. The copy is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-sticky-header": {
+      "description": "Sticky shrinking header — actual demo stage.",
+      "reason": "Completed labeled composition; Scroll the page inside the window: the header stays at the top and, once you leave the first screen, shrinks to a compact bar with a shadow so it takes less room while keeping the call to action visible. The page can be scrolled with the mouse or with the arrow keys after focusing it.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-dropdown-nav": {
+      "description": "Dropdown navigation — actual demo stage.",
+      "reason": "Completed labeled composition; The Product and Resources items are buttons that open a short list of sub-pages under the bar. Click one or press Enter on it, use Tab through the links, and press Escape or click elsewhere to close. Only one menu is open at a time, and the open button is marked expanded.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[aria-controls=m1]"
+        }
+      ]
+    },
+    "web-mega-menu": {
+      "description": "Mega menu — actual demo stage.",
+      "reason": "Completed labeled composition; One trigger opens a full-width panel so many destinations fit without nesting. Links are grouped under column headings and one featured card highlights what is new. Open Products by click or Enter, move through the links with Tab, and close with Escape or the trigger. Names are illustrative.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#mt"
+        }
+      ]
+    },
+    "web-announcement-bar": {
+      "description": "Announcement bar — actual demo stage.",
+      "reason": "Completed labeled composition; One sentence and one link sit above the header, where every visitor sees them without blocking the page. The close button removes the bar and the header moves up; Reset brings it back, as a returning visitor would see it again after a new announcement. The message is illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-mobile-menu": {
+      "description": "Full-screen mobile menu — actual demo stage.",
+      "reason": "Completed labeled composition; At phone width the links collapse behind one Menu button. Opening it covers the page with large, well-spaced links and moves focus into the menu; Close or Escape returns focus to the Menu button. Tap targets stay at least 44 pixels tall. Shown inside a phone-sized frame.",
+      "frame": 0,
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#mb"
+        }
+      ]
+    },
+    "web-breadcrumbs": {
+      "description": "Breadcrumb trail — actual demo stage.",
+      "reason": "Completed labeled composition; Each crumb is a link to a parent level and the last item is the current page, marked as current rather than linked. Click a crumb to go up to that level: the trail shortens and the page title follows. Reset returns to the deepest page. Page names are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-pricing-billing-toggle": {
+      "description": "Billing-period toggle — actual demo stage.",
+      "reason": "Completed labeled composition; One switch controls every price on the page, so plans stay comparable whichever period the visitor prefers. Choose Monthly or Annual: prices update, annual shows the monthly equivalent with the yearly total underneath, and the saving is stated next to the switch. Prices are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-pricing-usage-calculator": {
+      "description": "Usage-based price calculator — actual demo stage.",
+      "reason": "Completed labeled composition; Visitors move a slider to their expected monthly volume and see the estimate immediately, with the plan tier named and the arithmetic shown so the number can be trusted. Drag the slider or use the arrow keys. Above the last tier the price is replaced by a contact link. Prices are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-pricing-comparison-matrix": {
+      "description": "Plan comparison matrix — actual demo stage.",
+      "reason": "Completed labeled composition; Features are grouped under short headings and every plan is a column, so one capability can be checked across plans in a single row. Turn on Show differences only to hide rows where every plan is the same; the middle plan column stays highlighted. Features are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-pricing-enterprise-tier": {
+      "description": "Contact-sales enterprise tier — actual demo stage.",
+      "reason": "Completed labeled composition; Self-serve plans show a price and a sign-up button; the enterprise tier is styled differently and lists what only a contract brings, such as security review and an account manager, with Talk to sales instead of a price. Play shows the self-serve cards, then the enterprise card, then its call to action.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-pricing-seat-stepper": {
+      "description": "Per-seat price stepper — actual demo stage.",
+      "reason": "Completed labeled composition; The visitor sets the team size and sees the unit price and total update, with the next discount threshold named so a bigger plan feels earned rather than hidden. Use the minus and plus buttons or type a number. The discount steps at 10 and 50 seats; prices are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-logo-wall": {
+      "description": "Customer logo wall — actual demo stage.",
+      "reason": "Completed labeled composition; Logos are set in one neutral tone and equal visual weight so no single brand dominates, under a line that names the kind of customer. Play shows the line, then fades in the two rows. Real walls use permission-cleared logos; these are placeholders, never real brand marks.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-wall-of-love": {
+      "description": "Wall of love — actual demo stage.",
+      "reason": "Completed labeled composition; Many short quotes in a masonry grid say that lots of people like the product, even if no single quote is decisive. Cards differ in height so the wall looks organic. Play fills the wall column by column. People and quotes are invented examples.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-testimonial-carousel": {
+      "description": "Testimonial carousel — actual demo stage.",
+      "reason": "Completed labeled composition; Each quote gets the full width, with the person named so it reads as real voice rather than marketing. Use Previous and Next, the dots, or the arrow keys after focusing the carousel; it never advances on its own, so readers keep control. People and quotes are invented examples.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-impact-metrics-band": {
+      "description": "Impact metrics band — actual demo stage.",
+      "reason": "Completed labeled composition; A few outcome numbers in one band give the page a scannable proof point; each label says what was measured. Play counts the numbers up once, the way a band reacts when it scrolls into view; with reduced motion the final values show immediately. Figures are illustrative.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-rating-summary": {
+      "description": "Rating summary — actual demo stage.",
+      "reason": "Completed labeled composition; The average alone hides whether reviews are mostly glowing or split; the bars show the spread and the review count shows how much weight the average deserves. Play shows the score, then grows the five bars. Ratings are illustrative and would link to their source.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-micro-case-study": {
+      "description": "Micro case study — actual demo stage.",
+      "reason": "Completed labeled composition; A case study shrunk to one card: who the customer is, what was wrong, one measured result and a short quote, then a link for those who want the full story. Play shows the customer and challenge, then the result, then the quote and link. The customer and figures are invented.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-social-proof-microcopy": {
+      "description": "Proof microcopy near the CTA — actual demo stage.",
+      "reason": "Completed labeled composition; Proof works best where the doubt happens, so one line of evidence sits under the button instead of in a far-away section. Play shows the form, then the avatar stack and recent count with its no-card reassurance. The number is illustrative and should come from real, current data.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-faq-accordion": {
+      "description": "FAQ accordion — actual demo stage.",
+      "reason": "Completed labeled composition; Questions are buttons that expand their answer below, so visitors scan the questions and open only what worries them. Click a question or press Enter or Space; the plus turns to a minus and the button reports expanded. Opening one closes the others to keep the list short. Answers are illustrative.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-cta-band": {
+      "description": "Closing CTA band — actual demo stage.",
+      "reason": "Completed labeled composition; Visitors who reach the end are ready to decide, so the page repeats its promise in one band with a clear primary action and a lower-commitment secondary one. Play shows the band, the headline, then the two buttons. The copy is illustrative.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-newsletter-signup": {
+      "description": "Newsletter signup — actual demo stage.",
+      "reason": "Completed labeled composition; The form says exactly what subscribers get and how often, and asks for consent with an unticked box rather than assuming it. Enter an email, tick the box and press Subscribe; missing either shows an inline message tied to that field, and success replaces the form. Nothing is sent; the form is simulated.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-fat-footer": {
+      "description": "Multi-column footer — actual demo stage.",
+      "reason": "Completed labeled composition; The footer catches visitors who scrolled past everything else, so it groups every important link under short headings and ends with legal and locale details. Play shows the brand block and link columns, then the legal row. Link names are illustrative.",
+      "frame": "last",
+      "actions": []
+    },
+    "web-cookie-consent": {
+      "description": "Cookie consent banner — actual demo stage.",
+      "reason": "Completed labeled composition; Accept and reject get equal visual weight, so refusing is as easy as agreeing, and Settings lists each purpose with its own switch, with essential cookies always on. Choose any option: the banner closes and states your choice. This is a pattern illustration, not legal advice.",
+      "frame": 0,
+      "actions": []
+    },
+    "web-feature-grid": {
+      "description": "Feature grid — actual demo stage.",
+      "reason": "Completed labeled composition; Six parallel blocks let a visitor scan what the product does in seconds; each title is a benefit and the sentence says how. Play shows the section title, then the six blocks. Keep titles to a few words and the sentences to one line. Features are illustrative.",
+      "frame": "last",
+      "actions": []
     }
   },
   "hazards": {

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feature grid: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.fg{padding:1.4em 2.4em;display:grid;gap:1.2em}.fg .hd{text-align:center;display:grid;gap:.3em}.g6{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2em 1.6em}
+.f{display:grid;grid-template-columns:2.2em 1fr;gap:.2em .7em;align-items:start}.f i{grid-row:span 2;width:2.2em;height:2.2em;border-radius:.5em;background:var(--accent-soft);display:grid;place-items:center;font-style:normal;color:var(--accent);font-weight:700}
+.f b{font-size:.95em}.f span{font-size:.85em;color:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Feature grid</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Feature grid: a section title over six blocks in two rows, each with an icon, a title and one sentence.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="fg"><div class="hd" data-f="1"><span class="kicker">Why Acme</span><p class="web-h2">Everything a small team needs</p></div><div class="g6" data-f="2">
+<div class="f"><i>⚡</i><b>Fast by default</b><span>Every view opens in under a second.</span></div><div class="f"><i>⌘</i><b>Keyboard first</b><span>Do anything without the mouse.</span></div><div class="f"><i>↻</i><b>Works offline</b><span>Edits sync when you reconnect.</span></div>
+<div class="f"><i>🔒</i><b>Private by design</b><span>Encrypted at rest and in transit.</span></div><div class="f"><i>⇄</i><b>Plays well</b><span>Two-way sync with the tools you use.</span></div><div class="f"><i>✓</i><b>Simple pricing</b><span>One plan, every feature included.</span></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Six parallel blocks let a visitor scan what the product does in seconds; each title is a benefit and the sentence says how. Play shows the section title, then the six blocks. Keep titles to a few words and the sentences to one line. Features are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:2,stepMs:700,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

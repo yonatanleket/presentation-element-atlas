@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wall of love: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.wl{padding:1.2em 2.4em;display:grid;gap:.8em}.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.7em;align-items:start}.cols>div{display:grid;gap:.7em}
+.q{padding:.8em;display:grid;gap:.45em;font-size:.85em}.q p{margin:0;color:var(--ink-2)}.who{display:flex;align-items:center;gap:.45em;font-size:.95em}.who i{width:1.7em;height:1.7em;border-radius:50%;background:var(--accent-soft);flex:none}.who small{display:block;color:var(--muted);font:400 .9em/1.2 var(--f-body)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Wall of love</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Wall of love: three columns of short testimonial cards of different heights with names and roles.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="wl"><p class="web-h2" style="text-align:center;font-size:1.3em">Loved by teams who ship</p><div class="cols">
+<div data-f="1"><div class="q card"><p>“Replaced three tools and our weekly status meeting.”</p><span class="who"><i></i><span>Dana R.<small>Ops lead</small></span></span></div><div class="q card"><p>“Setup took an afternoon.”</p><span class="who"><i></i><span>Luis M.<small>Founder</small></span></span></div></div>
+<div data-f="2"><div class="q card"><p>“The first project tool our engineers open without being asked. The keyboard shortcuts alone won them over.”</p><span class="who"><i></i><span>Priya S.<small>Engineering manager</small></span></span></div><div class="q card"><p>“Support answered in eleven minutes.”</p><span class="who"><i></i><span>Tom K.<small>IT admin</small></span></span></div></div>
+<div data-f="3"><div class="q card"><p>“Finally one place for roadmap and bugs.”</p><span class="who"><i></i><span>Mei L.<small>Product manager</small></span></span></div><div class="q card"><p>“Our clients can follow progress without asking for updates every week.”</p><span class="who"><i></i><span>Sam O.<small>Agency owner</small></span></span></div></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Many short quotes in a masonry grid say that lots of people like the product, even if no single quote is decisive. Cards differ in height so the wall looks organic. Play fills the wall column by column. People and quotes are invented examples.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:650,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

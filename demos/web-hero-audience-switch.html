@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audience-switch hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.as{padding:1.8em 2.4em;display:grid;gap:.9em}.tabs{display:flex;gap:.3em;padding:.25em;background:var(--stage);border-radius:.6em;justify-self:start}
+.tabs button{font:500 .9em/1 var(--f-body);min-height:2.4em;padding:0 1em;border:0;border-radius:.45em;background:transparent;color:var(--ink-2);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(27,30,36,.15)}
+.pane{display:grid;grid-template-columns:1.2fr 1fr;gap:2em;align-items:center}.pane .web-shot{height:10em;display:grid;place-items:center;font:600 .9em/1 var(--f-mono);color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Audience-switch hero</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Audience-switch hero: three tabs, Designers, Engineers and Managers, above a headline that changes with the selected tab.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="as"><div class="tabs" role="tablist" aria-label="Audience" id="tl"><button role="tab" type="button" id="t0" aria-controls="pn">Designers</button><button role="tab" type="button" id="t1" aria-controls="pn">Engineers</button><button role="tab" type="button" id="t2" aria-controls="pn">Managers</button></div>
+<div class="pane" role="tabpanel" id="pn" tabindex="0"><div class="col" style="gap:.8em"><p class="web-h1" id="hh"></p><p class="web-lede" id="hl"></p><span class="web-btn" style="justify-self:start">Start free</span></div><div class="web-shot" id="hv"></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One page, several first impressions: each tab rewrites the headline and the value line for one role while the call to action stays the same. Click a tab, or focus the tabs and use the arrow keys, to switch audience. The copy is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var C=[['Hand off designs without the back-and-forth','Specs, assets and comments stay attached to every frame.','frames + specs'],['Ship the UI that was actually designed','Tokens and measurements export straight into your codebase.','tokens → code'],['See what is blocked before stand-up','Every review, owner and due date on one timeline.','status timeline']];
+var tabs=$$('[role=tab]'),cur=0;
+function sel(i,focus){cur=i;tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(j===i));t.tabIndex=j===i?0:-1;});$('#pn').setAttribute('aria-labelledby','t'+i);$('#hh').textContent=C[i][0];$('#hl').textContent=C[i][1];$('#hv').textContent=C[i][2];if(focus)tabs[i].focus();}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(i);api.status('Showing: '+t.textContent);});});
+$('#tl').addEventListener('keydown',function(e){var rtl=document.dir==='rtl',d={ArrowRight:rtl?-1:1,ArrowLeft:rtl?1:-1}[e.key];if(e.key==='Home')d=-cur;if(e.key==='End')d=2-cur;if(d==null)return;e.preventDefault();sel((cur+d+3)%3,true);api.status('Showing: '+tabs[cur].textContent);});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){sel(0);}});
+</script>
+</body>
+</html>

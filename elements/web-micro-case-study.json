@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-micro-case-study",
+  "name": "Micro case study",
+  "category": "web-social-proof",
+  "definition": "Compact card with a customer, their problem, the measured result and a one-line quote, linking to the full story.",
+  "bestUse": "Mid-page proof that one specific customer like the visitor succeeded.",
+  "trigger": [
+    "social-proof",
+    "before-after",
+    "quote-or-voice"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-micro-case-study.html",
+    "kind": "animated",
+    "how": "A case study shrunk to one card: who the customer is, what was wrong, one measured result and a short quote, then a link for those who want the full story. Play shows the customer and challenge, then the result, then the quote and link. The customer and figures are invented."
+  },
+  "aliases": [
+    "customer story",
+    "case study card",
+    "success story"
+  ],
+  "related": [
+    "before-after-rows"
+  ]
+}

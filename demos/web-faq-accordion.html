@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ accordion: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.fq{padding:1.2em 6em;display:grid;gap:.4em}.fq h3{margin:0}.fq button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1em;font:600 1em/1.3 var(--f-body);text-align:start;min-height:2.8em;padding:.4em 0;background:none;border:0;border-block-end:1px solid var(--line);color:var(--fg);cursor:pointer}
+.fq button::after{content:"+";font:400 1.4em/1 var(--f-mono);color:var(--accent)}.fq button[aria-expanded=true]::after{content:"−"}.fq .ans{margin:0;padding:.5em 0 .8em;color:var(--ink-2);font-size:.9em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">FAQ accordion</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: FAQ accordion with four questions; the first answer is expanded.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="fq"><p class="web-h2" style="text-align:center;margin-bottom:.4em">Frequently asked questions</p><div id="fq"></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Questions are buttons that expand their answer below, so visitors scan the questions and open only what worries them. Click a question or press Enter or Space; the plus turns to a minus and the button reports expanded. Opening one closes the others to keep the list short. Answers are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var Q=[['Can I change plans later?','Yes. Upgrade or downgrade any time; we prorate the difference on your next invoice.'],['Do you offer a free trial?','Every paid plan starts with 14 days free. No card is needed to start.'],['Where is my data stored?','In the region you choose at sign-up, with daily encrypted backups.'],['How do I cancel?','From Billing in settings. Your workspace stays readable for 30 days.']],open=0;
+Q.forEach(function(q,i){var h=document.createElement('h3'),b=document.createElement('button'),p=document.createElement('p');b.type='button';b.id='q'+i;b.setAttribute('aria-controls','a'+i);b.textContent=q[0];p.id='a'+i;p.className='ans';p.setAttribute('role','region');p.setAttribute('aria-labelledby','q'+i);p.textContent=q[1];h.appendChild(b);$('#fq').appendChild(h);$('#fq').appendChild(p);
+b.addEventListener('click',function(){open=open===i?-1:i;draw();api.status(open===i?'Opened: '+q[0]:'Closed');});});
+function draw(){Q.forEach(function(q,i){$('#q'+i).setAttribute('aria-expanded',String(open===i));$('#a'+i).hidden=open!==i;});}
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){open=0;draw();}});
+</script>
+</body>
+</html>

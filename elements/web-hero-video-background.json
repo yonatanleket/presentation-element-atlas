@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-video-background",
+  "name": "Video-background hero",
+  "category": "web-hero",
+  "definition": "Hero section over a muted, looping ambient video, with a visible pause control and a still fallback.",
+  "bestUse": "Brands where mood or a physical product matters more than a screenshot.",
+  "trigger": [
+    "visual-mood",
+    "key-message"
+  ],
+  "level": "advanced",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-video-background.html",
+    "kind": "interactive",
+    "how": "Muted ambient footage sets the mood behind the headline while a scrim keeps the text readable. The pause button stops the motion, as anything that moves for more than five seconds needs a way to stop it; with reduced motion the hero starts paused on a still. The footage is simulated."
+  },
+  "aliases": [
+    "background video",
+    "cinemagraph hero",
+    "ambient hero"
+  ],
+  "related": [
+    "background-video-cinemagraph"
+  ]
+}

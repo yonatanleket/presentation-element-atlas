@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Per-seat price stepper: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.ss{height:100%;align-content:center;padding:1.6em 2.4em;display:grid;grid-template-columns:1fr 1fr;gap:2em;align-items:center}.stp{display:flex;align-items:center;gap:.5em}
+.stp button{font:700 1.2em/1 var(--f-body);width:2.4em;height:2.4em;border-radius:.45em;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.stp input{width:4.5em;text-align:center;font:700 1.4em/1 var(--f-display);min-height:1.8em;border:1px solid var(--line);border-radius:.45em}
+.sum{padding:1.2em;display:grid;gap:.35em}.tot{font:700 2.3em/1 var(--f-display);font-variant-numeric:tabular-nums}.nx{font-size:.85em;color:var(--ok)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Per-seat price stepper</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Per-seat price stepper: minus and plus buttons around a seat count, the price per seat and the monthly total.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="ss"><div class="col" style="gap:.8em"><p class="web-h2">How big is your team?</p><label for="n" style="font-weight:600">Seats</label><div class="stp"><button type="button" id="mi" aria-label="Remove a seat">−</button><input id="n" type="number" min="1" max="200" inputmode="numeric"><button type="button" id="pl" aria-label="Add a seat">+</button></div></div>
+<div class="sum card"><span class="kicker" id="unit"></span><span class="tot" id="tot" aria-live="polite"></span><span class="per muted" style="font-size:.85em">per month, billed monthly</span><span class="nx" id="nx"></span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The visitor sets the team size and sees the unit price and total update, with the next discount threshold named so a bigger plan feels earned rather than hidden. Use the minus and plus buttons or type a number. The discount steps at 10 and 50 seats; prices are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+function unit(n){return n>=50?8:n>=10?10:12;}
+function draw(){var el=$('#n'),n=Math.max(1,Math.min(200,parseInt(el.value,10)||1));el.value=n;var u=unit(n);$('#unit').textContent='$'+u+' per seat';$('#tot').textContent='$'+(u*n).toLocaleString('en-US');
+$('#nx').textContent=n<10?(10-n)+' more seats unlock $10 per seat':n<50?(50-n)+' more seats unlock $8 per seat':'Best per-seat price applied';return n;}
+function set(n){$('#n').value=n;n=draw();api.status(n+' seats: '+$('#tot').textContent);}
+$('#mi').addEventListener('click',function(){set((+$('#n').value||1)-1);});$('#pl').addEventListener('click',function(){set((+$('#n').value||1)+1);});$('#n').addEventListener('change',function(){set(+$('#n').value);});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){$('#n').value=8;draw();}});
+</script>
+</body>
+</html>

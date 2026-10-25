@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-social-proof-microcopy",
+  "name": "Proof microcopy near the CTA",
+  "category": "web-social-proof",
+  "definition": "One short line of evidence, such as an avatar stack and a recent count, placed right beside the main call to action.",
+  "bestUse": "Reducing hesitation at the moment of sign-up without adding a section.",
+  "trigger": [
+    "social-proof",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-social-proof-microcopy.html",
+    "kind": "animated",
+    "how": "Proof works best where the doubt happens, so one line of evidence sits under the button instead of in a far-away section. Play shows the form, then the avatar stack and recent count with its no-card reassurance. The number is illustrative and should come from real, current data."
+  },
+  "aliases": [
+    "avatar stack",
+    "trust line",
+    "social proof snippet"
+  ],
+  "related": [
+    "web-hero-email-capture"
+  ]
+}

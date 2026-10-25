@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-dropdown-nav",
+  "name": "Dropdown navigation",
+  "category": "web-navigation",
+  "definition": "Top navigation where an item opens a short list of sub-pages on click or keyboard, and closes on Escape or outside click.",
+  "bestUse": "Sites with a handful of sections that each have two to six pages.",
+  "trigger": [
+    "navigation-wayfinding",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-dropdown-nav.html",
+    "kind": "interactive",
+    "how": "The Product and Resources items are buttons that open a short list of sub-pages under the bar. Click one or press Enter on it, use Tab through the links, and press Escape or click elsewhere to close. Only one menu is open at a time, and the open button is marked expanded."
+  },
+  "aliases": [
+    "dropdown menu",
+    "nav menu",
+    "disclosure navigation"
+  ]
+}

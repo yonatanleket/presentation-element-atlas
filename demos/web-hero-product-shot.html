@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product-shot hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.ctr{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.7em;padding:1.6em 3em 0}
+.app{position:absolute;inset-inline:5em;inset-block-end:-1.5em;height:11.5em;display:grid;grid-template-columns:8em 1fr;overflow:hidden;box-shadow:0 1em 2em rgba(27,30,36,.12);transform:translateY(3em)}
+.app.on{transform:none}.app aside{background:var(--stage);padding:.8em;display:grid;gap:.5em;align-content:start}.app aside i{height:1em;border-radius:.25em;background:var(--line)}
+.app section{padding:.9em;display:grid;grid-template-columns:repeat(3,1fr);gap:.6em;align-content:start}.app section div{height:4em;border-radius:.4em;background:var(--accent-soft)}.app section div:first-child{grid-column:span 2}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Product-shot hero</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Product-shot hero: a centered headline and button above a large simplified app window.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav>
+<div class="ctr"><p class="web-h1" data-f="1">Every metric, one calm dashboard</p><p class="web-lede" data-f="1">Connect your sources in minutes and stop rebuilding the same report.</p><span class="web-btn" data-f="2">Try it free</span></div>
+<div class="web-shot app" data-f="3"><aside><i></i><i></i><i></i><i></i></aside><section><div></div><div></div><div></div><div></div><div></div></section></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A short centered headline makes the promise, and a large product screen directly below backs it up. Play shows the headline, then the call to action, then slides the product window up from the fold so it reads as the next thing to look at. The interface is a simplified illustration.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:800,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

@@ -4,6 +4,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 import { ROOT } from './lib.mjs';
+const ELEMENT_COUNT=fs.readdirSync(path.join(ROOT,'elements')).filter(f=>f.endsWith('.json')).length;
 const args=process.argv.slice(2),opts={};for(let i=0;i<args.length;i++){if(['--playwright','--browser','--report'].includes(args[i])&&args[i+1])opts[args[i].slice(2)]=args[++i];else throw Error('Expected --playwright --browser [--report]');}
 const reportFile=path.resolve(opts.report||path.join(ROOT,'work/team-workflow/impeccable-m1/catalog-browser-report.json')),artifacts=path.join(path.dirname(reportFile),'catalog-browser-artifacts');fs.mkdirSync(artifacts,{recursive:true});
 const report={checker:'Atlas catalog UI browser check',version:'1.0.0',status:'running',checks:[],errors:[],screenshots:[],limitations:['Browser functional and screenshot evidence; independent visual inspection and full AA remain separate.']};let browser;
@@ -38,7 +39,7 @@ page.on('pageerror',e=>report.errors.push(e.message));const url=pathToFileURL(pa
 const ready=async()=>{await page.locator('#panel[open]').waitFor();await page.locator('#pBody[data-state="ready"]').waitFor({timeout:7000});assert.equal(await page.locator('iframe').count(),1);};
 const open=async id=>{await page.evaluate(value=>{location.hash='hazard-'+value;},id);await ready();};
 const frame=()=>page.frameLocator('#pBody iframe');
-await page.goto(url);assert.equal(await page.locator('#out .card').count(),166);assert.equal(await page.locator('.hazard-card').count(),15);check('166 element cards and15 hazard cards');
+await page.goto(url);assert.equal(await page.locator('#out .card').count(),ELEMENT_COUNT);assert.equal(await page.locator('.hazard-card').count(),15);check(`${ELEMENT_COUNT} element cards and15 hazard cards`);
 assert.equal(await page.locator('iframe').count(),0);await page.locator('#card-kpi-tile h3').hover();assert.equal(await page.locator('iframe').count(),0);
 await page.locator('#card-kpi-tile .poster').hover();await page.locator('#card-kpi-tile .poster.is-playing iframe.hover-demo-frame').waitFor({timeout:4000});assert.equal(await page.locator('iframe').count(),1);
 await page.locator('#q').hover();assert.equal(await page.locator('iframe').count(),0);check('catalog idle and non-poster hover create zero live frames; poster hover quick-plays and cleans up');
@@ -68,7 +69,7 @@ for(const width of [320,375,640]){
  const ctx=await browser.newContext({viewport:{width,height:width===640?450:800}});
  await ctx.route(/https?:\/\//,r=>r.abort());const p=await ctx.newPage();
  p.on('pageerror',e=>report.errors.push(e.message));await p.goto(url);
- const bounds=await p.locator('#elements-view .seg').evaluate(seg=>{
+ const bounds=await p.locator('#elements-view .seg[aria-label=Level]').evaluate(seg=>{
   const group=seg.getBoundingClientRect();return [...seg.querySelectorAll('button')].map(button=>{const b=button.getBoundingClientRect();return {label:button.textContent,width:b.width,height:b.height,inside:b.left>=group.left-1&&b.right<=group.right+1};});
  });assert.equal(bounds.length,3);assert.ok(bounds.every(b=>b.inside&&b.width>=44&&b.height>=44),JSON.stringify(bounds));
  await p.locator('button[data-level=advanced]').click();assert.equal(await p.locator('button[data-level=advanced]').getAttribute('aria-pressed'),'true');
@@ -81,5 +82,21 @@ for(const width of [320,375,640]){
  await p.waitForTimeout(50);assert.equal(await p.locator('#close').evaluate(button=>{const b=button.getBoundingClientRect(),p=document.querySelector('#panel').getBoundingClientRect();return b.top>=p.top-1&&b.bottom<=Math.min(p.bottom,innerHeight)+1&&document.elementFromPoint(b.left+b.width/2,b.top+b.height/2)===button;}),true);
  await p.locator('#close').click();assert.equal(await p.locator('iframe').count(),0);check(width+'px level control bounds, Advanced activation, stage-first inspector and sticky Close');await ctx.close();
 }
+// Surfaces: Slides is the default; Web shows only web cards and owns its own hash; element links switch surface.
+{const ctx=await browser.newContext({viewport:{width:1280,height:900}});await ctx.route(/https?:\/\//,r=>r.abort());const p=await ctx.newPage();p.on('pageerror',e=>report.errors.push(e.message));
+ await p.goto(url);
+ const surf=s=>p.locator('#out .card:not([hidden])').evaluateAll((cards,s)=>cards.length>0&&cards.every(c=>c.dataset.surface===s),s);
+ assert.equal(await surf('slide'),true);assert.equal(await p.locator('[data-surface-filter=slide]').getAttribute('aria-checked'),'true');
+ assert.equal(await p.locator('#surfaces [tabindex="0"]').count(),1);
+ await p.locator('[data-surface-filter=web]').click();assert.equal(await surf('web'),true);assert.equal(new URL(p.url()).hash,'#surface-web');
+ assert.equal(await p.locator('#cats [data-surface=slide]:not([hidden])').count(),0);assert.ok(await p.locator('#cats [data-surface=web]:not([hidden])').count()>=5);
+ await p.locator('[data-surface-filter=web]').focus();await p.keyboard.press('ArrowLeft');assert.equal(await surf('slide'),true);assert.equal(await p.evaluate(()=>document.activeElement.dataset.surfaceFilter),'slide');
+ await p.goto(url+'#surface-web');await p.reload();assert.equal(await surf('web'),true);
+ await p.goto(url+'#elements');await p.reload();assert.equal(await surf('slide'),true);
+ await p.evaluate(()=>location.hash='web-faq-accordion');await p.locator('#pBody[data-state="ready"]').waitFor();assert.equal(await p.locator('[data-surface-filter=web]').getAttribute('aria-checked'),'true');assert.equal(await p.locator('#prev').isDisabled()&&await p.locator('#next').isDisabled(),false);
+ await p.locator('#close').click();assert.equal(await p.locator('button[data-level=all]').getAttribute('aria-pressed'),'true');assert.equal(await p.locator('#out .card:not([hidden])').count(),await p.locator('#out .card[data-surface=web]').count());
+ await p.locator('#new-filter').click();assert.ok(await p.locator('#out .card:not([hidden])').evaluateAll(cards=>cards.every(c=>c.dataset.added)));await p.locator('#new-filter').click();
+ assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ check('surface switch: Slides default, Web filter and categories, radio arrow keys, #surface-web refresh, element route switches surface without changing Level, New filter');await ctx.close();}
 assert.equal(report.errors.length,0,JSON.stringify(report.errors));report.status='functional-checks-passed';process.exitCode=0;
 }catch(error){report.status='failed';report.failure=error.stack;process.exitCode=1;}finally{if(browser)await browser.close();fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({report:reportFile,status:report.status,checks:report.checks.length,failure:report.failure}));}

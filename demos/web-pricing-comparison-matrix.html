@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan comparison matrix: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.cm{padding:1em 2.4em;display:grid;gap:.6em}.cm .row{justify-content:space-between}.cm table{width:100%;border-collapse:collapse;font-size:.85em}
+.cm th,.cm td{padding:.38em .6em;text-align:center;border-block-end:1px solid var(--line)}.cm th:first-child,.cm td:first-child{text-align:start}.cm thead th{font-family:var(--f-display)}
+.cm .grp td{font:600 .85em/1 var(--f-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--stage)}.cm .hl{background:var(--accent-soft)}.y{color:var(--ok);font-weight:700}.n{color:var(--muted)}
+.sw{display:flex;align-items:center;gap:.4em;font-size:.85em;cursor:pointer}.sw input{accent-color:var(--accent);width:1.1em;height:1.1em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Plan comparison matrix</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Plan comparison matrix with features in grouped rows, three plan columns and a Show differences only switch.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="cm"><div class="row"><p class="web-h2" style="font-size:1.3em">Compare plans</p><label class="sw"><input type="checkbox" id="df"> Show differences only</label></div>
+<table><thead><tr><th scope="col">Feature</th><th scope="col">Starter</th><th scope="col" class="hl">Team</th><th scope="col">Business</th></tr></thead><tbody id="tb"></tbody></table></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Features are grouped under short headings and every plan is a column, so one capability can be checked across plans in a single row. Turn on Show differences only to hide rows where every plan is the same; the middle plan column stays highlighted. Features are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var R=[['Workspace'],['Projects','3','Unlimited','Unlimited'],['Guests','—','10','Unlimited'],['File storage','2 GB','100 GB','1 TB'],['Security'],['Two-factor sign-in','✓','✓','✓'],['Single sign-on','—','—','✓'],['Audit log','—','✓','✓'],['Support'],['Help centre','✓','✓','✓'],['Response time','—','24 h','1 h']];
+function draw(){var only=$('#df').checked,tb=$('#tb');tb.textContent='';var hidden=0;R.forEach(function(r){if(r.length===1){var g=document.createElement('tr');g.className='grp';g.innerHTML='<td colspan="4"></td>';g.firstChild.textContent=r[0];tb.appendChild(g);return;}
+if(only&&r[1]===r[2]&&r[2]===r[3]){hidden++;return;}var tr=document.createElement('tr');r.forEach(function(c,i){var td=document.createElement(i?'td':'th');if(!i)td.scope='row';td.textContent=c==='—'?'–':c;if(i===2)td.className='hl';if(c==='✓')td.classList.add('y');if(c==='—'){td.classList.add('n');td.setAttribute('aria-label','Not included');}if(c==='✓')td.setAttribute('aria-label','Included');tr.appendChild(td);});tb.appendChild(tr);});return hidden;}
+$('#df').addEventListener('change',function(){var h=draw();api.status($('#df').checked?h+' identical rows hidden':'All rows shown');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){$('#df').checked=false;draw();}});
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video-background hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.vid{position:absolute;inset:0;background:linear-gradient(120deg,#1d3a8a,#2f4bd8 40%,#11734f 75%,#1d3a8a);background-size:300% 300%;animation:drift 9s linear infinite}
+.vid::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.18),transparent 45%),radial-gradient(circle at 75% 70%,rgba(255,255,255,.12),transparent 40%);animation:drift 13s linear infinite reverse;background-size:200% 200%}
+.paused .vid,.paused .vid::after{animation-play-state:paused}
+@keyframes drift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,16,40,.78),rgba(10,16,40,.35))}
+.copy{position:absolute;inset-block-start:3.2em;inset-inline-start:2.4em;max-width:24em;color:#fff;display:grid;gap:.8em}
+.copy .web-lede{color:#e9ecf7}.copy .web-btn{justify-self:start;background:#fff;color:#1b1e24;border-color:#fff}
+.pz{position:absolute;inset-block-end:1em;inset-inline-end:1em;font-size:.9em;background:rgba(10,16,40,.7);color:#fff;border-color:rgba(255,255,255,.6)}
+.web-nav.dark{background:transparent;border-color:rgba(255,255,255,.25);position:relative;z-index:1}.web-nav.dark,.web-nav.dark a{color:#fff}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Video-background hero</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Video-background hero: headline over moving ambient imagery with a pause button in the corner.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body" id="hero"><div class="vid" aria-hidden="true"></div><div class="scrim"></div>
+<nav class="web-nav dark"><span class="logo">Acme Outdoor</span><a>Gear</a><a>Trips</a><a>Journal</a></nav>
+<div class="copy"><p class="web-h1">Built for the long way round</p><p class="web-lede">Packs and shelters tested on routes most maps leave blank.</p><span class="web-btn">Shop the range</span></div>
+<button class="sbtn pz" type="button" id="pz" aria-pressed="false">❚❚ Pause background</button></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Muted ambient footage sets the mood behind the headline while a scrim keeps the text readable. The pause button stops the motion, as anything that moves for more than five seconds needs a way to stop it; with reduced motion the hero starts paused on a still. The footage is simulated.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var hero=$('#hero'),pz=$('#pz');
+function set(p){hero.classList.toggle('paused',p);pz.setAttribute('aria-pressed',String(p));pz.textContent=p?'▶ Play background':'❚❚ Pause background';}
+pz.addEventListener('click',function(){var p=!hero.classList.contains('paused');set(p);api.status(p?'Background paused':'Background playing');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){set(AtlasDemo.reducedMotion);}});
+</script>
+</body>
+</html>

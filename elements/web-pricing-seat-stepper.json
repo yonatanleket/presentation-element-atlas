@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-pricing-seat-stepper",
+  "name": "Per-seat price stepper",
+  "category": "web-pricing",
+  "definition": "Seat counter with minus and plus buttons that recalculates the total and applies volume discounts at stated thresholds.",
+  "bestUse": "Per-user pricing where team size changes the unit price.",
+  "trigger": [
+    "pricing-plans",
+    "what-if-model"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-pricing-seat-stepper.html",
+    "kind": "interactive",
+    "how": "The visitor sets the team size and sees the unit price and total update, with the next discount threshold named so a bigger plan feels earned rather than hidden. Use the minus and plus buttons or type a number. The discount steps at 10 and 50 seats; prices are illustrative."
+  },
+  "aliases": [
+    "seat calculator",
+    "team size picker",
+    "quantity selector"
+  ],
+  "related": [
+    "web-pricing-usage-calculator"
+  ]
+}

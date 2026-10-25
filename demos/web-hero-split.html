@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:2em;padding:2em 2.4em;align-items:center}
+.vis{height:15em;padding:1em;display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}
+.vis div{background:var(--surface);border:1px solid var(--line);border-radius:.4em;padding:.5em;display:flex;flex-direction:column;gap:.4em}
+.vis b{font-size:.8em}.vis i{display:block;height:1.4em;border-radius:.3em;background:var(--accent-soft)}.vis i.w{background:var(--stage)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Split hero</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Split hero: headline, value line and two buttons on the left, a simplified product board on the right.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav>
+<div class="split"><div class="col" style="gap:.8em"><span data-f="1"><span class="pill">New: offline sync</span></span><p class="web-h1" data-f="1">Plan the week on one shared board</p><p class="web-lede" data-f="2">Tasks, owners and dates in one place, so Monday stand-up takes ten minutes.</p><div class="row" data-f="3" style="gap:.6em"><span class="web-btn">Start free</span><span class="web-btn ghost">Book a demo</span></div></div>
+<div class="web-shot vis" data-f="4"><div><b>To do</b><i></i><i class="w"></i><i></i></div><div><b>Doing</b><i></i><i></i></div><div><b>Done</b><i class="w"></i><i></i><i class="w"></i></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Words sit on the reading side and the picture on the other, so the eye moves from claim to proof. Play builds the badge and headline, then the value line, the two buttons with one clearly primary, and finally the product visual. Brand and copy are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:4,stepMs:700,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

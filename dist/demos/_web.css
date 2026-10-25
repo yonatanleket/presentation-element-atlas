@@ -1,0 +1,39 @@
+/* Presentation Element Atlas: web-section surface, an opt-in companion to _harness.css.
+   Web demos link it after the harness: <link rel="stylesheet" href="_web.css">
+   and mark the frame: <main class="demo" data-surface="web"> ... <div class="stage" data-aspect="web">.
+   Light theme only. No network requests. */
+
+/* Demo styles often set display on elements toggled with the hidden attribute; keep hidden authoritative. */
+.demo[data-surface=web] [hidden]{display:none!important}
+
+/* ---------- Frame: wider than a slide demo ---------- */
+.demo[data-surface=web]{max-width:880px}
+
+/* ---------- Stage: 16:9, scaled 768x432 logical canvas (1em = 16 logical px) ----------
+   Layout is in em and scales with the stage, so a section looks the same at any width. */
+.stage[data-aspect=web]{max-width:848px;aspect-ratio:16/9;background:var(--surface)}
+.stage[data-aspect=web]>*{font-size:2.0833cqi}
+
+/* ---------- Page building blocks ---------- */
+/* A simulated browser window: a thin address bar over the page body. */
+.web-page{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
+.web-bar{display:flex;align-items:center;gap:.35em;padding:.4em .7em;background:var(--stage);border-block-end:1px solid var(--line);font:500 .8em/1 var(--f-mono);color:var(--muted);flex:none}
+.web-bar i{width:.6em;height:.6em;border-radius:50%;background:var(--line)}
+.web-bar span{margin-inline-start:.6em;padding:.3em .8em;border-radius:99em;background:var(--surface);border:1px solid var(--line)}
+.web-body{position:relative;flex:1;min-height:0;overflow:hidden}
+/* Section wrapper with page-like gutters. */
+.web-section{padding:1.6em 2.4em;display:flex;flex-direction:column;gap:.8em}
+.web-nav{display:flex;align-items:center;gap:1.2em;padding:.7em 2.4em;border-block-end:1px solid var(--line);font-size:.85em;background:var(--surface)}
+.web-nav .logo{font:700 1.05em/1 var(--f-display);margin-inline-end:auto;display:flex;align-items:center;gap:.4em}
+.web-nav .logo::before{content:"";width:1em;height:1em;border-radius:.3em;background:var(--accent)}
+.web-nav a{color:var(--ink-2);text-decoration:none}
+.web-h1{font:700 2.4em/1.05 var(--f-display);letter-spacing:-.02em;margin:0}
+.web-h2{font:700 1.6em/1.1 var(--f-display);letter-spacing:-.01em;margin:0}
+.web-lede{font-size:1.05em;color:var(--ink-2);margin:0;max-width:30em}
+.web-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4em;font:600 .9em/1 var(--f-body);min-height:2.6em;padding:0 1.2em;border-radius:.45em;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;text-decoration:none}
+.web-btn.ghost{background:var(--surface);color:var(--fg);border-color:var(--line)}
+/* Neutral placeholder for a product image, photo or logo: never a real brand asset. */
+.web-shot{background:linear-gradient(135deg,var(--accent-soft),var(--stage));border:1px solid var(--line);border-radius:.6em}
+.web-logo{display:inline-flex;align-items:center;gap:.35em;font:700 1em/1 var(--f-display);color:var(--muted)}
+.web-logo::before{content:"";width:1em;height:1em;border-radius:.25em;background:currentColor;opacity:.55}
+.web-btn.sm{min-height:2.2em;padding:0 .9em;font-size:.85em}

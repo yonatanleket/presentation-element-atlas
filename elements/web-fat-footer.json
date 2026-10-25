@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-fat-footer",
+  "name": "Multi-column footer",
+  "category": "web-conversion",
+  "definition": "Page footer with grouped link columns, a short brand line, a newsletter field and a legal row.",
+  "bestUse": "Sites with many pages, as a sitemap safety net at the end of every page.",
+  "trigger": [
+    "navigation-wayfinding",
+    "dense-detail"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-fat-footer.html",
+    "kind": "animated",
+    "how": "The footer catches visitors who scrolled past everything else, so it groups every important link under short headings and ends with legal and locale details. Play shows the brand block and link columns, then the legal row. Link names are illustrative."
+  },
+  "aliases": [
+    "fat footer",
+    "site footer",
+    "sitemap footer"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-audience-switch",
+  "name": "Audience-switch hero",
+  "category": "web-hero",
+  "definition": "Hero with tabs for each audience; choosing one swaps the headline, value line and visual to that use case.",
+  "bestUse": "Products sold to several roles that each need a different first sentence.",
+  "trigger": [
+    "key-message",
+    "options-comparison"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-audience-switch.html",
+    "kind": "interactive",
+    "how": "One page, several first impressions: each tab rewrites the headline and the value line for one role while the call to action stays the same. Click a tab, or focus the tabs and use the arrow keys, to switch audience. The copy is illustrative."
+  },
+  "aliases": [
+    "persona tabs",
+    "use-case hero",
+    "role switcher"
+  ]
+}

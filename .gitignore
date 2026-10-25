@@ -5,3 +5,5 @@ node_modules/
 *.log
 # Internal planning and review notes; not part of the published atlas.
 work/
+.vercel
+.env*

@@ -2,61 +2,103 @@
   {
     "id": "nav",
     "label": "Navigation & deck chrome",
-    "description": "Persistent controls around the slides: wayfinding, pacing, presenter tools."
+    "description": "Persistent controls around the slides: wayfinding, pacing, presenter tools.",
+    "surface": "slide"
   },
   {
     "id": "story",
     "label": "Structure & narrative",
-    "description": "Slide types and devices that carry the storyline."
+    "description": "Slide types and devices that carry the storyline.",
+    "surface": "slide"
   },
   {
     "id": "text",
     "label": "Text, emphasis & builds",
-    "description": "How words and bullets appear and draw the eye."
+    "description": "How words and bullets appear and draw the eye.",
+    "surface": "slide"
   },
   {
     "id": "metric",
     "label": "Metrics & KPIs",
-    "description": "Single numbers and compact status displays."
+    "description": "Single numbers and compact status displays.",
+    "surface": "slide"
   },
   {
     "id": "chart",
     "label": "Charts",
-    "description": "Data charts, grouped by the FT Visual Vocabulary relationship they show."
+    "description": "Data charts, grouped by the FT Visual Vocabulary relationship they show.",
+    "surface": "slide"
   },
   {
     "id": "diagram",
     "label": "Diagrams & flows",
-    "description": "Process, system and relationship diagrams."
+    "description": "Process, system and relationship diagrams.",
+    "surface": "slide"
   },
   {
     "id": "compare",
     "label": "Comparison & decision",
-    "description": "Elements that put options side by side or show a choice."
+    "description": "Elements that put options side by side or show a choice.",
+    "surface": "slide"
   },
   {
     "id": "product",
     "label": "Product, prototype & code",
-    "description": "Showing a product, a UI or code inside the deck."
+    "description": "Showing a product, a UI or code inside the deck.",
+    "surface": "slide"
   },
   {
     "id": "motion",
     "label": "Media, motion & transitions",
-    "description": "Video, animation and slide-to-slide movement."
+    "description": "Video, animation and slide-to-slide movement.",
+    "surface": "slide"
   },
   {
     "id": "explore",
     "label": "Interactive & explorable",
-    "description": "Elements the viewer manipulates to understand an idea."
+    "description": "Elements the viewer manipulates to understand an idea.",
+    "surface": "slide"
   },
   {
     "id": "audience",
     "label": "Audience participation",
-    "description": "Live input from the room."
+    "description": "Live input from the room.",
+    "surface": "slide"
   },
   {
     "id": "trust",
     "label": "Evidence & trust",
-    "description": "Marking where a claim comes from and how solid it is."
+    "description": "Marking where a claim comes from and how solid it is.",
+    "surface": "slide"
+  },
+  {
+    "id": "web-hero",
+    "surface": "web",
+    "label": "Hero sections",
+    "description": "The first screen of a page: headline, proof of value and the primary call to action."
+  },
+  {
+    "id": "web-navigation",
+    "surface": "web",
+    "label": "Navigation & page chrome",
+    "description": "Headers, menus, announcement bars and wayfinding that frame every page."
+  },
+  {
+    "id": "web-pricing",
+    "surface": "web",
+    "label": "Pricing",
+    "description": "Plans, billing toggles, calculators and comparison tables that help a visitor choose."
+  },
+  {
+    "id": "web-social-proof",
+    "surface": "web",
+    "label": "Social proof",
+    "description": "Logos, testimonials, ratings and outcomes that show other people trust the product."
+  },
+  {
+    "id": "web-conversion",
+    "surface": "web",
+    "label": "Conversion & footer",
+    "description": "FAQs, calls to action, signup forms, consent and footers that close the page."
   }
 ]

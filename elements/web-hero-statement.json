@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-hero-statement",
+  "name": "Statement hero",
+  "category": "web-hero",
+  "definition": "Type-only opening: one large, confident sentence with a short kicker and a single call to action.",
+  "bestUse": "Positioning a new category or a bold point of view.",
+  "trigger": [
+    "key-message"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "supahero",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-hero-statement.html",
+    "kind": "animated",
+    "how": "With no picture competing, the sentence itself carries the page, so it must be specific and short. Play shows the kicker, then the statement with its key phrase in the accent colour, then the single call to action. The copy is illustrative."
+  },
+  "aliases": [
+    "manifesto hero",
+    "typographic hero",
+    "big headline"
+  ],
+  "related": [
+    "kicker-action-title-lede"
+  ]
+}

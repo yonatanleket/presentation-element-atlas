@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rating summary: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.rs{height:100%;align-content:center;padding:2em 3.4em;display:grid;grid-template-columns:auto 1fr;gap:3em;align-items:center}.sc2{display:grid;gap:.3em;justify-items:start}.sc2 b{font:700 3.6em/1 var(--f-display)}
+.stars{color:var(--warn);font-size:1.3em;letter-spacing:.1em}.bars{display:grid;gap:.5em}.br{display:grid;grid-template-columns:3.2em 1fr 3em;gap:.6em;align-items:center;font-size:.9em}
+.br i{display:block;height:.7em;border-radius:99em;background:var(--stage);overflow:hidden}.br i::before{content:"";display:block;height:100%;width:var(--w);background:var(--warn);transform-origin:left;transform:scaleX(0);transition:transform .6s var(--ease-out)}.on .br i::before,.br.on i::before{transform:none}
+.br span:last-child{font-family:var(--f-mono);color:var(--muted);text-align:end}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Rating summary</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Rating summary: 4.7 out of 5 from 1,284 reviews, with a bar for each star level from 5 to 1.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="rs"><div class="sc2" data-f="1"><b>4.7</b><span class="stars" aria-hidden="true">★★★★★</span><span class="muted">1,284 reviews</span><span class="pill">Verified purchases</span></div>
+<div class="bars" data-f="2"><div class="br"><span>5 star</span><i style="--w:78%"></i><span>78%</span></div><div class="br"><span>4 star</span><i style="--w:14%"></i><span>14%</span></div><div class="br"><span>3 star</span><i style="--w:4%"></i><span>4%</span></div><div class="br"><span>2 star</span><i style="--w:2%"></i><span>2%</span></div><div class="br"><span>1 star</span><i style="--w:2%"></i><span>2%</span></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The average alone hides whether reviews are mostly glowing or split; the bars show the spread and the review count shows how much weight the average deserves. Play shows the score, then grows the five bars. Ratings are illustrative and would link to their source.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:2,stepMs:700,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usage-based price calculator: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.uc{height:100%;align-content:center;padding:1.4em 2.4em;display:grid;grid-template-columns:1.2fr 1fr;gap:2em;align-items:center}.uc label{font-weight:600}.uc input{width:100%;accent-color:var(--accent)}
+.vol{font:700 1.3em/1 var(--f-display);font-variant-numeric:tabular-nums}.ticks{display:flex;justify-content:space-between;font:400 .8em/1 var(--f-mono);color:var(--muted)}
+.est{padding:1.2em;display:grid;gap:.4em}.big2{font:700 2.4em/1 var(--f-display);font-variant-numeric:tabular-nums}.brk{font:400 .85em/1.4 var(--f-mono);color:var(--ink-2)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Usage-based price calculator</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Usage-based price calculator: a slider for monthly events with the estimated price and its breakdown.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="uc"><div class="col" style="gap:.8em"><p class="web-h2">Pay for what you send</p><label for="sl">Events per month</label><span class="vol" id="vv"></span><input type="range" id="sl" min="1" max="12" step="1" aria-describedby="vv"><div class="ticks"><span>10k</span><span>1M</span><span>10M+</span></div></div>
+<div class="est card"><span class="kicker" id="tier"></span><span class="big2" id="pr" aria-live="polite"></span><span class="brk" id="bk"></span><span class="web-btn" id="cta">Start free</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Visitors move a slider to their expected monthly volume and see the estimate immediately, with the plan tier named and the arithmetic shown so the number can be trusted. Drag the slider or use the arrow keys. Above the last tier the price is replaced by a contact link. Prices are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var V=[1e4,5e4,1e5,25e4,5e5,1e6,2e6,3e6,5e6,7.5e6,1e7,2e7];
+function fmt(n){return n>=1e6?(n/1e6)+'M':(n/1e3)+'k';}
+function draw(){var n=V[$('#sl').value-1],t,price,bk;$('#vv').textContent=fmt(n)+' events';
+if(n<=1e4){t='Free';price='$0';bk='First 10k events included';}
+else if(n<=1e6){t='Growth';price='$'+Math.round(29+(n-1e4)/1e3*0.12);bk='$29 base + $0.12 per 1k above 10k';}
+else if(n<=1e7){t='Scale';price='$'+Math.round(149+(n-1e6)/1e3*0.06);bk='$149 base + $0.06 per 1k above 1M';}
+else{t='Enterprise';price='Custom';bk='Volume pricing above 10M events';}
+$('#tier').textContent=t+' tier';$('#pr').textContent=price+(price==='Custom'?'':' / mo');$('#bk').textContent=bk;$('#cta').textContent=t==='Enterprise'?'Contact sales':'Start free';$('#sl').setAttribute('aria-valuetext',fmt(n)+' events, '+price);}
+$('#sl').addEventListener('input',function(){draw();api.status($('#tier').textContent+': '+$('#pr').textContent);});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){$('#sl').value=6;draw();}});
+</script>
+</body>
+</html>

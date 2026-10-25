@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breadcrumb trail: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.bc{padding:1.2em 2.4em .4em}.bc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4em;font-size:.9em}.bc li+li::before{content:"/";color:var(--muted);margin-inline-end:.4em}
+.bc a{color:var(--accent)}.bc [aria-current]{color:var(--fg);font-weight:600}.doc{padding:.6em 2.4em;display:grid;gap:.7em}.doc i{display:block;height:1em;border-radius:.25em;background:var(--stage)}.doc i:nth-child(3){width:70%}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Breadcrumb trail</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Breadcrumb trail above a documentation page: Docs, Integrations, Messaging, Webhooks.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>docs.acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><nav class="bc" aria-label="Breadcrumb"><ol id="ol"></ol></nav><div class="doc"><p class="web-h2" id="tt"></p><i></i><i></i><i></i><i></i></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Each crumb is a link to a parent level and the last item is the current page, marked as current rather than linked. Click a crumb to go up to that level: the trail shortens and the page title follows. Reset returns to the deepest page. Page names are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var P=['Docs','Integrations','Messaging','Webhooks'],depth=4;
+function draw(){var ol=$('#ol');ol.textContent='';P.slice(0,depth).forEach(function(n,i){var li=document.createElement('li');if(i===depth-1){var s=document.createElement('span');s.setAttribute('aria-current','page');s.textContent=n;li.appendChild(s);}else{var a=document.createElement('a');a.href='#';a.textContent=n;a.addEventListener('click',function(e){e.preventDefault();depth=i+1;draw();api.status('Went up to: '+n);});li.appendChild(a);}ol.appendChild(li);});$('#tt').textContent=P[depth-1];}
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){depth=4;draw();}});
+</script>
+</body>
+</html>

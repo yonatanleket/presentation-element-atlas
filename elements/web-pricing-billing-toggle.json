@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-pricing-billing-toggle",
+  "name": "Billing-period toggle",
+  "category": "web-pricing",
+  "definition": "Switch above the plan cards that flips every price between monthly and annual billing and states the annual saving.",
+  "bestUse": "Subscription pricing that rewards annual commitment.",
+  "trigger": [
+    "pricing-plans",
+    "options-comparison"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-pricing-billing-toggle.html",
+    "kind": "interactive",
+    "how": "One switch controls every price on the page, so plans stay comparable whichever period the visitor prefers. Choose Monthly or Annual: prices update, annual shows the monthly equivalent with the yearly total underneath, and the saving is stated next to the switch. Prices are illustrative."
+  },
+  "aliases": [
+    "monthly annual switch",
+    "pricing toggle",
+    "billing switch"
+  ],
+  "related": [
+    "tier-cards"
+  ]
+}

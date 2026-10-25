@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newsletter signup: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.nl{position:absolute;inset:2.4em 7em;padding:1.6em;display:grid;gap:.7em;align-content:start}.nl form{display:grid;gap:.6em}.nl .r{display:flex;gap:.5em}
+.nl input[type=email]{flex:1;min-width:0;font:inherit;font-size:.95em;min-height:2.7em;padding:0 .9em;border:1px solid var(--line);border-radius:.45em}.nl input[aria-invalid=true]{border-color:var(--bad)}
+.nl label.ck{display:flex;gap:.5em;align-items:flex-start;font-size:.85em;color:var(--ink-2);cursor:pointer}.nl .ck input{width:1.1em;height:1.1em;margin-top:.15em;accent-color:var(--accent)}.e{min-height:1.2em;margin:0;font-size:.85em;color:var(--bad)}.ok{color:var(--ok);font-weight:600;margin:0}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Newsletter signup</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Newsletter signup card: what you get and how often, an email field, a consent checkbox and a Subscribe button.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="nl card"><span class="kicker">The Friday note</span><p class="web-h2" style="font-size:1.4em">One useful idea for product teams, every Friday</p><p class="p">Five minutes to read. Unsubscribe in one click.</p>
+<form id="f" novalidate><div class="r"><label class="sr-only" for="em">Email address</label><input id="em" type="email" placeholder="you@company.com" aria-describedby="e1" autocomplete="off"><button class="web-btn" type="submit">Subscribe</button></div><p class="e" id="e1" aria-live="polite"></p>
+<label class="ck"><input type="checkbox" id="ok" aria-describedby="e2"> I agree to receive the newsletter and accept the privacy policy.</label><p class="e" id="e2" aria-live="polite"></p></form></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The form says exactly what subscribers get and how often, and asks for consent with an unticked box rather than assuming it. Enter an email, tick the box and press Subscribe; missing either shows an inline message tied to that field, and success replaces the form. Nothing is sent; the form is simulated.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var f=$('#f'),em=$('#em'),ok=$('#ok'),msg=null;
+f.addEventListener('submit',function(e){e.preventDefault();var good=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim());em.toggleAttribute('aria-invalid',!good);if(!good)em.setAttribute('aria-invalid','true');$('#e1').textContent=good?'':'Enter a valid email address';$('#e2').textContent=ok.checked?'':'Tick the box to confirm you want the newsletter';
+if(!good){em.focus();api.status('Email needs fixing');return;}if(!ok.checked){ok.focus();api.status('Consent needed');return;}f.hidden=true;msg=document.createElement('p');msg.className='ok';msg.textContent='Subscribed. Check your inbox to confirm.';f.parentNode.appendChild(msg);api.status('Subscribed');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){f.hidden=false;em.value='';ok.checked=false;em.removeAttribute('aria-invalid');$('#e1').textContent='';$('#e2').textContent='';if(msg){msg.remove();msg=null;}}});
+</script>
+</body>
+</html>

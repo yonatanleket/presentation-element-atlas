@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-cookie-consent",
+  "name": "Cookie consent banner",
+  "category": "web-conversion",
+  "definition": "Bottom banner asking for cookie consent with equally prominent accept and reject buttons and a settings view with per-purpose toggles.",
+  "bestUse": "Any site that sets non-essential cookies for visitors in regions that require consent.",
+  "trigger": [
+    "consent-choice",
+    "accessibility"
+  ],
+  "level": "advanced",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-cookie-consent.html",
+    "kind": "interactive",
+    "how": "Accept and reject get equal visual weight, so refusing is as easy as agreeing, and Settings lists each purpose with its own switch, with essential cookies always on. Choose any option: the banner closes and states your choice. This is a pattern illustration, not legal advice."
+  },
+  "aliases": [
+    "cookie banner",
+    "consent manager",
+    "privacy banner"
+  ]
+}

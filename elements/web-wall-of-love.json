@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-wall-of-love",
+  "name": "Wall of love",
+  "category": "web-social-proof",
+  "definition": "Masonry of many short testimonials with names, roles and avatars, shown together to signal volume.",
+  "bestUse": "Products with many enthusiastic users but no single headline customer.",
+  "trigger": [
+    "social-proof",
+    "quote-or-voice"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-wall-of-love.html",
+    "kind": "animated",
+    "how": "Many short quotes in a masonry grid say that lots of people like the product, even if no single quote is decisive. Cards differ in height so the wall looks organic. Play fills the wall column by column. People and quotes are invented examples."
+  },
+  "aliases": [
+    "testimonial wall",
+    "review wall",
+    "love wall"
+  ],
+  "related": [
+    "pull-quote"
+  ]
+}

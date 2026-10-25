@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "id": "your-element-id",
   "name": "Your element name",
   "category": "story",
@@ -7,6 +7,8 @@
   "bestUse": "When to use it (140 characters max).",
   "trigger": ["key-message"],
   "level": "standard",
+  "surface": "slide",
+  "added": "YYYY-MM-DD",
   "sources": ["common"],
   "demo": {
     "file": "demos/your-element-id.html",

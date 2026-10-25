@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billing-period toggle: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.pr{padding:1.3em 2.4em;display:grid;gap:1em;justify-items:center}.bt{display:flex;align-items:center;gap:.7em}.seg2{display:flex;padding:.25em;background:var(--stage);border-radius:99em}
+.seg2 button{font:500 .9em/1 var(--f-body);min-height:2.3em;padding:0 1.1em;border:0;border-radius:99em;background:transparent;color:var(--ink-2);cursor:pointer}.seg2 button[aria-checked=true]{background:var(--fg);color:#fff}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em;width:100%}.plan{padding:1em;display:grid;gap:.25em;align-content:start}.plan.pop{border:2px solid var(--accent)}
+.amt{font:700 1.9em/1 var(--f-display);font-variant-numeric:tabular-nums}.per,.yr{font-size:.85em;color:var(--muted)}.plan .web-btn{margin-top:.6em}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Billing-period toggle</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Billing-period toggle above three plan cards whose prices change between monthly and annual.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="pr"><p class="web-h2">Simple pricing for growing teams</p><div class="bt"><div class="seg2" role="radiogroup" aria-label="Billing period" id="bp"><button type="button" role="radio" data-p="m">Monthly</button><button type="button" role="radio" data-p="y">Annual</button></div><span class="pill ok">Save 20% annually</span></div>
+<div class="plans"><div class="plan card"><b>Starter</b><span class="amt" data-m="0" data-y="0"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn ghost">Start free</span></div><div class="plan card pop"><b>Team <span class="pill">Popular</span></b><span class="amt" data-m="15" data-y="12"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn">Start trial</span></div><div class="plan card"><b>Business</b><span class="amt" data-m="30" data-y="24"></span><span class="per">per user / month</span><span class="yr"></span><span class="web-btn ghost">Start trial</span></div></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>One switch controls every price on the page, so plans stay comparable whichever period the visitor prefers. Choose Monthly or Annual: prices update, annual shows the monthly equivalent with the yearly total underneath, and the saving is stated next to the switch. Prices are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var rb=$$('#bp [role=radio]'),p='y';
+function draw(){rb.forEach(function(b){var on=b.dataset.p===p;b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;});$$('.amt').forEach(function(a){a.textContent='$'+a.dataset[p];var yr=a.parentNode.querySelector('.yr');yr.textContent=p==='y'&&+a.dataset.y?'$'+(a.dataset.y*12)+' billed yearly':'\u00a0';});}
+rb.forEach(function(b){b.addEventListener('click',function(){p=b.dataset.p;draw();api.status(p==='y'?'Annual prices shown':'Monthly prices shown');});});
+$('#bp').addEventListener('keydown',function(e){if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(e.key)<0)return;e.preventDefault();p=p==='m'?'y':'m';draw();rb.filter(function(b){return b.dataset.p===p;})[0].focus();api.status(p==='y'?'Annual prices shown':'Monthly prices shown');});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){p='y';draw();}});
+</script>
+</body>
+</html>

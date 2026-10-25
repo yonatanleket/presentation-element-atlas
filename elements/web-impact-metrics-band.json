@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-impact-metrics-band",
+  "name": "Impact metrics band",
+  "category": "web-social-proof",
+  "definition": "Full-width band of three or four large outcome numbers with short labels, often counting up when it scrolls into view.",
+  "bestUse": "Summarising measurable results customers get, between story sections of a page.",
+  "trigger": [
+    "social-proof",
+    "kpi-set"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-impact-metrics-band.html",
+    "kind": "animated",
+    "how": "A few outcome numbers in one band give the page a scannable proof point; each label says what was measured. Play counts the numbers up once, the way a band reacts when it scrolls into view; with reduced motion the final values show immediately. Figures are illustrative."
+  },
+  "aliases": [
+    "stats band",
+    "numbers section",
+    "results strip"
+  ],
+  "related": [
+    "kpi-tile"
+  ]
+}

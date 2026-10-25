@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-newsletter-signup",
+  "name": "Newsletter signup",
+  "category": "web-conversion",
+  "definition": "Compact form with an email field, an explicit consent checkbox and a clear statement of what and how often you will send.",
+  "bestUse": "Blogs, footers and content pages that build an audience over time.",
+  "trigger": [
+    "conversion-ask",
+    "consent-choice"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-newsletter-signup.html",
+    "kind": "interactive",
+    "how": "The form says exactly what subscribers get and how often, and asks for consent with an unticked box rather than assuming it. Enter an email, tick the box and press Subscribe; missing either shows an inline message tied to that field, and success replaces the form. Nothing is sent; the form is simulated."
+  },
+  "aliases": [
+    "email signup",
+    "subscribe form",
+    "mailing list"
+  ],
+  "related": [
+    "web-hero-email-capture"
+  ]
+}

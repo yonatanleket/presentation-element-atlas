@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer logo wall: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.lw{padding:4.5em 2.4em;display:grid;gap:1.4em;justify-items:center}.lw p{margin:0;font-size:.95em;color:var(--muted)}.lg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4em 2.6em}
+.lg .web-logo{font-size:1.1em;justify-content:center}.lg .web-logo:nth-child(3n)::before{border-radius:50%}.lg .web-logo:nth-child(4n)::before{transform:rotate(45deg) scale(.8)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Customer logo wall</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Customer logo wall: Trusted by product teams at, above two rows of grey placeholder logos.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="lw"><p data-f="1">Trusted by product teams at 2,000+ companies</p><div class="lg" data-f="2"><span class="web-logo">Brand A</span><span class="web-logo">Brand B</span><span class="web-logo">Brand C</span><span class="web-logo">Brand D</span><span class="web-logo">Brand E</span><span class="web-logo">Brand F</span><span class="web-logo">Brand G</span><span class="web-logo">Brand H</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Logos are set in one neutral tone and equal visual weight so no single brand dominates, under a line that names the kind of customer. Play shows the line, then fades in the two rows. Real walls use permission-cleared logos; these are placeholders, never real brand marks.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:2,stepMs:700,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

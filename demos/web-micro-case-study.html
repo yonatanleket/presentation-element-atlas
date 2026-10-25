@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro case study: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.cs{position:absolute;inset:1.6em 3em;display:grid;grid-template-columns:1fr 1.1fr;overflow:hidden}.cs .l{padding:1.3em;display:grid;gap:.6em;align-content:start;background:var(--stage)}
+.cs .r{padding:1.3em;display:grid;gap:.6em;align-content:start}.res{font:700 3em/1 var(--f-display);color:var(--accent)}.cs blockquote{margin:0;font-size:.95em;color:var(--ink-2);border-inline-start:3px solid var(--accent);padding-inline-start:.7em}
+.cs a{color:var(--accent);font-weight:600;font-size:.9em}.cs h4{margin:0;font:600 .8em/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Micro case study</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Micro case study card: customer name, challenge, a large result of 41% fewer tickets, a short quote and a read link.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="cs card"><div class="l" data-f="1"><span class="web-logo">Brand K · Retail</span><h4>Challenge</h4><p class="p">Support volume doubled every holiday season, and hiring could not keep up.</p></div>
+<div class="r"><h4 data-f="2">Result</h4><span class="res" data-f="2">41% fewer tickets</span><p class="p" data-f="2">in the first quarter after launching self-serve answers.</p><blockquote data-f="3">“Peak season felt like a normal week.” Morgan T., Support director</blockquote><a data-f="3">Read the full story →</a></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>A case study shrunk to one card: who the customer is, what was wrong, one measured result and a short quote, then a link for those who want the full story. Play shows the customer and challenge, then the result, then the quote and link. The customer and figures are invented.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

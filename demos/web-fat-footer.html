@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multi-column footer: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.pg3{margin:1em 2.4em;height:5em;border-radius:.6em;background:var(--stage)}.foot{position:absolute;inset-inline:0;inset-block-end:0;background:var(--fg);color:#d9dce2;padding:1.4em 2.4em 1em;display:grid;gap:1.1em}
+.fc{display:grid;grid-template-columns:1.6fr repeat(4,1fr);gap:1.2em;font-size:.85em}.fc h4{margin:0 0 .4em;color:#fff;font:600 .9em/1 var(--f-body)}.fc a{display:block;padding:.15em 0;color:#d9dce2;text-decoration:none}
+.fb{display:grid;gap:.5em}.fb .logo{font:700 1.2em/1 var(--f-display);color:#fff}.fb span.inp{display:flex;align-items:center;min-height:2.3em;padding:0 .7em;border:1px solid #565c6b;border-radius:.4em;color:#b8bcc6}
+.lg2{display:flex;justify-content:space-between;gap:1em;padding-top:.8em;border-top:1px solid #3a3f4b;font-size:.8em;color:#b8bcc6}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Multi-column footer</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Multi-column footer: brand and newsletter on the left, four link columns, and a legal row at the bottom.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><div class="pg3"></div><footer class="foot"><div class="fc" data-f="1"><div class="fb"><span class="logo">Acme</span><span>Plan, build and ship in one place.</span><span class="inp">Email for updates →</span></div>
+<div><h4>Product</h4><a>Boards</a><a>Timeline</a><a>Pricing</a></div><div><h4>Company</h4><a>About</a><a>Careers</a><a>Press</a></div><div><h4>Resources</h4><a>Docs</a><a>Guides</a><a>Status</a></div><div><h4>Legal</h4><a>Privacy</a><a>Terms</a><a>Cookies</a></div></div>
+<div class="lg2" data-f="2"><span>© 2026 Acme Inc. Illustrative company.</span><span>English (US) · USD</span></div></footer></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The footer catches visitors who scrolled past everything else, so it groups every important link under short headings and ends with legal and locale details. Play shows the brand block and link columns, then the legal row. Link names are illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:2,stepMs:700,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

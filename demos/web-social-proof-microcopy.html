@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof microcopy near the CTA: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.pm{padding:2.6em 3em;display:grid;gap:1em;justify-items:center;text-align:center}.fm{display:flex;gap:.5em;width:25em}.fm span:first-child{flex:1;min-height:2.7em;border:1px solid var(--line);border-radius:.45em;display:flex;align-items:center;padding:0 .9em;color:var(--muted);font-size:.95em}
+.av{display:flex;align-items:center;gap:.6em;font-size:.9em;color:var(--ink-2)}.av .st{display:flex}.av .st i{width:1.8em;height:1.8em;border-radius:50%;border:2px solid var(--surface);margin-inline-start:-.5em;background:var(--accent-soft)}.av .st i:nth-child(2){background:var(--ok-soft)}.av .st i:nth-child(3){background:var(--warn-soft)}.av .st i:first-child{margin:0}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Proof microcopy near the CTA</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Sign-up form with an avatar stack and the line Joined by 2,400 teams this week directly under the button.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="pm"><p class="web-h1" data-f="1" style="font-size:2em">Start your free trial</p><div class="fm" data-f="1"><span>you@company.com</span><span class="web-btn">Get started</span></div><div class="av" data-f="2"><span class="st"><i></i><i></i><i></i><i></i></span><span>Joined by <b>2,400 teams</b> this week · No card needed</span></div></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>Proof works best where the doubt happens, so one line of evidence sits under the button instead of in a far-away section. Play shows the form, then the avatar stack and recent count with its no-card reassurance. The number is illustrative and should come from real, current data.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:2,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>

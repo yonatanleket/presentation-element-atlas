@@ -49,13 +49,16 @@ function poster(key, label) {
 }
 
 // ---------- Markup ----------
+const SURFACES = [['slide', 'Slides'], ['web', 'Web sections']];
+const surfaceCount = id => els.filter(e => (e.surface || 'slide') === id).length;
+const slideCount = surfaceCount('slide'), webCount = surfaceCount('web');
 const counts = Object.fromEntries(categories.map(c => [c.id, els.filter(e => e.category === c.id).length]));
 const card = e => {
   const search = [e.name, e.definition, e.bestUse, ...(e.aliases || [])].join(' ').toLowerCase();
-  return `<article class="card" id="card-${e.id}" data-id="${e.id}" data-cat="${e.category}" data-level="${e.level}" data-search="${esc(search)}">
+  return `<article class="card" id="card-${e.id}" data-id="${e.id}" data-cat="${e.category}" data-level="${e.level}" data-surface="${e.surface || 'slide'}"${e.added ? ` data-added="${e.added}"` : ''} data-search="${esc(search)}">
 <div class="poster" data-hover-demo="${e.id}" data-open="${e.id}">${poster(e.id, e.name)}</div>
 <p class="specimen-caption">Illustrative demo</p>${limitationCaption(e.id)}
-<div class="ch"><h3>${esc(e.name)}</h3>${e.level === 'advanced' ? '<span class="pill-adv">Advanced</span>' : ''}</div>
+<div class="ch"><h3>${esc(e.name)}</h3>${e.added ? '<span class="pill-new" hidden>New</span>' : ''}${e.level === 'advanced' ? '<span class="pill-adv">Advanced</span>' : ''}</div>
 
 <p class="use"><b>Best for</b> ${esc(e.bestUse)}</p>
 <details class="card-details"><summary>Definition & related problems</summary><p class="def">${esc(e.definition)}</p>${reverse[e.id] ? `<div class="relations"><b>Helps with</b>${relatedHazards(e.id)}</div>` : ''}</details>
@@ -65,7 +68,7 @@ const card = e => {
 const sections = categories.map(c => {
   const items = els.filter(e => e.category === c.id);
   if (!items.length) return '';
-  return `<section class="cat" id="c-${c.id}" data-cat="${c.id}"><h2>${esc(c.label)}<span class="n">${items.length}</span></h2><p class="cd">${esc(c.description)}</p><div class="grid">${items.map(card).join('\n')}</div></section>`;
+  return `<section class="cat" id="c-${c.id}" data-cat="${c.id}" data-surface="${c.surface || 'slide'}"><h2>${esc(c.label)}<span class="n">${items.length}</span></h2><p class="cd">${esc(c.description)}</p><div class="grid">${items.map(card).join('\n')}</div></section>`;
 }).join('\n');
 
 const hazardCard = h => {
@@ -77,7 +80,7 @@ const hazardSections = Object.entries(hazardCats).map(([id,label]) => `<section 
 const extraCss = fs.readFileSync(path.join(ROOT,'templates/catalog-hazards.css'),'utf8');
 const redesignCss = fs.readFileSync(path.join(ROOT,'templates/catalog-redesign.css'),'utf8');
 const catalogScript = fs.readFileSync(path.join(ROOT,'scripts/catalog-ui.js'),'utf8');
-const data = els.map(e => ({ id: e.id, name: e.name, cat: e.category, level: e.level, demo: hasDemo(e.id),
+const data = els.map(e => ({ id: e.id, name: e.name, cat: e.category, level: e.level, surface: e.surface || 'slide', added: e.added || null, demo: hasDemo(e.id),
   definition:e.definition, bestUse:e.bestUse, kind:e.demo.kind, preview:previewAssets.get(e.id), sources: e.sources.map(k => sources[k]).filter(Boolean), hazards: reverse[e.id] || [] }));
 const json = JSON.stringify({ elements: data, hazards:hazards.map(h=>({...h,preview:previewAssets.get('hazard:'+h.id+':before')})), hazardCats }).replace(/</g, '\\u003c');
 
@@ -87,7 +90,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Presentation Element Atlas</title>
-<meta name="description" content="An open catalog of ${els.length} presentation elements, each with a definition, when to use it and a live demo.">
+<meta name="description" content="An open catalog of ${slideCount} presentation elements${webCount ? ` and ${webCount} web sections` : ''}, each with a definition, when to use it and a live demo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -98,19 +101,22 @@ ${extraCss}
 <body>
 <header class="masthead"><div class="wrap masthead-inner"><a class="brand" href="#elements">Presentation Element Atlas</a><nav class="section-switch" aria-label="Catalog section"><a href="#elements" data-section="elements" aria-current="page">Elements</a><a href="#hazards" data-section="hazards">Slide problems <span>15</span></a></nav></div></header>
 <div class="wrap">
-<header class="intro"><h1>Find the right way to show your idea.</h1><p class="lede">A visual library of ${els.length} presentation elements. Explore a specimen, then try it for yourself.</p></header>
-<div id="elements-view" class="catalog-layout"><aside class="category-sidebar"><button class="category-toggle btn" type="button" aria-expanded="false" aria-controls="cats">Categories <span id="category-current">All</span></button><p class="sidebar-title">Categories</p><div class="row" id="cats" role="group" aria-label="Categories"><button class="chip" type="button" data-cat="all" aria-pressed="true">All<small>${els.length}</small></button>${categories.map(c => `<button class="chip" type="button" data-cat="${c.id}" aria-pressed="false">${esc(c.label)}<small>${counts[c.id]}</small></button>`).join('')}</div></aside><div class="catalog-sheet"><div class="rail">
+<header class="intro"><h1>Find the right way to show your idea.</h1><p class="lede">A visual library of ${slideCount} presentation elements${webCount ? ` and ${webCount} web page sections` : ''}. Explore a specimen, then try it for yourself.</p></header>
+<div id="elements-view" class="catalog-layout"><aside class="category-sidebar"><button class="category-toggle btn" type="button" aria-expanded="false" aria-controls="cats">Categories <span id="category-current">All</span></button><p class="sidebar-title">Categories</p><div class="row" id="cats" role="group" aria-label="Categories"><button class="chip" type="button" data-cat="all" aria-pressed="true">All<small>${slideCount}</small></button>${categories.map(c => `<button class="chip" type="button" data-cat="${c.id}" data-surface="${c.surface || 'slide'}" aria-pressed="false"${(c.surface || 'slide') === 'slide' ? '' : ' hidden'}>${esc(c.label)}<small>${counts[c.id]}</small></button>`).join('')}</div></aside><div class="catalog-sheet"><div class="rail">
 <div class="row">
+<div class="seg surface-switch" id="surfaces" role="radiogroup" aria-label="Surface">${SURFACES.map(([id, label], i) => `<button class="chip" type="button" role="radio" data-surface-filter="${id}" aria-checked="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${label}<small>${surfaceCount(id)}</small></button>`).join('')}</div>
 <input type="search" id="q" placeholder="Search elements, e.g. funnel, slider, poll" aria-label="Search elements">
 <div class="seg" role="group" aria-label="Level">
 <button class="chip" type="button" data-level="all" aria-pressed="true">All</button><button class="chip" type="button" data-level="standard" aria-pressed="false">Standard</button><button class="chip" type="button" data-level="advanced" aria-pressed="false">Advanced</button>
 </div>
-<span class="count" id="count" aria-live="polite">${els.length} of ${els.length}</span>
+<button class="chip" type="button" id="new-filter" aria-pressed="false" title="Elements added in the last 30 days, newest first">New</button>
+<span class="count" id="count" aria-live="polite">${slideCount} of ${slideCount}</span>
 </div>
 </div>
 <main id="out">
 ${sections}
 <div class="empty" id="empty" hidden><p id="emptyMsg">No elements match.</p><button class="btn" type="button" id="clear">Clear filters</button></div>
+<div class="empty" id="surface-empty" hidden><p>No web sections yet.</p><p>See CONTRIBUTING.md in the repository to add the first one.</p></div>
 </main>
 </div></div>
 <div id="hazards-view" hidden><header class="intro hazards-intro"><h2 id="hazards-heading" tabindex="-1">Slide problems</h2><p class="lede">See what makes a slide hard to follow, compare a fix, then explore the elements behind it.</p><p class="scope-note">Fictional Before/After examples. 15 educational problems, including five supported HTML rules. Topic title is a heuristic; the other comparisons require visual or human review. This library does not scan or automatically fix your deck.</p></header>
@@ -148,6 +154,7 @@ copyPreviewAssets(ROOT,DIST,validatedPreviews);
 // Demos run in a sandboxed iframe (opaque origin). Opened from disk (file://), such a frame cannot load
 // sibling files, so the dist copy of each demo gets the harness inlined. Source demos keep the relative links.
 const harnessCss = fs.readFileSync(path.join(DEMOS, '_harness.css'), 'utf8') + '\n.quickplay body{background:var(--stage);overflow:hidden}.quickplay .demo{max-width:none;padding:0;gap:0;height:100dvh}.quickplay .stage{max-width:none;height:100%;border:0;border-radius:0}.quickplay .controls,.quickplay .how{display:none!important}';
+const webCss = fs.readFileSync(path.join(DEMOS, '_web.css'), 'utf8') + '\n.quickplay .stage[data-aspect=web]{max-width:none}';
 const harnessJs = (fs.readFileSync(path.join(DEMOS, '_harness.js'), 'utf8') + '\nif(location.hash.indexOf("quickplay")!==-1)document.documentElement.classList.add("quickplay");').replace(/<\/script/gi, '<\\/script');
 let copied = 0;
 for (const f of fs.readdirSync(DEMOS)) {
@@ -156,7 +163,8 @@ for (const f of fs.readdirSync(DEMOS)) {
   if (f.endsWith('.html') && !f.startsWith('_')) {
     const page = fs.readFileSync(src, 'utf8')
       .replace(/<link rel="stylesheet" href="_harness\.css">/, () => `<style>\n${harnessCss}</style>`)
-      .replace(/<script src="_harness\.js"><\/script>/, () => `<script>\n${harnessJs}</script>`);
+      .replace(/<script src="_harness\.js"><\/script>/, () => `<script>\n${harnessJs}</script>`)
+      .replace(/<link rel="stylesheet" href="_web\.css">/, () => `<style>\n${webCss}</style>`);
     fs.writeFileSync(dst, page);
   } else fs.copyFileSync(src, dst);
   copied++;

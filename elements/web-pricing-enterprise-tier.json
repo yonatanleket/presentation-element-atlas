@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-pricing-enterprise-tier",
+  "name": "Contact-sales enterprise tier",
+  "category": "web-pricing",
+  "definition": "Self-serve plan cards followed by a visually distinct enterprise tier that replaces a price with a contact-sales call to action.",
+  "bestUse": "Products sold both self-serve and through a sales team.",
+  "trigger": [
+    "pricing-plans",
+    "conversion-ask"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "pricingpages",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-pricing-enterprise-tier.html",
+    "kind": "animated",
+    "how": "Self-serve plans show a price and a sign-up button; the enterprise tier is styled differently and lists what only a contract brings, such as security review and an account manager, with Talk to sales instead of a price. Play shows the self-serve cards, then the enterprise card, then its call to action."
+  },
+  "aliases": [
+    "enterprise plan",
+    "talk to sales",
+    "custom pricing"
+  ],
+  "related": [
+    "tier-cards"
+  ]
+}

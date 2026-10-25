@@ -24,7 +24,7 @@ Thanks for helping grow the atlas. Each element is one JSON file plus one demo p
 
 | Field | Required | Rule |
 |---|---|---|
-| `schemaVersion` | yes | Exactly `1.0.0`; see [version policy](schema/README.md). |
+| `schemaVersion` | yes | `1.1.0` for new records (`1.0.0` records stay valid); see [version policy](schema/README.md). |
 | `id` | yes | Kebab slug, equals the filename, immutable. |
 | `name` | yes | At most 60 characters, unique (ignoring case). |
 | `category` | yes | One id from `categories.json`. |
@@ -34,6 +34,8 @@ Thanks for helping grow the atlas. Each element is one JSON file plus one demo p
 | `level` | yes | `standard` or `advanced` (advanced = genuinely interactive or uncommon). |
 | `sources` | yes | One or more keys from `sources.json`; use `common` when there is no single source. |
 | `demo` | yes | `{ "file": "demos/<id>.html", "kind": "static" \| "animated" \| "interactive", "how": "15–60 words" }` |
+| `surface` | no (1.1.0) | `slide` (default when absent) or `web`. Must match the category's `surface` in `categories.json`. |
+| `added` | no (1.1.0) | Date the element joined the atlas, `YYYY-MM-DD`. Shows a New badge for 30 days. |
 | `aliases` | no | Search synonyms. |
 | `related` | no | Ids of existing elements. |
 
@@ -87,6 +89,7 @@ Link the harness with exactly these relative paths and reference no other files.
 ```
 
 - **Stage**: a 16:10 frame of a 480×300 logical canvas. `1em` is 16 logical pixels and scales with the frame. Size everything inside the stage in `em` and keep text at `.8em` or larger. Building blocks in `_harness.css`: `.fill`, `.pad`, `.col`, `.row`, `.center`, `.card`, `.kicker`, `.h`, `.p`, `.muted`, `.big`, `.pill` (`.ok`, `.warn`, `.bad`, `.adv`), `.sbtn` (`.primary`), `.fx` (standard transition), `.hide`, `.sr-only`, and the mini deck `.deck` > `.deck-bar` / `.deck-body` / `.deck-foot`.
+- **Web sections** (`surface: "web"`): also link `<link rel="stylesheet" href="_web.css">` after the harness, and mark `<main class="demo" data-surface="web">` and `<div class="stage" data-aspect="web">`. The stage is 16:9 over a 768×432 logical canvas (`1em` = 16 logical px). Building blocks in `_web.css`: `.web-page` > `.web-bar` + `.web-body`, `.web-nav`, `.web-section`, `.web-h1`, `.web-h2`, `.web-lede`, `.web-btn` (`.ghost`, `.sm`), `.web-shot` and `.web-logo`. Use the placeholder brand Acme and `.web-logo` marks; never real logos, screenshots or copy from other sites. Forms must not send anything.
 - **Tokens**: use the CSS variables (`--accent`, `--line`, `--muted`, `--ok`, `--warn`, `--bad` and their `-soft` versions). Light only.
 - **Title**: shown when the demo is opened on its own, and visually hidden inside the catalog panel, whose header already shows the name.
 

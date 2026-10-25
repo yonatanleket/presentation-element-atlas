@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-logo-wall",
+  "name": "Customer logo wall",
+  "category": "web-social-proof",
+  "definition": "Row or grid of customer logos in one muted colour under a short line that says who they are.",
+  "bestUse": "Early in a page, when recognisable customers are the fastest proof.",
+  "trigger": [
+    "social-proof",
+    "claim-needing-evidence"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "socialproof",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-logo-wall.html",
+    "kind": "animated",
+    "how": "Logos are set in one neutral tone and equal visual weight so no single brand dominates, under a line that names the kind of customer. Play shows the line, then fades in the two rows. Real walls use permission-cleared logos; these are placeholders, never real brand marks."
+  },
+  "aliases": [
+    "logo cloud",
+    "trusted by",
+    "customer logos"
+  ]
+}

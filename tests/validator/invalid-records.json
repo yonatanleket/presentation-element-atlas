@@ -234,5 +234,59 @@
       ]
     },
     "expected": "not in sources.json"
+  },
+  {
+    "name": "1.0.0 record carrying surface",
+    "mutation": {
+      "surface": "slide"
+    },
+    "expected": "surface requires schemaVersion 1.1.0"
+  },
+  {
+    "name": "1.0.0 record carrying added",
+    "mutation": {
+      "added": "2026-10-25"
+    },
+    "expected": "added requires schemaVersion 1.1.0"
+  },
+  {
+    "name": "unknown surface",
+    "mutation": {
+      "schemaVersion": "1.1.0",
+      "surface": "billboard"
+    },
+    "expected": "surface: \"billboard\" not one of"
+  },
+  {
+    "name": "surface does not match category",
+    "mutation": {
+      "schemaVersion": "1.1.0",
+      "surface": "web"
+    },
+    "expected": "does not match category"
+  },
+  {
+    "name": "malformed added date",
+    "mutation": {
+      "schemaVersion": "1.1.0",
+      "added": "Oct 2026"
+    },
+    "expected": "added: \"Oct 2026\" does not match"
+  },
+  {
+    "name": "impossible added date",
+    "mutation": {
+      "schemaVersion": "1.1.0",
+      "added": "2026-13-99"
+    },
+    "expected": "is not a real date"
+  },
+  {
+    "name": "future added date",
+    "mutation": {
+      "schemaVersion": "1.1.0",
+      "added": "2999-01-01"
+    },
+    "expected": "is in the future"
   }
 ]

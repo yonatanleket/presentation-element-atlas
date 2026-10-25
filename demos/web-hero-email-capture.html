@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email-capture hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.ec{padding:3em 3em;display:grid;gap:.9em;justify-items:center;text-align:center}
+.ec form{display:flex;gap:.5em;width:26em;max-width:100%}.ec input{flex:1;min-width:0;font:inherit;font-size:.95em;min-height:2.7em;padding:0 .9em;border:1px solid var(--line);border-radius:.45em}
+.ec input[aria-invalid=true]{border-color:var(--bad)}.err{min-height:1.3em;font-size:.85em;color:var(--bad);margin:0}.ok{font-size:1em;color:var(--ok);font-weight:600;margin:0}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Email-capture hero</h1>
+<div class="stage" data-aspect="web" role="group" aria-label="Demo: Email-capture hero: headline with an email field and Join the waitlist button directly below.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="ec"><span class="pill">Private beta</span><p class="web-h1">Your inbox, finally quiet</p><p class="web-lede">Join the waitlist and get early access in the next cohort.</p>
+<form id="f" novalidate><label class="sr-only" for="em">Email address</label><input id="em" type="email" placeholder="you@company.com" aria-describedby="er" autocomplete="off"><button class="web-btn" type="submit">Join the waitlist</button></form><p class="err" id="er" aria-live="polite"></p></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>The field sits right under the promise, so signing up takes one step. Type an email and press Join: an invalid address shows an inline error next to the field, a valid one replaces the form with a confirmation. Nothing is sent anywhere; the form is simulated.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+var f=$('#f'),em=$('#em'),er=$('#er'),box=f.parentNode,done=null;
+f.addEventListener('submit',function(e){e.preventDefault();var v=em.value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){em.setAttribute('aria-invalid','true');er.textContent='Enter an email like name@company.com';api.status('Inline error shown');em.focus();return;}
+f.hidden=true;er.textContent='';done=document.createElement('p');done.className='ok';done.textContent='You are on the list. We will email '+v+' when your spot opens.';box.appendChild(done);api.status('Success state shown');});
+em.addEventListener('input',function(){if(em.getAttribute('aria-invalid')==='true'){em.removeAttribute('aria-invalid');er.textContent='';}});
+var api=AtlasDemo.init({frames:0,interactive:true,reset:function(){f.hidden=false;em.value='';em.removeAttribute('aria-invalid');er.textContent='';if(done){done.remove();done=null;}}});
+</script>
+</body>
+</html>

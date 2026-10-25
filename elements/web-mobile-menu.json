@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-mobile-menu",
+  "name": "Full-screen mobile menu",
+  "category": "web-navigation",
+  "definition": "On a phone-width page, a menu button opens a full-screen overlay with large tap targets and a close button.",
+  "bestUse": "Responsive sites whose desktop navigation does not fit a small screen.",
+  "trigger": [
+    "navigation-wayfinding",
+    "accessibility"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-mobile-menu.html",
+    "kind": "interactive",
+    "how": "At phone width the links collapse behind one Menu button. Opening it covers the page with large, well-spaced links and moves focus into the menu; Close or Escape returns focus to the Menu button. Tap targets stay at least 44 pixels tall. Shown inside a phone-sized frame."
+  },
+  "aliases": [
+    "hamburger menu",
+    "overlay menu",
+    "mobile nav"
+  ]
+}

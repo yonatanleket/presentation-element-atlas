@@ -50,5 +50,21 @@
   "common": {
     "label": "Common practice",
     "url": null
+  },
+  "supahero": {
+    "label": "Supahero (hero section gallery)",
+    "url": "https://supahero.io/"
+  },
+  "pricingpages": {
+    "label": "Pricing Pages (pricing page gallery)",
+    "url": "https://pricingpages.design/"
+  },
+  "socialproof": {
+    "label": "Social Proof Examples",
+    "url": "https://socialproofexamples.com/"
+  },
+  "navbargallery": {
+    "label": "Navbar Gallery",
+    "url": "https://navbar.gallery/"
   }
 }

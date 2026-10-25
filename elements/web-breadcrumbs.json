@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "web-breadcrumbs",
+  "name": "Breadcrumb trail",
+  "category": "web-navigation",
+  "definition": "A single line of links showing where the current page sits in the site hierarchy, ending in the current page.",
+  "bestUse": "Deep catalogs, documentation and help centres with three or more levels.",
+  "trigger": [
+    "navigation-wayfinding",
+    "hierarchy"
+  ],
+  "level": "standard",
+  "surface": "web",
+  "added": "2026-10-25",
+  "sources": [
+    "navbargallery",
+    "common"
+  ],
+  "demo": {
+    "file": "demos/web-breadcrumbs.html",
+    "kind": "interactive",
+    "how": "Each crumb is a link to a parent level and the last item is the current page, marked as current rather than linked. Click a crumb to go up to that level: the trail shortens and the page title follows. Reset returns to the deepest page. Page names are illustrative."
+  },
+  "aliases": [
+    "breadcrumbs",
+    "location trail",
+    "path navigation"
+  ]
+}

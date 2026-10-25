@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statement hero: demo</title>
+<link rel="stylesheet" href="_harness.css">
+<link rel="stylesheet" href="_web.css">
+<style>
+[data-f]{opacity:0;transform:translateY(.5em);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+[data-f].on{opacity:1;transform:none}
+.st{padding:3.2em 3em;display:grid;gap:1.1em;justify-items:start}.st .web-h1{font-size:3.2em;max-width:13em}.st mark{background:none;color:var(--accent)}
+</style>
+</head>
+<body>
+<main class="demo" data-surface="web" data-state="loading">
+<h1 class="demo-title">Statement hero</h1>
+<div class="stage" data-aspect="web" role="img" aria-label="Demo: Statement hero: a small kicker, a very large two-line sentence and one button, with no imagery.">
+<span class="label-illustrative">Illustrative</span>
+<div class="web-page"><div class="web-bar"><i></i><i></i><i></i><span>acme.example</span></div><div class="web-body"><nav class="web-nav"><span class="logo">Acme</span><a>Product</a><a>Pricing</a><a>Docs</a><span class="web-btn ghost sm">Sign in</span></nav><div class="st"><p class="kicker" data-f="1">For finance teams</p><p class="web-h1" data-f="2">Close the books in <mark>days, not weeks.</mark></p><span class="web-btn" data-f="3">See how it works</span></div></div></div>
+</div>
+<div class="controls"></div>
+<details class="how" open><summary>How it works</summary><p>With no picture competing, the sentence itself carries the page, so it must be specific and short. Play shows the kicker, then the statement with its key phrase in the accent colour, then the single call to action. The copy is illustrative.</p></details>
+</main>
+<script src="_harness.js"></script>
+<script>
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function showFrames(f){$$('[data-f]').forEach(function(n){n.classList.toggle('on',f>=+n.getAttribute('data-f'));});}
+AtlasDemo.init({frames:3,stepMs:750,render:function(fr,ctx){showFrames(fr);}});
+</script>
+</body>
+</html>
