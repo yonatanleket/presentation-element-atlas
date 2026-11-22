@@ -1,4 +1,4 @@
-# Presentation Element Atlas
+# Element Atlas
 
 An open catalog of slide and web page elements: what each one is, when to use it, and a live demo of how it works. It covers 166 slide elements in 12 categories, from progress bars and KPI tiles to sankeys, explorable sliders and audience polls, and 34 web page sections in 6 categories, from heroes and mega menus to pricing toggles, how-it-works steps, testimonial carousels and consent banners.
 
@@ -64,7 +64,7 @@ New elements, demos and fixes are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.m
 
 ## License
 
-[MIT](LICENSE) © 2026 Presentation Element Atlas contributors. Sample numbers in demos are invented and labeled "Illustrative".
+[MIT](LICENSE) © 2026 Element Atlas contributors. Sample numbers in demos are invented and labeled "Illustrative".
 
 ## Verification
 

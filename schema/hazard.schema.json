@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "hazard.schema.json",
-  "title": "Presentation Element Atlas hazard",
+  "title": "Element Atlas hazard",
   "description": "M1 metadata contract1.0.0; cross-file, rule/axis and approved-count constraints enforced by scripts/hazards.mjs.",
   "type": "object",
   "additionalProperties": false,

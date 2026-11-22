@@ -94,7 +94,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Presentation Element Atlas</title>
+<title>Element Atlas</title>
 <meta name="description" content="An open catalog of ${slideCount} presentation elements${webCount ? ` and ${webCount} web sections` : ''}, each with a definition, when to use it and a live demo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -104,7 +104,7 @@ ${extraCss}
 </style>
 </head>
 <body>
-<header class="masthead"><div class="wrap masthead-inner"><a class="brand" href="#elements">Presentation Element Atlas</a><nav class="section-switch" aria-label="Catalog section"><a href="#elements" data-section="elements" aria-current="page">Elements</a><a href="#hazards" data-section="hazards">Slide problems <span>15</span></a></nav></div></header>
+<header class="masthead"><div class="wrap masthead-inner"><a class="brand" href="#elements">Element Atlas</a><nav class="section-switch" aria-label="Catalog section"><a href="#elements" data-section="elements" aria-current="page">Elements</a><a href="#hazards" data-section="hazards">Slide problems <span>15</span></a></nav></div></header>
 <div class="wrap">
 <header class="intro"><h1>Find the right way to show your idea.</h1><p class="lede">A visual library of ${slideCount} presentation elements${webCount ? ` and ${webCount} web page sections` : ''}. Explore a specimen, then try it for yourself.</p></header>
 <div id="elements-view" class="catalog-layout"><aside class="category-sidebar"><button class="category-toggle btn" type="button" aria-expanded="false" aria-controls="cats">Categories <span id="category-current">All</span></button><p class="sidebar-title">Categories</p><div class="row" id="cats" role="group" aria-label="Categories"><button class="chip" type="button" data-cat="all" aria-pressed="true">All<small>${slideCount}</small></button>${categories.map(c => `<button class="chip" type="button" data-cat="${c.id}" data-surface="${c.surface || 'slide'}" aria-pressed="false"${(c.surface || 'slide') === 'slide' ? '' : ' hidden'}>${esc(c.label)}<small>${counts[c.id]}</small></button>`).join('')}</div></aside><div class="catalog-sheet"><div class="rail">

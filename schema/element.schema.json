@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "element.schema.json",
-  "title": "Presentation Element Atlas element",
+  "title": "Element Atlas element",
   "description": "One element per file at elements/<id>.json. Cross-file rules (id equals filename, unique names, keys exist in categories.json / triggers.json / sources.json, related ids exist) are enforced by scripts/validate.mjs.",
   "type": "object",
   "additionalProperties": false,
